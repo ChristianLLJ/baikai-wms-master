@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.PickTaskDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.PickTask">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="wave_code" jdbcType="VARCHAR" property="waveCode" />
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="distribution_time" jdbcType="TIMESTAMP" property="distributionTime" />
+    <result column="reviewer_id" jdbcType="INTEGER" property="reviewerId" />
+    <result column="reviewer_name" jdbcType="VARCHAR" property="reviewerName" />
+    <result column="reviewer_time" jdbcType="TIMESTAMP" property="reviewerTime" />
+    <result column="picking_time" jdbcType="TIMESTAMP" property="pickingTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="batch_type" jdbcType="VARCHAR" property="batchType" />
+    <result column="user_define" jdbcType="VARCHAR" property="userDefine" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, wave_code, task_id, `status`, distribution_time, reviewer_id, reviewer_name, 
+    reviewer_time, picking_time, create_time, batch_type, user_define
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pick_task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pick_task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.PickTask" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into pick_task (id, pid, wave_code, 
+      task_id, `status`, distribution_time, 
+      reviewer_id, reviewer_name, reviewer_time, 
+      picking_time, create_time, batch_type, 
+      user_define)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{waveCode,jdbcType=VARCHAR}, 
+      #{taskId,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, #{distributionTime,jdbcType=TIMESTAMP}, 
+      #{reviewerId,jdbcType=INTEGER}, #{reviewerName,jdbcType=VARCHAR}, #{reviewerTime,jdbcType=TIMESTAMP}, 
+      #{pickingTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{batchType,jdbcType=VARCHAR}, 
+      #{userDefine,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.PickTask" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into pick_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="waveCode != null">
+        wave_code,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="distributionTime != null">
+        distribution_time,
+      </if>
+      <if test="reviewerId != null">
+        reviewer_id,
+      </if>
+      <if test="reviewerName != null">
+        reviewer_name,
+      </if>
+      <if test="reviewerTime != null">
+        reviewer_time,
+      </if>
+      <if test="pickingTime != null">
+        picking_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="batchType != null">
+        batch_type,
+      </if>
+      <if test="userDefine != null">
+        user_define,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="waveCode != null">
+        #{waveCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="distributionTime != null">
+        #{distributionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewerId != null">
+        #{reviewerId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewerName != null">
+        #{reviewerName,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewerTime != null">
+        #{reviewerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pickingTime != null">
+        #{pickingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchType != null">
+        #{batchType,jdbcType=VARCHAR},
+      </if>
+      <if test="userDefine != null">
+        #{userDefine,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.PickTask">
+    update pick_task
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="waveCode != null">
+        wave_code = #{waveCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="distributionTime != null">
+        distribution_time = #{distributionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewerId != null">
+        reviewer_id = #{reviewerId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewerName != null">
+        reviewer_name = #{reviewerName,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewerTime != null">
+        reviewer_time = #{reviewerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pickingTime != null">
+        picking_time = #{pickingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="batchType != null">
+        batch_type = #{batchType,jdbcType=VARCHAR},
+      </if>
+      <if test="userDefine != null">
+        user_define = #{userDefine,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.PickTask">
+    update pick_task
+    set pid = #{pid,jdbcType=INTEGER},
+      wave_code = #{waveCode,jdbcType=VARCHAR},
+      task_id = #{taskId,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=SMALLINT},
+      distribution_time = #{distributionTime,jdbcType=TIMESTAMP},
+      reviewer_id = #{reviewerId,jdbcType=INTEGER},
+      reviewer_name = #{reviewerName,jdbcType=VARCHAR},
+      reviewer_time = #{reviewerTime,jdbcType=TIMESTAMP},
+      picking_time = #{pickingTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      batch_type = #{batchType,jdbcType=VARCHAR},
+      user_define = #{userDefine,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pick_task
+        <where>
+            1=1
+            <if test="!(states==null || states.size == 0) ">
+                and `status` in
+                <foreach close=")" collection="states" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="pojo.pid != null">
+                and PID = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.waveCode != null">
+                and wave_code = #{pojo.waveCode,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.taskId != null">
+                and task_id = #{pojo.taskId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.distributionTime != null">
+                and distribution_time = #{pojo.distributionTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pojo.reviewerId != null">
+                and reviewer_id = #{pojo.reviewerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.reviewerName != null">
+                and reviewer_name like CONCAT('%', #{pojo.reviewerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.batchType != null">
+                and batch_type = #{pojo.batchType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefine != null">
+                and user_define like CONCAT('%', #{pojo.userDefine,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime1 != null">
+                and picking_time &gt;=#{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP}&gt;=picking_time
+            </if>
+            <if test="startTime != null">
+                and distribution_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;=distribution_time
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+        <if test="searchDTO != null">
+            limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!--新增  筛选 -->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select
+        count(1)
+        from pick_task
+        <where>
+            1=1
+            <if test="!(states==null || states.size == 0) ">
+                and `status` in
+                <foreach close=")" collection="states" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="pojo.pid != null">
+                and PID = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.waveCode != null">
+                and wave_code = #{pojo.waveCode,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.taskId != null">
+                and task_id = #{pojo.taskId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.distributionTime != null">
+                and distribution_time = #{pojo.distributionTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pojo.reviewerId != null">
+                and reviewer_id = #{pojo.reviewerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.reviewerName != null">
+                and reviewer_name like CONCAT('%', #{pojo.reviewerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.batchType != null">
+                and batch_type = #{pojo.batchType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefine != null">
+                and user_define like CONCAT('%', #{pojo.userDefine,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime1 != null">
+                and picking_time &gt;=#{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP}&gt;=picking_time
+            </if>
+            <if test="startTime != null">
+                and distribution_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;=distribution_time
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+    </select>
+    <!--新增-->
+    <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pick_task
+        where pid = #{pid,jdbcType=INTEGER}
+    </select>
+    <!--新增-->
+    <select id="selectTaskByStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pick_task
+        where `status` = #{status,jdbcType=SMALLINT}
+    </select>
+    <select id="selectTaskStatusAfterCreated" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pick_task
+        where `status` > 0 and 3 > `status`
+    </select>
+</mapper>

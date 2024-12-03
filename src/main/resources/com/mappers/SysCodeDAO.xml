@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.SysCodeDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.SysCode">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="code_name" jdbcType="VARCHAR" property="codeName"/>
+        <result column="ismodify" jdbcType="CHAR" property="ismodify"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="Edescription" jdbcType="VARCHAR" property="edescription"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , code, code_name, ismodify, description, Edescription
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_code
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from sys_code
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.SysCode">
+        insert into sys_code (id, code, code_name,
+                              ismodify, description, Edescription)
+        values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{codeName,jdbcType=VARCHAR},
+                #{ismodify,jdbcType=CHAR}, #{description,jdbcType=VARCHAR}, #{edescription,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.SysCode" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        insert into sys_code
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="codeName != null">
+                code_name,
+            </if>
+            <if test="ismodify != null">
+                ismodify,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="edescription != null">
+                Edescription,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="codeName != null">
+                #{codeName,jdbcType=VARCHAR},
+            </if>
+            <if test="ismodify != null">
+                #{ismodify,jdbcType=CHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="edescription != null">
+                #{edescription,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.SysCode">
+        update sys_code
+        <set>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="codeName != null">
+                code_name = #{codeName,jdbcType=VARCHAR},
+            </if>
+            <if test="ismodify != null">
+                ismodify = #{ismodify,jdbcType=CHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="edescription != null">
+                Edescription = #{edescription,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.SysCode">
+        update sys_code
+        set code         = #{code,jdbcType=VARCHAR},
+            code_name    = #{codeName,jdbcType=VARCHAR},
+            ismodify     = #{ismodify,jdbcType=CHAR},
+            description  = #{description,jdbcType=VARCHAR},
+            Edescription = #{edescription,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id)
+        from sys_code
+        <where>
+            1=1
+            <if test="pojo.code != null">
+                and code = #{pojo.code,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.ismodify != null">
+                and ismodify = #{pojo.ismodify,jdbcType=CHAR}
+            </if>
+            <if test="pojo.codeName != null">
+                and code_name like CONCAT('%',#{pojo.codeName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.description != null">
+                and description like CONCAT('%',#{pojo.description,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.edescription != null">
+                and Edescription like CONCAT('%',#{pojo.edescription,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+    </select>
+    <!--新增-->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select id
+        from sys_code
+        <where>
+            1=1
+            <if test="pojo.code != null">
+                and code = #{pojo.code,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.ismodify != null">
+                and ismodify = #{pojo.ismodify,jdbcType=CHAR}
+            </if>
+            <if test="pojo.codeName != null">
+                and code_name like CONCAT('%',#{pojo.codeName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.description != null">
+                and description like CONCAT('%',#{pojo.description,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.edescription != null">
+                and Edescription like CONCAT('%',#{pojo.edescription,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+        order by id asc
+        <if test="searchDTO !=null">
+            limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!--新增-->
+    <select id="selectDetailByCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_code
+        where code = #{code,jdbcType=VARCHAR}
+        order by id asc
+        limit 1
+    </select>
+</mapper>

@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.PurchaseOrderDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.PurchaseOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="order_type" jdbcType="INTEGER" property="orderType" />
+    <result column="order_state" jdbcType="INTEGER" property="orderState" />
+    <result column="custom_id" jdbcType="INTEGER" property="customId" />
+    <result column="custom_code" jdbcType="VARCHAR" property="customCode" />
+    <result column="custom_name" jdbcType="VARCHAR" property="customName" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="supplier_code" jdbcType="VARCHAR" property="supplierCode" />
+    <result column="supplier_name" jdbcType="VARCHAR" property="supplierName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="add_person_id" jdbcType="INTEGER" property="addPersonId" />
+    <result column="add_person_name" jdbcType="VARCHAR" property="addPersonName" />
+    <result column="check_person_id" jdbcType="INTEGER" property="checkPersonId" />
+    <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_id, order_type, order_state, custom_id, custom_code, custom_name, warehouse_id,
+    warehouse_code, warehouse_name, supplier_id, supplier_code, supplier_name, create_time,
+    receive_time, remark, add_person_id, add_person_name, check_person_id, check_person_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from purchase_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from purchase_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.PurchaseOrder" useGeneratedKeys="true" keyProperty="id">
+    insert into purchase_order (id, order_id, order_type,
+      order_state, custom_id, custom_code,
+      custom_name, warehouse_id, warehouse_code,
+      warehouse_name, supplier_id, supplier_code,
+      supplier_name, create_time, receive_time,
+      remark, add_person_id, add_person_name,
+      check_person_id, check_person_name)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{orderType,jdbcType=INTEGER},
+      #{orderState,jdbcType=INTEGER}, #{customId,jdbcType=INTEGER}, #{customCode,jdbcType=VARCHAR},
+      #{customName,jdbcType=VARCHAR}, #{warehouseId,jdbcType=INTEGER}, #{warehouseCode,jdbcType=VARCHAR},
+      #{warehouseName,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER}, #{supplierCode,jdbcType=VARCHAR},
+      #{supplierName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP},
+      #{remark,jdbcType=VARCHAR}, #{addPersonId,jdbcType=INTEGER}, #{addPersonName,jdbcType=VARCHAR},
+      #{checkPersonId,jdbcType=INTEGER}, #{checkPersonName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.PurchaseOrder" useGeneratedKeys="true" keyProperty="id">
+    insert into purchase_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="orderState != null">
+        order_state,
+      </if>
+      <if test="customId != null">
+        custom_id,
+      </if>
+      <if test="customCode != null">
+        custom_code,
+      </if>
+      <if test="customName != null">
+        custom_name,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="supplierCode != null">
+        supplier_code,
+      </if>
+      <if test="supplierName != null">
+        supplier_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="receiveTime != null">
+        receive_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="addPersonId != null">
+        add_person_id,
+      </if>
+      <if test="addPersonName != null">
+        add_person_name,
+      </if>
+      <if test="checkPersonId != null">
+        check_person_id,
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null">
+        #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="customId != null">
+        #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="customCode != null">
+        #{customCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierCode != null">
+        #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveTime != null">
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addPersonId != null">
+        #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="addPersonName != null">
+        #{addPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPersonId != null">
+        #{checkPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonName != null">
+        #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.PurchaseOrder">
+    update purchase_order
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="orderState != null">
+        order_state = #{orderState,jdbcType=INTEGER},
+      </if>
+      <if test="customId != null">
+        custom_id = #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="customCode != null">
+        custom_code = #{customCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        custom_name = #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierCode != null">
+        supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        supplier_name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveTime != null">
+        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addPersonId != null">
+        add_person_id = #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="addPersonName != null">
+        add_person_name = #{addPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPersonId != null">
+        check_person_id = #{checkPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.PurchaseOrder">
+    update purchase_order
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=INTEGER},
+      order_state = #{orderState,jdbcType=INTEGER},
+      custom_id = #{customId,jdbcType=INTEGER},
+      custom_code = #{customCode,jdbcType=VARCHAR},
+      custom_name = #{customName,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      supplier_name = #{supplierName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      add_person_id = #{addPersonId,jdbcType=INTEGER},
+      add_person_name = #{addPersonName,jdbcType=VARCHAR},
+      check_person_id = #{checkPersonId,jdbcType=INTEGER},
+      check_person_name = #{checkPersonName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from purchase_order
+    where 1=1 and warehouse_id in
+    (select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER})
+    <if test="searchDTO !=null">
+      and id >= (select id from purchase_order
+      limit #{searchDTO.page,jdbcType=INTEGER},1)
+    </if>
+    <if test="pojo.orderId != null">
+      and order_id = #{pojo.orderId,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.orderType != null">
+      and order_type = #{pojo.orderType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.orderState != null">
+      and order_state = #{pojo.orderState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and order_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= order_state
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat('%',#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat('%',#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%',#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%'#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierId != null">
+      and supplier_id = #{pojo.supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.supplierCode != null">
+      and supplier_code like concat('%',#{pojo.supplierCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierName != null">
+      and supplier_name like concat('%',#{pojo.supplierName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.createTime != null">
+      and create_time = #{pojo.createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime}>=create_time
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.addPersonId != null">
+      and add_person_id = #{pojo.addPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.addPersonName != null">
+      and add_person_name like concat('%',#{pojo.addPersonName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.checkPersonId != null">
+      and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonName != null">
+      and check_person_name like concat('%',#{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from purchase_order
+    where 1=1 and warehouse_id in
+    (select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER})
+    <if test="pojo.orderId != null">
+      and order_id like concat('%',#{pojo.orderId,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.orderType != null">
+      and order_type = #{pojo.orderType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.orderState != null">
+      and order_state = #{pojo.orderState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and order_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= order_state
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat('%',#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat('%',#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%',#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%'#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierId != null">
+      and supplier_id = #{pojo.supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.supplierCode != null">
+      and supplier_code like concat('%',#{pojo.supplierCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierName != null">
+      and supplier_name like concat('%',#{pojo.supplierName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime,jdbcType=TIMESTAMP}>=create_time
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.addPersonId != null">
+      and add_person_id = #{pojo.addPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.addPersonName != null">
+      and add_person_name like concat('%',#{pojo.addPersonName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.checkPersonId != null">
+      and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonName != null">
+      and check_person_name like concat('%',#{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+  <select id="selectPurchaseCode" parameterType="purchaseOrder" resultType="purchaseOrder">
+    select
+    <include refid="Base_Column_List"></include>
+    from purchase_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+</mapper>

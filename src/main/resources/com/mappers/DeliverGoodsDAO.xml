@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.DeliverGoodsDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.DeliverGoods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="deliver_goods_id" jdbcType="VARCHAR" property="deliverGoodsId" />
+    <result column="type" jdbcType="SMALLINT" property="type" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="receiver_id" jdbcType="INTEGER" property="receiverId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="request_delivery_time" jdbcType="TIMESTAMP" property="requestDeliveryTime" />
+    <result column="expect_send_time" jdbcType="TIMESTAMP" property="expectSendTime" />
+    <result column="warehouse" jdbcType="VARCHAR" property="warehouse" />
+    <result column="verify_status" jdbcType="TINYINT" property="verifyStatus" />
+    <result column="reviewer_id" jdbcType="INTEGER" property="reviewerId" />
+    <result column="reviewer_name" jdbcType="VARCHAR" property="reviewerName" />
+    <result column="reviewer_time" jdbcType="TIMESTAMP" property="reviewerTime" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="settler_id" jdbcType="INTEGER" property="settlerId" />
+    <result column="carrier_id" jdbcType="INTEGER" property="carrierId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, deliver_goods_id, `type`, `status`, customer_id, customer_name, receiver_id, 
+    create_time, request_delivery_time, expect_send_time, warehouse, verify_status, reviewer_id, 
+    reviewer_name, reviewer_time, priority, settler_id, carrier_id, order_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deliver_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from deliver_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.DeliverGoods" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into deliver_goods (id, deliver_goods_id, `type`, 
+      `status`, customer_id, customer_name, 
+      receiver_id, create_time, request_delivery_time, 
+      expect_send_time, warehouse, verify_status, 
+      reviewer_id, reviewer_name, reviewer_time, 
+      priority, settler_id, carrier_id, 
+      order_id)
+    values (#{id,jdbcType=INTEGER}, #{deliverGoodsId,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, 
+      #{status,jdbcType=SMALLINT}, #{customerId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, 
+      #{receiverId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{requestDeliveryTime,jdbcType=TIMESTAMP}, 
+      #{expectSendTime,jdbcType=TIMESTAMP}, #{warehouse,jdbcType=VARCHAR}, #{verifyStatus,jdbcType=TINYINT}, 
+      #{reviewerId,jdbcType=INTEGER}, #{reviewerName,jdbcType=VARCHAR}, #{reviewerTime,jdbcType=TIMESTAMP}, 
+      #{priority,jdbcType=INTEGER}, #{settlerId,jdbcType=INTEGER}, #{carrierId,jdbcType=INTEGER}, 
+      #{orderId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.DeliverGoods" useGeneratedKeys="true" keyProperty="id"
+          keyColumn="id">
+    insert into deliver_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deliverGoodsId != null">
+        deliver_goods_id,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="receiverId != null">
+        receiver_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="requestDeliveryTime != null">
+        request_delivery_time,
+      </if>
+      <if test="expectSendTime != null">
+        expect_send_time,
+      </if>
+      <if test="warehouse != null">
+        warehouse,
+      </if>
+      <if test="verifyStatus != null">
+        verify_status,
+      </if>
+      <if test="reviewerId != null">
+        reviewer_id,
+      </if>
+      <if test="reviewerName != null">
+        reviewer_name,
+      </if>
+      <if test="reviewerTime != null">
+        reviewer_time,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="settlerId != null">
+        settler_id,
+      </if>
+      <if test="carrierId != null">
+        carrier_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deliverGoodsId != null">
+        #{deliverGoodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverId != null">
+        #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestDeliveryTime != null">
+        #{requestDeliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectSendTime != null">
+        #{expectSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warehouse != null">
+        #{warehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyStatus != null">
+        #{verifyStatus,jdbcType=TINYINT},
+      </if>
+      <if test="reviewerId != null">
+        #{reviewerId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewerName != null">
+        #{reviewerName,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewerTime != null">
+        #{reviewerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="settlerId != null">
+        #{settlerId,jdbcType=INTEGER},
+      </if>
+      <if test="carrierId != null">
+        #{carrierId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.DeliverGoods">
+    update deliver_goods
+    <set>
+      <if test="deliverGoodsId != null">
+        deliver_goods_id = #{deliverGoodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverId != null">
+        receiver_id = #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestDeliveryTime != null">
+        request_delivery_time = #{requestDeliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectSendTime != null">
+        expect_send_time = #{expectSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="warehouse != null">
+        warehouse = #{warehouse,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyStatus != null">
+        verify_status = #{verifyStatus,jdbcType=TINYINT},
+      </if>
+      <if test="reviewerId != null">
+        reviewer_id = #{reviewerId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewerName != null">
+        reviewer_name = #{reviewerName,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewerTime != null">
+        reviewer_time = #{reviewerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="settlerId != null">
+        settler_id = #{settlerId,jdbcType=INTEGER},
+      </if>
+      <if test="carrierId != null">
+        carrier_id = #{carrierId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.DeliverGoods">
+    update deliver_goods
+    set deliver_goods_id = #{deliverGoodsId,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=SMALLINT},
+      `status` = #{status,jdbcType=SMALLINT},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      receiver_id = #{receiverId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      request_delivery_time = #{requestDeliveryTime,jdbcType=TIMESTAMP},
+      expect_send_time = #{expectSendTime,jdbcType=TIMESTAMP},
+      warehouse = #{warehouse,jdbcType=VARCHAR},
+      verify_status = #{verifyStatus,jdbcType=TINYINT},
+      reviewer_id = #{reviewerId,jdbcType=INTEGER},
+      reviewer_name = #{reviewerName,jdbcType=VARCHAR},
+      reviewer_time = #{reviewerTime,jdbcType=TIMESTAMP},
+      priority = #{priority,jdbcType=INTEGER},
+      settler_id = #{settlerId,jdbcType=INTEGER},
+      carrier_id = #{carrierId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--新增-->
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select count(id)
+    from deliver_goods
+    <where>
+      1=1
+      <if test="pojo.deliverGoodsId != null">
+        and deliver_goods_id = #{pojo.deliverGoodsId,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.type != null">
+        and `type` = #{pojo.type,jdbcType=SMALLINT}
+      </if>
+      <if test="pojo.status != null">
+        and  `status` = #{pojo.status,jdbcType=SMALLINT}
+      </if>
+      <if test="pojo.customerId != null">
+        and customer_id = #{pojo.customerId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.customerName != null">
+        and  customer_name like CONCAT('%',  #{pojo.customerName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.receiverId != null">
+        and  receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+      </if>
+      <if test="startTime != null">
+        and and create_time>=#{startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        and   and #{endTime,jdbcType=TIMESTAMP}>=create_time
+      </if>
+      <if test="startTime1 != null">
+        and request_delivery_time>=#{startTime1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime1 != null">
+        and #{endTime1,jdbcType=TIMESTAMP}>=request_delivery_time
+      </if>
+      <if test="pojo.warehouse != null">
+        and  warehouse = #{pojo.warehouse,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.verifyStatus != null">
+        and  verify_status = #{pojo.verifyStatus,jdbcType=TINYINT}
+      </if>
+      <if test="pojo.reviewerId != null">
+        and reviewer_id = #{pojo.reviewerId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.reviewerName != null">
+        and  reviewer_name like CONCAT('%',  #{pojo.reviewerName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.reviewerTime != null">
+        and reviewer_time = #{pojo.reviewerTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="pojo.priority != null">
+        and priority = #{pojo.priority,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.settlerId != null">
+        and  settler_id = #{pojo.settlerId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.carrierId != null">
+        and  carrier_id = #{pojo.carrierId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.orderId != null">
+        and  order_id = #{pojo.orderId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <!--新增  筛选 -->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select id
+    from deliver_goods
+    <where>
+      1=1
+      <if test="pojo.deliverGoodsId != null">
+       and deliver_goods_id = #{pojo.deliverGoodsId,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.type != null">
+        and `type` = #{pojo.type,jdbcType=SMALLINT}
+      </if>
+      <if test="pojo.status != null">
+        and  `status` = #{pojo.status,jdbcType=SMALLINT}
+      </if>
+      <if test="pojo.customerId != null">
+        and customer_id = #{pojo.customerId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.customerName != null">
+        and  customer_name like CONCAT('%',  #{pojo.customerName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.receiverId != null">
+        and  receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+      </if>
+      <if test="startTime != null">
+        and and create_time>#{startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        and   and #{endTime,jdbcType=TIMESTAMP}>create_time
+      </if>
+      <if test="startTime1 != null">
+        and request_delivery_time>=#{startTime1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime1 != null">
+        and #{endTime1,jdbcType=TIMESTAMP}>=request_delivery_time
+      </if>
+      <if test="pojo.warehouse != null">
+        and  warehouse = #{pojo.warehouse,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.verifyStatus != null">
+        and  verify_status = #{pojo.verifyStatus,jdbcType=TINYINT}
+      </if>
+      <if test="pojo.reviewerId != null">
+        and reviewer_id = #{pojo.reviewerId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.reviewerName != null">
+        and  reviewer_name like CONCAT('%',  #{pojo.reviewerName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.reviewerTime != null">
+        and reviewer_time = #{pojo.reviewerTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="pojo.priority != null">
+        and priority = #{pojo.priority,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.settlerId != null">
+        and  settler_id = #{pojo.settlerId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.carrierId != null">
+        and  carrier_id = #{pojo.carrierId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.orderId != null">
+        and  order_id = #{pojo.orderId,jdbcType=INTEGER}
+      </if>
+    </where>
+    order by id desc
+    limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+  </select>
+</mapper>

@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.OnshelfAdviceDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.OnshelfAdvice">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="onshelf_strategy_id" jdbcType="INTEGER" property="onshelfStrategyId" />
+    <result column="onshelf_strategy_name" jdbcType="VARCHAR" property="onshelfStrategyName" />
+    <result column="onshelf_strategy_code" jdbcType="VARCHAR" property="onshelfStrategyCode" />
+    <result column="onshelf_code" jdbcType="VARCHAR" property="onshelfCode" />
+    <result column="onshelf_state" jdbcType="INTEGER" property="onshelfState" />
+    <result column="print_account" jdbcType="INTEGER" property="printAccount" />
+    <result column="is_usable" jdbcType="TINYINT" property="isUsable" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="checker_id" jdbcType="INTEGER" property="checkerId" />
+    <result column="checker_name" jdbcType="VARCHAR" property="checkerName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="onshelf_area_id" jdbcType="INTEGER" property="onshelfAreaId" />
+    <result column="onshelf_area_code" jdbcType="VARCHAR" property="onshelfAreaCode" />
+    <result column="onshelf_area_name" jdbcType="VARCHAR" property="onshelfAreaName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, onshelf_strategy_id, onshelf_strategy_name, onshelf_strategy_code, onshelf_code,
+    onshelf_state, print_account, is_usable, warehouse_id, warehouse_code, warehouse_name,
+    checker_id, checker_name, create_time, remark, onshelf_area_id, onshelf_area_code,
+    onshelf_area_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onshelf_advice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from onshelf_advice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.OnshelfAdvice">
+    insert into onshelf_advice (id, onshelf_strategy_id, onshelf_strategy_name,
+      onshelf_strategy_code, onshelf_code, onshelf_state,
+      print_account, is_usable, warehouse_id,
+      warehouse_code, warehouse_name, checker_id,
+      checker_name, create_time, remark,
+      onshelf_area_id, onshelf_area_code, onshelf_area_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{onshelfStrategyId,jdbcType=INTEGER}, #{onshelfStrategyName,jdbcType=VARCHAR},
+      #{onshelfStrategyCode,jdbcType=VARCHAR}, #{onshelfCode,jdbcType=VARCHAR}, #{onshelfState,jdbcType=INTEGER},
+      #{printAccount,jdbcType=INTEGER}, #{isUsable,jdbcType=TINYINT}, #{warehouseId,jdbcType=INTEGER},
+      #{warehouseCode,jdbcType=VARCHAR}, #{warehouseName,jdbcType=VARCHAR}, #{checkerId,jdbcType=INTEGER},
+      #{checkerName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},
+      #{onshelfAreaId,jdbcType=INTEGER}, #{onshelfAreaCode,jdbcType=VARCHAR}, #{onshelfAreaName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.OnshelfAdvice" keyProperty="id" useGeneratedKeys="true">
+    insert into onshelf_advice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="onshelfStrategyId != null">
+        onshelf_strategy_id,
+      </if>
+      <if test="onshelfStrategyName != null">
+        onshelf_strategy_name,
+      </if>
+      <if test="onshelfStrategyCode != null">
+        onshelf_strategy_code,
+      </if>
+      <if test="onshelfCode != null">
+        onshelf_code,
+      </if>
+      <if test="onshelfState != null">
+        onshelf_state,
+      </if>
+      <if test="printAccount != null">
+        print_account,
+      </if>
+      <if test="isUsable != null">
+        is_usable,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="checkerId != null">
+        checker_id,
+      </if>
+      <if test="checkerName != null">
+        checker_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="onshelfAreaId != null">
+        onshelf_area_id,
+      </if>
+      <if test="onshelfAreaCode != null">
+        onshelf_area_code,
+      </if>
+      <if test="onshelfAreaName != null">
+        onshelf_area_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="onshelfStrategyId != null">
+        #{onshelfStrategyId,jdbcType=INTEGER},
+      </if>
+      <if test="onshelfStrategyName != null">
+        #{onshelfStrategyName,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfStrategyCode != null">
+        #{onshelfStrategyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfCode != null">
+        #{onshelfCode,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfState != null">
+        #{onshelfState,jdbcType=INTEGER},
+      </if>
+      <if test="printAccount != null">
+        #{printAccount,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkerId != null">
+        #{checkerId,jdbcType=INTEGER},
+      </if>
+      <if test="checkerName != null">
+        #{checkerName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfAreaId != null">
+        #{onshelfAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="onshelfAreaCode != null">
+        #{onshelfAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfAreaName != null">
+        #{onshelfAreaName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.OnshelfAdvice">
+    update onshelf_advice
+    <set>
+      <if test="onshelfStrategyId != null">
+        onshelf_strategy_id = #{onshelfStrategyId,jdbcType=INTEGER},
+      </if>
+      <if test="onshelfStrategyName != null">
+        onshelf_strategy_name = #{onshelfStrategyName,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfStrategyCode != null">
+        onshelf_strategy_code = #{onshelfStrategyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfCode != null">
+        onshelf_code = #{onshelfCode,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfState != null">
+        onshelf_state = #{onshelfState,jdbcType=INTEGER},
+      </if>
+      <if test="printAccount != null">
+        print_account = #{printAccount,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        is_usable = #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkerId != null">
+        checker_id = #{checkerId,jdbcType=INTEGER},
+      </if>
+      <if test="checkerName != null">
+        checker_name = #{checkerName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfAreaId != null">
+        onshelf_area_id = #{onshelfAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="onshelfAreaCode != null">
+        onshelf_area_code = #{onshelfAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfAreaName != null">
+        onshelf_area_name = #{onshelfAreaName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.OnshelfAdvice">
+    update onshelf_advice
+    set onshelf_strategy_id = #{onshelfStrategyId,jdbcType=INTEGER},
+      onshelf_strategy_name = #{onshelfStrategyName,jdbcType=VARCHAR},
+      onshelf_strategy_code = #{onshelfStrategyCode,jdbcType=VARCHAR},
+      onshelf_code = #{onshelfCode,jdbcType=VARCHAR},
+      onshelf_state = #{onshelfState,jdbcType=INTEGER},
+      print_account = #{printAccount,jdbcType=INTEGER},
+      is_usable = #{isUsable,jdbcType=TINYINT},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      checker_id = #{checkerId,jdbcType=INTEGER},
+      checker_name = #{checkerName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      onshelf_area_id = #{onshelfAreaId,jdbcType=INTEGER},
+      onshelf_area_code = #{onshelfAreaCode,jdbcType=VARCHAR},
+      onshelf_area_name = #{onshelfAreaName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onshelf_advice
+    where 1=1 and warehouse_id in
+    (
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.onshelfStrategyId != null">
+      and onshelf_strategy_id = #{pojo.onshelfStrategyId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.onshelfStrategyName != null">
+      and onshelf_strategy_name like concat('%',#{pojo.onshelfStrategyName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfStrategyCode != null">
+      and onshelf_strategy_code like concat('%',#{pojo.onshelfStrategyCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfCode != null">
+      and onshelf_code like concat('%',#{pojo.onshelfCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfState != null">
+      and onshelf_state = #{pojo.onshelfState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and onshelf_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= onshelf_state
+    </if>
+    <if test="pojo.printAccount != null">
+      and print_account = #{pojo.printAccount,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%',#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.checkerId != null">
+      and checker_id = #{pojo.checkerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkerName != null">
+      and checker_name like concat('%',#{pojo.checkerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime,jdbcType=TIMESTAMP}>=create_time
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+  <if test="pojo.onshelfAreaId != null">
+    and onshelf_area_id = #{pojo.onshelfAreaId,jdbcType=INTEGER}
+  </if>
+  <if test="pojo.onshelfAreaCode != null">
+    and onshelf_area_code like concat(#{pojo.onshelfAreaCode,jdbcType=VARCHAR},'%')
+  </if>
+  <if test="pojo.onshelfAreaName != null">
+    and onshelf_area_name like concat(#{pojo.onshelfAreaName,jdbcType=VARCHAR},'%')
+  </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from onshelf_advice
+    where 1=1 and warehouse_id in
+    (
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.onshelfStrategyId != null">
+      and onshelf_strategy_id = #{pojo.onshelfStrategyId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.onshelfStrategyName != null">
+      and onshelf_strategy_name like concat('%',#{pojo.onshelfStrategyName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfStrategyCode != null">
+      and onshelf_strategy_code like concat('%',#{pojo.onshelfStrategyCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfCode != null">
+      and onshelf_code like concat('%',#{pojo.onshelfCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfState != null">
+      and onshelf_state = #{pojo.onshelfState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and onshelf_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= onshelf_state
+    </if>
+    <if test="pojo.printAccount != null">
+      and print_account = #{pojo.printAccount,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%',#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.checkerId != null">
+      and checker_id = #{pojo.checkerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkerName != null">
+      and checker_name like concat('%',#{pojo.checkerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime}>=create_time
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.onshelfAreaId != null">
+      and onshelf_area_id = #{pojo.onshelfAreaId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.onshelfAreaCode != null">
+      and onshelf_area_code like concat(#{pojo.onshelfAreaCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfAreaName != null">
+      and onshelf_area_name like concat(#{pojo.onshelfAreaName,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+</mapper>

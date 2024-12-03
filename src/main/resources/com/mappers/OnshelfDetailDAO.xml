@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.OnshelfDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.OnshelfDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="onshelf_id" jdbcType="INTEGER" property="onshelfId" />
+    <result column="trace_code" jdbcType="VARCHAR" property="traceCode" />
+    <result column="trace_code2" jdbcType="VARCHAR" property="traceCode2" />
+    <result column="onshelf_code" jdbcType="VARCHAR" property="onshelfCode" />
+    <result column="fact_location_id" jdbcType="INTEGER" property="factLocationId" />
+    <result column="fact_location_name" jdbcType="VARCHAR" property="factLocationName" />
+    <result column="onshelf_type" jdbcType="INTEGER" property="onshelfType" />
+    <result column="onshelf_state" jdbcType="INTEGER" property="onshelfState" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="person_id" jdbcType="INTEGER" property="personId" />
+    <result column="person_name" jdbcType="VARCHAR" property="personName" />
+    <result column="onshelf_time" jdbcType="TIMESTAMP" property="onshelfTime" />
+    <result column="inbound_batch" jdbcType="VARCHAR" property="inboundBatch" />
+    <result column="container_id" jdbcType="INTEGER" property="containerId" />
+    <result column="container_code" jdbcType="VARCHAR" property="containerCode" />
+    <result column="container_barcode" jdbcType="VARCHAR" property="containerBarcode" />
+    <result column="custom_id" jdbcType="INTEGER" property="customId" />
+    <result column="custom_code" jdbcType="VARCHAR" property="customCode" />
+    <result column="commodity_id" jdbcType="INTEGER" property="commodityId" />
+    <result column="commodity_code" jdbcType="VARCHAR" property="commodityCode" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="sku_num" jdbcType="DOUBLE" property="skuNum" />
+    <result column="total_volumn" jdbcType="DOUBLE" property="totalVolumn" />
+    <result column="total_weight" jdbcType="DOUBLE" property="totalWeight" />
+    <result column="product_company" jdbcType="VARCHAR" property="productCompany" />
+    <result column="product_time" jdbcType="TIMESTAMP" property="productTime" />
+    <result column="product_batch" jdbcType="VARCHAR" property="productBatch" />
+    <result column="onshelf_task_execute_device" jdbcType="VARCHAR" property="onshelfTaskExecuteDevice" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, onshelf_id, trace_code, trace_code2, onshelf_code, fact_location_id, fact_location_name,
+    onshelf_type, onshelf_state, remark, person_id, person_name, onshelf_time, inbound_batch,
+    container_id, container_code, container_barcode, custom_id, custom_code, commodity_id,
+    commodity_code, sku_id, sku_name, sku_code, unit, sku_num, total_volumn, total_weight,
+    product_company, product_time, product_batch, onshelf_task_execute_device
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onshelf_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from onshelf_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.OnshelfDetail">
+    insert into onshelf_detail (id, onshelf_id, trace_code,
+      trace_code2, onshelf_code, fact_location_id,
+      fact_location_name, onshelf_type, onshelf_state,
+      remark, person_id, person_name,
+      onshelf_time, inbound_batch, container_id,
+      container_code, container_barcode, custom_id,
+      custom_code, commodity_id, commodity_code,
+      sku_id, sku_name, sku_code,
+      unit, sku_num, total_volumn,
+      total_weight, product_company, product_time,
+      product_batch, onshelf_task_execute_device)
+    values (#{id,jdbcType=INTEGER}, #{onshelfId,jdbcType=INTEGER}, #{traceCode,jdbcType=VARCHAR},
+      #{traceCode2,jdbcType=VARCHAR}, #{onshelfCode,jdbcType=VARCHAR}, #{factLocationId,jdbcType=INTEGER},
+      #{factLocationName,jdbcType=VARCHAR}, #{onshelfType,jdbcType=INTEGER}, #{onshelfState,jdbcType=INTEGER},
+      #{remark,jdbcType=VARCHAR}, #{personId,jdbcType=INTEGER}, #{personName,jdbcType=VARCHAR},
+      #{onshelfTime,jdbcType=TIMESTAMP}, #{inboundBatch,jdbcType=VARCHAR}, #{containerId,jdbcType=INTEGER},
+      #{containerCode,jdbcType=VARCHAR}, #{containerBarcode,jdbcType=VARCHAR}, #{customId,jdbcType=INTEGER},
+      #{customCode,jdbcType=VARCHAR}, #{commodityId,jdbcType=INTEGER}, #{commodityCode,jdbcType=VARCHAR},
+      #{skuId,jdbcType=INTEGER}, #{skuName,jdbcType=VARCHAR}, #{skuCode,jdbcType=VARCHAR},
+      #{unit,jdbcType=VARCHAR}, #{skuNum,jdbcType=DOUBLE}, #{totalVolumn,jdbcType=DOUBLE},
+      #{totalWeight,jdbcType=DOUBLE}, #{productCompany,jdbcType=VARCHAR}, #{productTime,jdbcType=TIMESTAMP},
+      #{productBatch,jdbcType=VARCHAR}, #{onshelfTaskExecuteDevice,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.OnshelfDetail">
+    insert into onshelf_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="onshelfId != null">
+        onshelf_id,
+      </if>
+      <if test="traceCode != null">
+        trace_code,
+      </if>
+      <if test="traceCode2 != null">
+        trace_code2,
+      </if>
+      <if test="onshelfCode != null">
+        onshelf_code,
+      </if>
+      <if test="factLocationId != null">
+        fact_location_id,
+      </if>
+      <if test="factLocationName != null">
+        fact_location_name,
+      </if>
+      <if test="onshelfType != null">
+        onshelf_type,
+      </if>
+      <if test="onshelfState != null">
+        onshelf_state,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="personId != null">
+        person_id,
+      </if>
+      <if test="personName != null">
+        person_name,
+      </if>
+      <if test="onshelfTime != null">
+        onshelf_time,
+      </if>
+      <if test="inboundBatch != null">
+        inbound_batch,
+      </if>
+      <if test="containerId != null">
+        container_id,
+      </if>
+      <if test="containerCode != null">
+        container_code,
+      </if>
+      <if test="containerBarcode != null">
+        container_barcode,
+      </if>
+      <if test="customId != null">
+        custom_id,
+      </if>
+      <if test="customCode != null">
+        custom_code,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="commodityCode != null">
+        commodity_code,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="skuCode != null">
+        sku_code,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="skuNum != null">
+        sku_num,
+      </if>
+      <if test="totalVolumn != null">
+        total_volumn,
+      </if>
+      <if test="totalWeight != null">
+        total_weight,
+      </if>
+      <if test="productCompany != null">
+        product_company,
+      </if>
+      <if test="productTime != null">
+        product_time,
+      </if>
+      <if test="productBatch != null">
+        product_batch,
+      </if>
+      <if test="onshelfTaskExecuteDevice != null">
+        onshelf_task_execute_device,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="onshelfId != null">
+        #{onshelfId,jdbcType=INTEGER},
+      </if>
+      <if test="traceCode != null">
+        #{traceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="traceCode2 != null">
+        #{traceCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfCode != null">
+        #{onshelfCode,jdbcType=VARCHAR},
+      </if>
+      <if test="factLocationId != null">
+        #{factLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="factLocationName != null">
+        #{factLocationName,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfType != null">
+        #{onshelfType,jdbcType=INTEGER},
+      </if>
+      <if test="onshelfState != null">
+        #{onshelfState,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="personId != null">
+        #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="personName != null">
+        #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfTime != null">
+        #{onshelfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inboundBatch != null">
+        #{inboundBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerCode != null">
+        #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerBarcode != null">
+        #{containerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="customCode != null">
+        #{customCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityCode != null">
+        #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="skuNum != null">
+        #{skuNum,jdbcType=DOUBLE},
+      </if>
+      <if test="totalVolumn != null">
+        #{totalVolumn,jdbcType=DOUBLE},
+      </if>
+      <if test="totalWeight != null">
+        #{totalWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="productCompany != null">
+        #{productCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="productTime != null">
+        #{productTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productBatch != null">
+        #{productBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfTaskExecuteDevice != null">
+        #{onshelfTaskExecuteDevice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.OnshelfDetail">
+    update onshelf_detail
+    <set>
+      <if test="onshelfId != null">
+        onshelf_id = #{onshelfId,jdbcType=INTEGER},
+      </if>
+      <if test="traceCode != null">
+        trace_code = #{traceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="traceCode2 != null">
+        trace_code2 = #{traceCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfCode != null">
+        onshelf_code = #{onshelfCode,jdbcType=VARCHAR},
+      </if>
+      <if test="factLocationId != null">
+        fact_location_id = #{factLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="factLocationName != null">
+        fact_location_name = #{factLocationName,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfType != null">
+        onshelf_type = #{onshelfType,jdbcType=INTEGER},
+      </if>
+      <if test="onshelfState != null">
+        onshelf_state = #{onshelfState,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="personId != null">
+        person_id = #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="personName != null">
+        person_name = #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfTime != null">
+        onshelf_time = #{onshelfTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inboundBatch != null">
+        inbound_batch = #{inboundBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        container_id = #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerCode != null">
+        container_code = #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerBarcode != null">
+        container_barcode = #{containerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        custom_id = #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="customCode != null">
+        custom_code = #{customCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityCode != null">
+        commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null">
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="skuNum != null">
+        sku_num = #{skuNum,jdbcType=DOUBLE},
+      </if>
+      <if test="totalVolumn != null">
+        total_volumn = #{totalVolumn,jdbcType=DOUBLE},
+      </if>
+      <if test="totalWeight != null">
+        total_weight = #{totalWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="productCompany != null">
+        product_company = #{productCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="productTime != null">
+        product_time = #{productTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productBatch != null">
+        product_batch = #{productBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="onshelfTaskExecuteDevice != null">
+        onshelf_task_execute_device = #{onshelfTaskExecuteDevice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.OnshelfDetail">
+    update onshelf_detail
+    set onshelf_id = #{onshelfId,jdbcType=INTEGER},
+      trace_code = #{traceCode,jdbcType=VARCHAR},
+      trace_code2 = #{traceCode2,jdbcType=VARCHAR},
+      onshelf_code = #{onshelfCode,jdbcType=VARCHAR},
+      fact_location_id = #{factLocationId,jdbcType=INTEGER},
+      fact_location_name = #{factLocationName,jdbcType=VARCHAR},
+      onshelf_type = #{onshelfType,jdbcType=INTEGER},
+      onshelf_state = #{onshelfState,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      person_id = #{personId,jdbcType=INTEGER},
+      person_name = #{personName,jdbcType=VARCHAR},
+      onshelf_time = #{onshelfTime,jdbcType=TIMESTAMP},
+      inbound_batch = #{inboundBatch,jdbcType=VARCHAR},
+      container_id = #{containerId,jdbcType=INTEGER},
+      container_code = #{containerCode,jdbcType=VARCHAR},
+      container_barcode = #{containerBarcode,jdbcType=VARCHAR},
+      custom_id = #{customId,jdbcType=INTEGER},
+      custom_code = #{customCode,jdbcType=VARCHAR},
+      commodity_id = #{commodityId,jdbcType=INTEGER},
+      commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      sku_id = #{skuId,jdbcType=INTEGER},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      sku_code = #{skuCode,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      sku_num = #{skuNum,jdbcType=DOUBLE},
+      total_volumn = #{totalVolumn,jdbcType=DOUBLE},
+      total_weight = #{totalWeight,jdbcType=DOUBLE},
+      product_company = #{productCompany,jdbcType=VARCHAR},
+      product_time = #{productTime,jdbcType=TIMESTAMP},
+      product_batch = #{productBatch,jdbcType=VARCHAR},
+      onshelf_task_execute_device = #{onshelfTaskExecuteDevice,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onshelf_detail
+    where 1=1
+    <if test="pojo.onshelfId != null">
+      and onshelf_id = #{pojo.onshelfId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.traceCode != null">
+      and trace_code like concat(#{pojo.traceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.traceCode2 != null">
+      and trace_code2 like concat(#{pojo.traceCode2,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfCode != null">
+      and onshelf_code like concat(#{pojo.onshelfCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.factLocationId != null">
+      and fact_location_id = #{pojo.factLocationId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.factLocationName != null">
+      and fact_location_name like concat(#{pojo.factLocationName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfType != null">
+      and onshelf_type = #{pojo.onshelfType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.onshelfState != null">
+      and onshelf_state = #{pojo.onshelfState,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.personId != null">
+      and person_id = #{pojo.personId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.personName != null">
+      and person_name like concat(#{pojo.personName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfTime != null">
+      and onshelf_time = #{pojo.onshelfTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.inboundBatch != null">
+      and inbound_batch like concat(#{pojo.inboundBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat(#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat(#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat(#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat(#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuName != null">
+      and sku_name like concat(#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuCode != null">
+      and sku_code like concat(#{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.unit != null">
+      and unit like concat(#{pojo.unit,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuNum != null">
+      and sku_num = #{pojo.skuNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalVolumn != null">
+     and  total_volumn = #{pojo.totalVolumn,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalWeight != null">
+      and total_weight = #{pojo.totalWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.productCompany != null">
+      and product_company like concat(#{pojo.productCompany,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.productTime != null">
+      and product_time = #{pojo.productTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.productBatch != null">
+      and product_batch like concat(#{pojo.productBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfTaskExecuteDevice != null">
+      and onshelf_task_execute_device like concat(#{pojo.onshelfTaskExecuteDevice,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from onshelf_detail
+    where 1=1
+    <if test="pojo.onshelfId != null">
+      and onshelf_id = #{pojo.onshelfId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.traceCode != null">
+      and trace_code like concat(#{pojo.traceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.traceCode2 != null">
+      and trace_code2 like concat(#{pojo.traceCode2,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfCode != null">
+      and onshelf_code like concat(#{pojo.onshelfCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.factLocationId != null">
+      and fact_location_id = #{pojo.factLocationId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.factLocationName != null">
+      and fact_location_name like concat(#{pojo.factLocationName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfType != null">
+      and onshelf_type = #{pojo.onshelfType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.onshelfState != null">
+      and onshelf_state = #{pojo.onshelfState,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.personId != null">
+      and person_id = #{pojo.personId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.personName != null">
+      and person_name like concat(#{pojo.personName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfTime != null">
+      and onshelf_time = #{pojo.onshelfTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.inboundBatch != null">
+      and inbound_batch like concat(#{pojo.inboundBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat(#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat(#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat(#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat(#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuName != null">
+      and sku_name like concat(#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuCode != null">
+      and sku_code like concat(#{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.unit != null">
+      and unit like concat(#{pojo.unit,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuNum != null">
+      and sku_num = #{pojo.skuNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalVolumn != null">
+      and  total_volumn = #{pojo.totalVolumn,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalWeight != null">
+      and total_weight = #{pojo.totalWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.productCompany != null">
+      and product_company like concat(#{pojo.productCompany,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.productTime != null">
+      and product_time = #{pojo.productTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.productBatch != null">
+      and product_batch like concat(#{pojo.productBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.onshelfTaskExecuteDevice != null">
+      and onshelf_task_execute_device like concat(#{pojo.onshelfTaskExecuteDevice,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+  <select id="selectByOnshelfId" parameterType="com.bupt.pojo.Onshelf" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from onshelf_detail
+    where onshelf_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByOnshelfId" parameterType="java.lang.Integer">
+    delete from
+      onshelf_detail
+    where onshelf_id = #{onshelfId,jdbcType=INTEGER}
+  </delete>
+  <select id="checkOnshelf" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from onshelf_detail
+    where onshelf_id = #{id,jdbcType=INTEGER} and onshelf_state = 0
+  </select>
+  <select id="selectByContainerBarcode" parameterType="com.bupt.pojo.OnshelfDetail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from onshelf_detail
+    where container_barcode = #{containerBarcode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByOnshelfIdAndState" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from onshelf_detail
+    where onshelf_id = #{id,jdbcType=INTEGER} and 3> onshelf_state
+  </select>
+  <select id="SumOnshelfNum" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    sum(sku_num)
+    from ((select id from inbound_plan where 1=1
+    <if test="startTime!= null">
+      and create_time >= #{startTime}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime}>=create_time
+    </if>
+    ) b left join inbound_plan_detail temp
+    on b.id = plan_id) left join onshelf_detail temp1 on temp.inbound_trace_code=trace_code
+    where 1=1 and onshelf_state = 3
+  </select>
+</mapper>

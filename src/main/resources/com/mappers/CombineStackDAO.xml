@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.CombineStackDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.CombineStack">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="combine_state" jdbcType="INTEGER" property="combineState" />
+    <result column="combine_code" jdbcType="VARCHAR" property="combineCode" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
+    <result column="is_finished" jdbcType="BIT" property="isFinished" />
+    <result column="person_id" jdbcType="INTEGER" property="personId" />
+    <result column="person_name" jdbcType="VARCHAR" property="personName" />
+    <result column="check_person_id" jdbcType="INTEGER" property="checkPersonId" />
+    <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName" />
+    <result column="source_type" jdbcType="INTEGER" property="sourceType" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, combine_state, combine_code, warehouse_id, warehouse_name, warehouse_code, is_finished,
+    person_id, person_name, check_person_id, check_person_name, source_type, check_time,
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from combine_stack
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from combine_stack
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.CombineStack" useGeneratedKeys="true" keyProperty="id">
+    insert into combine_stack (id, combine_state, combine_code,
+      warehouse_id, warehouse_name, warehouse_code,
+      is_finished, person_id, person_name,
+      check_person_id, check_person_name, source_type,
+      check_time, create_time)
+    values (#{id,jdbcType=INTEGER}, #{combineState,jdbcType=INTEGER}, #{combineCode,jdbcType=VARCHAR},
+      #{warehouseId,jdbcType=INTEGER}, #{warehouseName,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR},
+      #{isFinished,jdbcType=BIT}, #{personId,jdbcType=INTEGER}, #{personName,jdbcType=VARCHAR},
+      #{checkPersonId,jdbcType=INTEGER}, #{checkPersonName,jdbcType=VARCHAR}, #{sourceType,jdbcType=INTEGER},
+      #{checkTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.CombineStack" useGeneratedKeys="true" keyProperty="id">
+    insert into combine_stack
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="combineState != null">
+        combine_state,
+      </if>
+      <if test="combineCode != null">
+        combine_code,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code,
+      </if>
+      <if test="isFinished != null">
+        is_finished,
+      </if>
+      <if test="personId != null">
+        person_id,
+      </if>
+      <if test="personName != null">
+        person_name,
+      </if>
+      <if test="checkPersonId != null">
+        check_person_id,
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="combineState != null">
+        #{combineState,jdbcType=INTEGER},
+      </if>
+      <if test="combineCode != null">
+        #{combineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null">
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isFinished != null">
+        #{isFinished,jdbcType=BIT},
+      </if>
+      <if test="personId != null">
+        #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="personName != null">
+        #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPersonId != null">
+        #{checkPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonName != null">
+        #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.CombineStack">
+    update combine_stack
+    <set>
+      <if test="combineState != null">
+        combine_state = #{combineState,jdbcType=INTEGER},
+      </if>
+      <if test="combineCode != null">
+        combine_code = #{combineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isFinished != null">
+        is_finished = #{isFinished,jdbcType=BIT},
+      </if>
+      <if test="personId != null">
+        person_id = #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="personName != null">
+        person_name = #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPersonId != null">
+        check_person_id = #{checkPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.CombineStack">
+    update combine_stack
+    set combine_state = #{combineState,jdbcType=INTEGER},
+      combine_code = #{combineCode,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      is_finished = #{isFinished,jdbcType=BIT},
+      person_id = #{personId,jdbcType=INTEGER},
+      person_name = #{personName,jdbcType=VARCHAR},
+      check_person_id = #{checkPersonId,jdbcType=INTEGER},
+      check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      source_type = #{sourceType,jdbcType=INTEGER},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from combine_stack
+    where 1=1 and warehouse_id in
+    (
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.combineState != null">
+      and combine_state = #{pojo.combineState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and combine_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= combine_state
+    </if>
+    <if test="pojo.combineCode != null">
+      and combine_code like concat('%',#{pojo.combineCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%',#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat(#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isFinished != null">
+      and is_finished = #{pojo.isFinished,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.personId != null">
+      and person_id = #{pojo.personId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.personName != null">
+      and person_name like concat('%',#{pojo.personName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime,jdbcType=TIMESTAMP}>=create_time
+    </if>
+    <if test="pojo.checkPersonId != null">
+      and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonName != null">
+      and check_person_name like concat('%',#{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from combine_stack
+    where 1=1 and warehouse_id in
+    (
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.combineState != null">
+      and combine_state = #{pojo.combineState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and combine_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= combine_state
+    </if>
+    <if test="pojo.combineCode != null">
+      and combine_code like concat('%',#{pojo.combineCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%',#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat(#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isFinished != null">
+      and is_finished = #{pojo.isFinished,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.personId != null">
+      and person_id = #{pojo.personId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.personName != null">
+      and person_name like concat('%',#{pojo.personName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime}>=create_time
+    </if>
+    <if test="pojo.checkPersonId != null">
+      and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonName != null">
+      and check_person_name like concat('%',#{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectByCombineCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from combine_stack
+    where combine_code = #{code,jdbcType=VARCHAR}
+  </select>
+</mapper>

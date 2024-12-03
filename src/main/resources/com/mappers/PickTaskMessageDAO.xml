@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.PickTaskMessageDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.PickTaskMessage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
+    <result column="warehouse_area_id" jdbcType="INTEGER" property="warehouseAreaId" />
+    <result column="warehouse_area_name" jdbcType="VARCHAR" property="warehouseAreaName" />
+    <result column="warehouse_area_code" jdbcType="VARCHAR" property="warehouseAreaCode" />
+    <result column="warehouse_order" jdbcType="SMALLINT" property="warehouseOrder" />
+    <result column="full_percent" jdbcType="INTEGER" property="fullPercent" />
+    <result column="full_box_device_id" jdbcType="INTEGER" property="fullBoxDeviceId" />
+    <result column="fullbox_device" jdbcType="VARCHAR" property="fullboxDevice" />
+    <result column="piece_device_id" jdbcType="INTEGER" property="pieceDeviceId" />
+    <result column="piece_device" jdbcType="VARCHAR" property="pieceDevice" />
+    <result column="piece_percent" jdbcType="INTEGER" property="piecePercent" />
+    <result column="packing_device_id" jdbcType="INTEGER" property="packingDeviceId" />
+    <result column="packing_device" jdbcType="VARCHAR" property="packingDevice" />
+    <result column="packing_percent" jdbcType="INTEGER" property="packingPercent" />
+    <result column="pick_task_rule" jdbcType="VARCHAR" property="pickTaskRule" />
+    <result column="is_not_single_area" jdbcType="BIT" property="isNotSingleArea" />
+    <result column="is_full_repacking" jdbcType="BIT" property="isFullRepacking" />
+    <result column="is_full_search" jdbcType="BIT" property="isFullSearch" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, warehouse_id, warehouse_name, warehouse_code, warehouse_area_id, warehouse_area_name, 
+    warehouse_area_code, warehouse_order, full_percent, full_box_device_id, fullbox_device, 
+    piece_device_id, piece_device, piece_percent, packing_device_id, packing_device, 
+    packing_percent, pick_task_rule, is_not_single_area, is_full_repacking, is_full_search, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pick_task_message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pick_task_message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.PickTaskMessage">
+    insert into pick_task_message (id, pid, warehouse_id, 
+      warehouse_name, warehouse_code, warehouse_area_id, 
+      warehouse_area_name, warehouse_area_code, warehouse_order, 
+      full_percent, full_box_device_id, fullbox_device, 
+      piece_device_id, piece_device, piece_percent, 
+      packing_device_id, packing_device, packing_percent, 
+      pick_task_rule, is_not_single_area, is_full_repacking, 
+      is_full_search, create_time)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{warehouseId,jdbcType=INTEGER}, 
+      #{warehouseName,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR}, #{warehouseAreaId,jdbcType=INTEGER}, 
+      #{warehouseAreaName,jdbcType=VARCHAR}, #{warehouseAreaCode,jdbcType=VARCHAR}, #{warehouseOrder,jdbcType=SMALLINT}, 
+      #{fullPercent,jdbcType=INTEGER}, #{fullBoxDeviceId,jdbcType=INTEGER}, #{fullboxDevice,jdbcType=VARCHAR}, 
+      #{pieceDeviceId,jdbcType=INTEGER}, #{pieceDevice,jdbcType=VARCHAR}, #{piecePercent,jdbcType=INTEGER}, 
+      #{packingDeviceId,jdbcType=INTEGER}, #{packingDevice,jdbcType=VARCHAR}, #{packingPercent,jdbcType=INTEGER}, 
+      #{pickTaskRule,jdbcType=VARCHAR}, #{isNotSingleArea,jdbcType=BIT}, #{isFullRepacking,jdbcType=BIT}, 
+      #{isFullSearch,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.PickTaskMessage">
+    insert into pick_task_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code,
+      </if>
+      <if test="warehouseAreaId != null">
+        warehouse_area_id,
+      </if>
+      <if test="warehouseAreaName != null">
+        warehouse_area_name,
+      </if>
+      <if test="warehouseAreaCode != null">
+        warehouse_area_code,
+      </if>
+      <if test="warehouseOrder != null">
+        warehouse_order,
+      </if>
+      <if test="fullPercent != null">
+        full_percent,
+      </if>
+      <if test="fullBoxDeviceId != null">
+        full_box_device_id,
+      </if>
+      <if test="fullboxDevice != null">
+        fullbox_device,
+      </if>
+      <if test="pieceDeviceId != null">
+        piece_device_id,
+      </if>
+      <if test="pieceDevice != null">
+        piece_device,
+      </if>
+      <if test="piecePercent != null">
+        piece_percent,
+      </if>
+      <if test="packingDeviceId != null">
+        packing_device_id,
+      </if>
+      <if test="packingDevice != null">
+        packing_device,
+      </if>
+      <if test="packingPercent != null">
+        packing_percent,
+      </if>
+      <if test="pickTaskRule != null">
+        pick_task_rule,
+      </if>
+      <if test="isNotSingleArea != null">
+        is_not_single_area,
+      </if>
+      <if test="isFullRepacking != null">
+        is_full_repacking,
+      </if>
+      <if test="isFullSearch != null">
+        is_full_search,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null">
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseAreaId != null">
+        #{warehouseAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseAreaName != null">
+        #{warehouseAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseAreaCode != null">
+        #{warehouseAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseOrder != null">
+        #{warehouseOrder,jdbcType=SMALLINT},
+      </if>
+      <if test="fullPercent != null">
+        #{fullPercent,jdbcType=INTEGER},
+      </if>
+      <if test="fullBoxDeviceId != null">
+        #{fullBoxDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="fullboxDevice != null">
+        #{fullboxDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="pieceDeviceId != null">
+        #{pieceDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="pieceDevice != null">
+        #{pieceDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="piecePercent != null">
+        #{piecePercent,jdbcType=INTEGER},
+      </if>
+      <if test="packingDeviceId != null">
+        #{packingDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="packingDevice != null">
+        #{packingDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="packingPercent != null">
+        #{packingPercent,jdbcType=INTEGER},
+      </if>
+      <if test="pickTaskRule != null">
+        #{pickTaskRule,jdbcType=VARCHAR},
+      </if>
+      <if test="isNotSingleArea != null">
+        #{isNotSingleArea,jdbcType=BIT},
+      </if>
+      <if test="isFullRepacking != null">
+        #{isFullRepacking,jdbcType=BIT},
+      </if>
+      <if test="isFullSearch != null">
+        #{isFullSearch,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.PickTaskMessage">
+    update pick_task_message
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseAreaId != null">
+        warehouse_area_id = #{warehouseAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseAreaName != null">
+        warehouse_area_name = #{warehouseAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseAreaCode != null">
+        warehouse_area_code = #{warehouseAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseOrder != null">
+        warehouse_order = #{warehouseOrder,jdbcType=SMALLINT},
+      </if>
+      <if test="fullPercent != null">
+        full_percent = #{fullPercent,jdbcType=INTEGER},
+      </if>
+      <if test="fullBoxDeviceId != null">
+        full_box_device_id = #{fullBoxDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="fullboxDevice != null">
+        fullbox_device = #{fullboxDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="pieceDeviceId != null">
+        piece_device_id = #{pieceDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="pieceDevice != null">
+        piece_device = #{pieceDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="piecePercent != null">
+        piece_percent = #{piecePercent,jdbcType=INTEGER},
+      </if>
+      <if test="packingDeviceId != null">
+        packing_device_id = #{packingDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="packingDevice != null">
+        packing_device = #{packingDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="packingPercent != null">
+        packing_percent = #{packingPercent,jdbcType=INTEGER},
+      </if>
+      <if test="pickTaskRule != null">
+        pick_task_rule = #{pickTaskRule,jdbcType=VARCHAR},
+      </if>
+      <if test="isNotSingleArea != null">
+        is_not_single_area = #{isNotSingleArea,jdbcType=BIT},
+      </if>
+      <if test="isFullRepacking != null">
+        is_full_repacking = #{isFullRepacking,jdbcType=BIT},
+      </if>
+      <if test="isFullSearch != null">
+        is_full_search = #{isFullSearch,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.PickTaskMessage">
+    update pick_task_message
+    set pid = #{pid,jdbcType=INTEGER},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      warehouse_area_id = #{warehouseAreaId,jdbcType=INTEGER},
+      warehouse_area_name = #{warehouseAreaName,jdbcType=VARCHAR},
+      warehouse_area_code = #{warehouseAreaCode,jdbcType=VARCHAR},
+      warehouse_order = #{warehouseOrder,jdbcType=SMALLINT},
+      full_percent = #{fullPercent,jdbcType=INTEGER},
+      full_box_device_id = #{fullBoxDeviceId,jdbcType=INTEGER},
+      fullbox_device = #{fullboxDevice,jdbcType=VARCHAR},
+      piece_device_id = #{pieceDeviceId,jdbcType=INTEGER},
+      piece_device = #{pieceDevice,jdbcType=VARCHAR},
+      piece_percent = #{piecePercent,jdbcType=INTEGER},
+      packing_device_id = #{packingDeviceId,jdbcType=INTEGER},
+      packing_device = #{packingDevice,jdbcType=VARCHAR},
+      packing_percent = #{packingPercent,jdbcType=INTEGER},
+      pick_task_rule = #{pickTaskRule,jdbcType=VARCHAR},
+      is_not_single_area = #{isNotSingleArea,jdbcType=BIT},
+      is_full_repacking = #{isFullRepacking,jdbcType=BIT},
+      is_full_search = #{isFullSearch,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

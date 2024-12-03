@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.InboundPlanDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.InboundPlan">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="plan_id" jdbcType="VARCHAR" property="planId" />
+    <result column="inbound_type" jdbcType="INTEGER" property="inboundType" />
+    <result column="inbound_state" jdbcType="INTEGER" property="inboundState" />
+    <result column="is_usable" jdbcType="TINYINT" property="isUsable" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="is_all_checke" jdbcType="BIT" property="isAllChecke" />
+    <result column="is_received" jdbcType="BIT" property="isReceived" />
+    <result column="predict_container_num" jdbcType="INTEGER" property="predictContainerNum" />
+    <result column="predict_sku_num" jdbcType="DOUBLE" property="predictSkuNum" />
+    <result column="predict_num" jdbcType="DOUBLE" property="predictNum" />
+    <result column="inbound_batch" jdbcType="VARCHAR" property="inboundBatch" />
+    <result column="source_type" jdbcType="INTEGER" property="sourceType" />
+    <result column="is_packaged" jdbcType="BIT" property="isPackaged" />
+    <result column="is_stacked" jdbcType="BIT" property="isStacked" />
+    <result column="received_sku_num" jdbcType="DOUBLE" property="receivedSkuNum" />
+    <result column="received_num" jdbcType="DOUBLE" property="receivedNum" />
+    <result column="received_container_num" jdbcType="INTEGER" property="receivedContainerNum" />
+    <result column="check_person_id" jdbcType="INTEGER" property="checkPersonId" />
+    <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="close_reason" jdbcType="VARCHAR" property="closeReason" />
+    <result column="is_need_check" jdbcType="BIT" property="isNeedCheck" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, plan_id, inbound_type, inbound_state, is_usable, warehouse_id, warehouse_code,
+    warehouse_name, create_time, remark, is_all_checke, is_received, predict_container_num,
+    predict_sku_num, predict_num, inbound_batch, source_type, is_packaged, is_stacked,
+    received_sku_num, received_num, received_container_num, check_person_id, check_person_name,
+    check_time, close_reason, is_need_check
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from inbound_plan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from inbound_plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.InboundPlan" useGeneratedKeys="true" keyProperty="id">
+    insert into inbound_plan (id, plan_id, inbound_type,
+      inbound_state, is_usable, warehouse_id,
+      warehouse_code, warehouse_name, create_time,
+      remark, is_all_checke, is_received,
+      predict_container_num, predict_sku_num, predict_num,
+      inbound_batch, source_type, is_packaged,
+      is_stacked, received_sku_num, received_num,
+      received_container_num, check_person_id, check_person_name,
+      check_time, close_reason, is_need_check
+      )
+    values (#{id,jdbcType=INTEGER}, #{planId,jdbcType=VARCHAR}, #{inboundType,jdbcType=INTEGER},
+      #{inboundState,jdbcType=INTEGER}, #{isUsable,jdbcType=TINYINT}, #{warehouseId,jdbcType=INTEGER},
+      #{warehouseCode,jdbcType=VARCHAR}, #{warehouseName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{remark,jdbcType=VARCHAR}, #{isAllChecke,jdbcType=BIT}, #{isReceived,jdbcType=BIT},
+      #{predictContainerNum,jdbcType=INTEGER}, #{predictSkuNum,jdbcType=DOUBLE}, #{predictNum,jdbcType=DOUBLE},
+      #{inboundBatch,jdbcType=VARCHAR}, #{sourceType,jdbcType=INTEGER}, #{isPackaged,jdbcType=BIT},
+      #{isStacked,jdbcType=BIT}, #{receivedSkuNum,jdbcType=DOUBLE}, #{receivedNum,jdbcType=DOUBLE},
+      #{receivedContainerNum,jdbcType=INTEGER}, #{checkPersonId,jdbcType=INTEGER}, #{checkPersonName,jdbcType=VARCHAR},
+      #{checkTime,jdbcType=TIMESTAMP}, #{closeReason,jdbcType=VARCHAR}, #{isNeedCheck,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.InboundPlan" useGeneratedKeys="true" keyProperty="id">
+    insert into inbound_plan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="planId != null">
+        plan_id,
+      </if>
+      <if test="inboundType != null">
+        inbound_type,
+      </if>
+      <if test="inboundState != null">
+        inbound_state,
+      </if>
+      <if test="isUsable != null">
+        is_usable,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="isAllChecke != null">
+        is_all_checke,
+      </if>
+      <if test="isReceived != null">
+        is_received,
+      </if>
+      <if test="predictContainerNum != null">
+        predict_container_num,
+      </if>
+      <if test="predictSkuNum != null">
+        predict_sku_num,
+      </if>
+      <if test="predictNum != null">
+        predict_num,
+      </if>
+      <if test="inboundBatch != null">
+        inbound_batch,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="isPackaged != null">
+        is_packaged,
+      </if>
+      <if test="isStacked != null">
+        is_stacked,
+      </if>
+      <if test="receivedSkuNum != null">
+        received_sku_num,
+      </if>
+      <if test="receivedNum != null">
+        received_num,
+      </if>
+      <if test="receivedContainerNum != null">
+        received_container_num,
+      </if>
+      <if test="checkPersonId != null">
+        check_person_id,
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
+      <if test="closeReason != null">
+        close_reason,
+      </if>
+      <if test="isNeedCheck != null">
+        is_need_check,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="planId != null">
+        #{planId,jdbcType=VARCHAR},
+      </if>
+      <if test="inboundType != null">
+        #{inboundType,jdbcType=INTEGER},
+      </if>
+      <if test="inboundState != null">
+        #{inboundState,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isAllChecke != null">
+        #{isAllChecke,jdbcType=BIT},
+      </if>
+      <if test="isReceived != null">
+        #{isReceived,jdbcType=BIT},
+      </if>
+      <if test="predictContainerNum != null">
+        #{predictContainerNum,jdbcType=INTEGER},
+      </if>
+      <if test="predictSkuNum != null">
+        #{predictSkuNum,jdbcType=DOUBLE},
+      </if>
+      <if test="predictNum != null">
+        #{predictNum,jdbcType=DOUBLE},
+      </if>
+      <if test="inboundBatch != null">
+        #{inboundBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="isPackaged != null">
+        #{isPackaged,jdbcType=BIT},
+      </if>
+      <if test="isStacked != null">
+        #{isStacked,jdbcType=BIT},
+      </if>
+      <if test="receivedSkuNum != null">
+        #{receivedSkuNum,jdbcType=DOUBLE},
+      </if>
+      <if test="receivedNum != null">
+        #{receivedNum,jdbcType=DOUBLE},
+      </if>
+      <if test="receivedContainerNum != null">
+        #{receivedContainerNum,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonId != null">
+        #{checkPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonName != null">
+        #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeReason != null">
+        #{closeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="isNeedCheck != null">
+        #{isNeedCheck,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.InboundPlan">
+    update inbound_plan
+    <set>
+      <if test="planId != null">
+        plan_id = #{planId,jdbcType=VARCHAR},
+      </if>
+      <if test="inboundType != null">
+        inbound_type = #{inboundType,jdbcType=INTEGER},
+      </if>
+      <if test="inboundState != null">
+        inbound_state = #{inboundState,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        is_usable = #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isAllChecke != null">
+        is_all_checke = #{isAllChecke,jdbcType=BIT},
+      </if>
+      <if test="isReceived != null">
+        is_received = #{isReceived,jdbcType=BIT},
+      </if>
+      <if test="predictContainerNum != null">
+        predict_container_num = #{predictContainerNum,jdbcType=INTEGER},
+      </if>
+      <if test="predictSkuNum != null">
+        predict_sku_num = #{predictSkuNum,jdbcType=DOUBLE},
+      </if>
+      <if test="predictNum != null">
+        predict_num = #{predictNum,jdbcType=DOUBLE},
+      </if>
+      <if test="inboundBatch != null">
+        inbound_batch = #{inboundBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="isPackaged != null">
+        is_packaged = #{isPackaged,jdbcType=BIT},
+      </if>
+      <if test="isStacked != null">
+        is_stacked = #{isStacked,jdbcType=BIT},
+      </if>
+      <if test="receivedSkuNum != null">
+        received_sku_num = #{receivedSkuNum,jdbcType=DOUBLE},
+      </if>
+      <if test="receivedNum != null">
+        received_num = #{receivedNum,jdbcType=DOUBLE},
+      </if>
+      <if test="receivedContainerNum != null">
+        received_container_num = #{receivedContainerNum,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonId != null">
+        check_person_id = #{checkPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeReason != null">
+        close_reason = #{closeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="isNeedCheck != null">
+        is_need_check = #{isNeedCheck,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.InboundPlan">
+    update inbound_plan
+    set plan_id = #{planId,jdbcType=VARCHAR},
+      inbound_type = #{inboundType,jdbcType=INTEGER},
+      inbound_state = #{inboundState,jdbcType=INTEGER},
+      is_usable = #{isUsable,jdbcType=TINYINT},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_all_checke = #{isAllChecke,jdbcType=BIT},
+      is_received = #{isReceived,jdbcType=BIT},
+      predict_container_num = #{predictContainerNum,jdbcType=INTEGER},
+      predict_sku_num = #{predictSkuNum,jdbcType=DOUBLE},
+      predict_num = #{predictNum,jdbcType=DOUBLE},
+      inbound_batch = #{inboundBatch,jdbcType=VARCHAR},
+      source_type = #{sourceType,jdbcType=INTEGER},
+      is_packaged = #{isPackaged,jdbcType=BIT},
+      is_stacked = #{isStacked,jdbcType=BIT},
+      received_sku_num = #{receivedSkuNum,jdbcType=DOUBLE},
+      received_num = #{receivedNum,jdbcType=DOUBLE},
+      received_container_num = #{receivedContainerNum,jdbcType=INTEGER},
+      check_person_id = #{checkPersonId,jdbcType=INTEGER},
+      check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      close_reason = #{closeReason,jdbcType=VARCHAR},
+      is_need_check = #{isNeedCheck,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from inbound_plan
+    where 1=1 and warehouse_id in(
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.planId != null">
+      and plan_id like concat('%',#{pojo.planId,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inboundType != null">
+      and inbound_type = #{pojo.inboundType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.inboundState != null">
+      and inbound_state = #{pojo.inboundState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and inbound_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= inbound_state
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable like concat('%',#{pojo.isUsable,jdbcType=TINYINT},'%')
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%', #{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime,jdbcType=TIMESTAMP}>=create_time
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isAllChecke != null">
+      and is_all_checke = #{pojo.isAllChecke,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isReceived != null">
+      and is_received = #{pojo.isReceived,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.predictContainerNum != null">
+      and predict_container_num = #{pojo.predictContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictSkuNum != null">
+      and predict_sku_num = #{pojo.predictSkuNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.predictNum!=null">
+      and predict_num = #{pojo.predictNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.inboundBatch != null">
+      and inbound_batch like concat('%',#{pojo.inboundBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isPackaged != null">
+      and is_packaged = #{pojo.isPackaged,jdbcType=BIT}
+    </if>
+    <if test="pojo.isStacked != null">
+      and is_stacked = #{pojo.isStacked,jdbcType=BIT}
+    </if>
+    <if test="pojo.receivedSkuNum != null">
+      and received_sku_num = #{pojo.receivedSkuNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedNum != null">
+      and received_num = #{pojo.receivedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedContainerNum != null">
+      and received_container_num = #{pojo.receivedContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonId != null">
+      and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonName != null">
+      and check_person_name like concat(#{checkPersonName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.checkTime != null">
+      and check_time = #{pojo.checkTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.closeReason != null">
+      and close_reason = #{pojo.closeReason,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isNeedCheck != null">
+      and is_need_check = #{pojo.isNeedCheck,jdbcType=BIT}
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from inbound_plan
+    where 1=1 and warehouse_id in(
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.planId != null">
+      and plan_id like concat('%',#{pojo.planId,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inboundType != null">
+      and inbound_type = #{pojo.inboundType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.inboundState != null">
+      and inbound_state = #{pojo.inboundState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and inbound_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= inbound_state
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable like concat('%',#{pojo.isUsable,jdbcType=TINYINT},'%')
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%', #{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime}>=create_time
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isAllChecke != null">
+      and is_all_checke = #{pojo.isAllChecke,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isReceived != null">
+      and is_received = #{pojo.isReceived,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.predictContainerNum != null">
+      and predict_container_num = #{pojo.predictContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictSkuNum != null">
+      and predict_sku_num = #{pojo.predictSkuNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.predictNum!=null">
+      and predict_num = #{pojo.predictNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.inboundBatch != null">
+      and inbound_batch like concat('%',#{pojo.inboundBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isPackaged != null">
+      and is_packaged = #{pojo.isPackaged,jdbcType=BIT}
+    </if>
+    <if test="pojo.isStacked != null">
+      and is_stacked = #{pojo.isStacked,jdbcType=BIT}
+    </if>
+    <if test="pojo.receivedSkuNum != null">
+      and received_sku_num = #{pojo.receivedSkuNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedNum != null">
+      and received_num = #{pojo.receivedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedContainerNum != null">
+      and received_container_num = #{pojo.receivedContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonId != null">
+      and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonName != null">
+      and check_person_name like concat(#{checkPersonName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.checkTime != null">
+      and check_time = #{pojo.checkTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.closeReason != null">
+      and close_reason = #{pojo.closeReason,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isNeedCheck != null">
+      and is_need_check = #{pojo.isNeedCheck,jdbcType=BIT}
+    </if>
+  </select>
+  <select id="selectByPlanId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from inbound_plan
+    where plan_id = #{id,jdbcType=VARCHAR}
+  </select>
+  <update id="updateIsReceived" parameterType="java.lang.Integer">
+    update inbound_plan
+    set is_received = 1,
+        inbound_state = 6
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateReceiving" parameterType="java.lang.String">
+    update inbound_plan
+    set inbound_state = 5
+    where plan_id = #{code,jdbcType=VARCHAR}
+  </update>
+  <update id="updateState" parameterType="com.bupt.pojo.InboundPlan">
+    update inbound_plan
+    set inbound_state = #{inboundState,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateNum" parameterType="com.bupt.pojo.InboundPlan">
+    update inbound_plan
+    <set>
+      <if test="receivedSkuNum != null">
+        received_sku_num = #{receivedSkuNum,jdbcType=DOUBLE}+received_sku_num,
+      </if>
+      <if test="receivedNum != null">
+        received_num = #{receivedNum,jdbcType=DOUBLE}+received_num,
+      </if>
+      <if test="receivedContainerNum != null">
+        received_container_num = #{receivedContainerNum,jdbcType=INTEGER}+received_container_num,
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="SumInboundNum" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    sum(predict_num)
+    from inbound_plan
+    where 1=1 and warehouse_id in(
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.planId != null">
+      and plan_id like concat('%',#{pojo.planId,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inboundType != null">
+      and inbound_type = #{pojo.inboundType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.inboundState != null">
+      and inbound_state = #{pojo.inboundState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and inbound_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= inbound_state
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable like concat('%',#{pojo.isUsable,jdbcType=TINYINT},'%')
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%', #{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime}>=create_time
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isAllChecke != null">
+      and is_all_checke = #{pojo.isAllChecke,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isReceived != null">
+      and is_received = #{pojo.isReceived,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.predictContainerNum != null">
+      and predict_container_num = #{pojo.predictContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictSkuNum != null">
+      and predict_sku_num = #{pojo.predictSkuNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.predictNum!=null">
+      and predict_num = #{pojo.predictNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.inboundBatch != null">
+      and inbound_batch like concat('%',#{pojo.inboundBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isPackaged != null">
+      and is_packaged = #{pojo.isPackaged,jdbcType=BIT}
+    </if>
+    <if test="pojo.isStacked != null">
+      and is_stacked = #{pojo.isStacked,jdbcType=BIT}
+    </if>
+    <if test="pojo.receivedSkuNum != null">
+      and received_sku_num = #{pojo.receivedSkuNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedNum != null">
+      and received_num = #{pojo.receivedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedContainerNum != null">
+      and received_container_num = #{pojo.receivedContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonId != null">
+      and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonName != null">
+      and check_person_name like concat(#{checkPersonName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.checkTime != null">
+      and check_time = #{pojo.checkTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.closeReason != null">
+      and close_reason = #{pojo.closeReason,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isNeedCheck != null">
+      and is_need_check = #{pojo.isNeedCheck,jdbcType=BIT}
+    </if>
+  </select>
+</mapper>

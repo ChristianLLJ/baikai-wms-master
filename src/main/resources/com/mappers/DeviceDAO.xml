@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.DeviceDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.Device">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="area_id" jdbcType="INTEGER" property="areaId"/>
+        <result column="device_name" jdbcType="VARCHAR" property="deviceName"/>
+        <result column="device_type" jdbcType="INTEGER" property="deviceType"/>
+        <result column="device_code" jdbcType="VARCHAR" property="deviceCode"/>
+        <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName"/>
+        <result column="area_name" jdbcType="VARCHAR" property="areaName"/>
+        <result column="is_usable" jdbcType="BIT" property="isUsable"/>
+        <result column="is_manual" jdbcType="BIT" property="isManual"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="velocity" jdbcType="VARCHAR" property="velocity"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , area_id, device_name, device_type, device_code, warehouse_name, area_name, is_usable,
+    is_manual, create_time, remark, velocity
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from device
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from device
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.Device">
+        insert into device (id, area_id, device_name,
+                            device_type, device_code, warehouse_name,
+                            area_name, is_usable, is_manual,
+                            create_time, remark, velocity)
+        values (#{id,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{deviceName,jdbcType=VARCHAR},
+                #{deviceType,jdbcType=INTEGER}, #{deviceCode,jdbcType=VARCHAR}, #{warehouseName,jdbcType=VARCHAR},
+                #{areaName,jdbcType=VARCHAR}, #{isUsable,jdbcType=BIT}, #{isManual,jdbcType=BIT},
+                #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{velocity,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.Device">
+        insert into device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="areaId != null">
+                area_id,
+            </if>
+            <if test="deviceName != null">
+                device_name,
+            </if>
+            <if test="deviceType != null">
+                device_type,
+            </if>
+            <if test="deviceCode != null">
+                device_code,
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name,
+            </if>
+            <if test="areaName != null">
+                area_name,
+            </if>
+            <if test="isUsable != null">
+                is_usable,
+            </if>
+            <if test="isManual != null">
+                is_manual,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="velocity != null">
+                velocity,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="areaId != null">
+                #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="deviceName != null">
+                #{deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceType != null">
+                #{deviceType,jdbcType=INTEGER},
+            </if>
+            <if test="deviceCode != null">
+                #{deviceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseName != null">
+                #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaName != null">
+                #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="isUsable != null">
+                #{isUsable,jdbcType=BIT},
+            </if>
+            <if test="isManual != null">
+                #{isManual,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="velocity != null">
+                #{velocity,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Device">
+        update device
+        <set>
+            <if test="areaId != null">
+                area_id = #{areaId,jdbcType=INTEGER},
+            </if>
+            <if test="deviceName != null">
+                device_name = #{deviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="deviceType != null">
+                device_type = #{deviceType,jdbcType=INTEGER},
+            </if>
+            <if test="deviceCode != null">
+                device_code = #{deviceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="areaName != null">
+                area_name = #{areaName,jdbcType=VARCHAR},
+            </if>
+            <if test="isUsable != null">
+                is_usable = #{isUsable,jdbcType=BIT},
+            </if>
+            <if test="isManual != null">
+                is_manual = #{isManual,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="velocity != null">
+                velocity = #{velocity,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Device">
+        update device
+        set area_id        = #{areaId,jdbcType=INTEGER},
+            device_name    = #{deviceName,jdbcType=VARCHAR},
+            device_type    = #{deviceType,jdbcType=INTEGER},
+            device_code    = #{deviceCode,jdbcType=VARCHAR},
+            warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            area_name      = #{areaName,jdbcType=VARCHAR},
+            is_usable      = #{isUsable,jdbcType=BIT},
+            is_manual      = #{isManual,jdbcType=BIT},
+            create_time    = #{createTime,jdbcType=TIMESTAMP},
+            remark         = #{remark,jdbcType=VARCHAR},
+            velocity       = #{velocity,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--  返回总数-->
+    <select id="selectNum" resultType="java.lang.Integer">
+        select count(id)
+        from device
+    </select>
+    <!--  筛选-->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from device
+        where 1=1
+        <if test="pojo.areaId != null">
+            and area_id = #{pojo.areaId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.deviceName != null">
+            and device_name like concat('%',#{pojo.deviceName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.deviceType != null">
+            and device_type = #{pojo.deviceType,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.deviceCode != null">
+            and device_code like concat('%',#{pojo.deviceCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.warehouseName != null">
+            and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.areaName != null">
+            and area_name like concat('%',#{pojo.areaName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.isUsable != null">
+            and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+        </if>
+        <if test="pojo.createTime != null">
+            and create_time = #{pojo.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="pojo.velocity != null">
+            and velocity = #{pojo.velocity,jdbcType=VARCHAR}
+        </if>
+        order by id desc
+        <if test="searchDTO !=null">
+            limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select
+        count(id)
+        from device
+        where 1=1
+        <if test="pojo.areaId != null">
+            and area_id = #{pojo.areaId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.deviceName != null">
+            and device_name like concat('%',#{pojo.deviceName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.deviceType != null">
+            and device_type = #{pojo.deviceType,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.deviceCode != null">
+            and device_code like concat('%',#{pojo.deviceCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.warehouseName != null">
+            and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.areaName != null">
+            and area_name like concat('%',#{pojo.areaName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.isUsable != null">
+            and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+        </if>
+        <if test="pojo.createTime != null">
+            and create_time = #{pojo.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="pojo.velocity != null">
+            and velocity = #{pojo.velocity,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <select id="selectDevice" parameterType="com.bupt.DTO.SearchDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from device
+        limit #{page,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
+    </select>
+</mapper>

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.InventoryTotalDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.InventoryTotal">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="total_code" jdbcType="VARCHAR" property="totalCode"/>
+        <result column="total_type" jdbcType="VARCHAR" property="totalType"/>
+        <result column="custom_id" jdbcType="INTEGER" property="customId"/>
+        <result column="custom_name" jdbcType="VARCHAR" property="customName"/>
+        <result column="cargo_type" jdbcType="VARCHAR" property="cargoType"/>
+        <result column="commodity_id" jdbcType="INTEGER" property="commodityId"/>
+        <result column="commodity_code" jdbcType="VARCHAR" property="commodityCode"/>
+        <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode"/>
+        <result column="area_code" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="product_group_code" jdbcType="VARCHAR" property="productGroupCode"/>
+        <result column="sku_id" jdbcType="INTEGER" property="skuId"/>
+        <result column="sku_code" jdbcType="VARCHAR" property="skuCode"/>
+        <result column="sku_name" jdbcType="VARCHAR" property="skuName"/>
+        <result column="unit" jdbcType="VARCHAR" property="unit"/>
+        <result column="trace_code" jdbcType="VARCHAR" property="traceCode"/>
+        <result column="pre_distribution_cnt" jdbcType="INTEGER" property="preDistributionCnt"/>
+        <result column="distribution_cnt" jdbcType="INTEGER" property="distributionCnt"/>
+        <result column="freeze_cnt" jdbcType="INTEGER" property="freezeCnt"/>
+        <result column="available_cnt" jdbcType="INTEGER" property="availableCnt"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, total_code, total_type, custom_id, custom_name, cargo_type, commodity_id, commodity_code,
+        warehouse_code, area_code, product_group_code, sku_id, sku_code, sku_name, unit,
+        trace_code, pre_distribution_cnt, distribution_cnt, freeze_cnt, available_cnt, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from inventory_total
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from inventory_total
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.InventoryTotal">
+        insert into inventory_total (id, total_code, total_type,
+        custom_id, custom_name, cargo_type,
+        commodity_id, commodity_code, warehouse_code,
+        area_code, product_group_code, sku_id,
+        sku_code, sku_name, unit,
+        trace_code, pre_distribution_cnt, distribution_cnt,
+        freeze_cnt, available_cnt, update_time
+        )
+        values (#{id,jdbcType=INTEGER}, #{totalCode,jdbcType=VARCHAR}, #{totalType,jdbcType=VARCHAR},
+        #{customId,jdbcType=INTEGER}, #{customName,jdbcType=VARCHAR}, #{cargoType,jdbcType=VARCHAR},
+        #{commodityId,jdbcType=INTEGER}, #{commodityCode,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR}, #{productGroupCode,jdbcType=VARCHAR}, #{skuId,jdbcType=INTEGER},
+        #{skuCode,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
+        #{traceCode,jdbcType=VARCHAR}, #{preDistributionCnt,jdbcType=INTEGER}, #{distributionCnt,jdbcType=INTEGER},
+        #{freezeCnt,jdbcType=INTEGER}, #{availableCnt,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.InventoryTotal">
+        insert into inventory_total
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="totalCode != null">
+                total_code,
+            </if>
+            <if test="totalType != null">
+                total_type,
+            </if>
+            <if test="customId != null">
+                custom_id,
+            </if>
+            <if test="customName != null">
+                custom_name,
+            </if>
+            <if test="cargoType != null">
+                cargo_type,
+            </if>
+            <if test="commodityId != null">
+                commodity_id,
+            </if>
+            <if test="commodityCode != null">
+                commodity_code,
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code,
+            </if>
+            <if test="areaCode != null">
+                area_code,
+            </if>
+            <if test="productGroupCode != null">
+                product_group_code,
+            </if>
+            <if test="skuId != null">
+                sku_id,
+            </if>
+            <if test="skuCode != null">
+                sku_code,
+            </if>
+            <if test="skuName != null">
+                sku_name,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="traceCode != null">
+                trace_code,
+            </if>
+            <if test="preDistributionCnt != null">
+                pre_distribution_cnt,
+            </if>
+            <if test="distributionCnt != null">
+                distribution_cnt,
+            </if>
+            <if test="freezeCnt != null">
+                freeze_cnt,
+            </if>
+            <if test="availableCnt != null">
+                available_cnt,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="totalCode != null">
+                #{totalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="totalType != null">
+                #{totalType,jdbcType=VARCHAR},
+            </if>
+            <if test="customId != null">
+                #{customId,jdbcType=INTEGER},
+            </if>
+            <if test="customName != null">
+                #{customName,jdbcType=VARCHAR},
+            </if>
+            <if test="cargoType != null">
+                #{cargoType,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityId != null">
+                #{commodityId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityCode != null">
+                #{commodityCode,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="productGroupCode != null">
+                #{productGroupCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuId != null">
+                #{skuId,jdbcType=INTEGER},
+            </if>
+            <if test="skuCode != null">
+                #{skuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="traceCode != null">
+                #{traceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="preDistributionCnt != null">
+                #{preDistributionCnt,jdbcType=INTEGER},
+            </if>
+            <if test="distributionCnt != null">
+                #{distributionCnt,jdbcType=INTEGER},
+            </if>
+            <if test="freezeCnt != null">
+                #{freezeCnt,jdbcType=INTEGER},
+            </if>
+            <if test="availableCnt != null">
+                #{availableCnt,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.InventoryTotal">
+        update inventory_total
+        <set>
+            <if test="totalCode != null">
+                total_code = #{totalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="totalType != null">
+                total_type = #{totalType,jdbcType=VARCHAR},
+            </if>
+            <if test="customId != null">
+                custom_id = #{customId,jdbcType=INTEGER},
+            </if>
+            <if test="customName != null">
+                custom_name = #{customName,jdbcType=VARCHAR},
+            </if>
+            <if test="cargoType != null">
+                cargo_type = #{cargoType,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityId != null">
+                commodity_id = #{commodityId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityCode != null">
+                commodity_code = #{commodityCode,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                area_code = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="productGroupCode != null">
+                product_group_code = #{productGroupCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuId != null">
+                sku_id = #{skuId,jdbcType=INTEGER},
+            </if>
+            <if test="skuCode != null">
+                sku_code = #{skuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                sku_name = #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="traceCode != null">
+                trace_code = #{traceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="preDistributionCnt != null">
+                pre_distribution_cnt = #{preDistributionCnt,jdbcType=INTEGER},
+            </if>
+            <if test="distributionCnt != null">
+                distribution_cnt = #{distributionCnt,jdbcType=INTEGER},
+            </if>
+            <if test="freezeCnt != null">
+                freeze_cnt = #{freezeCnt,jdbcType=INTEGER},
+            </if>
+            <if test="availableCnt != null">
+                available_cnt = #{availableCnt,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.InventoryTotal">
+        update inventory_total
+        set total_code = #{totalCode,jdbcType=VARCHAR},
+        total_type = #{totalType,jdbcType=VARCHAR},
+        custom_id = #{customId,jdbcType=INTEGER},
+        custom_name = #{customName,jdbcType=VARCHAR},
+        cargo_type = #{cargoType,jdbcType=VARCHAR},
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+        commodity_code = #{commodityCode,jdbcType=VARCHAR},
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+        area_code = #{areaCode,jdbcType=VARCHAR},
+        product_group_code = #{productGroupCode,jdbcType=VARCHAR},
+        sku_id = #{skuId,jdbcType=INTEGER},
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+        sku_name = #{skuName,jdbcType=VARCHAR},
+        unit = #{unit,jdbcType=VARCHAR},
+        trace_code = #{traceCode,jdbcType=VARCHAR},
+        pre_distribution_cnt = #{preDistributionCnt,jdbcType=INTEGER},
+        distribution_cnt = #{distributionCnt,jdbcType=INTEGER},
+        freeze_cnt = #{freezeCnt,jdbcType=INTEGER},
+        available_cnt = #{availableCnt,jdbcType=INTEGER},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from inventory_total
+        <where>
+            1=1
+            <if test="pojo.totalCode != null">
+                and total_code = #{pojo.totalCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.totalType != null">
+                and total_type = #{pojo.totalType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customId != null">
+                and custom_id = #{pojo.customId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customName != null">
+                and custom_name = #{pojo.customName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.cargoType != null">
+                and cargo_type = #{pojo.cargoType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.commodityId != null">
+                and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.commodityCode != null">
+                and commodity_code = #{pojo.commodityCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseCode != null">
+                and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.areaCode != null">
+                and area_code = #{pojo.areaCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.productGroupCode != null">
+                and product_group_code = #{pojo.productGroupCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuId != null">
+                and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuName != null">
+                and sku_name = #{pojo.skuName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.unit != null">
+                and unit = #{pojo.unit,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.traceCode != null">
+                and trace_code = #{pojo.traceCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.preDistributionCnt != null">
+                and pre_distribution_cnt = #{pojo.preDistributionCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.distributionCnt != null">
+                and distribution_cnt = #{pojo.distributionCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.freezeCnt != null">
+                and freeze_cnt = #{pojo.freezeCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.availableCnt != null">
+                and available_cnt = #{pojo.availableCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.updateTime != null">
+                and update_time = #{pojo.updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select id
+        from inventory_total
+        <where>
+            1=1
+            <if test="pojo.totalCode != null">
+                and total_code = #{pojo.totalCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.totalType != null">
+                and total_type = #{pojo.totalType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customId != null">
+                and custom_id = #{pojo.customId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customName != null">
+                and custom_name = #{pojo.customName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.cargoType != null">
+                and cargo_type = #{pojo.cargoType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.commodityId != null">
+                and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.commodityCode != null">
+                and commodity_code = #{pojo.commodityCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseCode != null">
+                and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.areaCode != null">
+                and area_code = #{pojo.areaCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.productGroupCode != null">
+                and product_group_code = #{pojo.productGroupCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuId != null">
+                and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuName != null">
+                and sku_name = #{pojo.skuName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.unit != null">
+                and unit = #{pojo.unit,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.traceCode != null">
+                and trace_code = #{pojo.traceCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.preDistributionCnt != null">
+                and pre_distribution_cnt = #{pojo.preDistributionCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.distributionCnt != null">
+                and distribution_cnt = #{pojo.distributionCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.freezeCnt != null">
+                and freeze_cnt = #{pojo.freezeCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.availableCnt != null">
+                and available_cnt = #{pojo.availableCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.updateTime != null">
+                and update_time = #{pojo.updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+        ORDER BY id DESC
+        <if test="searchDTO !=null">
+            limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+    <update id="increasePreDistributionCountBySkuId">
+        update inventory_total
+        set pre_distribution_cnt = pre_distribution_cnt + #{count,jdbcType=INTEGER},
+        available_cnt = available_cnt - #{count,jdbcType=INTEGER}
+        where sku_id = #{skuId,jdbcType=INTEGER} and warehouse_code = #{wareHouse,jdbcType=VARCHAR} and custom_id =
+        #{customId,jdbcType=INTEGER}
+    </update>
+    <update id="decreasePreDistributionCountBySkuId">
+        update inventory_total
+        set pre_distribution_cnt = pre_distribution_cnt - #{count,jdbcType=INTEGER},
+        available_cnt = available_cnt + #{count,jdbcType=INTEGER}
+        where sku_id = #{skuId,jdbcType=INTEGER} and warehouse_code = #{wareHouse,jdbcType=VARCHAR} and custom_id =
+        #{customId,jdbcType=INTEGER}
+    </update>
+    <update id="decreaseAvailableCountBySkuId">
+        update inventory_total
+        set available_cnt = available_cnt - #{count,jdbcType=INTEGER}
+        where sku_id = #{skuId,jdbcType=INTEGER} and warehouse_code = #{wareHouse,jdbcType=VARCHAR} and custom_id =
+        #{customId,jdbcType=INTEGER}
+    </update>
+    <update id="increaseAvailableCountBySkuId">
+        update inventory_total
+        set available_cnt = available_cnt + #{count,jdbcType=INTEGER}
+        where sku_id = #{skuId,jdbcType=INTEGER} and warehouse_code = #{wareHouse,jdbcType=VARCHAR} and custom_id =
+        #{customId,jdbcType=INTEGER}
+    </update>
+    <select id="selectAvailableCountBySkuId" resultType="java.lang.Integer">
+        select available_cnt
+        from inventory_total
+        where sku_id = #{skuId,jdbcType=INTEGER} and warehouse_code = #{wareHouse,jdbcType=VARCHAR} and custom_id =
+        #{customId,jdbcType=INTEGER}
+    </select>
+    <select id="selectBySkuId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from inventory_total
+        where sku_id = #{skuId,jdbcType=INTEGER}
+    </select>
+    <select id="selectAllById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from inventory_total
+    </select>
+    <select id="selectPreDistributionAvailableCountBySkuId" resultType="java.lang.Integer">
+        select sum(available_cnt)
+        from inventory_total
+        where sku_id = #{skuId,jdbcType=INTEGER} and warehouse_code = #{wareHouse,jdbcType=VARCHAR} and custom_id =
+        #{customId,jdbcType=INTEGER}
+    </select>
+</mapper>

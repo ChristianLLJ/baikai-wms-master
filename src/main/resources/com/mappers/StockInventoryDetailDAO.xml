@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.StockInventoryDetailDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.StockInventoryDetail">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="inventory_id" jdbcType="INTEGER" property="inventoryId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="custom_id" jdbcType="INTEGER" property="customId"/>
+        <result column="custom_code" jdbcType="VARCHAR" property="customCode"/>
+        <result column="custom_name" jdbcType="VARCHAR" property="customName"/>
+        <result column="commodity_id" jdbcType="INTEGER" property="commodityId"/>
+        <result column="commodity_code" jdbcType="VARCHAR" property="commodityCode"/>
+        <result column="commodity_name" jdbcType="VARCHAR" property="commodityName"/>
+        <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId"/>
+        <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode"/>
+        <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName"/>
+        <result column="location_id" jdbcType="INTEGER" property="locationId"/>
+        <result column="location_code" jdbcType="VARCHAR" property="locationCode"/>
+        <result column="location_name" jdbcType="VARCHAR" property="locationName"/>
+        <result column="container_id" jdbcType="INTEGER" property="containerId"/>
+        <result column="container_code" jdbcType="VARCHAR" property="containerCode"/>
+        <result column="container_name" jdbcType="VARCHAR" property="containerName"/>
+        <result column="sku_id" jdbcType="INTEGER" property="skuId"/>
+        <result column="sku_code" jdbcType="VARCHAR" property="skuCode"/>
+        <result column="sku_name" jdbcType="VARCHAR" property="skuName"/>
+        <result column="system_num" jdbcType="INTEGER" property="systemNum"/>
+        <result column="inventory_num" jdbcType="INTEGER" property="inventoryNum"/>
+        <result column="product_company" jdbcType="VARCHAR" property="productCompany"/>
+        <result column="product_time" jdbcType="TIMESTAMP" property="productTime"/>
+        <result column="product_batch" jdbcType="VARCHAR" property="productBatch"/>
+        <result column="trace_code" jdbcType="VARCHAR" property="traceCode"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, inventory_id, `status`, custom_id, custom_code, custom_name, commodity_id, commodity_code,
+        commodity_name, warehouse_id, warehouse_code, warehouse_name, location_id, location_code,
+        location_name, container_id, container_code, container_name, sku_id, sku_code, sku_name,
+        system_num, inventory_num, product_company, product_time, product_batch, trace_code
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_inventory_detail
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from stock_inventory_detail
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.StockInventoryDetail">
+        insert into stock_inventory_detail (id, inventory_id, `status`,
+        custom_id, custom_code, custom_name,
+        commodity_id, commodity_code, commodity_name,
+        warehouse_id, warehouse_code, warehouse_name,
+        location_id, location_code, location_name,
+        container_id, container_code, container_name,
+        sku_id, sku_code, sku_name,
+        system_num, inventory_num, product_company,
+        product_time, product_batch, trace_code
+        )
+        values (#{id,jdbcType=INTEGER}, #{inventoryId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+        #{customId,jdbcType=INTEGER}, #{customCode,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR},
+        #{commodityId,jdbcType=INTEGER}, #{commodityCode,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR},
+        #{warehouseId,jdbcType=INTEGER}, #{warehouseCode,jdbcType=VARCHAR}, #{warehouseName,jdbcType=VARCHAR},
+        #{locationId,jdbcType=INTEGER}, #{locationCode,jdbcType=VARCHAR}, #{locationName,jdbcType=VARCHAR},
+        #{containerId,jdbcType=INTEGER}, #{containerCode,jdbcType=VARCHAR}, #{containerName,jdbcType=VARCHAR},
+        #{skuId,jdbcType=INTEGER}, #{skuCode,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR},
+        #{systemNum,jdbcType=INTEGER}, #{inventoryNum,jdbcType=INTEGER}, #{productCompany,jdbcType=VARCHAR},
+        #{productTime,jdbcType=TIMESTAMP}, #{productBatch,jdbcType=VARCHAR}, #{traceCode,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.StockInventoryDetail">
+        insert into stock_inventory_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="inventoryId != null">
+                inventory_id,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="customId != null">
+                custom_id,
+            </if>
+            <if test="customCode != null">
+                custom_code,
+            </if>
+            <if test="customName != null">
+                custom_name,
+            </if>
+            <if test="commodityId != null">
+                commodity_id,
+            </if>
+            <if test="commodityCode != null">
+                commodity_code,
+            </if>
+            <if test="commodityName != null">
+                commodity_name,
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id,
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code,
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name,
+            </if>
+            <if test="locationId != null">
+                location_id,
+            </if>
+            <if test="locationCode != null">
+                location_code,
+            </if>
+            <if test="locationName != null">
+                location_name,
+            </if>
+            <if test="containerId != null">
+                container_id,
+            </if>
+            <if test="containerCode != null">
+                container_code,
+            </if>
+            <if test="containerName != null">
+                container_name,
+            </if>
+            <if test="skuId != null">
+                sku_id,
+            </if>
+            <if test="skuCode != null">
+                sku_code,
+            </if>
+            <if test="skuName != null">
+                sku_name,
+            </if>
+            <if test="systemNum != null">
+                system_num,
+            </if>
+            <if test="inventoryNum != null">
+                inventory_num,
+            </if>
+            <if test="productCompany != null">
+                product_company,
+            </if>
+            <if test="productTime != null">
+                product_time,
+            </if>
+            <if test="productBatch != null">
+                product_batch,
+            </if>
+            <if test="traceCode != null">
+                trace_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="inventoryId != null">
+                #{inventoryId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="customId != null">
+                #{customId,jdbcType=INTEGER},
+            </if>
+            <if test="customCode != null">
+                #{customCode,jdbcType=VARCHAR},
+            </if>
+            <if test="customName != null">
+                #{customName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityId != null">
+                #{commodityId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityCode != null">
+                #{commodityCode,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseId != null">
+                #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseCode != null">
+                #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseName != null">
+                #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="locationId != null">
+                #{locationId,jdbcType=INTEGER},
+            </if>
+            <if test="locationCode != null">
+                #{locationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="locationName != null">
+                #{locationName,jdbcType=VARCHAR},
+            </if>
+            <if test="containerId != null">
+                #{containerId,jdbcType=INTEGER},
+            </if>
+            <if test="containerCode != null">
+                #{containerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="containerName != null">
+                #{containerName,jdbcType=VARCHAR},
+            </if>
+            <if test="skuId != null">
+                #{skuId,jdbcType=INTEGER},
+            </if>
+            <if test="skuCode != null">
+                #{skuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="systemNum != null">
+                #{systemNum,jdbcType=INTEGER},
+            </if>
+            <if test="inventoryNum != null">
+                #{inventoryNum,jdbcType=INTEGER},
+            </if>
+            <if test="productCompany != null">
+                #{productCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="productTime != null">
+                #{productTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productBatch != null">
+                #{productBatch,jdbcType=VARCHAR},
+            </if>
+            <if test="traceCode != null">
+                #{traceCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.StockInventoryDetail">
+        update stock_inventory_detail
+        <set>
+            <if test="inventoryId != null">
+                inventory_id = #{inventoryId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="customId != null">
+                custom_id = #{customId,jdbcType=INTEGER},
+            </if>
+            <if test="customCode != null">
+                custom_code = #{customCode,jdbcType=VARCHAR},
+            </if>
+            <if test="customName != null">
+                custom_name = #{customName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityId != null">
+                commodity_id = #{commodityId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityCode != null">
+                commodity_code = #{commodityCode,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                commodity_name = #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="locationId != null">
+                location_id = #{locationId,jdbcType=INTEGER},
+            </if>
+            <if test="locationCode != null">
+                location_code = #{locationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="locationName != null">
+                location_name = #{locationName,jdbcType=VARCHAR},
+            </if>
+            <if test="containerId != null">
+                container_id = #{containerId,jdbcType=INTEGER},
+            </if>
+            <if test="containerCode != null">
+                container_code = #{containerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="containerName != null">
+                container_name = #{containerName,jdbcType=VARCHAR},
+            </if>
+            <if test="skuId != null">
+                sku_id = #{skuId,jdbcType=INTEGER},
+            </if>
+            <if test="skuCode != null">
+                sku_code = #{skuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                sku_name = #{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="systemNum != null">
+                system_num = #{systemNum,jdbcType=INTEGER},
+            </if>
+            <if test="inventoryNum != null">
+                inventory_num = #{inventoryNum,jdbcType=INTEGER},
+            </if>
+            <if test="productCompany != null">
+                product_company = #{productCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="productTime != null">
+                product_time = #{productTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productBatch != null">
+                product_batch = #{productBatch,jdbcType=VARCHAR},
+            </if>
+            <if test="traceCode != null">
+                trace_code = #{traceCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.StockInventoryDetail">
+        update stock_inventory_detail
+        set inventory_id = #{inventoryId,jdbcType=INTEGER},
+        `status` = #{status,jdbcType=INTEGER},
+        custom_id = #{customId,jdbcType=INTEGER},
+        custom_code = #{customCode,jdbcType=VARCHAR},
+        custom_name = #{customName,jdbcType=VARCHAR},
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+        commodity_code = #{commodityCode,jdbcType=VARCHAR},
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+        location_id = #{locationId,jdbcType=INTEGER},
+        location_code = #{locationCode,jdbcType=VARCHAR},
+        location_name = #{locationName,jdbcType=VARCHAR},
+        container_id = #{containerId,jdbcType=INTEGER},
+        container_code = #{containerCode,jdbcType=VARCHAR},
+        container_name = #{containerName,jdbcType=VARCHAR},
+        sku_id = #{skuId,jdbcType=INTEGER},
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+        sku_name = #{skuName,jdbcType=VARCHAR},
+        system_num = #{systemNum,jdbcType=INTEGER},
+        inventory_num = #{inventoryNum,jdbcType=INTEGER},
+        product_company = #{productCompany,jdbcType=VARCHAR},
+        product_time = #{productTime,jdbcType=TIMESTAMP},
+        product_batch = #{productBatch,jdbcType=VARCHAR},
+        trace_code = #{traceCode,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_inventory_detail
+        where inventory_id = #{stockInventoryId,jdbcType=INTEGER}
+    </select>
+    <select id="selectNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id)
+        from stock_inventory_detail
+    </select>
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from stock_inventory_detail
+        <where>
+            1=1
+            <if test="pojo.inventoryId != null">
+                and inventory_id = #{pojo.inventoryId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.status != null">
+                and `status` = #{pojo.status,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customId != null">
+                and custom_id = #{pojo.customId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customCode != null">
+                and custom_code = #{pojo.customCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customName != null">
+                and custom_name like CONCAT('%', #{pojo.customName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.commodityId != null">
+                and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.commodityCode != null">
+                and commodity_code = #{pojo.commodityCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.commodityName != null">
+                and commodity_name like CONCAT('%', #{pojo.commodityName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.warehouseId != null">
+                and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.warehouseCode != null">
+                and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name = #{pojo.warehouseName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.locationId != null">
+                and location_id = #{pojo.locationId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.locationCode != null">
+                and location_code = #{pojo.locationCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.locationName != null">
+                and location_name = #{pojo.locationName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.containerId != null">
+                and container_id = #{pojo.containerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.containerCode != null">
+                and container_code = #{pojo.containerCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.containerName != null">
+                and container_name = #{pojo.containerName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuId != null">
+                and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuName != null">
+                and sku_name like CONCAT('%', #{pojo.skuName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.systemNum != null">
+                and system_num = #{pojo.systemNum,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.inventoryNum != null">
+                and inventory_num = #{pojo.inventoryNum,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.productCompany != null">
+                and product_company = #{pojo.productCompany,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and product_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= product_time
+            </if>
+            <if test="pojo.productBatch != null">
+                and product_batch = #{pojo.productBatch,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.traceCode != null">
+                and trace_code = #{pojo.traceCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_inventory_detail
+        <where>
+            1=1
+            <if test="pojo.inventoryId != null">
+                and inventory_id = #{pojo.inventoryId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.status != null">
+                and `status` = #{pojo.status,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customId != null">
+                and custom_id = #{pojo.customId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customCode != null">
+                and custom_code = #{pojo.customCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customName != null">
+                and custom_name like CONCAT('%', #{pojo.customName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.commodityId != null">
+                and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.commodityCode != null">
+                and commodity_code = #{pojo.commodityCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.commodityName != null">
+                and commodity_name like CONCAT('%', #{pojo.commodityName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.warehouseId != null">
+                and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.warehouseCode != null">
+                and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name = #{pojo.warehouseName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.locationId != null">
+                and location_id = #{pojo.locationId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.locationCode != null">
+                and location_code = #{pojo.locationCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.locationName != null">
+                and location_name = #{pojo.locationName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.containerId != null">
+                and container_id = #{pojo.containerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.containerCode != null">
+                and container_code = #{pojo.containerCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.containerName != null">
+                and container_name = #{pojo.containerName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuId != null">
+                and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuName != null">
+                and sku_name like CONCAT('%', #{pojo.skuName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.systemNum != null">
+                and system_num = #{pojo.systemNum,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.inventoryNum != null">
+                and inventory_num = #{pojo.inventoryNum,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.productCompany != null">
+                and product_company = #{pojo.productCompany,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and product_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= product_time
+            </if>
+            <if test="pojo.productBatch != null">
+                and product_batch = #{pojo.productBatch,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.traceCode != null">
+                and trace_code = #{pojo.traceCode,jdbcType=VARCHAR}
+            </if>
+            <if test="screen != null">
+                order by ${screen}
+            </if>
+        </where>
+        <if test="searchDTO !=null">
+            limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

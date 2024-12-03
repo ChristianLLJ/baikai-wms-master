@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.ReplenishDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.Replenish">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="replenish_status" jdbcType="SMALLINT" property="replenishStatus"/>
+        <result column="replenish_id" jdbcType="VARCHAR" property="replenishId"/>
+        <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId"/>
+        <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName"/>
+        <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode"/>
+        <result column="customer_id" jdbcType="INTEGER" property="customerId"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="source_area_id" jdbcType="INTEGER" property="sourceAreaId"/>
+        <result column="source_area_code" jdbcType="VARCHAR" property="sourceAreaCode"/>
+        <result column="source_area_name" jdbcType="VARCHAR" property="sourceAreaName"/>
+        <result column="source_location_id" jdbcType="INTEGER" property="sourceLocationId"/>
+        <result column="source_location_name" jdbcType="VARCHAR" property="sourceLocationName"/>
+        <result column="source_location_code" jdbcType="VARCHAR" property="sourceLocationCode"/>
+        <result column="shortage_area_id" jdbcType="INTEGER" property="shortageAreaId"/>
+        <result column="shortage_area_code" jdbcType="VARCHAR" property="shortageAreaCode"/>
+        <result column="shortage_area_name" jdbcType="VARCHAR" property="shortageAreaName"/>
+        <result column="target_location_id" jdbcType="INTEGER" property="targetLocationId"/>
+        <result column="target_location_name" jdbcType="VARCHAR" property="targetLocationName"/>
+        <result column="target_location_code" jdbcType="VARCHAR" property="targetLocationCode"/>
+        <result column="container_id" jdbcType="INTEGER" property="containerId"/>
+        <result column="container_type" jdbcType="SMALLINT" property="containerType"/>
+        <result column="container_cnt" jdbcType="INTEGER" property="containerCnt"/>
+        <result column="proposal_cnt" jdbcType="INTEGER" property="proposalCnt"/>
+        <result column="replenish_cnt" jdbcType="INTEGER" property="replenishCnt"/>
+        <result column="sku_code" jdbcType="INTEGER" property="skuCode"/>
+        <result column="sku_bar_code" jdbcType="VARCHAR" property="skuBarCode"/>
+        <result column="batch_id" jdbcType="INTEGER" property="batchId"/>
+        <result column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="shortage_id" jdbcType="INTEGER" property="shortageId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , replenish_status, replenish_id, warehouse_id, warehouse_name, warehouse_code,
+    customer_id, customer_name, source_area_id, source_area_code, source_area_name, source_location_id, 
+    source_location_name, source_location_code, shortage_area_id, shortage_area_code, 
+    shortage_area_name, target_location_id, target_location_name, target_location_code, 
+    container_id, container_type, container_cnt, proposal_cnt, replenish_cnt, sku_code, 
+    sku_bar_code, batch_id, pid, shortage_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from replenish
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from replenish
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.Replenish" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        insert into replenish (id, replenish_status, replenish_id,
+                               warehouse_id, warehouse_name, warehouse_code,
+                               customer_id, customer_name, source_area_id,
+                               source_area_code, source_area_name, source_location_id,
+                               source_location_name, source_location_code,
+                               shortage_area_id, shortage_area_code, shortage_area_name,
+                               target_location_id, target_location_name, target_location_code,
+                               container_id, container_type, container_cnt,
+                               proposal_cnt, replenish_cnt, sku_code,
+                               sku_bar_code, batch_id, pid,
+                               shortage_id)
+        values (#{id,jdbcType=INTEGER}, #{replenishStatus,jdbcType=SMALLINT}, #{replenishId,jdbcType=VARCHAR},
+                #{warehouseId,jdbcType=INTEGER}, #{warehouseName,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR},
+                #{customerId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{sourceAreaId,jdbcType=INTEGER},
+                #{sourceAreaCode,jdbcType=VARCHAR}, #{sourceAreaName,jdbcType=VARCHAR},
+                #{sourceLocationId,jdbcType=INTEGER},
+                #{sourceLocationName,jdbcType=VARCHAR}, #{sourceLocationCode,jdbcType=VARCHAR},
+                #{shortageAreaId,jdbcType=INTEGER}, #{shortageAreaCode,jdbcType=VARCHAR},
+                #{shortageAreaName,jdbcType=VARCHAR},
+                #{targetLocationId,jdbcType=INTEGER}, #{targetLocationName,jdbcType=VARCHAR},
+                #{targetLocationCode,jdbcType=VARCHAR},
+                #{containerId,jdbcType=INTEGER}, #{containerType,jdbcType=SMALLINT}, #{containerCnt,jdbcType=INTEGER},
+                #{proposalCnt,jdbcType=INTEGER}, #{replenishCnt,jdbcType=INTEGER}, #{skuCode,jdbcType=INTEGER},
+                #{skuBarCode,jdbcType=VARCHAR}, #{batchId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER},
+                #{shortageId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.Replenish" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        insert into replenish
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="replenishStatus != null">
+                replenish_status,
+            </if>
+            <if test="replenishId != null">
+                replenish_id,
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id,
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name,
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="customerName != null">
+                customer_name,
+            </if>
+            <if test="sourceAreaId != null">
+                source_area_id,
+            </if>
+            <if test="sourceAreaCode != null">
+                source_area_code,
+            </if>
+            <if test="sourceAreaName != null">
+                source_area_name,
+            </if>
+            <if test="sourceLocationId != null">
+                source_location_id,
+            </if>
+            <if test="sourceLocationName != null">
+                source_location_name,
+            </if>
+            <if test="sourceLocationCode != null">
+                source_location_code,
+            </if>
+            <if test="shortageAreaId != null">
+                shortage_area_id,
+            </if>
+            <if test="shortageAreaCode != null">
+                shortage_area_code,
+            </if>
+            <if test="shortageAreaName != null">
+                shortage_area_name,
+            </if>
+            <if test="targetLocationId != null">
+                target_location_id,
+            </if>
+            <if test="targetLocationName != null">
+                target_location_name,
+            </if>
+            <if test="targetLocationCode != null">
+                target_location_code,
+            </if>
+            <if test="containerId != null">
+                container_id,
+            </if>
+            <if test="containerType != null">
+                container_type,
+            </if>
+            <if test="containerCnt != null">
+                container_cnt,
+            </if>
+            <if test="proposalCnt != null">
+                proposal_cnt,
+            </if>
+            <if test="replenishCnt != null">
+                replenish_cnt,
+            </if>
+            <if test="skuCode != null">
+                sku_code,
+            </if>
+            <if test="skuBarCode != null">
+                sku_bar_code,
+            </if>
+            <if test="batchId != null">
+                batch_id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="shortageId != null">
+                shortage_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="replenishStatus != null">
+                #{replenishStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="replenishId != null">
+                #{replenishId,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseId != null">
+                #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseName != null">
+                #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="customerName != null">
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceAreaId != null">
+                #{sourceAreaId,jdbcType=INTEGER},
+            </if>
+            <if test="sourceAreaCode != null">
+                #{sourceAreaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceAreaName != null">
+                #{sourceAreaName,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceLocationId != null">
+                #{sourceLocationId,jdbcType=INTEGER},
+            </if>
+            <if test="sourceLocationName != null">
+                #{sourceLocationName,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceLocationCode != null">
+                #{sourceLocationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="shortageAreaId != null">
+                #{shortageAreaId,jdbcType=INTEGER},
+            </if>
+            <if test="shortageAreaCode != null">
+                #{shortageAreaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="shortageAreaName != null">
+                #{shortageAreaName,jdbcType=VARCHAR},
+            </if>
+            <if test="targetLocationId != null">
+                #{targetLocationId,jdbcType=INTEGER},
+            </if>
+            <if test="targetLocationName != null">
+                #{targetLocationName,jdbcType=VARCHAR},
+            </if>
+            <if test="targetLocationCode != null">
+                #{targetLocationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="containerId != null">
+                #{containerId,jdbcType=INTEGER},
+            </if>
+            <if test="containerType != null">
+                #{containerType,jdbcType=SMALLINT},
+            </if>
+            <if test="containerCnt != null">
+                #{containerCnt,jdbcType=INTEGER},
+            </if>
+            <if test="proposalCnt != null">
+                #{proposalCnt,jdbcType=INTEGER},
+            </if>
+            <if test="replenishCnt != null">
+                #{replenishCnt,jdbcType=INTEGER},
+            </if>
+            <if test="skuCode != null">
+                #{skuCode,jdbcType=INTEGER},
+            </if>
+            <if test="skuBarCode != null">
+                #{skuBarCode,jdbcType=VARCHAR},
+            </if>
+            <if test="batchId != null">
+                #{batchId,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="shortageId != null">
+                #{shortageId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Replenish">
+        update replenish
+        <set>
+            <if test="replenishStatus != null">
+                replenish_status = #{replenishStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="replenishId != null">
+                replenish_id = #{replenishId,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="customerName != null">
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceAreaId != null">
+                source_area_id = #{sourceAreaId,jdbcType=INTEGER},
+            </if>
+            <if test="sourceAreaCode != null">
+                source_area_code = #{sourceAreaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceAreaName != null">
+                source_area_name = #{sourceAreaName,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceLocationId != null">
+                source_location_id = #{sourceLocationId,jdbcType=INTEGER},
+            </if>
+            <if test="sourceLocationName != null">
+                source_location_name = #{sourceLocationName,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceLocationCode != null">
+                source_location_code = #{sourceLocationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="shortageAreaId != null">
+                shortage_area_id = #{shortageAreaId,jdbcType=INTEGER},
+            </if>
+            <if test="shortageAreaCode != null">
+                shortage_area_code = #{shortageAreaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="shortageAreaName != null">
+                shortage_area_name = #{shortageAreaName,jdbcType=VARCHAR},
+            </if>
+            <if test="targetLocationId != null">
+                target_location_id = #{targetLocationId,jdbcType=INTEGER},
+            </if>
+            <if test="targetLocationName != null">
+                target_location_name = #{targetLocationName,jdbcType=VARCHAR},
+            </if>
+            <if test="targetLocationCode != null">
+                target_location_code = #{targetLocationCode,jdbcType=VARCHAR},
+            </if>
+            <if test="containerId != null">
+                container_id = #{containerId,jdbcType=INTEGER},
+            </if>
+            <if test="containerType != null">
+                container_type = #{containerType,jdbcType=SMALLINT},
+            </if>
+            <if test="containerCnt != null">
+                container_cnt = #{containerCnt,jdbcType=INTEGER},
+            </if>
+            <if test="proposalCnt != null">
+                proposal_cnt = #{proposalCnt,jdbcType=INTEGER},
+            </if>
+            <if test="replenishCnt != null">
+                replenish_cnt = #{replenishCnt,jdbcType=INTEGER},
+            </if>
+            <if test="skuCode != null">
+                sku_code = #{skuCode,jdbcType=INTEGER},
+            </if>
+            <if test="skuBarCode != null">
+                sku_bar_code = #{skuBarCode,jdbcType=VARCHAR},
+            </if>
+            <if test="batchId != null">
+                batch_id = #{batchId,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="shortageId != null">
+                shortage_id = #{shortageId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Replenish">
+        update replenish
+        set replenish_status     = #{replenishStatus,jdbcType=SMALLINT},
+            replenish_id         = #{replenishId,jdbcType=VARCHAR},
+            warehouse_id         = #{warehouseId,jdbcType=INTEGER},
+            warehouse_name       = #{warehouseName,jdbcType=VARCHAR},
+            warehouse_code       = #{warehouseCode,jdbcType=VARCHAR},
+            customer_id          = #{customerId,jdbcType=INTEGER},
+            customer_name        = #{customerName,jdbcType=VARCHAR},
+            source_area_id       = #{sourceAreaId,jdbcType=INTEGER},
+            source_area_code     = #{sourceAreaCode,jdbcType=VARCHAR},
+            source_area_name     = #{sourceAreaName,jdbcType=VARCHAR},
+            source_location_id   = #{sourceLocationId,jdbcType=INTEGER},
+            source_location_name = #{sourceLocationName,jdbcType=VARCHAR},
+            source_location_code = #{sourceLocationCode,jdbcType=VARCHAR},
+            shortage_area_id     = #{shortageAreaId,jdbcType=INTEGER},
+            shortage_area_code   = #{shortageAreaCode,jdbcType=VARCHAR},
+            shortage_area_name   = #{shortageAreaName,jdbcType=VARCHAR},
+            target_location_id   = #{targetLocationId,jdbcType=INTEGER},
+            target_location_name = #{targetLocationName,jdbcType=VARCHAR},
+            target_location_code = #{targetLocationCode,jdbcType=VARCHAR},
+            container_id         = #{containerId,jdbcType=INTEGER},
+            container_type       = #{containerType,jdbcType=SMALLINT},
+            container_cnt        = #{containerCnt,jdbcType=INTEGER},
+            proposal_cnt         = #{proposalCnt,jdbcType=INTEGER},
+            replenish_cnt        = #{replenishCnt,jdbcType=INTEGER},
+            sku_code             = #{skuCode,jdbcType=INTEGER},
+            sku_bar_code         = #{skuBarCode,jdbcType=VARCHAR},
+            batch_id             = #{batchId,jdbcType=INTEGER},
+            pid                  = #{pid,jdbcType=INTEGER},
+            shortage_id          = #{shortageId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from replenish
+        <where>
+            1=1
+            <if test="pojo.replenishStatus != null">
+                and replenish_status = #{pojo.replenishStatus,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.replenishId != null">
+                and replenish_id = #{pojo.replenishId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseId != null">
+                and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name = #{pojo.warehouseName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseCode != null">
+                and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customerId != null">
+                and customer_id = #{pojo.customerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customerName != null">
+                and customer_name like concat('%', #{pojo.customerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.sourceAreaId != null">
+                and source_area_id = #{pojo.sourceAreaId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.sourceAreaCode != null">
+                and source_area_code = #{pojo.sourceAreaCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.sourceAreaName != null">
+                and source_area_name like concat('%', #{pojo.sourceAreaName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.sourceLocationId != null">
+                and source_location_id = #{pojo.sourceLocationId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.sourceLocationName != null">
+                and source_location_name like concat('%', #{pojo.sourceLocationName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.sourceLocationCode != null">
+                and source_location_code = #{pojo.sourceLocationCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.shortageAreaId != null">
+                and shortage_area_id = #{pojo.shortageAreaId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.shortageAreaCode != null">
+                and shortage_area_code = #{pojo.shortageAreaCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.shortageAreaName != null">
+                and shortage_area_name like concat('%', #{pojo.shortageAreaName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.targetLocationId != null">
+                and target_location_id = #{pojo.targetLocationId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.targetLocationName != null">
+                and target_location_name = #{pojo.targetLocationName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.targetLocationCode != null">
+                and target_location_code = #{pojo.targetLocationCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.containerId != null">
+                and container_id = #{pojo.containerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.containerType != null">
+                and container_type = #{pojo.containerType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.containerCnt != null">
+                and container_cnt = #{pojo.containerCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.proposalCnt != null">
+                and proposal_cnt = #{pojo.proposalCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.replenishCnt != null">
+                and replenish_cnt = #{pojo.replenishCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuBarCode != null">
+                and sku_bar_code = #{pojo.skuBarCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.batchId != null">
+                and batch_id = #{pojo.batchId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.pid != null">
+                and pid = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.shortageId != null">
+                and shortage_id = #{pojo.shortageId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select id
+        from replenish
+        <where>
+            1=1
+            <if test="pojo.replenishStatus != null">
+                and replenish_status = #{pojo.replenishStatus,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.replenishId != null">
+                and replenish_id = #{pojo.replenishId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseId != null">
+                and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name = #{pojo.warehouseName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseCode != null">
+                and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customerId != null">
+                and customer_id = #{pojo.customerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customerName != null">
+                and customer_name like concat('%', #{pojo.customerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.sourceAreaId != null">
+                and source_area_id = #{pojo.sourceAreaId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.sourceAreaCode != null">
+                and source_area_code = #{pojo.sourceAreaCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.sourceAreaName != null">
+                and source_area_name like concat('%', #{pojo.sourceAreaName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.sourceLocationId != null">
+                and source_location_id = #{pojo.sourceLocationId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.sourceLocationName != null">
+                and source_location_name like concat('%', #{pojo.sourceLocationName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.sourceLocationCode != null">
+                and source_location_code = #{pojo.sourceLocationCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.shortageAreaId != null">
+                and shortage_area_id = #{pojo.shortageAreaId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.shortageAreaCode != null">
+                and shortage_area_code = #{pojo.shortageAreaCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.shortageAreaName != null">
+                and shortage_area_name like concat('%', #{pojo.shortageAreaName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.targetLocationId != null">
+                and target_location_id = #{pojo.targetLocationId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.targetLocationName != null">
+                and target_location_name = #{pojo.targetLocationName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.targetLocationCode != null">
+                and target_location_code = #{pojo.targetLocationCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.containerId != null">
+                and container_id = #{pojo.containerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.containerType != null">
+                and container_type = #{pojo.containerType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.containerCnt != null">
+                and container_cnt = #{pojo.containerCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.proposalCnt != null">
+                and proposal_cnt = #{pojo.proposalCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.replenishCnt != null">
+                and replenish_cnt = #{pojo.replenishCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuBarCode != null">
+                and sku_bar_code = #{pojo.skuBarCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.batchId != null">
+                and batch_id = #{pojo.batchId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.pid != null">
+                and pid = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.shortageId != null">
+                and shortage_id = #{pojo.shortageId,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by id desc
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+    <!--新增-->
+    <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from replenish
+        where pid = #{pid,jdbcType=INTEGER}
+    </select>
+</mapper>

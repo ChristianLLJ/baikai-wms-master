@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.CombineStackDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.CombineStackDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="stack_id" jdbcType="INTEGER" property="stackId" />
+    <result column="stack_code" jdbcType="VARCHAR" property="stackCode" />
+    <result column="package_id" jdbcType="INTEGER" property="packageId" />
+    <result column="package_code" jdbcType="VARCHAR" property="packageCode" />
+    <result column="package_barcode" jdbcType="VARCHAR" property="packageBarcode" />
+    <result column="is_fix" jdbcType="TINYINT" property="isFix" />
+    <result column="stack_state" jdbcType="INTEGER" property="stackState" />
+    <result column="package_num" jdbcType="INTEGER" property="packageNum" />
+    <result column="row_num" jdbcType="INTEGER" property="rowNum" />
+    <result column="combine_trace_code" jdbcType="VARCHAR" property="combineTraceCode" />
+    <result column="plan_id" jdbcType="INTEGER" property="planId" />
+    <result column="plan_code" jdbcType="VARCHAR" property="planCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, stack_id, stack_code, package_id, package_code, package_barcode, is_fix, stack_state,
+    package_num, row_num, combine_trace_code, plan_id, plan_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from combine_stack_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from combine_stack_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.CombineStackDetail">
+    insert into combine_stack_detail (id, stack_id, stack_code,
+      package_id, package_code, package_barcode,
+      is_fix, stack_state, package_num,
+      row_num, combine_trace_code, plan_id,
+      plan_code)
+    values (#{id,jdbcType=INTEGER}, #{stackId,jdbcType=INTEGER}, #{stackCode,jdbcType=VARCHAR},
+      #{packageId,jdbcType=INTEGER}, #{packageCode,jdbcType=VARCHAR}, #{packageBarcode,jdbcType=VARCHAR},
+      #{isFix,jdbcType=TINYINT}, #{stackState,jdbcType=INTEGER}, #{packageNum,jdbcType=INTEGER},
+      #{rowNum,jdbcType=INTEGER}, #{combineTraceCode,jdbcType=VARCHAR}, #{planId,jdbcType=INTEGER},
+      #{planCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.CombineStackDetail" useGeneratedKeys="true" keyProperty="id">
+    insert into combine_stack_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stackId != null">
+        stack_id,
+      </if>
+      <if test="stackCode != null">
+        stack_code,
+      </if>
+      <if test="packageId != null">
+        package_id,
+      </if>
+      <if test="packageCode != null">
+        package_code,
+      </if>
+      <if test="packageBarcode != null">
+        package_barcode,
+      </if>
+      <if test="isFix != null">
+        is_fix,
+      </if>
+      <if test="stackState != null">
+        stack_state,
+      </if>
+      <if test="packageNum != null">
+        package_num,
+      </if>
+      <if test="rowNum != null">
+        row_num,
+      </if>
+      <if test="combineTraceCode != null">
+        combine_trace_code,
+      </if>
+      <if test="planId != null">
+        plan_id,
+      </if>
+      <if test="planCode != null">
+        plan_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stackId != null">
+        #{stackId,jdbcType=INTEGER},
+      </if>
+      <if test="stackCode != null">
+        #{stackCode,jdbcType=VARCHAR},
+      </if>
+      <if test="packageId != null">
+        #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="packageCode != null">
+        #{packageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="packageBarcode != null">
+        #{packageBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isFix != null">
+        #{isFix,jdbcType=TINYINT},
+      </if>
+      <if test="stackState != null">
+        #{stackState,jdbcType=INTEGER},
+      </if>
+      <if test="packageNum != null">
+        #{packageNum,jdbcType=INTEGER},
+      </if>
+      <if test="rowNum != null">
+        #{rowNum,jdbcType=INTEGER},
+      </if>
+      <if test="combineTraceCode != null">
+        #{combineTraceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="planId != null">
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="planCode != null">
+        #{planCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.CombineStackDetail">
+    update combine_stack_detail
+    <set>
+      <if test="stackId != null">
+        stack_id = #{stackId,jdbcType=INTEGER},
+      </if>
+      <if test="stackCode != null">
+        stack_code = #{stackCode,jdbcType=VARCHAR},
+      </if>
+      <if test="packageId != null">
+        package_id = #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="packageCode != null">
+        package_code = #{packageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="packageBarcode != null">
+        package_barcode = #{packageBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isFix != null">
+        is_fix = #{isFix,jdbcType=TINYINT},
+      </if>
+      <if test="stackState != null">
+        stack_state = #{stackState,jdbcType=INTEGER},
+      </if>
+      <if test="packageNum != null">
+        package_num = #{packageNum,jdbcType=INTEGER},
+      </if>
+      <if test="rowNum != null">
+        row_num = #{rowNum,jdbcType=INTEGER},
+      </if>
+      <if test="combineTraceCode != null">
+        combine_trace_code = #{combineTraceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="planId != null">
+        plan_id = #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="planCode != null">
+        plan_code = #{planCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.CombineStackDetail">
+    update combine_stack_detail
+    set stack_id = #{stackId,jdbcType=INTEGER},
+      stack_code = #{stackCode,jdbcType=VARCHAR},
+      package_id = #{packageId,jdbcType=INTEGER},
+      package_code = #{packageCode,jdbcType=VARCHAR},
+      package_barcode = #{packageBarcode,jdbcType=VARCHAR},
+      is_fix = #{isFix,jdbcType=TINYINT},
+      stack_state = #{stackState,jdbcType=INTEGER},
+      package_num = #{packageNum,jdbcType=INTEGER},
+      row_num = #{rowNum,jdbcType=INTEGER},
+      combine_trace_code = #{combineTraceCode,jdbcType=VARCHAR},
+      plan_id = #{planId,jdbcType=INTEGER},
+      plan_code = #{planCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from combine_stack_detail
+    where 1=1
+    <if test="pojo.stackId != null">
+      and stack_id = #{pojo.stackId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackCode != null">
+      and stack_code like concat('%',#{pojo.stackCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.packageId != null">
+      and package_id = #{pojo.packageId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.packageCode != null">
+      and package_code like concat('%',#{pojo.packageCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.packageBarcode != null">
+      and package_barcode like concat('%',#{pojo.packageBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.packageId != null">
+      and package_id = #{pojo.packageId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.packageCode != null">
+      and package_code like concat('%',#{pojo.packageCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.packageBarcode != null">
+      and package_barcode like concat('%',#{pojo.packageBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isFix != null">
+      and is_fix = #{pojo.isFix,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.packageNum != null">
+      and package_num = #{pojo.packageNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.combineTraceCode != null">
+      and combine_trace_code like concat(#{pojo.combineTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.planCode != null">
+      and plan_code like concat(#{pojo.planCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from combine_stack_detail
+    where 1=1
+    <if test="pojo.stackId != null">
+      and stack_id = #{pojo.stackId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackCode != null">
+      and stack_code like concat('%',#{pojo.stackCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.packageId != null">
+      and package_id = #{pojo.packageId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.packageCode != null">
+      and package_code like concat('%',#{pojo.packageCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.packageBarcode != null">
+      and package_barcode like concat('%',#{pojo.packageBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.packageId != null">
+      and package_id = #{pojo.packageId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.packageCode != null">
+      and package_code like concat('%',#{pojo.packageCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.packageBarcode != null">
+      and package_barcode like concat('%',#{pojo.packageBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isFix != null">
+      and is_fix = #{pojo.isFix,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.packageNum != null">
+      and package_num = #{pojo.packageNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.combineTraceCode != null">
+      and combine_trace_code like concat(#{pojo.combineTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.planCode != null">
+      and plan_code like concat(#{pojo.planCode,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+  <delete id="deleteByStackId" parameterType="java.lang.Integer">
+    delete from
+      combine_stack_detail
+    where stack_id = #{stackId,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPackageBarcode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from combine_stack_detail
+    where package_barcode = #{code,jdbcType=VARCHAR}
+  </select>
+  <select id="checkStacked" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from combine_stack_detail
+    where stack_id = #{id,jdbcType=INTEGER} and stack_state = 0
+  </select>
+</mapper>

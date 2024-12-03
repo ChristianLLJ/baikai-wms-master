@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.OutboundStatisticsDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.OutboundStatistics">
+    <result column="today_despatch_nums" jdbcType="BIGINT" property="todayDespatchNums" />
+    <result column="today_wave_nums" jdbcType="BIGINT" property="todayWaveNums" />
+    <result column="today_toB_nums" jdbcType="BIGINT" property="todayTobNums" />
+    <result column="today_toC_nums" jdbcType="BIGINT" property="todayTocNums" />
+    <result column="today_box_nums" jdbcType="BIGINT" property="todayBoxNums" />
+    <result column="today_express_nums" jdbcType="BIGINT" property="todayExpressNums" />
+    <result column="today_loading_nums" jdbcType="BIGINT" property="todayLoadingNums" />
+    <result column="des_check_nums" jdbcType="BIGINT" property="desCheckNums" />
+    <result column="wave_check_nums" jdbcType="BIGINT" property="waveCheckNums" />
+    <result column="des_wait_wave_nums" jdbcType="BIGINT" property="desWaitWaveNums" />
+    <result column="today_des_been_wave_nums" jdbcType="BIGINT" property="todayDesBeenWaveNums" />
+    <result column="today_des_been_picking_nums" jdbcType="BIGINT" property="todayDesBeenPickingNums" />
+    <result column="today_des_wait_express_nums" jdbcType="BIGINT" property="todayDesWaitExpressNums" />
+    <result column="today_des_been_express_nums" jdbcType="BIGINT" property="todayDesBeenExpressNums" />
+    <result column="toB_not_begin" jdbcType="BIGINT" property="tobNotBegin" />
+    <result column="toC_not_begin" jdbcType="BIGINT" property="tocNotBegin" />
+    <result column="wave_not_end" jdbcType="BIGINT" property="waveNotEnd" />
+    <result column="des_not_end" jdbcType="BIGINT" property="desNotEnd" />
+  </resultMap>
+  <insert id="insert" parameterType="com.bupt.pojo.OutboundStatistics">
+    insert into outbound_statistics (today_despatch_nums, today_wave_nums, today_toB_nums, 
+      today_toC_nums, today_box_nums, today_express_nums, 
+      today_loading_nums, des_check_nums, wave_check_nums, 
+      des_wait_wave_nums, today_des_been_wave_nums, today_des_been_picking_nums, 
+      today_des_wait_express_nums, today_des_been_express_nums, 
+      toB_not_begin, toC_not_begin, wave_not_end, 
+      des_not_end)
+    values (#{todayDespatchNums,jdbcType=BIGINT}, #{todayWaveNums,jdbcType=BIGINT}, #{todayTobNums,jdbcType=BIGINT}, 
+      #{todayTocNums,jdbcType=BIGINT}, #{todayBoxNums,jdbcType=BIGINT}, #{todayExpressNums,jdbcType=BIGINT}, 
+      #{todayLoadingNums,jdbcType=BIGINT}, #{desCheckNums,jdbcType=BIGINT}, #{waveCheckNums,jdbcType=BIGINT}, 
+      #{desWaitWaveNums,jdbcType=BIGINT}, #{todayDesBeenWaveNums,jdbcType=BIGINT}, #{todayDesBeenPickingNums,jdbcType=BIGINT}, 
+      #{todayDesWaitExpressNums,jdbcType=BIGINT}, #{todayDesBeenExpressNums,jdbcType=BIGINT}, 
+      #{tobNotBegin,jdbcType=BIGINT}, #{tocNotBegin,jdbcType=BIGINT}, #{waveNotEnd,jdbcType=BIGINT}, 
+      #{desNotEnd,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.OutboundStatistics">
+    insert into outbound_statistics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="todayDespatchNums != null">
+        today_despatch_nums,
+      </if>
+      <if test="todayWaveNums != null">
+        today_wave_nums,
+      </if>
+      <if test="todayTobNums != null">
+        today_toB_nums,
+      </if>
+      <if test="todayTocNums != null">
+        today_toC_nums,
+      </if>
+      <if test="todayBoxNums != null">
+        today_box_nums,
+      </if>
+      <if test="todayExpressNums != null">
+        today_express_nums,
+      </if>
+      <if test="todayLoadingNums != null">
+        today_loading_nums,
+      </if>
+      <if test="desCheckNums != null">
+        des_check_nums,
+      </if>
+      <if test="waveCheckNums != null">
+        wave_check_nums,
+      </if>
+      <if test="desWaitWaveNums != null">
+        des_wait_wave_nums,
+      </if>
+      <if test="todayDesBeenWaveNums != null">
+        today_des_been_wave_nums,
+      </if>
+      <if test="todayDesBeenPickingNums != null">
+        today_des_been_picking_nums,
+      </if>
+      <if test="todayDesWaitExpressNums != null">
+        today_des_wait_express_nums,
+      </if>
+      <if test="todayDesBeenExpressNums != null">
+        today_des_been_express_nums,
+      </if>
+      <if test="tobNotBegin != null">
+        toB_not_begin,
+      </if>
+      <if test="tocNotBegin != null">
+        toC_not_begin,
+      </if>
+      <if test="waveNotEnd != null">
+        wave_not_end,
+      </if>
+      <if test="desNotEnd != null">
+        des_not_end,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="todayDespatchNums != null">
+        #{todayDespatchNums,jdbcType=BIGINT},
+      </if>
+      <if test="todayWaveNums != null">
+        #{todayWaveNums,jdbcType=BIGINT},
+      </if>
+      <if test="todayTobNums != null">
+        #{todayTobNums,jdbcType=BIGINT},
+      </if>
+      <if test="todayTocNums != null">
+        #{todayTocNums,jdbcType=BIGINT},
+      </if>
+      <if test="todayBoxNums != null">
+        #{todayBoxNums,jdbcType=BIGINT},
+      </if>
+      <if test="todayExpressNums != null">
+        #{todayExpressNums,jdbcType=BIGINT},
+      </if>
+      <if test="todayLoadingNums != null">
+        #{todayLoadingNums,jdbcType=BIGINT},
+      </if>
+      <if test="desCheckNums != null">
+        #{desCheckNums,jdbcType=BIGINT},
+      </if>
+      <if test="waveCheckNums != null">
+        #{waveCheckNums,jdbcType=BIGINT},
+      </if>
+      <if test="desWaitWaveNums != null">
+        #{desWaitWaveNums,jdbcType=BIGINT},
+      </if>
+      <if test="todayDesBeenWaveNums != null">
+        #{todayDesBeenWaveNums,jdbcType=BIGINT},
+      </if>
+      <if test="todayDesBeenPickingNums != null">
+        #{todayDesBeenPickingNums,jdbcType=BIGINT},
+      </if>
+      <if test="todayDesWaitExpressNums != null">
+        #{todayDesWaitExpressNums,jdbcType=BIGINT},
+      </if>
+      <if test="todayDesBeenExpressNums != null">
+        #{todayDesBeenExpressNums,jdbcType=BIGINT},
+      </if>
+      <if test="tobNotBegin != null">
+        #{tobNotBegin,jdbcType=BIGINT},
+      </if>
+      <if test="tocNotBegin != null">
+        #{tocNotBegin,jdbcType=BIGINT},
+      </if>
+      <if test="waveNotEnd != null">
+        #{waveNotEnd,jdbcType=BIGINT},
+      </if>
+      <if test="desNotEnd != null">
+        #{desNotEnd,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <!--新增-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select *
+    from outbound_statistics
+  </select>
+</mapper>

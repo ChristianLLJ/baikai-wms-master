@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.PositionDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.Position">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="is_usable" jdbcType="TINYINT" property="isUsable" />
+    <result column="position_type" jdbcType="TINYINT" property="positionType" />
+    <result column="position_code" jdbcType="VARCHAR" property="positionCode" />
+    <result column="position_name" jdbcType="VARCHAR" property="positionName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, is_usable, position_type, position_code, position_name, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.Position">
+    insert into position (id, is_usable, position_type, 
+      position_code, position_name, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{isUsable,jdbcType=TINYINT}, #{positionType,jdbcType=TINYINT}, 
+      #{positionCode,jdbcType=VARCHAR}, #{positionName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.Position">
+    insert into position
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="isUsable != null">
+        is_usable,
+      </if>
+      <if test="positionType != null">
+        position_type,
+      </if>
+      <if test="positionCode != null">
+        position_code,
+      </if>
+      <if test="positionName != null">
+        position_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="positionType != null">
+        #{positionType,jdbcType=TINYINT},
+      </if>
+      <if test="positionCode != null">
+        #{positionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="positionName != null">
+        #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Position">
+    update position
+    <set>
+      <if test="isUsable != null">
+        is_usable = #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="positionType != null">
+        position_type = #{positionType,jdbcType=TINYINT},
+      </if>
+      <if test="positionCode != null">
+        position_code = #{positionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="positionName != null">
+        position_name = #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Position">
+    update position
+    set is_usable = #{isUsable,jdbcType=TINYINT},
+      position_type = #{positionType,jdbcType=TINYINT},
+      position_code = #{positionCode,jdbcType=VARCHAR},
+      position_name = #{positionName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.LoadingDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.Loading">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="load_id" jdbcType="VARCHAR" property="loadId"/>
+        <result column="status" jdbcType="SMALLINT" property="status"/>
+        <result column="car_number" jdbcType="VARCHAR" property="carNumber"/>
+        <result column="car_type" jdbcType="VARCHAR" property="carType"/>
+        <result column="driver_id" jdbcType="INTEGER" property="driverId"/>
+        <result column="driver" jdbcType="VARCHAR" property="driver"/>
+        <result column="load_peopl_id" jdbcType="INTEGER" property="loadPeoplId"/>
+        <result column="load_people" jdbcType="VARCHAR" property="loadPeople"/>
+        <result column="warehouse" jdbcType="VARCHAR" property="warehouse"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="end_time" jdbcType="TIMESTAMP" property="endTime"/>
+        <result column="volume_limit" jdbcType="REAL" property="volumeLimit"/>
+        <result column="weight_limit" jdbcType="REAL" property="weightLimit"/>
+        <result column="user_defined1" jdbcType="VARCHAR" property="userDefined1"/>
+        <result column="user_defined2" jdbcType="VARCHAR" property="userDefined2"/>
+        <result column="user_defined3" jdbcType="VARCHAR" property="userDefined3"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , load_id, `status`, car_number, car_type, driver_id, driver, load_peopl_id, load_people,
+    warehouse, start_time, end_time, volume_limit, weight_limit, user_defined1, user_defined2, 
+    user_defined3
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from loading
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from loading
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.Loading" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into loading (id, load_id, `status`,
+                             car_number, car_type, driver_id,
+                             driver, load_peopl_id, load_people,
+                             warehouse, start_time, end_time,
+                             volume_limit, weight_limit, user_defined1,
+                             user_defined2, user_defined3)
+        values (#{id,jdbcType=INTEGER}, #{loadId,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT},
+                #{carNumber,jdbcType=VARCHAR}, #{carType,jdbcType=VARCHAR}, #{driverId,jdbcType=INTEGER},
+                #{driver,jdbcType=VARCHAR}, #{loadPeoplId,jdbcType=INTEGER}, #{loadPeople,jdbcType=VARCHAR},
+                #{warehouse,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+                #{volumeLimit,jdbcType=REAL}, #{weightLimit,jdbcType=REAL}, #{userDefined1,jdbcType=VARCHAR},
+                #{userDefined2,jdbcType=VARCHAR}, #{userDefined3,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.Loading" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        insert into loading
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="loadId != null">
+                load_id,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="carNumber != null">
+                car_number,
+            </if>
+            <if test="carType != null">
+                car_type,
+            </if>
+            <if test="driverId != null">
+                driver_id,
+            </if>
+            <if test="driver != null">
+                driver,
+            </if>
+            <if test="loadPeoplId != null">
+                load_peopl_id,
+            </if>
+            <if test="loadPeople != null">
+                load_people,
+            </if>
+            <if test="warehouse != null">
+                warehouse,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="volumeLimit != null">
+                volume_limit,
+            </if>
+            <if test="weightLimit != null">
+                weight_limit,
+            </if>
+            <if test="userDefined1 != null">
+                user_defined1,
+            </if>
+            <if test="userDefined2 != null">
+                user_defined2,
+            </if>
+            <if test="userDefined3 != null">
+                user_defined3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="loadId != null">
+                #{loadId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="carNumber != null">
+                #{carNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="carType != null">
+                #{carType,jdbcType=VARCHAR},
+            </if>
+            <if test="driverId != null">
+                #{driverId,jdbcType=INTEGER},
+            </if>
+            <if test="driver != null">
+                #{driver,jdbcType=VARCHAR},
+            </if>
+            <if test="loadPeoplId != null">
+                #{loadPeoplId,jdbcType=INTEGER},
+            </if>
+            <if test="loadPeople != null">
+                #{loadPeople,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouse != null">
+                #{warehouse,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="volumeLimit != null">
+                #{volumeLimit,jdbcType=REAL},
+            </if>
+            <if test="weightLimit != null">
+                #{weightLimit,jdbcType=REAL},
+            </if>
+            <if test="userDefined1 != null">
+                #{userDefined1,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined2 != null">
+                #{userDefined2,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined3 != null">
+                #{userDefined3,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Loading">
+        update loading
+        <set>
+            <if test="loadId != null">
+                load_id = #{loadId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="carNumber != null">
+                car_number = #{carNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="carType != null">
+                car_type = #{carType,jdbcType=VARCHAR},
+            </if>
+            <if test="driverId != null">
+                driver_id = #{driverId,jdbcType=INTEGER},
+            </if>
+            <if test="driver != null">
+                driver = #{driver,jdbcType=VARCHAR},
+            </if>
+            <if test="loadPeoplId != null">
+                load_peopl_id = #{loadPeoplId,jdbcType=INTEGER},
+            </if>
+            <if test="loadPeople != null">
+                load_people = #{loadPeople,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouse != null">
+                warehouse = #{warehouse,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="volumeLimit != null">
+                volume_limit = #{volumeLimit,jdbcType=REAL},
+            </if>
+            <if test="weightLimit != null">
+                weight_limit = #{weightLimit,jdbcType=REAL},
+            </if>
+            <if test="userDefined1 != null">
+                user_defined1 = #{userDefined1,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined2 != null">
+                user_defined2 = #{userDefined2,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined3 != null">
+                user_defined3 = #{userDefined3,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Loading">
+        update loading
+        set load_id       = #{loadId,jdbcType=VARCHAR},
+            `status`      = #{status,jdbcType=SMALLINT},
+            car_number    = #{carNumber,jdbcType=VARCHAR},
+            car_type      = #{carType,jdbcType=VARCHAR},
+            driver_id     = #{driverId,jdbcType=INTEGER},
+            driver        = #{driver,jdbcType=VARCHAR},
+            load_peopl_id = #{loadPeoplId,jdbcType=INTEGER},
+            load_people   = #{loadPeople,jdbcType=VARCHAR},
+            warehouse     = #{warehouse,jdbcType=VARCHAR},
+            start_time    = #{startTime,jdbcType=TIMESTAMP},
+            end_time      = #{endTime,jdbcType=TIMESTAMP},
+            volume_limit  = #{volumeLimit,jdbcType=REAL},
+            weight_limit  = #{weightLimit,jdbcType=REAL},
+            user_defined1 = #{userDefined1,jdbcType=VARCHAR},
+            user_defined2 = #{userDefined2,jdbcType=VARCHAR},
+            user_defined3 = #{userDefined3,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from loading
+        <where>
+            1=1
+            <if test="!(states==null || states.size == 0) ">
+                and `status` in
+                <foreach close=")" collection="states" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="pojo.loadId != null">
+                and load_id = #{pojo.loadId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.carNumber != null">
+                and car_number = #{pojo.carNumber,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.carType != null">
+                and car_type = #{pojo.carType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.driver != null">
+                and driver like CONCAT('%', #{pojo.driver,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.loadPeople != null">
+                and load_people like CONCAT('%', #{pojo.loadPeople,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.warehouse != null">
+                and warehouse like CONCAT('%', #{pojo.warehouse,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.volumeLimit != null">
+                and volume_limit = #{pojo.volumeLimit,jdbcType=REAL}
+            </if>
+            <if test="pojo.weightLimit != null">
+                and weight_limit = #{pojo.weightLimit,jdbcType=REAL}
+            </if>
+            <if test="pojo.userDefined1 != null">
+                and user_defined1 = #{pojo.userDefined1,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined2 != null">
+                and user_defined2 = #{pojo.userDefined2,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined3 != null">
+                and user_defined3 = #{pojo.userDefined3,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and start_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=start_time
+            </if>
+            <if test="startTime1 != null">
+                and end_time&gt;=#{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=end_time
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from loading
+        <where>
+            1=1
+            <if test="!(states==null || states.size == 0) ">
+                and `status` in
+                <foreach close=")" collection="states" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="pojo.loadId != null">
+                and load_id = #{pojo.loadId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.carNumber != null">
+                and car_number = #{pojo.carNumber,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.carType != null">
+                and car_type = #{pojo.carType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.driver != null">
+                and driver like CONCAT('%', #{pojo.driver,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.loadPeople != null">
+                and load_people like CONCAT('%', #{pojo.loadPeople,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.warehouse != null">
+                and warehouse like CONCAT('%', #{pojo.warehouse,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.volumeLimit != null">
+                and volume_limit = #{pojo.volumeLimit,jdbcType=REAL}
+            </if>
+            <if test="pojo.weightLimit != null">
+                and weight_limit = #{pojo.weightLimit,jdbcType=REAL}
+            </if>
+            <if test="pojo.userDefined1 != null">
+                and user_defined1 = #{pojo.userDefined1,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined2 != null">
+                and user_defined2 = #{pojo.userDefined2,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined3 != null">
+                and user_defined3 = #{pojo.userDefined3,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and start_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=start_time
+            </if>
+            <if test="startTime1 != null">
+                and end_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=end_time
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+        <if test="searchDTO != null">
+            limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

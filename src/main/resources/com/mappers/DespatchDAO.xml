@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.DespatchDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.Despatch">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="despatch_id" jdbcType="VARCHAR" property="despatchId"/>
+        <result column="type" jdbcType="SMALLINT" property="type"/>
+        <result column="is_pre_distributed" jdbcType="SMALLINT" property="isPreDistributed"/>
+        <result column="status" jdbcType="SMALLINT" property="status"/>
+        <result column="customer_id" jdbcType="INTEGER" property="customerId"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="site" jdbcType="VARCHAR" property="site"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="receiver_id" jdbcType="INTEGER" property="receiverId"/>
+        <result column="receiver_name" jdbcType="VARCHAR" property="receiverName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="request_delivery_time" jdbcType="TIMESTAMP" property="requestDeliveryTime"/>
+        <result column="expect_send_time" jdbcType="TIMESTAMP" property="expectSendTime"/>
+        <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId"/>
+        <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName"/>
+        <result column="warehouse" jdbcType="VARCHAR" property="warehouse"/>
+        <result column="verify_status" jdbcType="TINYINT" property="verifyStatus"/>
+        <result column="reviewer_id" jdbcType="INTEGER" property="reviewerId"/>
+        <result column="reviewer_name" jdbcType="VARCHAR" property="reviewerName"/>
+        <result column="reviewer_time" jdbcType="TIMESTAMP" property="reviewerTime"/>
+        <result column="priority" jdbcType="INTEGER" property="priority"/>
+        <result column="settler_id" jdbcType="INTEGER" property="settlerId"/>
+        <result column="carrier_id" jdbcType="INTEGER" property="carrierId"/>
+        <result column="order_id" jdbcType="INTEGER" property="orderId"/>
+        <result column="remarks" jdbcType="VARCHAR" property="remarks"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , despatch_id, `type`, is_pre_distributed, `status`, customer_id, customer_name,
+    province, city, site, address, receiver_id, receiver_name, create_time, request_delivery_time, 
+    expect_send_time, warehouse_id, warehouse_name, warehouse, verify_status, reviewer_id,
+    reviewer_name, reviewer_time, priority, settler_id, carrier_id, order_id, remarks
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from despatch
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from despatch
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.Despatch" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into despatch (id, despatch_id, `type`,
+                              is_pre_distributed, `status`, customer_id,
+                              customer_name, province, city,
+                              site, address, receiver_id,
+                              receiver_name, create_time, request_delivery_time,
+                              expect_send_time, warehouse_id, warehouse_name,
+                              warehouse, verify_status, reviewer_id,
+                              reviewer_name, reviewer_time, priority,
+                              settler_id, carrier_id, order_id,
+                              remarks)
+        values (#{id,jdbcType=INTEGER}, #{despatchId,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT},
+                #{isPreDistributed,jdbcType=SMALLINT}, #{status,jdbcType=SMALLINT}, #{customerId,jdbcType=INTEGER},
+                #{customerName,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+                #{site,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{receiverId,jdbcType=INTEGER},
+                #{receiverName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+                #{requestDeliveryTime,jdbcType=TIMESTAMP},
+                #{expectSendTime,jdbcType=TIMESTAMP}, #{warehouseId,jdbcType=INTEGER},
+                #{warehouseName,jdbcType=VARCHAR},
+                #{warehouse,jdbcType=VARCHAR}, #{verifyStatus,jdbcType=TINYINT}, #{reviewerId,jdbcType=INTEGER},
+                #{reviewerName,jdbcType=VARCHAR}, #{reviewerTime,jdbcType=TIMESTAMP}, #{priority,jdbcType=INTEGER},
+                #{settlerId,jdbcType=INTEGER}, #{carrierId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER},
+                #{remarks,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.Despatch" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into despatch
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="despatchId != null">
+                despatch_id,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="isPreDistributed != null">
+                is_pre_distributed,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="customerName != null">
+                customer_name,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="site != null">
+                site,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="receiverId != null">
+                receiver_id,
+            </if>
+            <if test="receiverName != null">
+                receiver_name,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="requestDeliveryTime != null">
+                request_delivery_time,
+            </if>
+            <if test="expectSendTime != null">
+                expect_send_time,
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id,
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name,
+            </if>
+            <if test="warehouse != null">
+                warehouse,
+            </if>
+            <if test="verifyStatus != null">
+                verify_status,
+            </if>
+            <if test="reviewerId != null">
+                reviewer_id,
+            </if>
+            <if test="reviewerName != null">
+                reviewer_name,
+            </if>
+            <if test="reviewerTime != null">
+                reviewer_time,
+            </if>
+            <if test="priority != null">
+                priority,
+            </if>
+            <if test="settlerId != null">
+                settler_id,
+            </if>
+            <if test="carrierId != null">
+                carrier_id,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="despatchId != null">
+                #{despatchId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="isPreDistributed != null">
+                #{isPreDistributed,jdbcType=SMALLINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="customerName != null">
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="site != null">
+                #{site,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverId != null">
+                #{receiverId,jdbcType=INTEGER},
+            </if>
+            <if test="receiverName != null">
+                #{receiverName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="requestDeliveryTime != null">
+                #{requestDeliveryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expectSendTime != null">
+                #{expectSendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="warehouseId != null">
+                #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseName != null">
+                #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouse != null">
+                #{warehouse,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyStatus != null">
+                #{verifyStatus,jdbcType=TINYINT},
+            </if>
+            <if test="reviewerId != null">
+                #{reviewerId,jdbcType=INTEGER},
+            </if>
+            <if test="reviewerName != null">
+                #{reviewerName,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewerTime != null">
+                #{reviewerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="priority != null">
+                #{priority,jdbcType=INTEGER},
+            </if>
+            <if test="settlerId != null">
+                #{settlerId,jdbcType=INTEGER},
+            </if>
+            <if test="carrierId != null">
+                #{carrierId,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Despatch">
+        update despatch
+        <set>
+            <if test="despatchId != null">
+                despatch_id = #{despatchId,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="isPreDistributed != null">
+                is_pre_distributed = #{isPreDistributed,jdbcType=SMALLINT},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="customerName != null">
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="site != null">
+                site = #{site,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverId != null">
+                receiver_id = #{receiverId,jdbcType=INTEGER},
+            </if>
+            <if test="receiverName != null">
+                receiver_name = #{receiverName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="requestDeliveryTime != null">
+                request_delivery_time = #{requestDeliveryTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expectSendTime != null">
+                expect_send_time = #{expectSendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouse != null">
+                warehouse = #{warehouse,jdbcType=VARCHAR},
+            </if>
+            <if test="verifyStatus != null">
+                verify_status = #{verifyStatus,jdbcType=TINYINT},
+            </if>
+            <if test="reviewerId != null">
+                reviewer_id = #{reviewerId,jdbcType=INTEGER},
+            </if>
+            <if test="reviewerName != null">
+                reviewer_name = #{reviewerName,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewerTime != null">
+                reviewer_time = #{reviewerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="priority != null">
+                priority = #{priority,jdbcType=INTEGER},
+            </if>
+            <if test="settlerId != null">
+                settler_id = #{settlerId,jdbcType=INTEGER},
+            </if>
+            <if test="carrierId != null">
+                carrier_id = #{carrierId,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Despatch">
+        update despatch
+        set despatch_id           = #{despatchId,jdbcType=VARCHAR},
+            `type`                = #{type,jdbcType=SMALLINT},
+            is_pre_distributed    = #{isPreDistributed,jdbcType=SMALLINT},
+            `status`              = #{status,jdbcType=SMALLINT},
+            customer_id           = #{customerId,jdbcType=INTEGER},
+            customer_name         = #{customerName,jdbcType=VARCHAR},
+            province              = #{province,jdbcType=VARCHAR},
+            city                  = #{city,jdbcType=VARCHAR},
+            site                  = #{site,jdbcType=VARCHAR},
+            address               = #{address,jdbcType=VARCHAR},
+            receiver_id           = #{receiverId,jdbcType=INTEGER},
+            receiver_name         = #{receiverName,jdbcType=VARCHAR},
+            create_time           = #{createTime,jdbcType=TIMESTAMP},
+            request_delivery_time = #{requestDeliveryTime,jdbcType=TIMESTAMP},
+            expect_send_time      = #{expectSendTime,jdbcType=TIMESTAMP},
+            warehouse_id          = #{warehouseId,jdbcType=INTEGER},
+            warehouse_name        = #{warehouseName,jdbcType=VARCHAR},
+            warehouse             = #{warehouse,jdbcType=VARCHAR},
+            verify_status         = #{verifyStatus,jdbcType=TINYINT},
+            reviewer_id           = #{reviewerId,jdbcType=INTEGER},
+            reviewer_name         = #{reviewerName,jdbcType=VARCHAR},
+            reviewer_time         = #{reviewerTime,jdbcType=TIMESTAMP},
+            priority              = #{priority,jdbcType=INTEGER},
+            settler_id            = #{settlerId,jdbcType=INTEGER},
+            carrier_id            = #{carrierId,jdbcType=INTEGER},
+            order_id              = #{orderId,jdbcType=INTEGER},
+            remarks               = #{remarks,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from despatch
+        <where>
+            1=1
+            <if test="!(states==null || states.size == 0) ">
+                and `status` in
+                <foreach close=")" collection="states" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="!(persons==null || persons.size == 0)">
+                and customer_id in
+                <foreach close=")" collection="persons" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="pojo.despatchId != null">
+                and despatch_id = #{pojo.despatchId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.type != null">
+                and `type` = #{pojo.type,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.province != null">
+                and province = #{pojo.province,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.city != null">
+                and city = #{pojo.city,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.site != null">
+                and site = #{pojo.site,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.address != null">
+                and address like CONCAT('%', #{pojo.address,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.isPreDistributed != null">
+                and is_pre_distributed = #{pojo.isPreDistributed,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.customerName != null">
+                and customer_name like CONCAT('%',#{pojo.customerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.receiverId != null">
+                and receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.receiverName != null">
+                and receiver_name like CONCAT('%',#{pojo.receiverName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime != null">
+                and create_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=create_time
+            </if>
+            <if test="startTime1 != null">
+                and request_delivery_time&gt;=#{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP}&gt;=request_delivery_time
+            </if>
+            <if test="pojo.warehouse != null and pojo.warehouse !='' ">
+                and warehouse = #{pojo.warehouse,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name like CONCAT('%', #{pojo.warehouseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.verifyStatus != null">
+                and verify_status = #{pojo.verifyStatus,jdbcType=TINYINT}
+            </if>
+            <if test="pojo.reviewerId != null">
+                and reviewer_id = #{pojo.reviewerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.reviewerName != null">
+                and reviewer_name like CONCAT('%',#{pojo.reviewerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.priority != null">
+                and priority = #{pojo.priority,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.settlerId != null">
+                and settler_id = #{pojo.settlerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.carrierId != null">
+                and carrier_id = #{pojo.carrierId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.orderId != null">
+                and order_id = #{pojo.orderId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from despatch
+        <where>
+            1=1
+            <if test="!(states==null || states.size == 0) ">
+                and `status` in
+                <foreach close=")" collection="states" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="!(persons==null || persons.size == 0)">
+                and customer_id in
+                <foreach close=")" collection="persons" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="pojo.despatchId != null">
+                and despatch_id = #{pojo.despatchId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.type != null">
+                and `type` = #{pojo.type,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.province != null">
+                and province = #{pojo.province,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.city != null">
+                and city = #{pojo.city,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.site != null">
+                and site = #{pojo.site,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.address != null">
+                and address like CONCAT('%', #{pojo.address,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.isPreDistributed != null">
+                and is_pre_distributed = #{pojo.isPreDistributed,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.customerName != null">
+                and customer_name like CONCAT('%',#{pojo.customerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.receiverId != null">
+                and receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.receiverName != null">
+                and receiver_name like CONCAT('%',#{pojo.receiverName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime != null">
+                and create_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=create_time
+            </if>
+            <if test="startTime1 != null">
+                and request_delivery_time&gt;=#{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP}&gt;=request_delivery_time
+            </if>
+            <if test="pojo.warehouse != null and pojo.warehouse !='' ">
+                and warehouse = #{pojo.warehouse,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name like CONCAT('%', #{pojo.warehouseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.verifyStatus != null">
+                and verify_status = #{pojo.verifyStatus,jdbcType=TINYINT}
+            </if>
+            <if test="pojo.reviewerId != null">
+                and reviewer_id = #{pojo.reviewerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.reviewerName != null">
+                and reviewer_name like CONCAT('%',#{pojo.reviewerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.priority != null">
+                and priority = #{pojo.priority,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.settlerId != null">
+                and settler_id = #{pojo.settlerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.carrierId != null">
+                and carrier_id = #{pojo.carrierId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.orderId != null">
+                and order_id = #{pojo.orderId,jdbcType=INTEGER}
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+        <if test="searchDTO != null">
+            limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!--新增-->
+    <select id="selectByStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from despatch
+        where `status` = #{status,jdbcType=SMALLINT}
+        order by id asc
+    </select>
+    <!--新增-->
+    <select id="selectByDespatchId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from despatch
+        where despatch_id = #{pojo.despatchId,jdbcType=VARCHAR}
+    </select>
+    <!--新增-->
+    <select id="selectByWaveId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from despatch
+        where id in
+        (select
+        despatch_id
+        from despatch_wave
+        where wave_id=#{waveId,jdbcType=INTEGER}
+        order by despatch_id asc)
+    </select>
+    <!--筛选-->
+    <!--新增  筛选 -->
+    <select id="screenToBox" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from despatch
+        <where>
+            id in(
+            SELECT distinct despatch_id from pick_task_detail WHERE pid in
+            (SELECT id FROM pick_task WHERE status =2)
+            and piece_device LIKE "人工%"
+            )
+            <if test="!(persons==null || persons.size == 0)">
+                and customer_id in
+                <foreach close=")" collection="persons" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="pojo.despatchId != null">
+                and despatch_id = #{pojo.despatchId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.type != null">
+                and `type` = #{pojo.type,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.province != null">
+                and province = #{pojo.province,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.city != null">
+                and city = #{pojo.city,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.site != null">
+                and site = #{pojo.site,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.address != null">
+                and address like CONCAT('%', #{pojo.address,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.isPreDistributed != null">
+                and is_pre_distributed = #{pojo.isPreDistributed,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.customerName != null">
+                and customer_name like CONCAT('%',#{pojo.customerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.receiverId != null">
+                and receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.receiverName != null">
+                and receiver_name like CONCAT('%',#{pojo.receiverName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime != null">
+                and create_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=create_time
+            </if>
+            <if test="startTime1 != null">
+                and request_delivery_time&gt;=#{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP}&gt;=request_delivery_time
+            </if>
+            <if test="pojo.warehouse != null and pojo.warehouse !='' ">
+                and warehouse = #{pojo.warehouse,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name like CONCAT('%', #{pojo.warehouseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.verifyStatus != null">
+                and verify_status = #{pojo.verifyStatus,jdbcType=TINYINT}
+            </if>
+            <if test="pojo.reviewerId != null">
+                and reviewer_id = #{pojo.reviewerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.reviewerName != null">
+                and reviewer_name like CONCAT('%',#{pojo.reviewerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.priority != null">
+                and priority = #{pojo.priority,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.settlerId != null">
+                and settler_id = #{pojo.settlerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.carrierId != null">
+                and carrier_id = #{pojo.carrierId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.orderId != null">
+                and order_id = #{pojo.orderId,jdbcType=INTEGER}
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+        <if test="searchDTO != null">
+            limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

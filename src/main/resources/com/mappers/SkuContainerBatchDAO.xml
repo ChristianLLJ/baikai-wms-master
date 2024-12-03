@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.SkuContainerBatchDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.SkuContainerBatch">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="container_id" jdbcType="INTEGER" property="containerId" />
+    <result column="ctn" jdbcType="INTEGER" property="ctn" />
+    <result column="artno" jdbcType="VARCHAR" property="artno" />
+    <result column="sku_batch" jdbcType="VARCHAR" property="skuBatch" />
+    <result column="sku_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="container_code" jdbcType="VARCHAR" property="containerCode" />
+    <result column="container_name" jdbcType="VARCHAR" property="containerName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sku_id, container_id, ctn, artno, sku_batch, sku_code, sku_name, container_code,
+    container_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sku_container_batch
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sku_container_batch
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.SkuContainerBatch">
+    insert into sku_container_batch (id, sku_id, container_id,
+      ctn, artno, sku_batch,
+      sku_code, sku_name, container_code,
+      container_name)
+    values (#{id,jdbcType=INTEGER}, #{skuId,jdbcType=INTEGER}, #{containerId,jdbcType=INTEGER},
+      #{ctn,jdbcType=INTEGER}, #{artno,jdbcType=VARCHAR}, #{skuBatch,jdbcType=VARCHAR},
+      #{skuCode,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR}, #{containerCode,jdbcType=VARCHAR},
+      #{containerName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.SkuContainerBatch">
+    insert into sku_container_batch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="containerId != null">
+        container_id,
+      </if>
+      <if test="ctn != null">
+        ctn,
+      </if>
+      <if test="artno != null">
+        artno,
+      </if>
+      <if test="skuBatch != null">
+        sku_batch,
+      </if>
+      <if test="skuCode != null">
+        sku_code,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="containerCode != null">
+        container_code,
+      </if>
+      <if test="containerName != null">
+        container_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="ctn != null">
+        #{ctn,jdbcType=INTEGER},
+      </if>
+      <if test="artno != null">
+        #{artno,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBatch != null">
+        #{skuBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null">
+        #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerName != null">
+        #{containerName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.SkuContainerBatch">
+    update sku_container_batch
+    <set>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="containerId != null">
+        container_id = #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="ctn != null">
+        ctn = #{ctn,jdbcType=INTEGER},
+      </if>
+      <if test="artno != null">
+        artno = #{artno,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBatch != null">
+        sku_batch = #{skuBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null">
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null">
+        container_code = #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerName != null">
+        container_name = #{containerName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.SkuContainerBatch">
+    update sku_container_batch
+    set sku_id = #{skuId,jdbcType=INTEGER},
+      container_id = #{containerId,jdbcType=INTEGER},
+      ctn = #{ctn,jdbcType=INTEGER},
+      artno = #{artno,jdbcType=VARCHAR},
+      sku_batch = #{skuBatch,jdbcType=VARCHAR},
+      sku_code = #{skuCode,jdbcType=VARCHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      container_code = #{containerCode,jdbcType=VARCHAR},
+      container_name = #{containerName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sku_container_batch
+    where 1=1
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.ctn != null">
+      and ctn = #{pojo.ctn,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.artno != null">
+      and artno like concat(#{artno,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuBatch != null">
+      and sku_batch = #{pojo.skuBatch,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.skuCode != null">
+      and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.skuName != null">
+      and sku_name = #{pojo.skuName,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code = #{pojo.containerCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name = #{pojo.containerName,jdbcType=VARCHAR}
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from sku_container_batch
+    where 1=1
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.ctn != null">
+      and ctn = #{pojo.ctn,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.artno != null">
+      and artno like concat(#{artno,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuBatch != null">
+      and sku_batch = #{pojo.skuBatch,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.skuCode != null">
+      and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.skuName != null">
+      and sku_name = #{pojo.skuName,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code = #{pojo.containerCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name = #{pojo.containerName,jdbcType=VARCHAR}
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+  </select>
+</mapper>

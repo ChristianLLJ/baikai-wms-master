@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.ExPickingDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.ExPicking">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="ex_picking_id" jdbcType="VARCHAR" property="exPickingId"/>
+        <result column="ex_picking_type" jdbcType="SMALLINT" property="exPickingType"/>
+        <result column="customer_id" jdbcType="INTEGER" property="customerId"/>
+        <result column="customer_name" jdbcType="VARCHAR" property="customerName"/>
+        <result column="customer_code" jdbcType="VARCHAR" property="customerCode"/>
+        <result column="receiver_id" jdbcType="INTEGER" property="receiverId"/>
+        <result column="bill_source" jdbcType="VARCHAR" property="billSource"/>
+        <result column="biil_date" jdbcType="DATE" property="biilDate"/>
+        <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode"/>
+        <result column="cargo_owner_code" jdbcType="VARCHAR" property="cargoOwnerCode"/>
+        <result column="work_type" jdbcType="SMALLINT" property="workType"/>
+        <result column="wave_number" jdbcType="INTEGER" property="waveNumber"/>
+        <result column="container_code" jdbcType="VARCHAR" property="containerCode"/>
+        <result column="container_id" jdbcType="INTEGER" property="containerId"/>
+        <result column="despatch_id" jdbcType="INTEGER" property="despatchId"/>
+        <result column="despatch_code" jdbcType="VARCHAR" property="despatchCode"/>
+        <result column="is_merged" jdbcType="BIT" property="isMerged"/>
+        <result column="box_position" jdbcType="VARCHAR" property="boxPosition"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , ex_picking_id, ex_picking_type, customer_id, customer_name, customer_code, receiver_id,
+    bill_source, biil_date, warehouse_code, cargo_owner_code, work_type, wave_number, 
+    container_code, container_id, despatch_id, despatch_code, is_merged, box_position, 
+    create_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ex_picking
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from ex_picking
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.ExPicking" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into ex_picking (id, ex_picking_id, ex_picking_type,
+                                customer_id, customer_name, customer_code,
+                                receiver_id, bill_source, biil_date,
+                                warehouse_code, cargo_owner_code, work_type,
+                                wave_number, container_code, container_id,
+                                despatch_id, despatch_code, is_merged,
+                                box_position, create_time)
+        values (#{id,jdbcType=INTEGER}, #{exPickingId,jdbcType=VARCHAR}, #{exPickingType,jdbcType=SMALLINT},
+                #{customerId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR},
+                #{receiverId,jdbcType=INTEGER}, #{billSource,jdbcType=VARCHAR}, #{biilDate,jdbcType=DATE},
+                #{warehouseCode,jdbcType=VARCHAR}, #{cargoOwnerCode,jdbcType=VARCHAR}, #{workType,jdbcType=SMALLINT},
+                #{waveNumber,jdbcType=INTEGER}, #{containerCode,jdbcType=VARCHAR}, #{containerId,jdbcType=INTEGER},
+                #{despatchId,jdbcType=INTEGER}, #{despatchCode,jdbcType=VARCHAR}, #{isMerged,jdbcType=BIT},
+                #{boxPosition,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.ExPicking" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id">
+        insert into ex_picking
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="exPickingId != null">
+                ex_picking_id,
+            </if>
+            <if test="exPickingType != null">
+                ex_picking_type,
+            </if>
+            <if test="customerId != null">
+                customer_id,
+            </if>
+            <if test="customerName != null">
+                customer_name,
+            </if>
+            <if test="customerCode != null">
+                customer_code,
+            </if>
+            <if test="receiverId != null">
+                receiver_id,
+            </if>
+            <if test="billSource != null">
+                bill_source,
+            </if>
+            <if test="biilDate != null">
+                biil_date,
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code,
+            </if>
+            <if test="cargoOwnerCode != null">
+                cargo_owner_code,
+            </if>
+            <if test="workType != null">
+                work_type,
+            </if>
+            <if test="waveNumber != null">
+                wave_number,
+            </if>
+            <if test="containerCode != null">
+                container_code,
+            </if>
+            <if test="containerId != null">
+                container_id,
+            </if>
+            <if test="despatchId != null">
+                despatch_id,
+            </if>
+            <if test="despatchCode != null">
+                despatch_code,
+            </if>
+            <if test="isMerged != null">
+                is_merged,
+            </if>
+            <if test="boxPosition != null">
+                box_position,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="exPickingId != null">
+                #{exPickingId,jdbcType=VARCHAR},
+            </if>
+            <if test="exPickingType != null">
+                #{exPickingType,jdbcType=SMALLINT},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="customerName != null">
+                #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerCode != null">
+                #{customerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverId != null">
+                #{receiverId,jdbcType=INTEGER},
+            </if>
+            <if test="billSource != null">
+                #{billSource,jdbcType=VARCHAR},
+            </if>
+            <if test="biilDate != null">
+                #{biilDate,jdbcType=DATE},
+            </if>
+            <if test="warehouseCode != null">
+                #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cargoOwnerCode != null">
+                #{cargoOwnerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="workType != null">
+                #{workType,jdbcType=SMALLINT},
+            </if>
+            <if test="waveNumber != null">
+                #{waveNumber,jdbcType=INTEGER},
+            </if>
+            <if test="containerCode != null">
+                #{containerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="containerId != null">
+                #{containerId,jdbcType=INTEGER},
+            </if>
+            <if test="despatchId != null">
+                #{despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="despatchCode != null">
+                #{despatchCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isMerged != null">
+                #{isMerged,jdbcType=BIT},
+            </if>
+            <if test="boxPosition != null">
+                #{boxPosition,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.ExPicking">
+        update ex_picking
+        <set>
+            <if test="exPickingId != null">
+                ex_picking_id = #{exPickingId,jdbcType=VARCHAR},
+            </if>
+            <if test="exPickingType != null">
+                ex_picking_type = #{exPickingType,jdbcType=SMALLINT},
+            </if>
+            <if test="customerId != null">
+                customer_id = #{customerId,jdbcType=INTEGER},
+            </if>
+            <if test="customerName != null">
+                customer_name = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="customerCode != null">
+                customer_code = #{customerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverId != null">
+                receiver_id = #{receiverId,jdbcType=INTEGER},
+            </if>
+            <if test="billSource != null">
+                bill_source = #{billSource,jdbcType=VARCHAR},
+            </if>
+            <if test="biilDate != null">
+                biil_date = #{biilDate,jdbcType=DATE},
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="cargoOwnerCode != null">
+                cargo_owner_code = #{cargoOwnerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="workType != null">
+                work_type = #{workType,jdbcType=SMALLINT},
+            </if>
+            <if test="waveNumber != null">
+                wave_number = #{waveNumber,jdbcType=INTEGER},
+            </if>
+            <if test="containerCode != null">
+                container_code = #{containerCode,jdbcType=VARCHAR},
+            </if>
+            <if test="containerId != null">
+                container_id = #{containerId,jdbcType=INTEGER},
+            </if>
+            <if test="despatchId != null">
+                despatch_id = #{despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="despatchCode != null">
+                despatch_code = #{despatchCode,jdbcType=VARCHAR},
+            </if>
+            <if test="isMerged != null">
+                is_merged = #{isMerged,jdbcType=BIT},
+            </if>
+            <if test="boxPosition != null">
+                box_position = #{boxPosition,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.ExPicking">
+        update ex_picking
+        set ex_picking_id    = #{exPickingId,jdbcType=VARCHAR},
+            ex_picking_type  = #{exPickingType,jdbcType=SMALLINT},
+            customer_id      = #{customerId,jdbcType=INTEGER},
+            customer_name    = #{customerName,jdbcType=VARCHAR},
+            customer_code    = #{customerCode,jdbcType=VARCHAR},
+            receiver_id      = #{receiverId,jdbcType=INTEGER},
+            bill_source      = #{billSource,jdbcType=VARCHAR},
+            biil_date        = #{biilDate,jdbcType=DATE},
+            warehouse_code   = #{warehouseCode,jdbcType=VARCHAR},
+            cargo_owner_code = #{cargoOwnerCode,jdbcType=VARCHAR},
+            work_type        = #{workType,jdbcType=SMALLINT},
+            wave_number      = #{waveNumber,jdbcType=INTEGER},
+            container_code   = #{containerCode,jdbcType=VARCHAR},
+            container_id     = #{containerId,jdbcType=INTEGER},
+            despatch_id      = #{despatchId,jdbcType=INTEGER},
+            despatch_code    = #{despatchCode,jdbcType=VARCHAR},
+            is_merged        = #{isMerged,jdbcType=BIT},
+            box_position     = #{boxPosition,jdbcType=VARCHAR},
+            create_time      = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from ex_picking
+        <where>
+            1=1
+            <if test="pojo.exPickingId != null">
+                and ex_picking_id = #{pojo.exPickingId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.exPickingType != null">
+                and ex_picking_type = #{pojo.exPickingType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.customerId != null">
+                and customer_id = #{pojo.customerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customerName != null">
+                and customer_name like CONCAT('%', #{pojo.customerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.receiverId != null">
+                and receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.billSource != null">
+                and bill_source = #{pojo.billSource,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and create_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= create_time
+            </if>
+            <if test="pojo.warehouseCode != null">
+                and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.cargoOwnerCode != null">
+                and cargo_owner_code = #{pojo.cargoOwnerCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customerCode != null">
+                and customer_code = #{pojo.customerCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.workType != null">
+                and work_type = #{pojo.workType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.waveNumber != null">
+                and wave_number = #{pojo.waveNumber,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.despatchId != null">
+                and despatch_id = #{pojo.despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="pojo.despatchCode != null">
+                and despatch_code = #{pojo.despatchCode,jdbcType=VARCHAR},
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ex_picking
+        <where>
+            1=1
+            <if test="pojo.exPickingId != null">
+                and ex_picking_id = #{pojo.exPickingId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.exPickingType != null">
+                and ex_picking_type = #{pojo.exPickingType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.customerId != null">
+                and customer_id = #{pojo.customerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customerName != null">
+                and customer_name like CONCAT('%', #{pojo.customerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.receiverId != null">
+                and receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.billSource != null">
+                and bill_source = #{pojo.billSource,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and create_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= create_time
+            </if>
+            <if test="pojo.warehouseCode != null">
+                and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.cargoOwnerCode != null">
+                and cargo_owner_code = #{pojo.cargoOwnerCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customerCode != null">
+                and customer_code = #{pojo.customerCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.workType != null">
+                and work_type = #{pojo.workType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.waveNumber != null">
+                and wave_number = #{pojo.waveNumber,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.despatchId != null">
+                and despatch_id = #{pojo.despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="pojo.despatchCode != null">
+                and despatch_code = #{pojo.despatchCode,jdbcType=VARCHAR},
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+        <if test="searchDTO != null">
+            limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!--新增-->
+    <select id="selectDetailByPid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ex_picking
+        where despatch_id = #{despatchId,jdbcType=INTEGER}
+    </select>
+    <!--新增-->
+    <select id="selectByExpickingCode" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ex_picking
+        where ex_picking_id = #{exPickingId,jdbcType=VARCHAR}
+        order by Id asc
+    </select>
+    <!--新增-->
+    <select id="selectByDespatchIdAndType" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ex_picking
+        where despatch_id = #{despatchId,jdbcType=INTEGER} and ex_picking_type = #{exPickingType,jdbcType=SMALLINT}
+        order by Id asc
+    </select>
+    <!--新增-->
+    <select id="selectMergePosition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ex_picking
+        where despatch_id = #{despatchId,jdbcType=INTEGER} and !ISNULL(box_position)
+        order by Id asc
+    </select>
+    <!--新增-->
+    <select id="selectByDespatchId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ex_picking
+        where despatch_id = #{despatchId,jdbcType=INTEGER}
+        limit 1
+    </select>
+</mapper>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.FunctionsDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.Functions">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="function_name" jdbcType="VARCHAR" property="functionName"/>
+        <result column="parent_function_id" jdbcType="INTEGER" property="parentFunctionId"/>
+        <result column="parent_function_name" jdbcType="VARCHAR" property="parentFunctionName"/>
+        <result column="function_code" jdbcType="INTEGER" property="functionCode"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, function_name, parent_function_id, parent_function_name, function_code
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from functions
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from functions
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.Functions">
+        insert into functions (id, function_name, parent_function_id,
+        parent_function_name, function_code)
+        values (#{id,jdbcType=INTEGER}, #{functionName,jdbcType=VARCHAR}, #{parentFunctionId,jdbcType=INTEGER},
+        #{parentFunctionName,jdbcType=VARCHAR}, #{functionCode,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.Functions">
+        insert into functions
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="functionName != null">
+                function_name,
+            </if>
+            <if test="parentFunctionId != null">
+                parent_function_id,
+            </if>
+            <if test="parentFunctionName != null">
+                parent_function_name,
+            </if>
+            <if test="functionCode != null">
+                function_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="functionName != null">
+                #{functionName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentFunctionId != null">
+                #{parentFunctionId,jdbcType=INTEGER},
+            </if>
+            <if test="parentFunctionName != null">
+                #{parentFunctionName,jdbcType=VARCHAR},
+            </if>
+            <if test="functionCode != null">
+                #{functionCode,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Functions">
+        update functions
+        <set>
+            <if test="functionName != null">
+                function_name = #{functionName,jdbcType=VARCHAR},
+            </if>
+            <if test="parentFunctionId != null">
+                parent_function_id = #{parentFunctionId,jdbcType=INTEGER},
+            </if>
+            <if test="parentFunctionName != null">
+                parent_function_name = #{parentFunctionName,jdbcType=VARCHAR},
+            </if>
+            <if test="functionCode != null">
+                function_code = #{functionCode,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Functions">
+        update functions
+        set function_name = #{functionName,jdbcType=VARCHAR},
+        parent_function_id = #{parentFunctionId,jdbcType=INTEGER},
+        parent_function_name = #{parentFunctionName,jdbcType=VARCHAR},
+        function_code = #{functionCode,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--  返回总数-->
+    <select id="selectNum" resultType="java.lang.Integer">
+        select
+        count(id)
+        from functions
+    </select>
+    <!--  筛选-->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from functions
+        where 1=1
+        <if test="pojo.functionName != null">
+            and function_name like concat('%',#{pojo.functionName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.parentFunctionId != null">
+            and parent_function_id = #{pojo.parentFunctionId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.parentFunctionName != null">
+            and parent_function_name like concat('%',#{pojo.parentFunctionName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.functionCode != null">
+            and function_code like concat('%',#{pojo.functionCode,jdbcType=INTEGER},'%')
+        </if>
+        order by id desc
+        <if test="searchDTO !=null">
+            limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+        </if>
+
+    </select>
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select
+        count(id)
+        from functions
+        where 1=1
+        <if test="pojo.functionName != null">
+            and function_name like concat('%',#{pojo.functionName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.parentFunctionId != null">
+            and parent_function_id = #{pojo.parentFunctionId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.parentFunctionName != null">
+            and parent_function_name like concat('%',#{pojo.parentFunctionName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.functionCode != null">
+            and function_code like concat('%',#{pojo.functionCode,jdbcType=INTEGER},'%')
+        </if>
+    </select>
+</mapper>

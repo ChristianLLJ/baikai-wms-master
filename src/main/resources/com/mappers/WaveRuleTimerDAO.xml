@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.WaveRuleTimerDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.WaveRuleTimer">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="wave_rule_id" jdbcType="INTEGER" property="waveRuleId"/>
+        <result column="frequency_minute" jdbcType="INTEGER" property="frequencyMinute"/>
+        <result column="start_time" jdbcType="TIME" property="startTime"/>
+        <result column="end_time" jdbcType="TIME" property="endTime"/>
+        <result column="fixed_time" jdbcType="TIME" property="fixedTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , wave_rule_id, frequency_minute, start_time, end_time, fixed_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave_rule_timer
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from wave_rule_timer
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.WaveRuleTimer">
+        insert into wave_rule_timer (id, wave_rule_id, frequency_minute,
+                                     start_time, end_time, fixed_time)
+        values (#{id,jdbcType=INTEGER}, #{waveRuleId,jdbcType=INTEGER}, #{frequencyMinute,jdbcType=INTEGER},
+                #{startTime,jdbcType=TIME}, #{endTime,jdbcType=TIME}, #{fixedTime,jdbcType=TIME})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.WaveRuleTimer">
+        insert into wave_rule_timer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="waveRuleId != null">
+                wave_rule_id,
+            </if>
+            <if test="frequencyMinute != null">
+                frequency_minute,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="fixedTime != null">
+                fixed_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="waveRuleId != null">
+                #{waveRuleId,jdbcType=INTEGER},
+            </if>
+            <if test="frequencyMinute != null">
+                #{frequencyMinute,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIME},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIME},
+            </if>
+            <if test="fixedTime != null">
+                #{fixedTime,jdbcType=TIME},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.WaveRuleTimer">
+        update wave_rule_timer
+        <set>
+            <if test="waveRuleId != null">
+                wave_rule_id = #{waveRuleId,jdbcType=INTEGER},
+            </if>
+            <if test="frequencyMinute != null">
+                frequency_minute = #{frequencyMinute,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIME},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIME},
+            </if>
+            <if test="fixedTime != null">
+                fixed_time = #{fixedTime,jdbcType=TIME},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.WaveRuleTimer">
+        update wave_rule_timer
+        set wave_rule_id     = #{waveRuleId,jdbcType=INTEGER},
+            frequency_minute = #{frequencyMinute,jdbcType=INTEGER},
+            start_time       = #{startTime,jdbcType=TIME},
+            end_time         = #{endTime,jdbcType=TIME},
+            fixed_time       = #{fixedTime,jdbcType=TIME}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--根据waveId删除-->
+    <delete id="deleteByWaveRuleId" parameterType="java.lang.Integer">
+        delete
+        from wave_rule_timer
+        where wave_rule_id = #{waveRuleId,jdbcType=INTEGER}
+    </delete>
+    <!--新增-->
+    <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave_rule_timer
+        where wave_rule_id = #{pid,jdbcType=INTEGER}
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select *
+        from wave_rule_timer
+        <where>
+            1=1
+            <if test="pojo.waveRuleId != null">
+                and wave_rule_id = #{pojo.waveRuleId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.frequencyMinute != null">
+                and frequency_minute = #{pojo.frequencyMinute,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.startTime != null">
+                and start_time = #{pojo.startTime,jdbcType=TIME}
+            </if>
+            <if test="pojo.endTime != null">
+                and end_time = #{pojo.endTime,jdbcType=TIME}
+            </if>
+            <if test="pojo.fixedTime != null">
+                and fixed_time = #{pojo.fixedTime,jdbcType=TIME}
+            </if>
+        </where>
+        order by id desc
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+    <!--新增 晒选总数-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from wave_rule_timer
+        <where>
+            1=1
+            <if test="pojo.waveRuleId != null">
+                and wave_rule_id = #{pojo.waveRuleId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.frequencyMinute != null">
+                and frequency_minute = #{pojo.frequencyMinute,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.startTime != null">
+                and start_time = #{pojo.startTime,jdbcType=TIME}
+            </if>
+            <if test="pojo.endTime != null">
+                and end_time = #{pojo.endTime,jdbcType=TIME}
+            </if>
+            <if test="pojo.fixedTime != null">
+                and fixed_time = #{pojo.fixedTime,jdbcType=TIME}
+            </if>
+        </where>
+        order by id desc
+    </select>
+</mapper>

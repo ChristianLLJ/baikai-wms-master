@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.CarDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.Car">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="is_usable" jdbcType="TINYINT" property="isUsable" />
+    <result column="is_using" jdbcType="TINYINT" property="isUsing" />
+    <result column="car_brand" jdbcType="VARCHAR" property="carBrand" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+    <result column="car_type" jdbcType="INTEGER" property="carType" />
+    <result column="weight_capacity" jdbcType="REAL" property="weightCapacity" />
+    <result column="volumn_capacity" jdbcType="REAL" property="volumnCapacity" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, warehouse_id, is_usable, is_using, car_brand, car_number, car_type, weight_capacity,
+    volumn_capacity, warehouse_name, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from car
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectCar"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from car
+    limit #{page,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from car
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.Car">
+    insert into car (id, warehouse_id, is_usable,
+      is_using, car_brand, car_number,
+      car_type, weight_capacity, volumn_capacity,
+      warehouse_name, create_time)
+    values (#{id,jdbcType=INTEGER}, #{warehouseId,jdbcType=INTEGER}, #{isUsable,jdbcType=TINYINT},
+      #{isUsing,jdbcType=TINYINT}, #{carBrand,jdbcType=VARCHAR}, #{carNumber,jdbcType=VARCHAR},
+      #{carType,jdbcType=INTEGER}, #{weightCapacity,jdbcType=REAL}, #{volumnCapacity,jdbcType=REAL},
+      #{warehouseName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.Car">
+    insert into car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="isUsable != null">
+        is_usable,
+      </if>
+      <if test="isUsing != null">
+        is_using,
+      </if>
+      <if test="carBrand != null">
+        car_brand,
+      </if>
+      <if test="carNumber != null">
+        car_number,
+      </if>
+      <if test="carType != null">
+        car_type,
+      </if>
+      <if test="weightCapacity != null">
+        weight_capacity,
+      </if>
+      <if test="volumnCapacity != null">
+        volumn_capacity,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="isUsing != null">
+        #{isUsing,jdbcType=TINYINT},
+      </if>
+      <if test="carBrand != null">
+        #{carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null">
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null">
+        #{carType,jdbcType=INTEGER},
+      </if>
+      <if test="weightCapacity != null">
+        #{weightCapacity,jdbcType=REAL},
+      </if>
+      <if test="volumnCapacity != null">
+        #{volumnCapacity,jdbcType=REAL},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Car">
+    update car
+    <set>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        is_usable = #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="isUsing != null">
+        is_using = #{isUsing,jdbcType=TINYINT},
+      </if>
+      <if test="carBrand != null">
+        car_brand = #{carBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null">
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null">
+        car_type = #{carType,jdbcType=INTEGER},
+      </if>
+      <if test="weightCapacity != null">
+        weight_capacity = #{weightCapacity,jdbcType=REAL},
+      </if>
+      <if test="volumnCapacity != null">
+        volumn_capacity = #{volumnCapacity,jdbcType=REAL},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Car">
+    update car
+    set warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      is_usable = #{isUsable,jdbcType=TINYINT},
+      is_using = #{isUsing,jdbcType=TINYINT},
+      car_brand = #{carBrand,jdbcType=VARCHAR},
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=INTEGER},
+      weight_capacity = #{weightCapacity,jdbcType=REAL},
+      volumn_capacity = #{volumnCapacity,jdbcType=REAL},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  返回总数-->
+  <select id="selectNum" resultType="java.lang.Integer">
+    select
+      count(id)
+    from car
+  </select>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from car
+    where 1=1
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isUsing != null">
+      and is_using = #{pojo.isUsing,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.carBrand != null">
+      and car_brand like concat('%',#{pojo.carBrand,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.carNumber != null">
+      and car_number like concat('%',#{pojo.carNumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.carType != null">
+      and car_type = #{pojo.carType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.weightCapacity != null">
+      and weight_capacity = #{pojo.weightCapacity,jdbcType=REAL}
+    </if>
+    <if test="pojo.volumnCapacity != null">
+      and volumn_capacity = #{pojo.volumnCapacity,jdbcType=REAL}
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.createTime != null">
+      and create_time = #{pojo.createTime,jdbcType=TIMESTAMP}
+    </if>
+    order by id desc
+    <if test="searchDTO !=null">
+    limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from car
+    where 1=1
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isUsing != null">
+      and is_using = #{pojo.isUsing,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.carBrand != null">
+      and car_brand like concat('%',#{pojo.carBrand,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.carNumber != null">
+      and car_number like concat('%',#{pojo.carNumber,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.carType != null">
+      and car_type = #{pojo.carType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.weightCapacity != null">
+      and weight_capacity = #{pojo.weightCapacity,jdbcType=REAL}
+    </if>
+    <if test="pojo.volumnCapacity != null">
+      and volumn_capacity = #{pojo.volumnCapacity,jdbcType=REAL}
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.createTime != null">
+      and create_time = #{pojo.createTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

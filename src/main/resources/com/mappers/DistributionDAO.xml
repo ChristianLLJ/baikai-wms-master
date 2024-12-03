@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.DistributionDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.Distribution">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="status" jdbcType="SMALLINT" property="status"/>
+        <result column="distribution_id" jdbcType="VARCHAR" property="distributionId"/>
+        <result column="ex_picking_id" jdbcType="INTEGER" property="exPickingId"/>
+        <result column="ex_picking_code" jdbcType="VARCHAR" property="exPickingCode"/>
+        <result column="despatch_id" jdbcType="INTEGER" property="despatchId"/>
+        <result column="despatch_code" jdbcType="VARCHAR" property="despatchCode"/>
+        <result column="receiver_id" jdbcType="INTEGER" property="receiverId"/>
+        <result column="receiver" jdbcType="VARCHAR" property="receiver"/>
+        <result column="receiver_province" jdbcType="VARCHAR" property="receiverProvince"/>
+        <result column="receiver_city" jdbcType="VARCHAR" property="receiverCity"/>
+        <result column="receiver_site" jdbcType="VARCHAR" property="receiverSite"/>
+        <result column="receiver_address" jdbcType="VARCHAR" property="receiverAddress"/>
+        <result column="weight" jdbcType="REAL" property="weight"/>
+        <result column="length" jdbcType="REAL" property="length"/>
+        <result column="wide" jdbcType="REAL" property="wide"/>
+        <result column="hight" jdbcType="REAL" property="hight"/>
+        <result column="volume" jdbcType="REAL" property="volume"/>
+        <result column="cnt" jdbcType="INTEGER" property="cnt"/>
+        <result column="distribution_taget_cnt" jdbcType="VARCHAR" property="distributionTagetCnt"/>
+        <result column="shipping_type" jdbcType="VARCHAR" property="shippingType"/>
+        <result column="pay_type" jdbcType="VARCHAR" property="payType"/>
+        <result column="pay_discribe" jdbcType="VARCHAR" property="payDiscribe"/>
+        <result column="delivery_type" jdbcType="VARCHAR" property="deliveryType"/>
+        <result column="delivery_type_discribe" jdbcType="VARCHAR" property="deliveryTypeDiscribe"/>
+        <result column="station" jdbcType="VARCHAR" property="station"/>
+        <result column="load_place" jdbcType="VARCHAR" property="loadPlace"/>
+        <result column="delivery_place" jdbcType="VARCHAR" property="deliveryPlace"/>
+        <result column="user_defined1" jdbcType="VARCHAR" property="userDefined1"/>
+        <result column="user_defined2" jdbcType="VARCHAR" property="userDefined2"/>
+        <result column="user_defined3" jdbcType="VARCHAR" property="userDefined3"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , `status`, distribution_id, ex_picking_id, ex_picking_code, despatch_id, despatch_code,
+    receiver_id, receiver, receiver_province, receiver_city, receiver_site, receiver_address, 
+    weight, `length`, wide, hight, volume, cnt, distribution_taget_cnt, shipping_type, 
+    pay_type, pay_discribe, delivery_type, delivery_type_discribe, station, load_place, 
+    delivery_place, user_defined1, user_defined2, user_defined3
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from distribution
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from distribution
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.Distribution">
+        insert into distribution (id, `status`, distribution_id,
+                                  ex_picking_id, ex_picking_code, despatch_id,
+                                  despatch_code, receiver_id, receiver,
+                                  receiver_province, receiver_city, receiver_site,
+                                  receiver_address, weight, `length`,
+                                  wide, hight, volume, cnt,
+                                  distribution_taget_cnt, shipping_type, pay_type,
+                                  pay_discribe, delivery_type, delivery_type_discribe,
+                                  station, load_place, delivery_place,
+                                  user_defined1, user_defined2, user_defined3)
+        values (#{id,jdbcType=INTEGER}, #{status,jdbcType=SMALLINT}, #{distributionId,jdbcType=VARCHAR},
+                #{exPickingId,jdbcType=INTEGER}, #{exPickingCode,jdbcType=VARCHAR}, #{despatchId,jdbcType=INTEGER},
+                #{despatchCode,jdbcType=VARCHAR}, #{receiverId,jdbcType=INTEGER}, #{receiver,jdbcType=VARCHAR},
+                #{receiverProvince,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR},
+                #{receiverSite,jdbcType=VARCHAR},
+                #{receiverAddress,jdbcType=VARCHAR}, #{weight,jdbcType=REAL}, #{length,jdbcType=REAL},
+                #{wide,jdbcType=REAL}, #{hight,jdbcType=REAL}, #{volume,jdbcType=REAL}, #{cnt,jdbcType=INTEGER},
+                #{distributionTagetCnt,jdbcType=VARCHAR}, #{shippingType,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR},
+                #{payDiscribe,jdbcType=VARCHAR}, #{deliveryType,jdbcType=VARCHAR},
+                #{deliveryTypeDiscribe,jdbcType=VARCHAR},
+                #{station,jdbcType=VARCHAR}, #{loadPlace,jdbcType=VARCHAR}, #{deliveryPlace,jdbcType=VARCHAR},
+                #{userDefined1,jdbcType=VARCHAR}, #{userDefined2,jdbcType=VARCHAR}, #{userDefined3,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.Distribution">
+        insert into distribution
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="distributionId != null">
+                distribution_id,
+            </if>
+            <if test="exPickingId != null">
+                ex_picking_id,
+            </if>
+            <if test="exPickingCode != null">
+                ex_picking_code,
+            </if>
+            <if test="despatchId != null">
+                despatch_id,
+            </if>
+            <if test="despatchCode != null">
+                despatch_code,
+            </if>
+            <if test="receiverId != null">
+                receiver_id,
+            </if>
+            <if test="receiver != null">
+                receiver,
+            </if>
+            <if test="receiverProvince != null">
+                receiver_province,
+            </if>
+            <if test="receiverCity != null">
+                receiver_city,
+            </if>
+            <if test="receiverSite != null">
+                receiver_site,
+            </if>
+            <if test="receiverAddress != null">
+                receiver_address,
+            </if>
+            <if test="weight != null">
+                weight,
+            </if>
+            <if test="length != null">
+                `length`,
+            </if>
+            <if test="wide != null">
+                wide,
+            </if>
+            <if test="hight != null">
+                hight,
+            </if>
+            <if test="volume != null">
+                volume,
+            </if>
+            <if test="cnt != null">
+                cnt,
+            </if>
+            <if test="distributionTagetCnt != null">
+                distribution_taget_cnt,
+            </if>
+            <if test="shippingType != null">
+                shipping_type,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="payDiscribe != null">
+                pay_discribe,
+            </if>
+            <if test="deliveryType != null">
+                delivery_type,
+            </if>
+            <if test="deliveryTypeDiscribe != null">
+                delivery_type_discribe,
+            </if>
+            <if test="station != null">
+                station,
+            </if>
+            <if test="loadPlace != null">
+                load_place,
+            </if>
+            <if test="deliveryPlace != null">
+                delivery_place,
+            </if>
+            <if test="userDefined1 != null">
+                user_defined1,
+            </if>
+            <if test="userDefined2 != null">
+                user_defined2,
+            </if>
+            <if test="userDefined3 != null">
+                user_defined3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="distributionId != null">
+                #{distributionId,jdbcType=VARCHAR},
+            </if>
+            <if test="exPickingId != null">
+                #{exPickingId,jdbcType=INTEGER},
+            </if>
+            <if test="exPickingCode != null">
+                #{exPickingCode,jdbcType=VARCHAR},
+            </if>
+            <if test="despatchId != null">
+                #{despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="despatchCode != null">
+                #{despatchCode,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverId != null">
+                #{receiverId,jdbcType=INTEGER},
+            </if>
+            <if test="receiver != null">
+                #{receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverProvince != null">
+                #{receiverProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverCity != null">
+                #{receiverCity,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverSite != null">
+                #{receiverSite,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverAddress != null">
+                #{receiverAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null">
+                #{weight,jdbcType=REAL},
+            </if>
+            <if test="length != null">
+                #{length,jdbcType=REAL},
+            </if>
+            <if test="wide != null">
+                #{wide,jdbcType=REAL},
+            </if>
+            <if test="hight != null">
+                #{hight,jdbcType=REAL},
+            </if>
+            <if test="volume != null">
+                #{volume,jdbcType=REAL},
+            </if>
+            <if test="cnt != null">
+                #{cnt,jdbcType=INTEGER},
+            </if>
+            <if test="distributionTagetCnt != null">
+                #{distributionTagetCnt,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingType != null">
+                #{shippingType,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="payDiscribe != null">
+                #{payDiscribe,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryType != null">
+                #{deliveryType,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryTypeDiscribe != null">
+                #{deliveryTypeDiscribe,jdbcType=VARCHAR},
+            </if>
+            <if test="station != null">
+                #{station,jdbcType=VARCHAR},
+            </if>
+            <if test="loadPlace != null">
+                #{loadPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryPlace != null">
+                #{deliveryPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined1 != null">
+                #{userDefined1,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined2 != null">
+                #{userDefined2,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined3 != null">
+                #{userDefined3,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Distribution">
+        update distribution
+        <set>
+            <if test="status != null">
+                `status` = #{status,jdbcType=SMALLINT},
+            </if>
+            <if test="distributionId != null">
+                distribution_id = #{distributionId,jdbcType=VARCHAR},
+            </if>
+            <if test="exPickingId != null">
+                ex_picking_id = #{exPickingId,jdbcType=INTEGER},
+            </if>
+            <if test="exPickingCode != null">
+                ex_picking_code = #{exPickingCode,jdbcType=VARCHAR},
+            </if>
+            <if test="despatchId != null">
+                despatch_id = #{despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="despatchCode != null">
+                despatch_code = #{despatchCode,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverId != null">
+                receiver_id = #{receiverId,jdbcType=INTEGER},
+            </if>
+            <if test="receiver != null">
+                receiver = #{receiver,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverProvince != null">
+                receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverCity != null">
+                receiver_city = #{receiverCity,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverSite != null">
+                receiver_site = #{receiverSite,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverAddress != null">
+                receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null">
+                weight = #{weight,jdbcType=REAL},
+            </if>
+            <if test="length != null">
+                `length` = #{length,jdbcType=REAL},
+            </if>
+            <if test="wide != null">
+                wide = #{wide,jdbcType=REAL},
+            </if>
+            <if test="hight != null">
+                hight = #{hight,jdbcType=REAL},
+            </if>
+            <if test="volume != null">
+                volume = #{volume,jdbcType=REAL},
+            </if>
+            <if test="cnt != null">
+                cnt = #{cnt,jdbcType=INTEGER},
+            </if>
+            <if test="distributionTagetCnt != null">
+                distribution_taget_cnt = #{distributionTagetCnt,jdbcType=VARCHAR},
+            </if>
+            <if test="shippingType != null">
+                shipping_type = #{shippingType,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null">
+                pay_type = #{payType,jdbcType=VARCHAR},
+            </if>
+            <if test="payDiscribe != null">
+                pay_discribe = #{payDiscribe,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryType != null">
+                delivery_type = #{deliveryType,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryTypeDiscribe != null">
+                delivery_type_discribe = #{deliveryTypeDiscribe,jdbcType=VARCHAR},
+            </if>
+            <if test="station != null">
+                station = #{station,jdbcType=VARCHAR},
+            </if>
+            <if test="loadPlace != null">
+                load_place = #{loadPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryPlace != null">
+                delivery_place = #{deliveryPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined1 != null">
+                user_defined1 = #{userDefined1,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined2 != null">
+                user_defined2 = #{userDefined2,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined3 != null">
+                user_defined3 = #{userDefined3,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Distribution">
+        update distribution
+        set `status`               = #{status,jdbcType=SMALLINT},
+            distribution_id        = #{distributionId,jdbcType=VARCHAR},
+            ex_picking_id          = #{exPickingId,jdbcType=INTEGER},
+            ex_picking_code        = #{exPickingCode,jdbcType=VARCHAR},
+            despatch_id            = #{despatchId,jdbcType=INTEGER},
+            despatch_code          = #{despatchCode,jdbcType=VARCHAR},
+            receiver_id            = #{receiverId,jdbcType=INTEGER},
+            receiver               = #{receiver,jdbcType=VARCHAR},
+            receiver_province      = #{receiverProvince,jdbcType=VARCHAR},
+            receiver_city          = #{receiverCity,jdbcType=VARCHAR},
+            receiver_site          = #{receiverSite,jdbcType=VARCHAR},
+            receiver_address       = #{receiverAddress,jdbcType=VARCHAR},
+            weight                 = #{weight,jdbcType=REAL},
+            `length`               = #{length,jdbcType=REAL},
+            wide                   = #{wide,jdbcType=REAL},
+            hight                  = #{hight,jdbcType=REAL},
+            volume                 = #{volume,jdbcType=REAL},
+            cnt                    = #{cnt,jdbcType=INTEGER},
+            distribution_taget_cnt = #{distributionTagetCnt,jdbcType=VARCHAR},
+            shipping_type          = #{shippingType,jdbcType=VARCHAR},
+            pay_type               = #{payType,jdbcType=VARCHAR},
+            pay_discribe           = #{payDiscribe,jdbcType=VARCHAR},
+            delivery_type          = #{deliveryType,jdbcType=VARCHAR},
+            delivery_type_discribe = #{deliveryTypeDiscribe,jdbcType=VARCHAR},
+            station                = #{station,jdbcType=VARCHAR},
+            load_place             = #{loadPlace,jdbcType=VARCHAR},
+            delivery_place         = #{deliveryPlace,jdbcType=VARCHAR},
+            user_defined1          = #{userDefined1,jdbcType=VARCHAR},
+            user_defined2          = #{userDefined2,jdbcType=VARCHAR},
+            user_defined3          = #{userDefined3,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from distribution
+        <where>
+            1=1
+            <if test="pojo.distributionId != null">
+                and distribution_id = #{pojo.distributionId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiver != null">
+                and receiver like CONCAT('%', #{pojo.receiver,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.shippingType != null">
+                and shipping_type = #{pojo.shippingType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverProvince != null">
+                and receiver_province = #{pojo.receiverProvince,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverCity != null">
+                and receiver_city = #{pojo.receiverCity,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverSite != null">
+                and receiver_site = #{pojo.receiverSite,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverAddress != null">
+                and receiver_address like CONCAT('%', #{pojo.receiverAddress,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.payType != null">
+                and pay_type = #{pojo.payType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.payDiscribe != null">
+                and pay_discribe like CONCAT('%', #{pojo.payDiscribe,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.deliveryType != null">
+                and delivery_type = #{pojo.deliveryType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.deliveryTypeDiscribe != null">
+                and delivery_type_discribe = #{pojo.deliveryTypeDiscribe,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.loadPlace != null">
+                and load_place like CONCAT('%', #{pojo.loadPlace,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.deliveryPlace != null">
+                and delivery_place like CONCAT('%', #{pojo.deliveryPlace,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.status != null">
+                and `status` = #{pojo.status,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.userDefined1 != null">
+                and user_defined1 = #{pojo.userDefined1,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined2 != null">
+                and user_defined2 = #{pojo.userDefined2,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined3 != null">
+                and user_defined3 = #{pojo.userDefined3,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from distribution
+        <where>
+            1=1
+            <if test="pojo.distributionId != null">
+                and distribution_id = #{pojo.distributionId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiver != null">
+                and receiver like CONCAT('%', #{pojo.receiver,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.shippingType != null">
+                and shipping_type = #{pojo.shippingType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverProvince != null">
+                and receiver_province = #{pojo.receiverProvince,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverCity != null">
+                and receiver_city = #{pojo.receiverCity,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverSite != null">
+                and receiver_site = #{pojo.receiverSite,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverAddress != null">
+                and receiver_address like CONCAT('%', #{pojo.receiverAddress,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.payType != null">
+                and pay_type = #{pojo.payType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.payDiscribe != null">
+                and pay_discribe like CONCAT('%', #{pojo.payDiscribe,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.deliveryType != null">
+                and delivery_type = #{pojo.deliveryType,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.deliveryTypeDiscribe != null">
+                and delivery_type_discribe = #{pojo.deliveryTypeDiscribe,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.loadPlace != null">
+                and load_place like CONCAT('%', #{pojo.loadPlace,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.deliveryPlace != null">
+                and delivery_place like CONCAT('%', #{pojo.deliveryPlace,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.status != null">
+                and `status` = #{pojo.status,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.userDefined1 != null">
+                and user_defined1 = #{pojo.userDefined1,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined2 != null">
+                and user_defined2 = #{pojo.userDefined2,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined3 != null">
+                and user_defined3 = #{pojo.userDefined3,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by id desc
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+</mapper>

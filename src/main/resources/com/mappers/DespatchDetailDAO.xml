@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.DespatchDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.DespatchDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="delivery_detai_id" jdbcType="VARCHAR" property="deliveryDetaiId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="sku_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="sku_barcode" jdbcType="VARCHAR" property="skuBarcode" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="chinese_describe" jdbcType="VARCHAR" property="chineseDescribe" />
+    <result column="english_describe" jdbcType="VARCHAR" property="englishDescribe" />
+    <result column="other_name" jdbcType="VARCHAR" property="otherName" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="order_cnt" jdbcType="INTEGER" property="orderCnt" />
+    <result column="turn_rule" jdbcType="VARCHAR" property="turnRule" />
+    <result column="pre_distribution_rule" jdbcType="VARCHAR" property="preDistributionRule" />
+    <result column="distribution_rule" jdbcType="VARCHAR" property="distributionRule" />
+    <result column="pre_distribution_cnt" jdbcType="INTEGER" property="preDistributionCnt" />
+    <result column="distribution_cnt" jdbcType="INTEGER" property="distributionCnt" />
+    <result column="take_cnt" jdbcType="INTEGER" property="takeCnt" />
+    <result column="deliver_cnt" jdbcType="INTEGER" property="deliverCnt" />
+    <result column="piece_cnt" jdbcType="INTEGER" property="pieceCnt" />
+    <result column="is_merge_piece" jdbcType="BIT" property="isMergePiece" />
+    <result column="volume" jdbcType="DOUBLE" property="volume" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="net_weight" jdbcType="DOUBLE" property="netWeight" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, row_id, delivery_detai_id, `status`, sku_id, sku_code, sku_barcode, sku_name, 
+    chinese_describe, english_describe, other_name, unit, order_cnt, turn_rule, pre_distribution_rule, 
+    distribution_rule, pre_distribution_cnt, distribution_cnt, take_cnt, deliver_cnt, 
+    piece_cnt, is_merge_piece, volume, weight, net_weight, money
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from despatch_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from despatch_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.DespatchDetail">
+    insert into despatch_detail (id, pid, row_id, 
+      delivery_detai_id, `status`, sku_id, 
+      sku_code, sku_barcode, sku_name, 
+      chinese_describe, english_describe, other_name, 
+      unit, order_cnt, turn_rule, 
+      pre_distribution_rule, distribution_rule, 
+      pre_distribution_cnt, distribution_cnt, take_cnt, 
+      deliver_cnt, piece_cnt, is_merge_piece, 
+      volume, weight, net_weight, 
+      money)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{rowId,jdbcType=INTEGER}, 
+      #{deliveryDetaiId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{skuId,jdbcType=INTEGER}, 
+      #{skuCode,jdbcType=VARCHAR}, #{skuBarcode,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR}, 
+      #{chineseDescribe,jdbcType=VARCHAR}, #{englishDescribe,jdbcType=VARCHAR}, #{otherName,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{orderCnt,jdbcType=INTEGER}, #{turnRule,jdbcType=VARCHAR}, 
+      #{preDistributionRule,jdbcType=VARCHAR}, #{distributionRule,jdbcType=VARCHAR}, 
+      #{preDistributionCnt,jdbcType=INTEGER}, #{distributionCnt,jdbcType=INTEGER}, #{takeCnt,jdbcType=INTEGER}, 
+      #{deliverCnt,jdbcType=INTEGER}, #{pieceCnt,jdbcType=INTEGER}, #{isMergePiece,jdbcType=BIT}, 
+      #{volume,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE}, #{netWeight,jdbcType=DOUBLE}, 
+      #{money,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.DespatchDetail">
+    insert into despatch_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="deliveryDetaiId != null">
+        delivery_detai_id,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="skuCode != null">
+        sku_code,
+      </if>
+      <if test="skuBarcode != null">
+        sku_barcode,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="chineseDescribe != null">
+        chinese_describe,
+      </if>
+      <if test="englishDescribe != null">
+        english_describe,
+      </if>
+      <if test="otherName != null">
+        other_name,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="orderCnt != null">
+        order_cnt,
+      </if>
+      <if test="turnRule != null">
+        turn_rule,
+      </if>
+      <if test="preDistributionRule != null">
+        pre_distribution_rule,
+      </if>
+      <if test="distributionRule != null">
+        distribution_rule,
+      </if>
+      <if test="preDistributionCnt != null">
+        pre_distribution_cnt,
+      </if>
+      <if test="distributionCnt != null">
+        distribution_cnt,
+      </if>
+      <if test="takeCnt != null">
+        take_cnt,
+      </if>
+      <if test="deliverCnt != null">
+        deliver_cnt,
+      </if>
+      <if test="pieceCnt != null">
+        piece_cnt,
+      </if>
+      <if test="isMergePiece != null">
+        is_merge_piece,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="netWeight != null">
+        net_weight,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryDetaiId != null">
+        #{deliveryDetaiId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBarcode != null">
+        #{skuBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="chineseDescribe != null">
+        #{chineseDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="englishDescribe != null">
+        #{englishDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="otherName != null">
+        #{otherName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCnt != null">
+        #{orderCnt,jdbcType=INTEGER},
+      </if>
+      <if test="turnRule != null">
+        #{turnRule,jdbcType=VARCHAR},
+      </if>
+      <if test="preDistributionRule != null">
+        #{preDistributionRule,jdbcType=VARCHAR},
+      </if>
+      <if test="distributionRule != null">
+        #{distributionRule,jdbcType=VARCHAR},
+      </if>
+      <if test="preDistributionCnt != null">
+        #{preDistributionCnt,jdbcType=INTEGER},
+      </if>
+      <if test="distributionCnt != null">
+        #{distributionCnt,jdbcType=INTEGER},
+      </if>
+      <if test="takeCnt != null">
+        #{takeCnt,jdbcType=INTEGER},
+      </if>
+      <if test="deliverCnt != null">
+        #{deliverCnt,jdbcType=INTEGER},
+      </if>
+      <if test="pieceCnt != null">
+        #{pieceCnt,jdbcType=INTEGER},
+      </if>
+      <if test="isMergePiece != null">
+        #{isMergePiece,jdbcType=BIT},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="netWeight != null">
+        #{netWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.DespatchDetail">
+    update despatch_detail
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="rowId != null">
+        row_id = #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryDetaiId != null">
+        delivery_detai_id = #{deliveryDetaiId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBarcode != null">
+        sku_barcode = #{skuBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="chineseDescribe != null">
+        chinese_describe = #{chineseDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="englishDescribe != null">
+        english_describe = #{englishDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="otherName != null">
+        other_name = #{otherName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCnt != null">
+        order_cnt = #{orderCnt,jdbcType=INTEGER},
+      </if>
+      <if test="turnRule != null">
+        turn_rule = #{turnRule,jdbcType=VARCHAR},
+      </if>
+      <if test="preDistributionRule != null">
+        pre_distribution_rule = #{preDistributionRule,jdbcType=VARCHAR},
+      </if>
+      <if test="distributionRule != null">
+        distribution_rule = #{distributionRule,jdbcType=VARCHAR},
+      </if>
+      <if test="preDistributionCnt != null">
+        pre_distribution_cnt = #{preDistributionCnt,jdbcType=INTEGER},
+      </if>
+      <if test="distributionCnt != null">
+        distribution_cnt = #{distributionCnt,jdbcType=INTEGER},
+      </if>
+      <if test="takeCnt != null">
+        take_cnt = #{takeCnt,jdbcType=INTEGER},
+      </if>
+      <if test="deliverCnt != null">
+        deliver_cnt = #{deliverCnt,jdbcType=INTEGER},
+      </if>
+      <if test="pieceCnt != null">
+        piece_cnt = #{pieceCnt,jdbcType=INTEGER},
+      </if>
+      <if test="isMergePiece != null">
+        is_merge_piece = #{isMergePiece,jdbcType=BIT},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="netWeight != null">
+        net_weight = #{netWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.DespatchDetail">
+    update despatch_detail
+    set pid = #{pid,jdbcType=INTEGER},
+      row_id = #{rowId,jdbcType=INTEGER},
+      delivery_detai_id = #{deliveryDetaiId,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      sku_id = #{skuId,jdbcType=INTEGER},
+      sku_code = #{skuCode,jdbcType=VARCHAR},
+      sku_barcode = #{skuBarcode,jdbcType=VARCHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      chinese_describe = #{chineseDescribe,jdbcType=VARCHAR},
+      english_describe = #{englishDescribe,jdbcType=VARCHAR},
+      other_name = #{otherName,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      order_cnt = #{orderCnt,jdbcType=INTEGER},
+      turn_rule = #{turnRule,jdbcType=VARCHAR},
+      pre_distribution_rule = #{preDistributionRule,jdbcType=VARCHAR},
+      distribution_rule = #{distributionRule,jdbcType=VARCHAR},
+      pre_distribution_cnt = #{preDistributionCnt,jdbcType=INTEGER},
+      distribution_cnt = #{distributionCnt,jdbcType=INTEGER},
+      take_cnt = #{takeCnt,jdbcType=INTEGER},
+      deliver_cnt = #{deliverCnt,jdbcType=INTEGER},
+      piece_cnt = #{pieceCnt,jdbcType=INTEGER},
+      is_merge_piece = #{isMergePiece,jdbcType=BIT},
+      volume = #{volume,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      net_weight = #{netWeight,jdbcType=DOUBLE},
+      money = #{money,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <!--新增-->
+    <update id="increasePreDistributionCountById">
+        update despatch_detail
+        set pre_distribution_cnt = pre_distribution_cnt + #{count,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="decreasePreDistributionCountById">
+        update despatch_detail
+        set pre_distribution_cnt = pre_distribution_cnt - #{count,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="increaseDistributionCountById">
+        update despatch_detail
+        set distribution_cnt = distribution_cnt + #{count,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="decreaseDistributionCountById">
+        update despatch_detail
+        set distribution_cnt = distribution_cnt - #{count,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from despatch_detail
+        <where>
+            1=1
+            <if test="pojo.pid != null">
+                and pid = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.rowId != null">
+                and row_id = #{pojo.rowId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.deliveryDetaiId != null">
+                and delivery_detai_id = #{pojo.deliveryDetaiId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.status != null">
+                and `status` = #{pojo.status,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuId != null">
+                and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.otherName != null">
+                and other_name like CONCAT('%', #{pojo.otherName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.unit != null">
+                and unit = #{pojo.unit,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.orderCnt != null">
+                and order_cnt = #{pojo.orderCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.turnRule != null">
+                and turn_rule like CONCAT('%', #{pojo.turnRule,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.preDistributionRule != null">
+                and pre_distribution_rule = #{pojo.preDistributionRule,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.distributionRule != null">
+                and distribution_rule = #{pojo.distributionRule,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.preDistributionCnt != null">
+                and pre_distribution_cnt = #{pojo.preDistributionCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.distributionCnt != null">
+                and distribution_cnt = #{pojo.distributionCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.takeCnt != null">
+                and take_cnt = #{pojo.takeCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.deliverCnt != null">
+                and deliver_cnt = #{pojo.deliverCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.pieceCnt != null">
+                and piece_cnt = #{pieceCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.isMergePiece != null">
+                and is_merge_piece = #{pojo.isMergePiece,jdbcType=BIT}
+            </if>
+            <if test="pojo.chineseDescribe != null">
+                and chinese_describe = #{pojo.chineseDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.englishDescribe != null">
+                and english_describe = #{pojo.englishDescribe,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select *
+        from despatch_detail
+        <where>
+            1=1
+            <if test="pojo.pid != null">
+                and pid = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.rowId != null">
+                and row_id = #{pojo.rowId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.deliveryDetaiId != null">
+                and delivery_detai_id = #{pojo.deliveryDetaiId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.status != null">
+                and `status` = #{pojo.status,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuId != null">
+                and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.otherName != null">
+                and other_name like CONCAT('%', #{pojo.otherName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.unit != null">
+                and unit = #{pojo.unit,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.orderCnt != null">
+                and order_cnt = #{pojo.orderCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.turnRule != null">
+                and turn_rule like CONCAT('%', #{pojo.turnRule,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.preDistributionRule != null">
+                and pre_distribution_rule = #{pojo.preDistributionRule,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.distributionRule != null">
+                and distribution_rule = #{pojo.distributionRule,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.preDistributionCnt != null">
+                and pre_distribution_cnt = #{pojo.preDistributionCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.distributionCnt != null">
+                and distribution_cnt = #{pojo.distributionCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.takeCnt != null">
+                and take_cnt = #{pojo.takeCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.deliverCnt != null">
+                and deliver_cnt = #{pojo.deliverCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.pieceCnt != null">
+                and piece_cnt = #{pieceCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.isMergePiece != null">
+                and is_merge_piece = #{pojo.isMergePiece,jdbcType=BIT}
+            </if>
+            <if test="pojo.chineseDescribe != null">
+                and chinese_describe = #{pojo.chineseDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.englishDescribe != null">
+                and english_describe = #{pojo.englishDescribe,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by id desc
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+    <!--新增-->
+    <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from despatch_detail
+        where pid = #{pid,jdbcType=INTEGER}
+    </select>
+    <!--新增-->
+    <select id="selectDetailByPidAndPieceCnt" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from despatch_detail
+        where pid = #{pid,jdbcType=INTEGER} and piece_cnt != 0
+    </select>
+    <!--新增-->
+    <select id="selectByPidAndSkuCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from despatch_detail
+        where pid = #{pid,jdbcType=INTEGER} and sku_code = #{skuCode,jdbcType=VARCHAR}
+        limit 1
+    </select>
+    <!--新增-->
+    <select id="generateSumOrderCnt" parameterType="com.bupt.DTO.reportForm.OutboundReport" resultType="com.bupt.DTO.reportForm.OutboundReport">
+        select
+        sum(order_cnt) as skuOfTotalCnt,count(distinct pid)as totalDesNum
+        from (select id  from despatch where 1=1
+        <if test="startTime!= null">
+            and create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime!= null">
+            and #{endTime}&gt;=create_time
+        </if>
+        <if test="endTime== null and startTime== null ">
+            and create_time &gt;= curdate()
+        </if>
+        <if test="receiverId!= null">
+            and receiver_id = #{receiverId,jdbcType=INTEGER}
+        </if>
+        <if test="warehouseId!= null">
+            and warehouse_id = #{warehouseId,jdbcType=INTEGER}
+        </if>
+        <if test="customerId!= null">
+            and customer_id = #{customerId,jdbcType=INTEGER}
+        </if>
+        ) a left join despatch_detail b
+        on a.id = b.pid
+        where 1=1
+        <if test="skuId!= null">
+            and sku_id = #{skuId,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!--新增-->
+    <select id="gerateSumDespatchedOrderCnt" parameterType="com.bupt.DTO.reportForm.OutboundReport" resultType="com.bupt.DTO.reportForm.OutboundReport">
+        select
+        sum(b.order_cnt) as skuOfOutCnt,count(distinct pid) as desNumToOut
+        from (select id from despatch where status &gt; 13
+        <if test="startTime!= null">
+            and create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime!= null">
+            and #{endTime}&gt;=create_time
+        </if>
+        <if test="endTime== null and startTime== null ">
+            and create_time &gt;= curdate()
+        </if>
+        <if test="receiverId!= null">
+            and receiver_id = #{receiverId,jdbcType=INTEGER}
+        </if>
+        <if test="warehouseId!= null">
+            and warehouse_id = #{warehouseId,jdbcType=INTEGER}
+        </if>
+        <if test="customerId!= null">
+            and customer_id = #{customerId,jdbcType=INTEGER}
+        </if>
+        ) a left join despatch_detail b
+        on a.id = b.pid
+        where 1=1
+        <if test="skuId!= null">
+            and sku_id = #{skuId,jdbcType=INTEGER}
+        </if>
+    </select>
+    <!--新增-->
+    <select id="gerateDespatchDetailList" parameterType="com.bupt.DTO.reportForm.OutboundReport" resultMap="BaseResultMap">
+        select
+        b.*
+        from (select id from despatch where 1=1
+        <if test="startTime!= null">
+            and create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime!= null">
+            and #{endTime}&gt;=create_time
+        </if>
+        <if test="endTime== null and startTime== null ">
+            and create_time &gt;= curdate()
+        </if>
+        <if test="receiverId!= null">
+            and receiver_id = #{receiverId,jdbcType=INTEGER}
+        </if>
+        <if test="warehouseId!= null">
+            and warehouse_id = #{warehouseId,jdbcType=INTEGER}
+        </if>
+        <if test="customerId!= null">
+            and customer_id = #{customerId,jdbcType=INTEGER}
+        </if>
+        ) a left join despatch_detail b
+        on a.id = b.pid
+        where 1=1
+        <if test="skuId!= null">
+            and sku_id = #{skuId,jdbcType=INTEGER}
+        </if>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+        <if test="searchDTO != null">
+            limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

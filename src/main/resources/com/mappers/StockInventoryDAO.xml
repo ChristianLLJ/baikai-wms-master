@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.StockInventoryDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.StockInventory">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="inventory_code" jdbcType="VARCHAR" property="inventoryCode"/>
+        <result column="inventory_type" jdbcType="INTEGER" property="inventoryType"/>
+        <result column="inventory_state" jdbcType="INTEGER" property="inventoryState"/>
+        <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId"/>
+        <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName"/>
+        <result column="is_active" jdbcType="BIT" property="isActive"/>
+        <result column="custom_up_id" jdbcType="INTEGER" property="customUpId"/>
+        <result column="custom_up_name" jdbcType="VARCHAR" property="customUpName"/>
+        <result column="custom_down_id" jdbcType="INTEGER" property="customDownId"/>
+        <result column="custom_down_name" jdbcType="VARCHAR" property="customDownName"/>
+        <result column="commodity_up_id" jdbcType="INTEGER" property="commodityUpId"/>
+        <result column="commodity_up_name" jdbcType="VARCHAR" property="commodityUpName"/>
+        <result column="commodity_down_id" jdbcType="INTEGER" property="commodityDownId"/>
+        <result column="commodity_down_name" jdbcType="VARCHAR" property="commodityDownName"/>
+        <result column="location_up_id" jdbcType="INTEGER" property="locationUpId"/>
+        <result column="location_up_name" jdbcType="VARCHAR" property="locationUpName"/>
+        <result column="location_down_id" jdbcType="INTEGER" property="locationDownId"/>
+        <result column="location_down_name" jdbcType="VARCHAR" property="locationDownName"/>
+        <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime"/>
+        <result column="is_usable" jdbcType="BIT" property="isUsable"/>
+        <result column="inventory_person_id" jdbcType="INTEGER" property="inventoryPersonId"/>
+        <result column="inventory_person_name" jdbcType="VARCHAR" property="inventoryPersonName"/>
+        <result column="move_start_time" jdbcType="TIMESTAMP" property="moveStartTime"/>
+        <result column="move_finish_time" jdbcType="TIMESTAMP" property="moveFinishTime"/>
+        <result column="random_num" jdbcType="DOUBLE" property="randomNum"/>
+        <result column="inventory_des" jdbcType="VARCHAR" property="inventoryDes"/>
+        <result column="check_person_id" jdbcType="INTEGER" property="checkPersonId"/>
+        <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName"/>
+        <result column="check_time" jdbcType="TIMESTAMP" property="checkTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, inventory_code, inventory_type, inventory_state, warehouse_id, warehouse_name,
+        is_active, custom_up_id, custom_up_name, custom_down_id, custom_down_name, commodity_up_id,
+        commodity_up_name, commodity_down_id, commodity_down_name, location_up_id, location_up_name,
+        location_down_id, location_down_name, apply_time, is_usable, inventory_person_id,
+        inventory_person_name, move_start_time, move_finish_time, random_num, inventory_des,
+        check_person_id, check_person_name, check_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_inventory
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from stock_inventory
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.StockInventory" keyProperty="id" useGeneratedKeys="true">
+        insert into stock_inventory (id, inventory_code, inventory_type,
+        inventory_state, warehouse_id, warehouse_name,
+        is_active, custom_up_id, custom_up_name,
+        custom_down_id, custom_down_name, commodity_up_id,
+        commodity_up_name, commodity_down_id, commodity_down_name,
+        location_up_id, location_up_name, location_down_id,
+        location_down_name, apply_time, is_usable,
+        inventory_person_id, inventory_person_name,
+        move_start_time, move_finish_time, random_num,
+        inventory_des, check_person_id, check_person_name,
+        check_time)
+        values (#{id,jdbcType=INTEGER}, #{inventoryCode,jdbcType=VARCHAR}, #{inventoryType,jdbcType=INTEGER},
+        #{inventoryState,jdbcType=INTEGER}, #{warehouseId,jdbcType=INTEGER}, #{warehouseName,jdbcType=VARCHAR},
+        #{isActive,jdbcType=BIT}, #{customUpId,jdbcType=INTEGER}, #{customUpName,jdbcType=VARCHAR},
+        #{customDownId,jdbcType=INTEGER}, #{customDownName,jdbcType=VARCHAR}, #{commodityUpId,jdbcType=INTEGER},
+        #{commodityUpName,jdbcType=VARCHAR}, #{commodityDownId,jdbcType=INTEGER}, #{commodityDownName,jdbcType=VARCHAR},
+        #{locationUpId,jdbcType=INTEGER}, #{locationUpName,jdbcType=VARCHAR}, #{locationDownId,jdbcType=INTEGER},
+        #{locationDownName,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{isUsable,jdbcType=BIT},
+        #{inventoryPersonId,jdbcType=INTEGER}, #{inventoryPersonName,jdbcType=VARCHAR},
+        #{moveStartTime,jdbcType=TIMESTAMP}, #{moveFinishTime,jdbcType=TIMESTAMP}, #{randomNum,jdbcType=DOUBLE},
+        #{inventoryDes,jdbcType=VARCHAR}, #{checkPersonId,jdbcType=INTEGER}, #{checkPersonName,jdbcType=VARCHAR},
+        #{checkTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.StockInventory" keyProperty="id" useGeneratedKeys="true">
+        insert into stock_inventory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="inventoryCode != null">
+                inventory_code,
+            </if>
+            <if test="inventoryType != null">
+                inventory_type,
+            </if>
+            <if test="inventoryState != null">
+                inventory_state,
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id,
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name,
+            </if>
+            <if test="isActive != null">
+                is_active,
+            </if>
+            <if test="customUpId != null">
+                custom_up_id,
+            </if>
+            <if test="customUpName != null">
+                custom_up_name,
+            </if>
+            <if test="customDownId != null">
+                custom_down_id,
+            </if>
+            <if test="customDownName != null">
+                custom_down_name,
+            </if>
+            <if test="commodityUpId != null">
+                commodity_up_id,
+            </if>
+            <if test="commodityUpName != null">
+                commodity_up_name,
+            </if>
+            <if test="commodityDownId != null">
+                commodity_down_id,
+            </if>
+            <if test="commodityDownName != null">
+                commodity_down_name,
+            </if>
+            <if test="locationUpId != null">
+                location_up_id,
+            </if>
+            <if test="locationUpName != null">
+                location_up_name,
+            </if>
+            <if test="locationDownId != null">
+                location_down_id,
+            </if>
+            <if test="locationDownName != null">
+                location_down_name,
+            </if>
+            <if test="applyTime != null">
+                apply_time,
+            </if>
+            <if test="isUsable != null">
+                is_usable,
+            </if>
+            <if test="inventoryPersonId != null">
+                inventory_person_id,
+            </if>
+            <if test="inventoryPersonName != null">
+                inventory_person_name,
+            </if>
+            <if test="moveStartTime != null">
+                move_start_time,
+            </if>
+            <if test="moveFinishTime != null">
+                move_finish_time,
+            </if>
+            <if test="randomNum != null">
+                random_num,
+            </if>
+            <if test="inventoryDes != null">
+                inventory_des,
+            </if>
+            <if test="checkPersonId != null">
+                check_person_id,
+            </if>
+            <if test="checkPersonName != null">
+                check_person_name,
+            </if>
+            <if test="checkTime != null">
+                check_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="inventoryCode != null">
+                #{inventoryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="inventoryType != null">
+                #{inventoryType,jdbcType=INTEGER},
+            </if>
+            <if test="inventoryState != null">
+                #{inventoryState,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseId != null">
+                #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseName != null">
+                #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="isActive != null">
+                #{isActive,jdbcType=BIT},
+            </if>
+            <if test="customUpId != null">
+                #{customUpId,jdbcType=INTEGER},
+            </if>
+            <if test="customUpName != null">
+                #{customUpName,jdbcType=VARCHAR},
+            </if>
+            <if test="customDownId != null">
+                #{customDownId,jdbcType=INTEGER},
+            </if>
+            <if test="customDownName != null">
+                #{customDownName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityUpId != null">
+                #{commodityUpId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityUpName != null">
+                #{commodityUpName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityDownId != null">
+                #{commodityDownId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityDownName != null">
+                #{commodityDownName,jdbcType=VARCHAR},
+            </if>
+            <if test="locationUpId != null">
+                #{locationUpId,jdbcType=INTEGER},
+            </if>
+            <if test="locationUpName != null">
+                #{locationUpName,jdbcType=VARCHAR},
+            </if>
+            <if test="locationDownId != null">
+                #{locationDownId,jdbcType=INTEGER},
+            </if>
+            <if test="locationDownName != null">
+                #{locationDownName,jdbcType=VARCHAR},
+            </if>
+            <if test="applyTime != null">
+                #{applyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isUsable != null">
+                #{isUsable,jdbcType=BIT},
+            </if>
+            <if test="inventoryPersonId != null">
+                #{inventoryPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="inventoryPersonName != null">
+                #{inventoryPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="moveStartTime != null">
+                #{moveStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="moveFinishTime != null">
+                #{moveFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="randomNum != null">
+                #{randomNum,jdbcType=DOUBLE},
+            </if>
+            <if test="inventoryDes != null">
+                #{inventoryDes,jdbcType=VARCHAR},
+            </if>
+            <if test="checkPersonId != null">
+                #{checkPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="checkPersonName != null">
+                #{checkPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null">
+                #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.StockInventory">
+        update stock_inventory
+        <set>
+            <if test="inventoryCode != null">
+                inventory_code = #{inventoryCode,jdbcType=VARCHAR},
+            </if>
+            <if test="inventoryType != null">
+                inventory_type = #{inventoryType,jdbcType=INTEGER},
+            </if>
+            <if test="inventoryState != null">
+                inventory_state = #{inventoryState,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="isActive != null">
+                is_active = #{isActive,jdbcType=BIT},
+            </if>
+            <if test="customUpId != null">
+                custom_up_id = #{customUpId,jdbcType=INTEGER},
+            </if>
+            <if test="customUpName != null">
+                custom_up_name = #{customUpName,jdbcType=VARCHAR},
+            </if>
+            <if test="customDownId != null">
+                custom_down_id = #{customDownId,jdbcType=INTEGER},
+            </if>
+            <if test="customDownName != null">
+                custom_down_name = #{customDownName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityUpId != null">
+                commodity_up_id = #{commodityUpId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityUpName != null">
+                commodity_up_name = #{commodityUpName,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityDownId != null">
+                commodity_down_id = #{commodityDownId,jdbcType=INTEGER},
+            </if>
+            <if test="commodityDownName != null">
+                commodity_down_name = #{commodityDownName,jdbcType=VARCHAR},
+            </if>
+            <if test="locationUpId != null">
+                location_up_id = #{locationUpId,jdbcType=INTEGER},
+            </if>
+            <if test="locationUpName != null">
+                location_up_name = #{locationUpName,jdbcType=VARCHAR},
+            </if>
+            <if test="locationDownId != null">
+                location_down_id = #{locationDownId,jdbcType=INTEGER},
+            </if>
+            <if test="locationDownName != null">
+                location_down_name = #{locationDownName,jdbcType=VARCHAR},
+            </if>
+            <if test="applyTime != null">
+                apply_time = #{applyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isUsable != null">
+                is_usable = #{isUsable,jdbcType=BIT},
+            </if>
+            <if test="inventoryPersonId != null">
+                inventory_person_id = #{inventoryPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="inventoryPersonName != null">
+                inventory_person_name = #{inventoryPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="moveStartTime != null">
+                move_start_time = #{moveStartTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="moveFinishTime != null">
+                move_finish_time = #{moveFinishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="randomNum != null">
+                random_num = #{randomNum,jdbcType=DOUBLE},
+            </if>
+            <if test="inventoryDes != null">
+                inventory_des = #{inventoryDes,jdbcType=VARCHAR},
+            </if>
+            <if test="checkPersonId != null">
+                check_person_id = #{checkPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="checkPersonName != null">
+                check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null">
+                check_time = #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.StockInventory">
+        update stock_inventory
+        set inventory_code = #{inventoryCode,jdbcType=VARCHAR},
+        inventory_type = #{inventoryType,jdbcType=INTEGER},
+        inventory_state = #{inventoryState,jdbcType=INTEGER},
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+        is_active = #{isActive,jdbcType=BIT},
+        custom_up_id = #{customUpId,jdbcType=INTEGER},
+        custom_up_name = #{customUpName,jdbcType=VARCHAR},
+        custom_down_id = #{customDownId,jdbcType=INTEGER},
+        custom_down_name = #{customDownName,jdbcType=VARCHAR},
+        commodity_up_id = #{commodityUpId,jdbcType=INTEGER},
+        commodity_up_name = #{commodityUpName,jdbcType=VARCHAR},
+        commodity_down_id = #{commodityDownId,jdbcType=INTEGER},
+        commodity_down_name = #{commodityDownName,jdbcType=VARCHAR},
+        location_up_id = #{locationUpId,jdbcType=INTEGER},
+        location_up_name = #{locationUpName,jdbcType=VARCHAR},
+        location_down_id = #{locationDownId,jdbcType=INTEGER},
+        location_down_name = #{locationDownName,jdbcType=VARCHAR},
+        apply_time = #{applyTime,jdbcType=TIMESTAMP},
+        is_usable = #{isUsable,jdbcType=BIT},
+        inventory_person_id = #{inventoryPersonId,jdbcType=INTEGER},
+        inventory_person_name = #{inventoryPersonName,jdbcType=VARCHAR},
+        move_start_time = #{moveStartTime,jdbcType=TIMESTAMP},
+        move_finish_time = #{moveFinishTime,jdbcType=TIMESTAMP},
+        random_num = #{randomNum,jdbcType=DOUBLE},
+        inventory_des = #{inventoryDes,jdbcType=VARCHAR},
+        check_person_id = #{checkPersonId,jdbcType=INTEGER},
+        check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+        check_time = #{checkTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="selectNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id)
+        from stock_inventory
+    </select>
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from stock_inventory
+        <where>
+            1=1
+            <if test="pojo.inventoryCode != null">
+                and inventory_code = #{pojo.inventoryCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.inventoryType != null">
+                and inventory_type = #{pojo.inventoryType,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.inventoryState != null">
+                and inventory_state = #{pojo.inventoryState,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.warehouseId != null">
+                and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name like CONCAT('%', #{pojo.warehouseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.isActive != null">
+                and is_active = #{pojo.isActive,jdbcType=TINYINT}
+            </if>
+            <if test="pojo.customUpId != null">
+                and custom_up_id = #{pojo.customUpId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customUpName != null">
+                and custom_up_name = #{pojo.customUpName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customDownId != null">
+                and custom_down_id = #{pojo.customDownId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customDownName != null">
+                and custom_down_name = #{pojo.customDownName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.commodityUpId != null">
+                and commodity_up_id = #{pojo.commodityUpId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.commodityUpName != null">
+                and commodity_up_name = #{pojo.commodityUpName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.commodityDownId != null">
+                and commodity_down_id = #{pojo.commodityDownId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.commodityDownName != null">
+                and commodity_down_name = #{pojo.commodityDownName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.locationUpId != null">
+                and location_up_id = #{pojo.locationUpId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.locationUpName != null">
+                and location_up_name = #{pojo.locationUpName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.locationDownId != null">
+                and location_down_id = #{pojo.locationDownId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.locationDownName != null">
+                and location_down_name = #{pojo.locationDownName,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and apply_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= apply_time
+            </if>
+            <if test="pojo.isUsable != null">
+                and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+            </if>
+            <if test="pojo.inventoryPersonId != null">
+                and inventory_person_id = #{pojo.inventoryPersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.inventoryPersonName != null">
+                and inventory_person_name like CONCAT('%', #{pojo.inventoryPersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.moveStartTime != null">
+                and move_start_time &gt;= #{pojo.moveStartTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pojo.moveFinishTime != null">
+                and #{pojo.moveFinishTime,jdbcType=TIMESTAMP} &gt;= move_finish_time
+            </if>
+            <if test="pojo.randomNum != null">
+                and random_num = #{pojo.randomNum,jdbcType=DOUBLE}
+            </if>
+            <if test="pojo.inventoryDes != null">
+                and inventory_des = #{pojo.inventoryDes,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.checkPersonId != null">
+                and check_person_id = #{pojo.checkPersonId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.checkPersonName != null">
+                and check_person_name like CONCAT('%', #{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime1 != null">
+                and check_time &gt;= #{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP} &gt;= check_time
+            </if>
+            <if test="min1 != null">
+                and inventory_type >= #{min1,jdbcType=DOUBLE}
+            </if>
+            <if test="max1 != null">
+                and #{max1,jdbcType=DOUBLE} >= inventory_type
+            </if>
+        </where>
+    </select>
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_inventory
+        <where>
+            1=1
+            <if test="pojo.inventoryCode != null">
+                and inventory_code = #{pojo.inventoryCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.inventoryType != null">
+                and inventory_type = #{pojo.inventoryType,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.inventoryState != null">
+                and inventory_state = #{pojo.inventoryState,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.warehouseId != null">
+                and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name like CONCAT('%', #{pojo.warehouseName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.isActive != null">
+                and is_active = #{pojo.isActive,jdbcType=TINYINT}
+            </if>
+            <if test="pojo.customUpId != null">
+                and custom_up_id = #{pojo.customUpId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customUpName != null">
+                and custom_up_name = #{pojo.customUpName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customDownId != null">
+                and custom_down_id = #{pojo.customDownId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.customDownName != null">
+                and custom_down_name = #{pojo.customDownName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.commodityUpId != null">
+                and commodity_up_id = #{pojo.commodityUpId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.commodityUpName != null">
+                and commodity_up_name = #{pojo.commodityUpName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.commodityDownId != null">
+                and commodity_down_id = #{pojo.commodityDownId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.commodityDownName != null">
+                and commodity_down_name = #{pojo.commodityDownName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.locationUpId != null">
+                and location_up_id = #{pojo.locationUpId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.locationUpName != null">
+                and location_up_name = #{pojo.locationUpName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.locationDownId != null">
+                and location_down_id = #{pojo.locationDownId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.locationDownName != null">
+                and location_down_name = #{pojo.locationDownName,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and apply_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= apply_time
+            </if>
+            <if test="pojo.isUsable != null">
+                and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+            </if>
+            <if test="pojo.inventoryPersonId != null">
+                and inventory_person_id = #{pojo.inventoryPersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.inventoryPersonName != null">
+                and inventory_person_name like CONCAT('%', #{pojo.inventoryPersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.moveStartTime != null">
+                and move_start_time &gt;= #{pojo.moveStartTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pojo.moveFinishTime != null">
+                and #{pojo.moveFinishTime,jdbcType=TIMESTAMP} &gt;= move_finish_time
+            </if>
+            <if test="pojo.randomNum != null">
+                and random_num = #{pojo.randomNum,jdbcType=DOUBLE}
+            </if>
+            <if test="pojo.inventoryDes != null">
+                and inventory_des = #{pojo.inventoryDes,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.checkPersonId != null">
+                and check_person_id = #{pojo.checkPersonId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.checkPersonName != null">
+                and check_person_name like CONCAT('%', #{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime1 != null">
+                and check_time &gt;= #{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP} &gt;= check_time
+            </if>
+            <if test="min1 != null">
+                and inventory_type >= #{min1,jdbcType=DOUBLE}
+            </if>
+            <if test="max1 != null">
+                and #{max1,jdbcType=DOUBLE} >= inventory_type
+            </if>
+            <if test="screen != null">
+                order by ${screen}
+            </if>
+        </where>
+        <if test="searchDTO !=null">
+            limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectByInventoryCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_inventory
+        where inventory_code = #{inventoryCode,jdbcType=VARCHAR}
+    </select>
+</mapper>

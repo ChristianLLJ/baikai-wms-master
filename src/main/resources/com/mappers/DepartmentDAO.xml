@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.DepartmentDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.Department">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="is_usable" jdbcType="TINYINT" property="isUsable" />
+    <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="parent_department_id" jdbcType="INTEGER" property="parentDepartmentId" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, is_usable, department_name, company_id, company_name, parent_department_id, remark,
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from department
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <!--  分页查询-->
+  <select id="selectDepartment" parameterType="com.bupt.DTO.SearchDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from department
+    order by id desc
+    limit #{page,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from department
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.Department">
+    insert into department (id, is_usable, department_name,
+      company_id, company_name, parent_department_id,
+      remark, create_time)
+    values (#{id,jdbcType=INTEGER}, #{isUsable,jdbcType=TINYINT}, #{departmentName,jdbcType=VARCHAR},
+      #{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR}, #{parentDepartmentId,jdbcType=INTEGER},
+      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.Department">
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="isUsable != null">
+        is_usable,
+      </if>
+      <if test="departmentName != null">
+        department_name,
+      </if>
+      <if test="companyId != null">
+        company_id,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="parentDepartmentId != null">
+        parent_department_id,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="departmentName != null">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentDepartmentId != null">
+        #{parentDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Department">
+    update department
+    <set>
+      <if test="isUsable != null">
+        is_usable = #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="departmentName != null">
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentDepartmentId != null">
+        parent_department_id = #{parentDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Department">
+    update department
+    set is_usable = #{isUsable,jdbcType=TINYINT},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      parent_department_id = #{parentDepartmentId,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  返回总数-->
+  <select id="selectNum" resultType="java.lang.Integer">
+    select
+      count(id)
+    from department
+  </select>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from department
+    where 1=1
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.departmentName != null">
+      and department_name like concat('%',#{pojo.departmentName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.companyId != null">
+      and company_id = #{pojo.companyId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.companyName != null">
+      and company_name like concat('%',#{pojo.companyName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.parentDepartmentId != null">
+      and parent_department_id = #{pojo.parentDepartmentId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.createTime != null">
+      and create_time = #{pojo.createTime,jdbcType=TIMESTAMP}
+    </if>
+    order by id desc
+    <if test="searchDTO !=null">
+    limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from department
+    where 1=1
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.departmentName != null">
+      and department_name like concat('%',#{pojo.departmentName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.companyId != null">
+      and company_id = #{pojo.companyId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.companyName != null">
+      and company_name like concat('%',#{pojo.companyName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.parentDepartmentId != null">
+      and parent_department_id = #{pojo.parentDepartmentId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.createTime != null">
+      and create_time = #{pojo.createTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

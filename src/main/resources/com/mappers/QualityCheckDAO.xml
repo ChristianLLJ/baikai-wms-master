@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.QualityCheckDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.QualityCheck">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="check_code" jdbcType="VARCHAR" property="checkCode" />
+    <result column="check_type" jdbcType="INTEGER" property="checkType" />
+    <result column="check_state" jdbcType="INTEGER" property="checkState" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="total_pass_num" jdbcType="DOUBLE" property="totalPassNum" />
+    <result column="total_unpass_num" jdbcType="DOUBLE" property="totalUnpassNum" />
+    <result column="check_result" jdbcType="VARCHAR" property="checkResult" />
+    <result column="quality_time" jdbcType="TIMESTAMP" property="qualityTime" />
+    <result column="checker_id" jdbcType="INTEGER" property="checkerId" />
+    <result column="checker_name" jdbcType="VARCHAR" property="checkerName" />
+    <result column="is_pass" jdbcType="BIT" property="isPass" />
+    <result column="check_person_id" jdbcType="INTEGER" property="checkPersonId" />
+    <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="random_num" jdbcType="INTEGER" property="randomNum" />
+    <result column="source_type" jdbcType="INTEGER" property="sourceType" />
+    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="close_reason" jdbcType="VARCHAR" property="closeReason" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, check_code, check_type, check_state, create_time, total_pass_num, total_unpass_num,
+    check_result, quality_time, checker_id, checker_name, is_pass, check_person_id, check_person_name,
+    warehouse_id, random_num, source_type, warehouse_code, warehouse_name, check_time,
+    close_reason
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from quality_check
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from quality_check
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.QualityCheck" useGeneratedKeys="true" keyProperty="id">
+    insert into quality_check (id, check_code, check_type,
+      check_state, create_time, total_pass_num,
+      total_unpass_num, check_result, quality_time,
+      checker_id, checker_name, is_pass,
+      check_person_id, check_person_name, warehouse_id,
+      random_num, source_type, warehouse_code,
+      warehouse_name, check_time, close_reason
+      )
+    values (#{id,jdbcType=INTEGER}, #{checkCode,jdbcType=VARCHAR}, #{checkType,jdbcType=INTEGER},
+      #{checkState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{totalPassNum,jdbcType=DOUBLE},
+      #{totalUnpassNum,jdbcType=DOUBLE}, #{checkResult,jdbcType=VARCHAR}, #{qualityTime,jdbcType=TIMESTAMP},
+      #{checkerId,jdbcType=INTEGER}, #{checkerName,jdbcType=VARCHAR}, #{isPass,jdbcType=BIT},
+      #{checkPersonId,jdbcType=INTEGER}, #{checkPersonName,jdbcType=VARCHAR}, #{warehouseId,jdbcType=INTEGER},
+      #{randomNum,jdbcType=INTEGER}, #{sourceType,jdbcType=INTEGER}, #{warehouseCode,jdbcType=VARCHAR},
+      #{warehouseName,jdbcType=VARCHAR}, #{checkTime,jdbcType=TIMESTAMP}, #{closeReason,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.QualityCheck" useGeneratedKeys="true" keyProperty="id">
+    insert into quality_check
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="checkCode != null">
+        check_code,
+      </if>
+      <if test="checkType != null">
+        check_type,
+      </if>
+      <if test="checkState != null">
+        check_state,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="totalPassNum != null">
+        total_pass_num,
+      </if>
+      <if test="totalUnpassNum != null">
+        total_unpass_num,
+      </if>
+      <if test="checkResult != null">
+        check_result,
+      </if>
+      <if test="qualityTime != null">
+        quality_time,
+      </if>
+      <if test="checkerId != null">
+        checker_id,
+      </if>
+      <if test="checkerName != null">
+        checker_name,
+      </if>
+      <if test="isPass != null">
+        is_pass,
+      </if>
+      <if test="checkPersonId != null">
+        check_person_id,
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="randomNum != null">
+        random_num,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
+      <if test="closeReason != null">
+        close_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="checkCode != null">
+        #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkType != null">
+        #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="checkState != null">
+        #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalPassNum != null">
+        #{totalPassNum,jdbcType=DOUBLE},
+      </if>
+      <if test="totalUnpassNum != null">
+        #{totalUnpassNum,jdbcType=DOUBLE},
+      </if>
+      <if test="checkResult != null">
+        #{checkResult,jdbcType=VARCHAR},
+      </if>
+      <if test="qualityTime != null">
+        #{qualityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkerId != null">
+        #{checkerId,jdbcType=INTEGER},
+      </if>
+      <if test="checkerName != null">
+        #{checkerName,jdbcType=VARCHAR},
+      </if>
+      <if test="isPass != null">
+        #{isPass,jdbcType=BIT},
+      </if>
+      <if test="checkPersonId != null">
+        #{checkPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonName != null">
+        #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="randomNum != null">
+        #{randomNum,jdbcType=INTEGER},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeReason != null">
+        #{closeReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.QualityCheck">
+    update quality_check
+    <set>
+      <if test="checkCode != null">
+        check_code = #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkType != null">
+        check_type = #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="checkState != null">
+        check_state = #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalPassNum != null">
+        total_pass_num = #{totalPassNum,jdbcType=DOUBLE},
+      </if>
+      <if test="totalUnpassNum != null">
+        total_unpass_num = #{totalUnpassNum,jdbcType=DOUBLE},
+      </if>
+      <if test="checkResult != null">
+        check_result = #{checkResult,jdbcType=VARCHAR},
+      </if>
+      <if test="qualityTime != null">
+        quality_time = #{qualityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkerId != null">
+        checker_id = #{checkerId,jdbcType=INTEGER},
+      </if>
+      <if test="checkerName != null">
+        checker_name = #{checkerName,jdbcType=VARCHAR},
+      </if>
+      <if test="isPass != null">
+        is_pass = #{isPass,jdbcType=BIT},
+      </if>
+      <if test="checkPersonId != null">
+        check_person_id = #{checkPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="randomNum != null">
+        random_num = #{randomNum,jdbcType=INTEGER},
+      </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closeReason != null">
+        close_reason = #{closeReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.QualityCheck">
+    update quality_check
+    set check_code = #{checkCode,jdbcType=VARCHAR},
+      check_type = #{checkType,jdbcType=INTEGER},
+      check_state = #{checkState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      total_pass_num = #{totalPassNum,jdbcType=DOUBLE},
+      total_unpass_num = #{totalUnpassNum,jdbcType=DOUBLE},
+      check_result = #{checkResult,jdbcType=VARCHAR},
+      quality_time = #{qualityTime,jdbcType=TIMESTAMP},
+      checker_id = #{checkerId,jdbcType=INTEGER},
+      checker_name = #{checkerName,jdbcType=VARCHAR},
+      is_pass = #{isPass,jdbcType=BIT},
+      check_person_id = #{checkPersonId,jdbcType=INTEGER},
+      check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      random_num = #{randomNum,jdbcType=INTEGER},
+      source_type = #{sourceType,jdbcType=INTEGER},
+      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      close_reason = #{closeReason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from quality_check
+    where 1=1 and warehouse_id in (
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.checkCode != null">
+      and check_code like concat('%',#{pojo.checkCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.checkType != null">
+      and check_type = #{pojo.checkType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkState != null">
+      and check_state = #{pojo.checkState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and check_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= check_state
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime,jdbcType=TIMESTAMP}>=create_time
+    </if>
+    <if test="pojo.totalPassNum != null">
+      and total_pass_num = #{pojo.totalPassNum,jdbcType=DOUBLE},
+    </if>
+    <if test="pojo.totalUnpassNum != null">
+      and total_unpass_num = #{pojo.totalUnpassNum,jdbcType=DOUBLE},
+    </if>
+    <if test="pojo.checkResult != null">
+      and check_result = #{pojo.checkResult,jdbcType=VARCHAR},
+    </if>
+
+    <if test="pojo.checkerId != null">
+      and checker_id = #{pojo.checkerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkerName != null">
+      and checker_name like concat('%',#{pojo.checkerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isPass != null">
+      and is_pass = #{pojo.isPass,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.checkPersonId != null">
+      and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonName != null">
+      and check_person_name like concat('%',#{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.randomNum != null">
+      and random_num = #{pojo.randomNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.sourceType != null">
+      and sourceType = #{sourceType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat(#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat(#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    order by id desc
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from quality_check
+    where 1=1 and
+    warehouse_id in (
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.checkCode != null">
+      and check_code like concat('%',#{pojo.checkCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.checkType != null">
+      and check_type = #{pojo.checkType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkState != null">
+      and check_state = #{pojo.checkState,jdbcType=INTEGER}
+    </if>
+    <if test="stateMin!=null">
+      and check_state >= #{stateMin,jdbcType=INTEGER}
+    </if>
+    <if test="stateMax!=null">
+      and #{stateMax,jdbcType=INTEGER} >= check_state
+    </if>
+    <if test="startTime!= null">
+      and create_time >= #{startTime}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime}>=create_time
+    </if>
+    <if test="pojo.totalPassNum != null">
+      and total_pass_num = #{pojo.totalPassNum,jdbcType=DOUBLE},
+    </if>
+    <if test="pojo.totalUnpassNum != null">
+      and total_unpass_num = #{pojo.totalUnpassNum,jdbcType=DOUBLE},
+    </if>
+    <if test="pojo.checkResult != null">
+      and check_result = #{pojo.checkResult,jdbcType=VARCHAR},
+    </if>
+    <if test="startTime1!= null">
+      and check_time >= #{startTime,jdbcType=DATE}
+    </if>
+    <if test="endTime1!= null">
+      and  #{endTime,jdbcType=DATE}>=check_time
+    </if>
+    <if test="pojo.checkerId != null">
+      and checker_id = #{pojo.checkerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkerName != null">
+      and checker_name like concat('%',#{pojo.checkerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isPass != null">
+      and is_pass = #{pojo.isPass,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.checkPersonId != null">
+      and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkPersonName != null">
+      and check_person_name like concat('%',#{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.randomNum != null">
+      and random_num = #{pojo.randomNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.sourceType != null">
+      and sourceType = #{sourceType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat(#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat(#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+</mapper>

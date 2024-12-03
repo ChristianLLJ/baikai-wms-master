@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.WarehouseLocationDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.WarehouseLocation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="is_usable" jdbcType="BIT" property="isUsable" />
+    <result column="location_name" jdbcType="VARCHAR" property="locationName" />
+    <result column="location_code" jdbcType="VARCHAR" property="locationCode" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="area_name" jdbcType="VARCHAR" property="areaName" />
+    <result column="location_group_id" jdbcType="INTEGER" property="locationGroupId" />
+    <result column="location_group_name" jdbcType="VARCHAR" property="locationGroupName" />
+    <result column="location_group_code" jdbcType="VARCHAR" property="locationGroupCode" />
+    <result column="rows" jdbcType="INTEGER" property="rows" />
+    <result column="columns" jdbcType="INTEGER" property="columns" />
+    <result column="layer" jdbcType="INTEGER" property="layer" />
+    <result column="length" jdbcType="INTEGER" property="length" />
+    <result column="wideth" jdbcType="INTEGER" property="wideth" />
+    <result column="high" jdbcType="INTEGER" property="high" />
+    <result column="num_capacity" jdbcType="DOUBLE" property="numCapacity" />
+    <result column="weight_capacity" jdbcType="DOUBLE" property="weightCapacity" />
+    <result column="volume_capacity" jdbcType="DOUBLE" property="volumeCapacity" />
+    <result column="is_replenish" jdbcType="BIT" property="isReplenish" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_locked" jdbcType="BIT" property="isLocked" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="container_id" jdbcType="INTEGER" property="containerId" />
+    <result column="container_code" jdbcType="VARCHAR" property="containerCode" />
+    <result column="location_type" jdbcType="INTEGER" property="locationType" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="container_name" jdbcType="VARCHAR" property="containerName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, area_id, is_usable, location_name, location_code, warehouse_name, area_name,
+    location_group_id, location_group_name, location_group_code, `rows`, `columns`, layer,
+    `length`, wideth, high, num_capacity, weight_capacity, volume_capacity, is_replenish,
+    create_time, is_locked, update_time, container_id, container_code, location_type,
+    warehouse_id, warehouse_code, area_code, container_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from warehouse_location
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from warehouse_location
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.WarehouseLocation">
+    insert into warehouse_location (id, area_id, is_usable,
+      location_name, location_code, warehouse_name,
+      area_name, location_group_id, location_group_name,
+      location_group_code, `rows`, `columns`,
+      layer, `length`, wideth,
+      high, num_capacity, weight_capacity,
+      volume_capacity, is_replenish, create_time,
+      is_locked, update_time, container_id,
+      container_code, location_type, warehouse_id,
+      warehouse_code, area_code, container_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{isUsable,jdbcType=BIT},
+      #{locationName,jdbcType=VARCHAR}, #{locationCode,jdbcType=VARCHAR}, #{warehouseName,jdbcType=VARCHAR},
+      #{areaName,jdbcType=VARCHAR}, #{locationGroupId,jdbcType=INTEGER}, #{locationGroupName,jdbcType=VARCHAR},
+      #{locationGroupCode,jdbcType=VARCHAR}, #{rows,jdbcType=INTEGER}, #{columns,jdbcType=INTEGER},
+      #{layer,jdbcType=INTEGER}, #{length,jdbcType=INTEGER}, #{wideth,jdbcType=INTEGER},
+      #{high,jdbcType=INTEGER}, #{numCapacity,jdbcType=DOUBLE}, #{weightCapacity,jdbcType=DOUBLE},
+      #{volumeCapacity,jdbcType=DOUBLE}, #{isReplenish,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP},
+      #{isLocked,jdbcType=BIT}, #{updateTime,jdbcType=TIMESTAMP}, #{containerId,jdbcType=INTEGER},
+      #{containerCode,jdbcType=VARCHAR}, #{locationType,jdbcType=INTEGER}, #{warehouseId,jdbcType=INTEGER},
+      #{warehouseCode,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{containerName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.WarehouseLocation">
+    insert into warehouse_location
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="isUsable != null">
+        is_usable,
+      </if>
+      <if test="locationName != null">
+        location_name,
+      </if>
+      <if test="locationCode != null">
+        location_code,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="areaName != null">
+        area_name,
+      </if>
+      <if test="locationGroupId != null">
+        location_group_id,
+      </if>
+      <if test="locationGroupName != null">
+        location_group_name,
+      </if>
+      <if test="locationGroupCode != null">
+        location_group_code,
+      </if>
+      <if test="rows != null">
+        `rows`,
+      </if>
+      <if test="columns != null">
+        `columns`,
+      </if>
+      <if test="layer != null">
+        layer,
+      </if>
+      <if test="length != null">
+        `length`,
+      </if>
+      <if test="wideth != null">
+        wideth,
+      </if>
+      <if test="high != null">
+        high,
+      </if>
+      <if test="numCapacity != null">
+        num_capacity,
+      </if>
+      <if test="weightCapacity != null">
+        weight_capacity,
+      </if>
+      <if test="volumeCapacity != null">
+        volume_capacity,
+      </if>
+      <if test="isReplenish != null">
+        is_replenish,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isLocked != null">
+        is_locked,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="containerId != null">
+        container_id,
+      </if>
+      <if test="containerCode != null">
+        container_code,
+      </if>
+      <if test="locationType != null">
+        location_type,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="containerName != null">
+        container_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        #{isUsable,jdbcType=BIT},
+      </if>
+      <if test="locationName != null">
+        #{locationName,jdbcType=VARCHAR},
+      </if>
+      <if test="locationCode != null">
+        #{locationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="locationGroupId != null">
+        #{locationGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="locationGroupName != null">
+        #{locationGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="locationGroupCode != null">
+        #{locationGroupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rows != null">
+        #{rows,jdbcType=INTEGER},
+      </if>
+      <if test="columns != null">
+        #{columns,jdbcType=INTEGER},
+      </if>
+      <if test="layer != null">
+        #{layer,jdbcType=INTEGER},
+      </if>
+      <if test="length != null">
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="wideth != null">
+        #{wideth,jdbcType=INTEGER},
+      </if>
+      <if test="high != null">
+        #{high,jdbcType=INTEGER},
+      </if>
+      <if test="numCapacity != null">
+        #{numCapacity,jdbcType=DOUBLE},
+      </if>
+      <if test="weightCapacity != null">
+        #{weightCapacity,jdbcType=DOUBLE},
+      </if>
+      <if test="volumeCapacity != null">
+        #{volumeCapacity,jdbcType=DOUBLE},
+      </if>
+      <if test="isReplenish != null">
+        #{isReplenish,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isLocked != null">
+        #{isLocked,jdbcType=BIT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerCode != null">
+        #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="locationType != null">
+        #{locationType,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerName != null">
+        #{containerName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.WarehouseLocation">
+    update warehouse_location
+    <set>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        is_usable = #{isUsable,jdbcType=BIT},
+      </if>
+      <if test="locationName != null">
+        location_name = #{locationName,jdbcType=VARCHAR},
+      </if>
+      <if test="locationCode != null">
+        location_code = #{locationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="locationGroupId != null">
+        location_group_id = #{locationGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="locationGroupName != null">
+        location_group_name = #{locationGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="locationGroupCode != null">
+        location_group_code = #{locationGroupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rows != null">
+        `rows` = #{rows,jdbcType=INTEGER},
+      </if>
+      <if test="columns != null">
+        `columns` = #{columns,jdbcType=INTEGER},
+      </if>
+      <if test="layer != null">
+        layer = #{layer,jdbcType=INTEGER},
+      </if>
+      <if test="length != null">
+        `length` = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="wideth != null">
+        wideth = #{wideth,jdbcType=INTEGER},
+      </if>
+      <if test="high != null">
+        high = #{high,jdbcType=INTEGER},
+      </if>
+      <if test="numCapacity != null">
+        num_capacity = #{numCapacity,jdbcType=DOUBLE},
+      </if>
+      <if test="weightCapacity != null">
+        weight_capacity = #{weightCapacity,jdbcType=DOUBLE},
+      </if>
+      <if test="volumeCapacity != null">
+        volume_capacity = #{volumeCapacity,jdbcType=DOUBLE},
+      </if>
+      <if test="isReplenish != null">
+        is_replenish = #{isReplenish,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isLocked != null">
+        is_locked = #{isLocked,jdbcType=BIT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="containerId != null">
+        container_id = #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerCode != null">
+        container_code = #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="locationType != null">
+        location_type = #{locationType,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerName != null">
+        container_name = #{containerName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.WarehouseLocation">
+    update warehouse_location
+    set area_id = #{areaId,jdbcType=INTEGER},
+      is_usable = #{isUsable,jdbcType=BIT},
+      location_name = #{locationName,jdbcType=VARCHAR},
+      location_code = #{locationCode,jdbcType=VARCHAR},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      location_group_id = #{locationGroupId,jdbcType=INTEGER},
+      location_group_name = #{locationGroupName,jdbcType=VARCHAR},
+      location_group_code = #{locationGroupCode,jdbcType=VARCHAR},
+      `rows` = #{rows,jdbcType=INTEGER},
+      `columns` = #{columns,jdbcType=INTEGER},
+      layer = #{layer,jdbcType=INTEGER},
+      `length` = #{length,jdbcType=INTEGER},
+      wideth = #{wideth,jdbcType=INTEGER},
+      high = #{high,jdbcType=INTEGER},
+      num_capacity = #{numCapacity,jdbcType=DOUBLE},
+      weight_capacity = #{weightCapacity,jdbcType=DOUBLE},
+      volume_capacity = #{volumeCapacity,jdbcType=DOUBLE},
+      is_replenish = #{isReplenish,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_locked = #{isLocked,jdbcType=BIT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      container_id = #{containerId,jdbcType=INTEGER},
+      container_code = #{containerCode,jdbcType=VARCHAR},
+      location_type = #{locationType,jdbcType=INTEGER},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=VARCHAR},
+      container_name = #{containerName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectWarehouseLocation" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from warehouse_location
+      order by is_locked desc,id asc
+      limit #{page,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
+  </select>
+  <!--  模糊分页查询所有id.name,code-->
+  <select id="selectIdAndNameAndCode" resultType="com.bupt.DTO.IdAndNameAndCode">
+    select
+      id,location_name as name,location_code as code
+    from warehouse_location
+    where location_name like concat('%',#{name},'%') and location_type = 1
+      limit 0,10
+  </select>
+  <!--  修改库位的库位组信息为null-->
+  <update id="updateByLocationGroupId" parameterType="com.bupt.DTO.location.LocationIdAndNull">
+    update warehouse_location
+    set location_group_id = #{cid,jdbcType=INTEGER},
+        location_group_name = #{name,jdbcType=VARCHAR},
+        location_group_code = #{code,jdbcType=VARCHAR}
+    where location_group_id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  返回总数-->
+  <select id="selectNum" resultType="java.lang.Integer">
+    select
+      count(id)
+    from warehouse_location
+  </select>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from warehouse_location
+    where 1=1
+    <if test="pojo.areaId != null">
+      and area_id = #{pojo.areaId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.locationName != null">
+      and location_name like concat('%',#{pojo.locationName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.locationCode != null">
+      and location_code like concat('%',#{pojo.locationCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.areaName != null">
+      and area_name like concat('%', #{pojo.areaName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.rows != null">
+      and `rows` = #{pojo.rows,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.columns != null">
+      and `columns` = #{pojo.columns,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.layer != null">
+      and layer = #{pojo.layer,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.length != null">
+      and `length` = #{pojo.length,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.wideth != null">
+      and wideth = #{pojo.wideth,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.high != null">
+      and high = #{pojo.high,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.numCapacity != null">
+      and num_capacity = #{pojo.numCapacity,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.weightCapacity != null">
+      and weight_capacity = #{pojo.weightCapacity,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.volumeCapacity != null">
+      and volume_capacity = #{pojo.volumeCapacity,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.isReplenish != null">
+      and is_replenish = #{pojo.isReplenish,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.createTime != null">
+      and create_time = #{pojo.createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.locationGroupId != null">
+      and location_group_id = #{pojo.locationGroupId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.locationGroupName != null">
+      and location_group_name like concat('%',#{pojo.locationGroupName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.locationGroupCode != null">
+      and location_group_code like concat('%',#{pojo.locationGroupCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isLocked != null">
+      and is_locked = #{pojo.isLocked,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.updateTime != null">
+      and update_time = #{pojo.updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.locationType != null">
+      and location_type = #{locationType,jdbcType=INTEGER}
+    </if>
+    order by is_locked desc,id asc
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from warehouse_location
+    where 1=1
+    <if test="pojo.areaId != null">
+      and area_id = #{pojo.areaId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.locationName != null">
+      and location_name like concat('%',#{pojo.locationName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.locationCode != null">
+      and location_code like concat('%',#{pojo.locationCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.areaName != null">
+      and area_name like concat('%', #{pojo.areaName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.rows != null">
+      and `rows` = #{pojo.rows,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.columns != null">
+      and `columns` = #{pojo.columns,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.layer != null">
+      and layer = #{pojo.layer,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.length != null">
+      and `length` = #{pojo.length,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.wideth != null">
+      and wideth = #{pojo.wideth,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.high != null">
+      and high = #{pojo.high,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.numCapacity != null">
+      and num_capacity = #{pojo.numCapacity,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.weightCapacity != null">
+      and weight_capacity = #{pojo.weightCapacity,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.volumeCapacity != null">
+      and volume_capacity = #{pojo.volumeCapacity,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.isReplenish != null">
+      and is_replenish = #{pojo.isReplenish,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.createTime != null">
+      and create_time = #{pojo.createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.locationGroupId != null">
+      and location_group_id = #{pojo.locationGroupId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.locationGroupName != null">
+      and location_group_name like concat('%',#{pojo.locationGroupName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.locationGroupCode != null">
+      and location_group_code like concat('%',#{pojo.locationGroupCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isLocked != null">
+      and is_locked = #{pojo.isLocked,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.updateTime != null">
+      and update_time = #{pojo.updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.locationType != null">
+      and location_type = #{locationType,jdbcType=INTEGER}
+    </if>
+  </select>
+  <!--  返回符合条件的库位id-->
+  <select id="searchId" resultType="java.lang.Integer">
+    select id
+    from warehouse_location
+    where 1=1 and location_type = 0
+    <if test="down != null">
+      and id >= #{0,jdbcType = INTEGER}
+    </if>
+    <if test="up != null">
+      and #{1,jdbcType = INTEGER} >= id
+    </if>
+  </select>
+  <select id="selectClose" parameterType="com.bupt.pojo.WarehouseLocation" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from warehouse_location
+    where is_locked = 0 and  layer=#{layer,jdbcType=INTEGER}
+    and  `rows` =#{rows,jdbcType = INTEGER} and `columns`=#{columns,jdbcType=INTEGER} and container_id = #{containerId,jdbcType=INTEGER} and location_type = 0 and area_id =#{areaId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAreaOne" parameterType="com.bupt.pojo.WarehouseLocation" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from warehouse_location
+    where area_id = #{areaId,jdbcType=INTEGER} and location_type = 0
+    LIMIT 1
+  </select>
+  <select id="selectByAreaId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from warehouse_location
+    where area_id = #{areaId,jdbcType=INTEGER} and location_type = 0
+  </select>
+  <select id="selectContainerOne" parameterType="com.bupt.pojo.WarehouseLocation" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from warehouse_location
+    where area_id = #{areaId,jdbcType=INTEGER} and container_id = #{containerId,jdbcType=INTEGER} and location_type = 0
+    LIMIT 1
+  </select>
+  <select id="selectByAreaContainerLayerRow" parameterType="com.bupt.pojo.WarehouseLocation" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from warehouse_location
+    where area_id = #{areaId,jdbcType=INTEGER} and container_id = #{containerId,jdbcType=INTEGER} and layer = #{layer,jdbcType=INTEGER}
+    and `rows` = #{rows,jdbcType=INTEGER}  and location_type = 0 and is_locked = 0
+  </select>
+  <select id="selectByLocation" parameterType="com.bupt.pojo.WarehouseLocation" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from warehouse_location
+    where is_locked = 0 and area_id = #{areaId,jdbcType=INTEGER} and container_id = #{containerId,jdbcType=INTEGER} and layer = #{layer,jdbcType=INTEGER}
+    and `rows` = #{rows,jdbcType=INTEGER} and `columns`=#{columns,jdbcType=INTEGER} and location_type = #{locationType,jdbcType=INTEGER}
+  </select>
+  <select id="selectByLocationName" parameterType="com.bupt.pojo.WarehouseLocation" resultType="warehouseLocation">
+    select
+    <include refid="Base_Column_List"></include>
+    from warehouse_location
+    where location_name = #{locationName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAreaInGate" parameterType="com.bupt.pojo.WarehouseLocation" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from warehouse_location
+    where area_id = #{areaId,jdbcType=INTEGER} and location_type = #{locationType,jdbcType=INTEGER}
+  </select>
+  <select id="selectRange" parameterType="com.bupt.DTO.inbound.OSSLocationAndRange" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from warehouse_location
+    where is_locked = 0 and location_type = 0 and  area_id = #{w.areaId,jdbcType=INTEGER} and container_id = #{w.containerId,jdbcType=INTEGER} and layer = #{w.layer,jdbcType=INTEGER}
+    and `rows`>= #{w.rows,jdbcType = INTEGER}+#{range,jdbcType=INTEGER}-1 and #{w.rows,jdbcType = INTEGER}-#{range,jdbcType=INTEGER}+1 >= `rows`
+    and `columns` >= #{w.columns,jdbcType = INTEGER}+#{range,jdbcType=INTEGER}-1 and #{w.columns,jdbcType = INTEGER}-#{range,jdbcType=INTEGER}+1 >= `columns`
+  </select>
+
+</mapper>

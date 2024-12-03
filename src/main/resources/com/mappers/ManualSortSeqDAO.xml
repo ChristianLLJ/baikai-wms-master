@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.ManualSortSeqDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.ManualSortSeq">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="despatch_id" jdbcType="INTEGER" property="despatchId"/>
+        <result column="warehouse_area_id" jdbcType="INTEGER" property="warehouseAreaId"/>
+        <result column="priority" jdbcType="BIGINT" property="priority"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , despatch_id, warehouse_area_id, priority, `status`, create_time, update_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from manual_sort_seq
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from manual_sort_seq
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.ManualSortSeq" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into manual_sort_seq (id, despatch_id, warehouse_area_id,
+                                     priority, `status`, create_time,
+                                     update_time)
+        values (#{id,jdbcType=INTEGER}, #{despatchId,jdbcType=INTEGER}, #{warehouseAreaId,jdbcType=INTEGER},
+                #{priority,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},
+                #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.ManualSortSeq" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into manual_sort_seq
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="despatchId != null">
+                despatch_id,
+            </if>
+            <if test="warehouseAreaId != null">
+                warehouse_area_id,
+            </if>
+            <if test="priority != null">
+                priority,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="despatchId != null">
+                #{despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseAreaId != null">
+                #{warehouseAreaId,jdbcType=INTEGER},
+            </if>
+            <if test="priority != null">
+                #{priority,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.ManualSortSeq">
+        update manual_sort_seq
+        <set>
+            <if test="despatchId != null">
+                despatch_id = #{despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseAreaId != null">
+                warehouse_area_id = #{warehouseAreaId,jdbcType=INTEGER},
+            </if>
+            <if test="priority != null">
+                priority = #{priority,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.ManualSortSeq">
+        update manual_sort_seq
+        set despatch_id       = #{despatchId,jdbcType=INTEGER},
+            warehouse_area_id = #{warehouseAreaId,jdbcType=INTEGER},
+            priority          = #{priority,jdbcType=BIGINT},
+            `status`          = #{status,jdbcType=TINYINT},
+            create_time       = #{createTime,jdbcType=TIMESTAMP},
+            update_time       = #{updateTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="selectByDesIdAndAreaId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from manual_sort_seq
+        where despatch_id = #{despatchId,jdbcType=INTEGER}
+        and warehouse_area_id = #{warehouseAreaId,jdbcType=INTEGER}
+        order by priority asc
+    </select>
+    <!--新增-->
+    <select id="selectByDesIdAndAreaIdAndStatus"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from manual_sort_seq
+        where despatch_id = #{despatchId,jdbcType=INTEGER}
+        and warehouse_area_id = #{warehouseAreaId,jdbcType=INTEGER} and `status`= 2
+        order by priority asc
+    </select>
+    <!--新增-->
+    <select id="selectByDesId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from manual_sort_seq
+        where despatch_id = #{despatchId,jdbcType=INTEGER}
+    </select>
+    <!--新增-->
+    <select id="selectByAreaIAndStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from manual_sort_seq
+        where warehouse_area_id = #{warehouseAreaId,jdbcType=INTEGER} and
+        `status`= #{status,jdbcType=TINYINT}
+        order by priority asc
+    </select>
+</mapper>

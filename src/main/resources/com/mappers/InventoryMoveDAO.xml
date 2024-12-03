@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.InventoryMoveDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.InventoryMove">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="move_code" jdbcType="VARCHAR" property="moveCode"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="move_reason" jdbcType="VARCHAR" property="moveReason"/>
+        <result column="move_person_id" jdbcType="INTEGER" property="movePersonId"/>
+        <result column="move_person_name" jdbcType="VARCHAR" property="movePersonName"/>
+        <result column="move_time" jdbcType="TIMESTAMP" property="moveTime"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
+        <result column="source_id" jdbcType="VARCHAR" property="sourceId"/>
+        <result column="check_person_id" jdbcType="INTEGER" property="checkPersonId"/>
+        <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName"/>
+        <result column="check_time" jdbcType="TIMESTAMP" property="checkTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, move_code, `status`, `type`, create_time, move_reason, move_person_id, move_person_name,
+        move_time, `source`, source_id, check_person_id, check_person_name, check_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from inventory_move
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from inventory_move
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.InventoryMove" keyProperty="id" useGeneratedKeys="true">
+        insert into inventory_move (id, move_code, `status`,
+        `type`, create_time, move_reason,
+        move_person_id, move_person_name, move_time,
+        `source`, source_id, check_person_id,
+        check_person_name, check_time)
+        values (#{id,jdbcType=INTEGER}, #{moveCode,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+        #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{moveReason,jdbcType=VARCHAR},
+        #{movePersonId,jdbcType=INTEGER}, #{movePersonName,jdbcType=VARCHAR}, #{moveTime,jdbcType=TIMESTAMP},
+        #{source,jdbcType=VARCHAR}, #{sourceId,jdbcType=VARCHAR}, #{checkPersonId,jdbcType=INTEGER},
+        #{checkPersonName,jdbcType=VARCHAR}, #{checkTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.InventoryMove" keyProperty="id" useGeneratedKeys="true">
+        insert into inventory_move
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="moveCode != null">
+                move_code,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="moveReason != null">
+                move_reason,
+            </if>
+            <if test="movePersonId != null">
+                move_person_id,
+            </if>
+            <if test="movePersonName != null">
+                move_person_name,
+            </if>
+            <if test="moveTime != null">
+                move_time,
+            </if>
+            <if test="source != null">
+                `source`,
+            </if>
+            <if test="sourceId != null">
+                source_id,
+            </if>
+            <if test="checkPersonId != null">
+                check_person_id,
+            </if>
+            <if test="checkPersonName != null">
+                check_person_name,
+            </if>
+            <if test="checkTime != null">
+                check_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="moveCode != null">
+                #{moveCode,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="moveReason != null">
+                #{moveReason,jdbcType=VARCHAR},
+            </if>
+            <if test="movePersonId != null">
+                #{movePersonId,jdbcType=INTEGER},
+            </if>
+            <if test="movePersonName != null">
+                #{movePersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="moveTime != null">
+                #{moveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceId != null">
+                #{sourceId,jdbcType=VARCHAR},
+            </if>
+            <if test="checkPersonId != null">
+                #{checkPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="checkPersonName != null">
+                #{checkPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null">
+                #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.InventoryMove">
+        update inventory_move
+        <set>
+            <if test="moveCode != null">
+                move_code = #{moveCode,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="moveReason != null">
+                move_reason = #{moveReason,jdbcType=VARCHAR},
+            </if>
+            <if test="movePersonId != null">
+                move_person_id = #{movePersonId,jdbcType=INTEGER},
+            </if>
+            <if test="movePersonName != null">
+                move_person_name = #{movePersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="moveTime != null">
+                move_time = #{moveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="source != null">
+                `source` = #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceId != null">
+                source_id = #{sourceId,jdbcType=VARCHAR},
+            </if>
+            <if test="checkPersonId != null">
+                check_person_id = #{checkPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="checkPersonName != null">
+                check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null">
+                check_time = #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.InventoryMove">
+        update inventory_move
+        set move_code = #{moveCode,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=INTEGER},
+        `type` = #{type,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        move_reason = #{moveReason,jdbcType=VARCHAR},
+        move_person_id = #{movePersonId,jdbcType=INTEGER},
+        move_person_name = #{movePersonName,jdbcType=VARCHAR},
+        move_time = #{moveTime,jdbcType=TIMESTAMP},
+        `source` = #{source,jdbcType=VARCHAR},
+        source_id = #{sourceId,jdbcType=VARCHAR},
+        check_person_id = #{checkPersonId,jdbcType=INTEGER},
+        check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+        check_time = #{checkTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="selectNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id)
+        from inventory_move
+    </select>
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from inventory_move
+        <where>
+            1=1
+            <if test="pojo.moveCode != null">
+                and move_code = #{pojo.moveCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.status != null">
+                and `status` = #{pojo.status,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.type != null">
+                and `type` = #{pojo.type,jdbcType=INTEGER}
+            </if>
+            <if test="startTime != null">
+                and create_time >= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} >= create_time
+            </if>
+            <if test="pojo.moveReason != null">
+                and move_reason = #{pojo.moveReason,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.movePersonId != null">
+                and move_person_id = #{pojo.movePersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.movePersonName != null">
+                and move_person_name like CONCAT('%', #{pojo.movePersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime1 != null">
+                and move_time >= #{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP} >= move_time
+            </if>
+            <if test="pojo.source != null">
+                and `source` = #{pojo.source,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.sourceId != null">
+                and source_id = #{sourceId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.checkPersonId != null">
+                and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.checkPersonName != null">
+                and check_person_name like CONCAT('%', #{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.checkTime != null">
+                and check_time = #{pojo.checkTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from inventory_move
+        <where>
+            1=1
+            <if test="pojo.moveCode != null">
+                and move_code = #{pojo.moveCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.status != null">
+                and `status` = #{pojo.status,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.type != null">
+                and `type` = #{pojo.type,jdbcType=INTEGER}
+            </if>
+            <if test="startTime != null">
+                and create_time >= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} >= create_time
+            </if>
+            <if test="pojo.moveReason != null">
+                and move_reason = #{pojo.moveReason,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.movePersonId != null">
+                and move_person_id = #{pojo.movePersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.movePersonName != null">
+                and move_person_name like CONCAT('%', #{pojo.movePersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime1 != null">
+                and move_time >= #{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP} >= move_time
+            </if>
+            <if test="pojo.source != null">
+                and `source` = #{pojo.source,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.sourceId != null">
+                and source_id = #{sourceId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.checkPersonId != null">
+                and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.checkPersonName != null">
+                and check_person_name like CONCAT('%', #{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.checkTime != null">
+                and check_time = #{pojo.checkTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="screen != null">
+                order by ${screen}
+            </if>
+        </where>
+        <if test="searchDTO !=null">
+            limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectByMoveCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from inventory_move
+        where move_code = #{moveCode,jdbcType=VARCHAR}
+    </select>
+</mapper>

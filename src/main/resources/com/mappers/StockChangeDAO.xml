@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.StockChangeDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.StockChange">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="change_code" jdbcType="VARCHAR" property="changeCode"/>
+        <result column="change_type" jdbcType="INTEGER" property="changeType"/>
+        <result column="change_state" jdbcType="INTEGER" property="changeState"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="change_reason" jdbcType="VARCHAR" property="changeReason"/>
+        <result column="change_person_id" jdbcType="INTEGER" property="changePersonId"/>
+        <result column="change_person_name" jdbcType="VARCHAR" property="changePersonName"/>
+        <result column="check_person_id" jdbcType="INTEGER" property="checkPersonId"/>
+        <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName"/>
+        <result column="check_time" jdbcType="TIMESTAMP" property="checkTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, change_code, change_type, change_state, create_time, change_reason, change_person_id,
+        change_person_name, check_person_id, check_person_name, check_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_change
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from stock_change
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.StockChange" keyProperty="id" useGeneratedKeys="true">
+        insert into stock_change (id, change_code, change_type,
+        change_state, create_time, change_reason,
+        change_person_id, change_person_name, check_person_id,
+        check_person_name, check_time)
+        values (#{id,jdbcType=INTEGER}, #{changeCode,jdbcType=VARCHAR}, #{changeType,jdbcType=INTEGER},
+        #{changeState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{changeReason,jdbcType=VARCHAR},
+        #{changePersonId,jdbcType=INTEGER}, #{changePersonName,jdbcType=VARCHAR}, #{checkPersonId,jdbcType=INTEGER},
+        #{checkPersonName,jdbcType=VARCHAR}, #{checkTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.StockChange" keyProperty="id" useGeneratedKeys="true">
+        insert into stock_change
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="changeCode != null">
+                change_code,
+            </if>
+            <if test="changeType != null">
+                change_type,
+            </if>
+            <if test="changeState != null">
+                change_state,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="changeReason != null">
+                change_reason,
+            </if>
+            <if test="changePersonId != null">
+                change_person_id,
+            </if>
+            <if test="changePersonName != null">
+                change_person_name,
+            </if>
+            <if test="checkPersonId != null">
+                check_person_id,
+            </if>
+            <if test="checkPersonName != null">
+                check_person_name,
+            </if>
+            <if test="checkTime != null">
+                check_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="changeCode != null">
+                #{changeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="changeType != null">
+                #{changeType,jdbcType=INTEGER},
+            </if>
+            <if test="changeState != null">
+                #{changeState,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="changeReason != null">
+                #{changeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="changePersonId != null">
+                #{changePersonId,jdbcType=INTEGER},
+            </if>
+            <if test="changePersonName != null">
+                #{changePersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkPersonId != null">
+                #{checkPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="checkPersonName != null">
+                #{checkPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null">
+                #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.StockChange">
+        update stock_change
+        <set>
+            <if test="changeCode != null">
+                change_code = #{changeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="changeType != null">
+                change_type = #{changeType,jdbcType=INTEGER},
+            </if>
+            <if test="changeState != null">
+                change_state = #{changeState,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="changeReason != null">
+                change_reason = #{changeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="changePersonId != null">
+                change_person_id = #{changePersonId,jdbcType=INTEGER},
+            </if>
+            <if test="changePersonName != null">
+                change_person_name = #{changePersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkPersonId != null">
+                check_person_id = #{checkPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="checkPersonName != null">
+                check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null">
+                check_time = #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.StockChange">
+        update stock_change
+        set change_code = #{changeCode,jdbcType=VARCHAR},
+        change_type = #{changeType,jdbcType=INTEGER},
+        change_state = #{changeState,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        change_reason = #{changeReason,jdbcType=VARCHAR},
+        change_person_id = #{changePersonId,jdbcType=INTEGER},
+        change_person_name = #{changePersonName,jdbcType=VARCHAR},
+        check_person_id = #{checkPersonId,jdbcType=INTEGER},
+        check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+        check_time = #{checkTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="selectNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id)
+        from stock_change
+    </select>
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from stock_change
+        <where>
+            1=1
+            <if test="pojo.changeCode != null">
+                and change_code = #{pojo.changeCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.changeType != null">
+                and change_type = #{pojo.changeType,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.changeState != null">
+                and change_state = #{pojo.changeState,jdbcType=INTEGER}
+            </if>
+            <if test="startTime != null">
+                and create_time >= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} >= create_time
+            </if>
+            <if test="pojo.changeReason != null">
+                and change_reason = #{pojo.changeReason,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.changePersonId != null">
+                and change_person_id = #{pojo.changePersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.changePersonName != null">
+                and change_person_name like CONCAT('%', #{pojo.changePersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.checkPersonId != null">
+                and check_person_id = #{pojo.checkPersonId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.checkPersonName != null">
+                and check_person_name like CONCAT('%', #{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime1 != null">
+                and check_time >= #{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP} >= check_time
+            </if>
+        </where>
+    </select>
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_change
+        <where>
+            1=1
+            <if test="pojo.changeCode != null">
+                and change_code = #{pojo.changeCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.changeType != null">
+                and change_type = #{pojo.changeType,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.changeState != null">
+                and change_state = #{pojo.changeState,jdbcType=INTEGER}
+            </if>
+            <if test="startTime != null">
+                and create_time >= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} >= create_time
+            </if>
+            <if test="pojo.changeReason != null">
+                and change_reason = #{pojo.changeReason,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.changePersonId != null">
+                and change_person_id = #{pojo.changePersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.changePersonName != null">
+                and change_person_name like CONCAT('%', #{pojo.changePersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.checkPersonId != null">
+                and check_person_id = #{pojo.checkPersonId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.checkPersonName != null">
+                and check_person_name like CONCAT('%', #{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime1 != null">
+                and check_time >= #{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP} >= check_time
+            </if>
+            <if test="screen != null">
+                order by ${screen}
+            </if>
+        </where>
+        <if test="searchDTO !=null">
+            limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectByChangeCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_change
+        where change_code = #{changeCode,jdbcType=VARCHAR}
+    </select>
+</mapper>

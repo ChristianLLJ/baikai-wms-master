@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.AInitMysqlDAO">
+    <update id="init">
+        -- 重置入库
+        TRUNCATE TABLE purchase_order;
+        TRUNCATE TABLE purchase_order_detail;
+        TRUNCATE TABLE inbound_plan;
+        TRUNCATE TABLE inbound_plan_detail;
+        TRUNCATE TABLE quality_check;
+        TRUNCATE TABLE quality_check_detail;
+        TRUNCATE TABLE packing_table;
+        TRUNCATE TABLE packing_detail;
+        TRUNCATE TABLE combine_stack;
+        TRUNCATE TABLE combine_stack_detail;
+        TRUNCATE TABLE combine_stack_package_detail;
+        TRUNCATE TABLE onshelf_advice;
+        TRUNCATE TABLE onshelf_advice_detail;
+        TRUNCATE TABLE onshelf;
+        TRUNCATE TABLE onshelf_detail;
+        -- 重置出库
+        -- 删除多余余量表
+        DELETE FROM inventory_balance WHERE type=0;
+        UPDATE inventory_total SET pre_distribution_cnt =0 ;
+        UPDATE inventory_balance SET distribution_cnt=0,available_cnt=20,total_cnt=20;
+        -- 重置toB/C
+        TRUNCATE TABLE toB_deliver_notify;
+        TRUNCATE TABLE toB_deliver_notify_detail;
+        TRUNCATE TABLE toB_notify_despatch;
+        TRUNCATE TABLE toC_deliver_notify;
+        TRUNCATE TABLE toC_deliver_notify_detail;
+        TRUNCATE TABLE toC_notify_despatch;
+        -- 重置波次/发运/分拣
+        TRUNCATE TABLE wave;
+        TRUNCATE TABLE pick_task;
+        TRUNCATE TABLE pick_task_detail;
+        TRUNCATE TABLE despatch;
+        TRUNCATE TABLE despatch_detail;
+        TRUNCATE TABLE despatch_wave;
+        TRUNCATE TABLE pick_task_message_json;
+        -- 重置任务分配
+        TRUNCATE TABLE manual_sort_seq;
+    </update>
+    <update id="initTwo">
+        -- 插入采购订单表头
+        INSERT INTO `purchase_order` (`order_id`, `order_type`, `order_state`, `custom_id`, `custom_code`,
+                                      `custom_name`, `warehouse_id`, `warehouse_code`, `warehouse_name`, `supplier_id`,
+                                      `supplier_code`, `supplier_name`, `create_time`, `receive_time`, `remark`,
+                                      `add_person_id`, `add_person_name`, `check_person_id`, `check_person_name`)
+        VALUES ('PUR2306050010', 1, 2, 1, 'A001', '宝开物流', 8, 'BK', '宝开地下演示仓库', 2, 'BUPT', '北邮供应商',
+                '2023-06-05 00:00:00', NULL, '演示2层', 1, '陈路', NULL, NULL);
+
+        -- 插入采购订单表细
+        INSERT INTO `purchase_order_detail` (`order_id`, `row_num`, `commodity_id`, `commodity_name`, `commodity_code`,
+                                             `SKU_ID`, `SKU_code`, `SKU_name`, `container_id`, `unit`, `container_name`,
+                                             `container_code`, `predict_container_num`, `predict_num`,
+                                             `fact_container_num`, `fact_num`, `total_volumn`, `total_weight`,
+                                             `total_net_weight`, `total_money`, `receive_time`, `remark`, `is_generate`)
+        VALUES (1, NULL, 1, '大衣', 'A00001', 1, 'A000011', '大衣S', 1, '件', '箱-1', 'CON001', 1, 20.0000000000, 0,
+                0.0000000000, 10.0000000000, 000000020.0000000000, 0.0000000000, 2000.0000000000, NULL, '', b'1');
+
+        -- 插入入库计划表头
+        INSERT INTO `inbound_plan` (`plan_id`, `inbound_type`, `inbound_state`, `is_usable`, `warehouse_id`,
+                                    `warehouse_code`, `warehouse_name`, `create_time`, `remark`, `is_all_checke`,
+                                    `is_received`, `predict_container_num`, `predict_sku_num`, `predict_num`,
+                                    `inbound_batch`, `source_type`, `is_packaged`, `is_stacked`, `received_sku_num`,
+                                    `received_num`, `received_container_num`, `check_person_id`, `check_person_name`,
+                                    `check_time`, `close_reason`, `is_need_check`)
+        VALUES ('IPL2306050005', 1, 6, 1, 8, 'BK', '宝开地下演示仓库', '2023-06-05 15:00:51', NULL, 0, 1, 1,
+                1.0000000000, 20.0000000000, NULL, 1, b'0', b'0', 0.0000000000, 0.0000000000, 0, 1, '陈路',
+                '2023-06-05 15:01:05', NULL, b'0');
+
+        -- 插入入库计划表细
+        INSERT INTO `inbound_plan_detail` (`plan_id`, `purchase_id`, `purchase_code`, `purchase_row`, `commodity_id`,
+                                           `commodity_name`, `commodity_code`, `sku_id`, `SKU_code`, `SKU_name`,
+                                           `predict_receive_location`, `predict_receive_location_code`, `total_weight`,
+                                           `total_net_weight`, `total_volumn`, `unit`, `is_checked`, `receive_time`,
+                                           `remark`, `is_plate`, `is_received`, `is_packaged`, `product_company`,
+                                           `product_time`, `product_batch`, `container_id`, `container_code`,
+                                           `container_name`, `container_barcode`, `num`, `received_num`,
+                                           `inbound_trace_code`, `inventory_id`, `stack_id`, `stack_code`, `stack_name`,
+                                           `stack_barcode`, `custom_id`, `custom_code`, `custom_name`, `supplier_name`,
+                                           `supplier_id`, `supplier_code`, `sku_split_container_num`, `is_onshelf`,
+                                           `is_audit`, `is_single`, `source_type`)
+        VALUES (1, 1, 'PUR2306050010', 1, 1, '大衣', 'A00001', 1, 'A000011', '大衣S', NULL, NULL, 20.0000000000,
+                0.0000000000, 10.0000000000, '件', 1, '2023-06-05 15:01:10', NULL, 0, 1, b'1', NULL, NULL, NULL, 1,
+                'CON001', '箱-1', 'BAL23052030', 20.0000000000, 000000020.0000000000, 'INS2306050015', NULL, NULL, NULL,
+                NULL, NULL, 1, 'A001', '宝开物流', '北邮供应商', 2, 'BUPT', 1, b'0', b'1', b'0', NULL);
+
+        -- 插入上架建议表头
+        INSERT INTO `onshelf_advice` (`onshelf_strategy_id`, `onshelf_strategy_name`, `onshelf_strategy_code`,
+                                      `onshelf_code`, `onshelf_state`, `print_account`, `is_usable`, `warehouse_id`,
+                                      `warehouse_code`, `warehouse_name`, `checker_id`, `checker_name`, `create_time`,
+                                      `remark`, `onshelf_area_id`, `onshelf_area_code`, `onshelf_area_name`)
+        VALUES (6, '普通策略', 'S2', 'ONP2306050010', 2, 0, 1, 8, 'BK', '宝开地下演示仓库', NULL, NULL,
+                '2023-06-05 15:01:33', NULL, 6, 'LK', '立体库');
+
+        -- 插入上架建议表细
+        INSERT INTO `onshelf_advice_detail` (`onshelf_id`, `trace_code`, `trace_code2`, `onshelf_code`,
+                                             `advice_location_id`, `advice_location_name`, `onshelf_state`, `remark`,
+                                             `onshelf_time`, `inbound_batch`, `onshelf_type`, `container_id`,
+                                             `container_code`, `container_barcode`, `custom_id`, `custom_code`,
+                                             `commodity_id`, `commodity_code`, `sku_id`, `sku_name`, `sku_code`, `unit`,
+                                             `sku_num`, `total_volumn`, `total_weight`, `product_company`,
+                                             `product_time`, `product_batch`)
+        VALUES (1, 'INS2306050015', NULL, 'ONP2306050010', 69, '立体库库位0069', NULL, NULL, NULL, NULL, 1, 1, 'CON001',
+                'BAL23052030', 1, 'A001', 1, 'A00001', 1, '大衣S', 'A000011', '件', 20.0000000000, 10.0000000000,
+                20.0000000000, NULL, NULL, NULL);
+
+        -- 插入上架任务表头
+        INSERT INTO `onshelf` (`id`, `advice_id`, `advice_code`, `onshelf_code`, `onshelf_state`, `print_account`,
+                               `is_usable`, `warehouse_id`, `warehouse_name`, `warehouse_code`, `check_person_id`,
+                               `check_person_name`, `create_time`, `remark`, `onshelf_person_id`, `onshelf_person_name`,
+                               `onshelf_area_id`, `onshelf_area_code`, `onshelf_area_name`, `source_type`, `check_time`,
+                               `onshelf_batch`, `onshelf_task_execute_device`)
+        VALUES (2, 1, 'ONP2306050010', 'ONF2306050005', 2, 0, 1, 8, '宝开地下演示仓库', 'BK', 1, '陈路',
+                '2023-06-05 15:02:27', NULL, NULL, NULL, 6, 'LK', '立体库', 1, '2023-06-05 15:02:33', NULL, NULL);
+
+        -- 插入上架任务表细
+        INSERT INTO `onshelf_detail` (`onshelf_id`, `trace_code`, `trace_code2`, `onshelf_code`, `fact_location_id`,
+                                      `fact_location_name`, `onshelf_type`, `onshelf_state`, `remark`, `person_id`,
+                                      `person_name`, `onshelf_time`, `inbound_batch`, `container_id`, `container_code`,
+                                      `container_barcode`, `custom_id`, `custom_code`, `commodity_id`, `commodity_code`,
+                                      `sku_id`, `sku_name`, `sku_code`, `unit`, `sku_num`, `total_volumn`,
+                                      `total_weight`, `product_company`, `product_time`, `product_batch`,
+                                      `onshelf_task_execute_device`)
+        VALUES (2, 'INS2306050015', NULL, 'ONF2306050005', 69, '立体库库位0069', 1, 1, NULL, NULL, NULL, NULL, NULL, 1,
+                'CON001', 'BAL23052030', NULL, NULL, NULL, NULL, 1, '大衣S', 'A000011', '件', 20.0000000000,
+                10.0000000000, 20.0000000000, NULL, NULL, NULL, NULL);
+
+        -- 重置出库
+        -- 插入toB 表头 数据
+        INSERT INTO `toB_deliver_notify` (`id`, `deliver_id`, `status`, `place_time`, `customer_id`, `customer_name`,
+                                          `customer_code`, `goods_amount`, `goods_weight`, `payment_type`, `province`,
+                                          `city`, `site`, `address`, `receiver_id`, `receiver_name`, `phone_number`,
+                                          `request_delivery_time`, `expect_send_time`, `retention_days`, `remarks`,
+                                          `create_time`)
+        VALUES (2, 'TOB2306300001', 3, '2023-06-30 11:26:58', 1, '宝开物流', 'A001', 20, 20, 1, '北京市', '北京市',
+                '海淀区', '西土城路10号', 3, '陈一', '15577778888', '2023-06-30 11:26:58', '2023-06-30 11:26:58', 0,
+                NULL, '2023-06-30 11:26:58');
+
+        -- 插入toB 表细 数据
+        INSERT INTO `toB_notify_despatch` (`toB_id`, `despatch_id`, `update_date`)
+        VALUES (2, 1, '2023-06-05 14:48:58');
+        INSERT INTO `toB_notify_despatch` (`toB_id`, `despatch_id`, `update_date`)
+        VALUES (2, 2, '2023-06-05 00:00:00');
+
+        -- 插入发运 表头 数据
+        INSERT INTO `despatch` (`id`, `despatch_id`, `type`, `is_pre_distributed`, `status`, `customer_id`,
+                                `customer_name`, `province`, `city`, `site`, `address`, `receiver_id`, `receiver_name`,
+                                `create_time`, `request_delivery_time`, `expect_send_time`, `warehouse_id`,
+                                `warehouse_name`, `warehouse`, `verify_status`, `reviewer_id`, `reviewer_name`,
+                                `reviewer_time`, `priority`, `settler_id`, `carrier_id`, `order_id`, `remarks`,
+                                `last_operating_time`)
+        VALUES (2, 'DES2306300002', 2, 1, 3, 1, '宝开物流', '北京市', '北京市', '海淀区', '西土城路10号', 3, '陈一',
+                '2023-06-05 14:48:58', '2023-06-30 11:26:58', '2023-06-30 11:26:58', 8, '宝开地下演示仓库', 'BK', 2, 1,
+                '陈路', '2023-06-05 14:49:03', NULL, NULL, NULL, NULL, NULL, '2023-06-05 14:49:33');
+
+        -- 插入发运 表细 数据
+        INSERT INTO `despatch_detail` (`pid`, `row_id`, `delivery_detai_id`, `status`, `sku_id`, `sku_code`,
+                                       `sku_barcode`, `sku_name`, `chinese_describe`, `english_describe`, `other_name`,
+                                       `unit`, `order_cnt`, `turn_rule`, `pre_distribution_rule`, `distribution_rule`,
+                                       `pre_distribution_cnt`, `distribution_cnt`, `take_cnt`, `deliver_cnt`,
+                                       `piece_cnt`, `is_merge_piece`, `volume`, `weight`, `net_weight`, `money`)
+        VALUES (2, 1, NULL, '预配成功', 1, 'A000011', '1000011', NULL, NULL, NULL, NULL, NULL, 20, NULL, NULL, NULL, 20,
+                20, 0, 0, 0, b'1', 0.5, 1, NULL, NULL);
+
+        -- 插入发运波次 表细 数据
+        INSERT INTO `despatch_wave` (`despatch_id`, `wave_id`, `update_date`)
+        VALUES (2, 2, NULL);
+
+        -- 插入波次 表头 数据
+        INSERT INTO `wave` (`id`, `wave_id`, `status`, `discribe`, `check_status`, `weight`, `volume`, `warehouse_name`,
+                            `warehouse`, `carrier_name`, `wave_rule_id`, `wave_rule_name`, `wave_rule_code`,
+                            `reviewer_id`, `reviewer_name`, `reviewer_time`, `user_defined1`, `user_defined2`,
+                            `user_defined3`, `create_time`)
+        VALUES (2, 'WAV2306300002', 2, '2', 2, 1, 0.5, '宝开地下演示仓库', 'BK', NULL, 9999, '人工分波次',
+                'ArtificialWaveStrategy', 1, '陈路', '2023-06-05 14:49:25', NULL, NULL, NULL, '2023-06-05 14:49:08');
+
+        -- 插入分拣 表头 数据
+        INSERT INTO `pick_task` (`id`, `pid`, `wave_code`, `task_id`, `status`, `distribution_time`, `reviewer_id`,
+                                 `reviewer_name`, `reviewer_time`, `picking_time`, `create_time`, `batch_type`,
+                                 `user_define`)
+        VALUES (2, 2, 'WAV2306300002', 'PIC2306300002', 1, '2023-06-05 14:49:34', NULL, NULL, NULL, NULL,
+                '2023-06-05 14:49:33', '整箱出库', NULL);
+
+        -- 插入分拣 表细 数据
+        INSERT INTO `pick_task_detail` (`id`, `pid`, `despatch_id`, `row_no`, `sku_id`, `sku_code`, `customer_id`,
+                                        `customer_name`, `receiver_id`, `receiver_name`, `unit`, `volume`, `weight`,
+                                        `inventory_balance_id`, `inventory_balance_code`, `warehouse_id`,
+                                        `warehouse_name`, `warehouse_code`, `area_id`, `area_code`, `area_name`,
+                                        `location_group_id`, `location_group_name`, `location_group_code`,
+                                        `location_id`, `location_code`, `location_name`, `container_id`,
+                                        `container_code`, `full_tag`, `pickup_tag`, `piece_cnt`, `device_pick_num`,
+                                        `inbox_cnt`, `full_box_device_id`, `full_box_device`, `piece_device_id`,
+                                        `piece_device`, `pick_task_rule`, `create_time`, `user_defined1`,
+                                        `user_defined2`, `user_defined3`, `is_picked`, `is_boxed`, `trace_code`)
+        VALUES (2, 2, 1, 1, 1, 'A000011', 1, 'A001', 3, '陈一', '件', 10.0000000000, 20.0000000000, 30, 'BAL23052030',
+                8, '宝开地下演示仓库', 'BK', 6, 'LK', '立体库', NULL, NULL, NULL, 69, 'BKLKLTK0069', '立体库库位0069',
+                1, 'CON001', 1, 0, 0, 0, 20, 2, '穿梭车', NULL, NULL, NULL, '2023-06-05 14:49:34', NULL, NULL, NULL, 1,
+                0, NULL);
+        UPDATE inventory_balance
+        SET type=0
+        WHERE balance_code = 'BAL23052030';
+
+    </update>
+    <update id="initThree">
+
+        -- 重置出库
+        -- 插入toC 表头 数据
+        INSERT INTO `toC_deliver_notify` (`id`, `deliver_id`, `status`, `place_time`, `customer_id`, `customer_name`,
+                                          `customer_code`, `goods_amount`, `goods_weight`, `payment_type`, `province`,
+                                          `city`, `site`, `address`, `receiver_id`, `receiver_name`, `phone_number`,
+                                          `request_delivery_time`, `expect_send_time`, `retention_days`, `create_time`,
+                                          `remarks`)
+        VALUES (3, 'TOC2305200003', 3, '2023-06-30 11:26:58', 1, '宝开物流', 'A001', 2, 2, 1, '北京市', '北京市',
+                '海淀区', '西土城路10号', 3, '陈一', '15577778888', '2023-06-30 11:26:58', '2023-06-30 11:26:58', 0,
+                '2023-06-30 11:26:58', NULL);
+
+        -- 插入toC 表细 数据
+        INSERT INTO `toC_deliver_notify_detail` (`deliver_notify_id`, `detail_id`, `sku_id`, `sku_code`, `sku_barcode`,
+                                                 `sku_name`, `sku_price`, `order_cnt`, `sku_size`, `sku_color`,
+                                                 `remarks`, `row_id`)
+        VALUES (3, NULL, 3, 'A000013', '1000013', '大衣L', 100, 5, 'L', '白色', NULL, 1);
+        INSERT INTO `toC_notify_despatch` (`toC_id`, `despatch_id`, `update_date`)
+        VALUES (3, 3, '2023-06-05 00:00:00');
+
+        -- 插入发运 表头 数据
+        INSERT INTO `despatch` (`id`, `despatch_id`, `type`, `is_pre_distributed`, `status`, `customer_id`,
+                                `customer_name`, `province`, `city`, `site`, `address`, `receiver_id`, `receiver_name`,
+                                `create_time`, `request_delivery_time`, `expect_send_time`, `warehouse_id`,
+                                `warehouse_name`, `warehouse`, `verify_status`, `reviewer_id`, `reviewer_name`,
+                                `reviewer_time`, `priority`, `settler_id`, `carrier_id`, `order_id`, `remarks`,
+                                `last_operating_time`)
+        VALUES (3, 'DES2306300003', 3, 1, 3, 1, '宝开物流', '北京市', '北京市', '海淀区', '西土城路10号', 3, '陈一',
+                '2023-06-05 15:17:40', '2023-06-30 11:26:58', '2023-06-30 11:26:58', 8, '宝开地下演示仓库', 'BK', 2, 1,
+                '陈路', '2023-06-05 15:17:45', NULL, NULL, NULL, NULL, NULL, '2023-06-05 15:18:03');
+
+        -- 插入发运 表细 数据
+        INSERT INTO `despatch_detail` (`pid`, `row_id`, `delivery_detai_id`, `status`, `sku_id`, `sku_code`,
+                                       `sku_barcode`, `sku_name`, `chinese_describe`, `english_describe`, `other_name`,
+                                       `unit`, `order_cnt`, `turn_rule`, `pre_distribution_rule`, `distribution_rule`,
+                                       `pre_distribution_cnt`, `distribution_cnt`, `take_cnt`, `deliver_cnt`,
+                                       `piece_cnt`, `is_merge_piece`, `volume`, `weight`, `net_weight`, `money`)
+        VALUES (3, 1, NULL, '预配成功', 3, 'A000013', '1000013', '大衣L', NULL, NULL, NULL, '件/个', 5, NULL, NULL,
+                NULL, 5, 5, 0, 0, 5, b'1', 0.5, 1, 1, 100);
+
+        -- 插入发运波次 表细 数据
+        INSERT INTO `despatch_wave` (`despatch_id`, `wave_id`, `update_date`)
+        VALUES (3, 3, NULL);
+
+        -- 插入波次 表头 数据
+        INSERT INTO `wave` (`id`, `wave_id`, `status`, `discribe`, `check_status`, `weight`, `volume`, `warehouse_name`,
+                            `warehouse`, `carrier_name`, `wave_rule_id`, `wave_rule_name`, `wave_rule_code`,
+                            `reviewer_id`, `reviewer_name`, `reviewer_time`, `user_defined1`, `user_defined2`,
+                            `user_defined3`, `create_time`)
+        VALUES (3, 'WAV2306300003', 2, '2', 2, 1, 0.5, '宝开地下演示仓库', 'BK', NULL, 9999, '人工分波次',
+                'ArtificialWaveStrategy', 1, '陈路', '2023-06-05 15:17:56', NULL, NULL, NULL, '2023-06-05 15:17:51');
+
+        -- 插入分拣 表头 数据
+        INSERT INTO `pick_task` (`id`, `pid`, `wave_code`, `task_id`, `status`, `distribution_time`, `reviewer_id`,
+                                 `reviewer_name`, `reviewer_time`, `picking_time`, `create_time`, `batch_type`,
+                                 `user_define`)
+        VALUES (3, 3, 'WAV2306300003', 'PIC2306300003', 1, '2023-06-05 15:18:03', NULL, NULL, NULL, NULL,
+                '2023-06-05 15:18:03', '分拣机使用', NULL);
+
+        -- 插入分拣 表细 数据
+        INSERT INTO `pick_task_detail` (`id`, `pid`, `despatch_id`, `row_no`, `sku_id`, `sku_code`, `customer_id`,
+                                        `customer_name`, `receiver_id`, `receiver_name`, `unit`, `volume`, `weight`,
+                                        `inventory_balance_id`, `inventory_balance_code`, `warehouse_id`,
+                                        `warehouse_name`, `warehouse_code`, `area_id`, `area_code`, `area_name`,
+                                        `location_group_id`, `location_group_name`, `location_group_code`,
+                                        `location_id`, `location_code`, `location_name`, `container_id`,
+                                        `container_code`, `full_tag`, `pickup_tag`, `piece_cnt`, `device_pick_num`,
+                                        `inbox_cnt`, `full_box_device_id`, `full_box_device`, `piece_device_id`,
+                                        `piece_device`, `pick_task_rule`, `create_time`, `user_defined1`,
+                                        `user_defined2`, `user_defined3`, `is_picked`, `is_boxed`, `trace_code`)
+        VALUES (3, 3, 1, 1, 3, 'A000013', 1, 'A001', NULL, NULL, '件', 10.0000000000, 20.0000000000, 30, 'BAL23052021',
+                8, '宝开地下演示仓库', 'BK', 6, 'LK', '立体库', NULL, NULL, NULL, 117, 'BKLKLTK0117', '立体库库位0117',
+                1, 'CON001', 0, 1, 5, 0, 20, NULL, NULL, 1, '交叉带分拣机', NULL, '2023-06-05 15:18:03', NULL, NULL,
+                NULL, 0, 0, NULL);
+        UPDATE inventory_balance
+        SET type=2
+        WHERE balance_code = 'BAL23052021';
+    </update>
+    <update id="initFour">
+        -- 重置出库
+        -- 插入toC 表头 数据
+        INSERT INTO `toC_deliver_notify` (`id`,`deliver_id`, `status`, `place_time`, `customer_id`, `customer_name`, `customer_code`, `goods_amount`, `goods_weight`, `payment_type`, `province`, `city`, `site`, `address`, `receiver_id`, `receiver_name`, `phone_number`, `request_delivery_time`, `expect_send_time`, `retention_days`, `create_time`, `remarks`) VALUES (4,'TOC2305200002', 3, '2023-06-30 11:26:58', 1, '宝开物流', 'A001', 2, 2, 1, '北京市', '北京市', '海淀区', '西土城路10号', 3, '陈一', '15577778888', '2023-06-30 11:26:58', '2023-06-30 11:26:58', 0, '2023-06-30 11:26:58', NULL);
+
+        -- 插入toC 表细 数据
+        INSERT INTO `toC_notify_despatch` (`toC_id`, `despatch_id`, `update_date`) VALUES (4, 4, '2023-06-05 00:00:00');
+        INSERT INTO `toC_deliver_notify_detail` (`deliver_notify_id`, `detail_id`, `sku_id`, `sku_code`, `sku_barcode`, `sku_name`, `sku_price`, `order_cnt`, `sku_size`, `sku_color`, `remarks`, `row_id`) VALUES (4, NULL, 2, 'A000012', '1000012', '大衣M', 100, 2, 'M', '白色', NULL, 1);
+
+        -- 插入发运 表头 数据
+        INSERT INTO `despatch` (`id`,`despatch_id`, `type`, `is_pre_distributed`, `status`, `customer_id`, `customer_name`, `province`, `city`, `site`, `address`, `receiver_id`, `receiver_name`, `create_time`, `request_delivery_time`, `expect_send_time`, `warehouse_id`, `warehouse_name`, `warehouse`, `verify_status`, `reviewer_id`, `reviewer_name`, `reviewer_time`, `priority`, `settler_id`, `carrier_id`, `order_id`, `remarks`, `last_operating_time`) VALUES (4,'DES2306300004', 3, 1, 3, 1, '宝开物流', '北京市', '北京市', '海淀区', '西土城路10号', 3, '陈一', '2023-06-05 15:27:43', '2023-06-30 11:26:58', '2023-06-30 11:26:58', 8, '宝开地下演示仓库', 'BK', 2, 1, '陈路', '2023-06-05 15:27:49', NULL, NULL, NULL, NULL, NULL, '2023-06-05 15:28:07');
+
+        -- 插入发运 表细 数据
+        INSERT INTO `despatch_detail` (`pid`, `row_id`, `delivery_detai_id`, `status`, `sku_id`, `sku_code`, `sku_barcode`, `sku_name`, `chinese_describe`, `english_describe`, `other_name`, `unit`, `order_cnt`, `turn_rule`, `pre_distribution_rule`, `distribution_rule`, `pre_distribution_cnt`, `distribution_cnt`, `take_cnt`, `deliver_cnt`, `piece_cnt`, `is_merge_piece`, `volume`, `weight`, `net_weight`, `money`) VALUES (4, 1, NULL, '预配成功', 2, 'A000012', '1000012', '大衣M', NULL, NULL, NULL, '件/个', 2, NULL, NULL, NULL, 2, 2, 0, 0, 2, b'0', 0.5, 1, 1, 100);
+
+        -- 插入发运波次 表细 数据
+        INSERT INTO `despatch_wave` (`despatch_id`, `wave_id`, `update_date`) VALUES (4, 4, NULL);
+
+        -- 插入波次 表头 数据
+        INSERT INTO `wave` (`id`,`wave_id`, `status`, `discribe`, `check_status`, `weight`, `volume`, `warehouse_name`, `warehouse`, `carrier_name`, `wave_rule_id`, `wave_rule_name`, `wave_rule_code`, `reviewer_id`, `reviewer_name`, `reviewer_time`, `user_defined1`, `user_defined2`, `user_defined3`, `create_time`) VALUES (4,'WAV2306300004', 2, '2', 2, 1, 0.5, '宝开地下演示仓库', 'BK', NULL, 9999, '人工分波次', 'ArtificialWaveStrategy', 1, '陈路', '2023-06-05 15:28:00', NULL, NULL, NULL, '2023-06-05 15:27:55');
+
+        -- 插入分拣 表头 数据
+        INSERT INTO `pick_task` (`id`,`pid`, `wave_code`, `task_id`, `status`, `distribution_time`, `reviewer_id`, `reviewer_name`, `reviewer_time`, `picking_time`, `create_time`, `batch_type`, `user_define`) VALUES (4,4, 'WAV2306300004', 'PIC2306300004', 1, '2023-06-05 15:28:07', NULL, NULL, NULL, NULL, '2023-06-05 15:28:07', '人工拣货使用', NULL);
+
+        -- 插入分拣 表细 数据
+        INSERT INTO `pick_task_detail` ( `pid`, `despatch_id`, `row_no`, `sku_id`, `sku_code`, `customer_id`,
+                                        `customer_name`, `receiver_id`, `receiver_name`, `unit`, `volume`, `weight`,
+                                        `inventory_balance_id`, `inventory_balance_code`, `warehouse_id`,
+                                        `warehouse_name`, `warehouse_code`, `area_id`, `area_code`, `area_name`,
+                                        `location_group_id`, `location_group_name`, `location_group_code`,
+                                        `location_id`, `location_code`, `location_name`, `container_id`,
+                                        `container_code`, `full_tag`, `pickup_tag`, `piece_cnt`, `device_pick_num`,
+                                        `inbox_cnt`, `full_box_device_id`, `full_box_device`, `piece_device_id`,
+                                        `piece_device`, `pick_task_rule`, `create_time`, `user_defined1`,
+                                        `user_defined2`, `user_defined3`, `is_picked`, `is_boxed`, `trace_code`)
+        VALUES (4, 4, 1, 2, 'A000012', 1, 'A001', NULL, NULL, '件', 10.0000000000, 20.0000000000, 26,
+                'BAL23052008', 8, '宝开地下演示仓库', 'BK', 6, 'LK', '立体库', NULL, NULL, NULL, 148, 'BKLKLTK0148',
+                '立体库库位0148', 1, 'CON001', 0, 1, 2, 0, 20, NULL, NULL, 3, '人工拣货', NULL, '2023-06-05 15:28:07',
+                NULL, NULL, NULL, 0, 0, NULL);
+        UPDATE inventory_balance SET type=2 WHERE balance_code='BAL23052008';
+    </update>
+    <update id="initDispaly">
+        -- 插入采购订单表头
+        INSERT INTO `purchase_order` (`order_id`, `order_type`, `order_state`, `custom_id`, `custom_code`, `custom_name`, `warehouse_id`, `warehouse_code`, `warehouse_name`, `supplier_id`, `supplier_code`, `supplier_name`, `create_time`, `receive_time`, `remark`, `add_person_id`, `add_person_name`, `check_person_id`, `check_person_name`) VALUES ('PUR2305240001', 1, 1, 1, 'A001', '宝开物流', 8, 'BK', '宝开地下演示仓库', 2, 'BUPT', '北邮供应商', '2023-05-24 00:00:00', NULL, '演示使用', 1, '陈路', NULL, NULL);
+
+        -- 插入采购订单表细
+        INSERT INTO `purchase_order_detail` (`order_id`, `row_num`, `commodity_id`, `commodity_name`, `commodity_code`, `SKU_ID`, `SKU_code`, `SKU_name`, `container_id`, `unit`, `container_name`, `container_code`, `predict_container_num`, `predict_num`, `fact_container_num`, `fact_num`, `total_volumn`, `total_weight`, `total_net_weight`, `total_money`, `receive_time`, `remark`, `is_generate`) VALUES (1, NULL, 1, '大衣', 'A00001', 1, 'A000011', '大衣S', 1, '件', '箱-1', 'CON001', 1, 20.0000000000, 0, 0.0000000000, 10.0000000000, 000000020.0000000000, 0.0000000000, 2000.0000000000, NULL, '', b'0');
+        INSERT INTO `purchase_order_detail` (`order_id`, `row_num`, `commodity_id`, `commodity_name`, `commodity_code`, `SKU_ID`, `SKU_code`, `SKU_name`, `container_id`, `unit`, `container_name`, `container_code`, `predict_container_num`, `predict_num`, `fact_container_num`, `fact_num`, `total_volumn`, `total_weight`, `total_net_weight`, `total_money`, `receive_time`, `remark`, `is_generate`) VALUES (1, NULL, 1, '大衣', 'A00001', 3, 'A000013', '大衣L', 1, '件', '箱-1', 'CON001', 1, 20.0000000000, 0, 0.0000000000, 10.0000000000, 000000020.0000000000, 0.0000000000, 2000.0000000000, NULL, '', b'0');
+
+        -- 重置出库
+        -- 插入toB 表头 数据
+        INSERT INTO `toB_deliver_notify` (`deliver_id`, `status`, `place_time`, `customer_id`, `customer_name`, `customer_code`, `goods_amount`, `goods_weight`, `payment_type`, `province`, `city`, `site`, `address`, `receiver_id`, `receiver_name`, `phone_number`, `request_delivery_time`, `expect_send_time`, `retention_days`, `remarks`, `create_time`) VALUES ('TOB2305200001', 1, '2023-05-20 11:26:58', 1, '宝开物流', 'A001', 20, 20, 1, '北京市', '北京市', '海淀区', '西土城路10号', 3, '陈一', '15577778888', '2023-05-31 00:00:00', '2023-05-25 11:26:58', 0, NULL, '2023-05-20 11:26:58');
+        INSERT INTO `toB_deliver_notify` (`deliver_id`, `status`, `place_time`, `customer_id`, `customer_name`, `customer_code`, `goods_amount`, `goods_weight`, `payment_type`, `province`, `city`, `site`, `address`, `receiver_id`, `receiver_name`, `phone_number`, `request_delivery_time`, `expect_send_time`, `retention_days`, `remarks`, `create_time`) VALUES ('TOB2305200002', 1, '2023-05-20 11:26:58', 1, '宝开物流', 'A001', 20, 20, 1, '北京市', '北京市', '海淀区', '西土城路10号', 3, '陈一', '15577778888', '2023-05-31 00:00:00', '2023-05-25 11:26:58', 0, NULL, '2023-05-20 11:26:58');
+
+        -- 插入toB 表细 数据
+        INSERT INTO `toB_deliver_notify_detail` (`deliver_notify_id`, `detail_id`, `sku_id`, `sku_code`, `sku_barcode`, `sku_name`, `sku_price`, `despatch_num`, `order_cnt`, `remain_num`, `sku_size`, `sku_color`, `remarks`, `row_id`) VALUES (1, NULL, 1, 'A000011', '1000011', '大衣S', 100, 0, 20, 20, 'S', '白色', NULL, 1);
+        INSERT INTO `toB_deliver_notify_detail` (`deliver_notify_id`, `detail_id`, `sku_id`, `sku_code`, `sku_barcode`, `sku_name`, `sku_price`, `despatch_num`, `order_cnt`, `remain_num`, `sku_size`, `sku_color`, `remarks`, `row_id`) VALUES (2, NULL, 3, 'A000013', '1000013', '大衣L', 100, 0, 20, 20, 'L', '白色', NULL, 2);
+
+        -- 插入toC 表头 数据
+        INSERT INTO `toC_deliver_notify` (`deliver_id`, `status`, `place_time`, `customer_id`, `customer_name`, `customer_code`, `goods_amount`, `goods_weight`, `payment_type`, `province`, `city`, `site`, `address`, `receiver_id`, `receiver_name`, `phone_number`, `request_delivery_time`, `expect_send_time`, `retention_days`, `create_time`, `remarks`) VALUES ('TOC2305200001', 1, '2023-05-20 11:26:58', 1, '宝开物流', 'A001', 2, 2, 1, '北京市', '北京市', '海淀区', '西土城路10号', 3, '陈一', '15577778888', '2023-05-31 00:00:00', '2023-05-25 11:27:18', 0, '2023-05-20 11:26:58', NULL);
+        INSERT INTO `toC_deliver_notify` (`deliver_id`, `status`, `place_time`, `customer_id`, `customer_name`, `customer_code`, `goods_amount`, `goods_weight`, `payment_type`, `province`, `city`, `site`, `address`, `receiver_id`, `receiver_name`, `phone_number`, `request_delivery_time`, `expect_send_time`, `retention_days`, `create_time`, `remarks`) VALUES ('TOC2305200002', 1, '2023-05-20 11:26:58', 1, '宝开物流', 'A001', 2, 2, 1, '北京市', '北京市', '海淀区', '西土城路10号', 3, '陈一', '15577778888', '2023-05-31 00:00:00', '2023-05-25 00:00:00', 0, '2023-05-20 11:26:58', NULL);
+        INSERT INTO `toC_deliver_notify` (`deliver_id`, `status`, `place_time`, `customer_id`, `customer_name`, `customer_code`, `goods_amount`, `goods_weight`, `payment_type`, `province`, `city`, `site`, `address`, `receiver_id`, `receiver_name`, `phone_number`, `request_delivery_time`, `expect_send_time`, `retention_days`, `create_time`, `remarks`) VALUES ('TOC2305200003', 1, '2023-05-20 11:26:58', 1, '宝开物流', 'A001', 2, 2, 1, '北京市', '北京市', '海淀区', '西土城路10号', 3, '陈一', '15577778888', '2023-05-31 00:00:00', '2023-05-25 00:00:00', 0, '2023-05-20 11:26:58', NULL);
+
+        -- 插入toC 表细 数据
+        INSERT INTO `toC_deliver_notify_detail` (`deliver_notify_id`, `detail_id`, `sku_id`, `sku_code`, `sku_barcode`, `sku_name`, `sku_price`, `order_cnt`, `sku_size`, `sku_color`, `remarks`, `row_id`) VALUES (1, NULL, 3, 'A000013', '1000013', '大衣L', 100, 2, 'L', '白色', NULL, 1);
+        INSERT INTO `toC_deliver_notify_detail` (`deliver_notify_id`, `detail_id`, `sku_id`, `sku_code`, `sku_barcode`, `sku_name`, `sku_price`, `order_cnt`, `sku_size`, `sku_color`, `remarks`, `row_id`) VALUES (2, NULL, 2, 'A000012', '1000012', '大衣M', 100, 2, 'M', '白色', NULL, 1);
+        INSERT INTO `toC_deliver_notify_detail` (`deliver_notify_id`, `detail_id`, `sku_id`, `sku_code`, `sku_barcode`, `sku_name`, `sku_price`, `order_cnt`, `sku_size`, `sku_color`, `remarks`, `row_id`) VALUES (3, NULL, 1, 'A000011', '1000011', '大衣S', 100, 2, 'S', '白色', NULL, 1);
+    </update>
+</mapper>

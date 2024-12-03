@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.WaveRuleRunnerDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.WaveRuleRunner">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="wave_rule_id" jdbcType="INTEGER" property="waveRuleId"/>
+        <result column="running_order" jdbcType="INTEGER" property="runningOrder"/>
+        <result column="running_tag" jdbcType="BIT" property="runningTag"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , wave_rule_id, running_order, running_tag, create_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave_rule_runner
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from wave_rule_runner
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.WaveRuleRunner">
+        insert into wave_rule_runner (id, wave_rule_id, running_order,
+                                      running_tag, create_time)
+        values (#{id,jdbcType=INTEGER}, #{waveRuleId,jdbcType=INTEGER}, #{runningOrder,jdbcType=INTEGER},
+                #{runningTag,jdbcType=BIT}, NOW())
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.WaveRuleRunner">
+        insert into wave_rule_runner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="waveRuleId != null">
+                wave_rule_id,
+            </if>
+            <if test="runningOrder != null">
+                running_order,
+            </if>
+            <if test="runningTag != null">
+                running_tag,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="waveRuleId != null">
+                #{waveRuleId,jdbcType=INTEGER},
+            </if>
+            <if test="runningOrder != null">
+                #{runningOrder,jdbcType=INTEGER},
+            </if>
+            <if test="runningTag != null">
+                #{runningTag,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                NOW(),
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.WaveRuleRunner">
+        update wave_rule_runner
+        <set>
+            <if test="waveRuleId != null">
+                wave_rule_id = #{waveRuleId,jdbcType=INTEGER},
+            </if>
+            <if test="runningOrder != null">
+                running_order = #{runningOrder,jdbcType=INTEGER},
+            </if>
+            <if test="runningTag != null">
+                running_tag = #{runningTag,jdbcType=BIT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.WaveRuleRunner">
+        update wave_rule_runner
+        set wave_rule_id  = #{waveRuleId,jdbcType=INTEGER},
+            running_order = #{runningOrder,jdbcType=INTEGER},
+            running_tag   = #{runningTag,jdbcType=BIT},
+            create_time   = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--全部停止-->
+    <update id="updateAllRunning" parameterType="com.bupt.pojo.WaveRuleRunner">
+        update wave_rule_runner
+        set running_tag = false
+        where running_tag = true
+    </update>
+    <!--新增-->
+    <select id="searchByWaveRuleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select *
+        from wave_rule_runner
+        where wave_rule_id = #{waveRuleId,jdbcType=INTEGER}
+          and running_tag = true
+        order by id desc limit 1
+    </select>
+</mapper>

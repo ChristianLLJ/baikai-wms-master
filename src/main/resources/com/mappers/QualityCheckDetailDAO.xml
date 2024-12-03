@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.QualityCheckDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.QualityCheckDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="check_id" jdbcType="INTEGER" property="checkId" />
+    <result column="check_code" jdbcType="VARCHAR" property="checkCode" />
+    <result column="commodity_id" jdbcType="INTEGER" property="commodityId" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="commodity_code" jdbcType="VARCHAR" property="commodityCode" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="SKU_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="SKU_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="container_id" jdbcType="INTEGER" property="containerId" />
+    <result column="container_name" jdbcType="VARCHAR" property="containerName" />
+    <result column="container_code" jdbcType="VARCHAR" property="containerCode" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="predict_num" jdbcType="DOUBLE" property="predictNum" />
+    <result column="predict_check_num" jdbcType="DOUBLE" property="predictCheckNum" />
+    <result column="checked_num" jdbcType="DOUBLE" property="checkedNum" />
+    <result column="random_check_num" jdbcType="DOUBLE" property="randomCheckNum" />
+    <result column="pass_num" jdbcType="DOUBLE" property="passNum" />
+    <result column="unpass_num" jdbcType="DOUBLE" property="unpassNum" />
+    <result column="product_time" jdbcType="TIMESTAMP" property="productTime" />
+    <result column="product_factory" jdbcType="VARCHAR" property="productFactory" />
+    <result column="is_pass" jdbcType="TINYINT" property="isPass" />
+    <result column="product_batch" jdbcType="VARCHAR" property="productBatch" />
+    <result column="container_barcode" jdbcType="VARCHAR" property="containerBarcode" />
+    <result column="custom_id" jdbcType="INTEGER" property="customId" />
+    <result column="custom_code" jdbcType="VARCHAR" property="customCode" />
+    <result column="custom_name" jdbcType="VARCHAR" property="customName" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="supplier_code" jdbcType="VARCHAR" property="supplierCode" />
+    <result column="supplier_name" jdbcType="VARCHAR" property="supplierName" />
+    <result column="plan_id" jdbcType="INTEGER" property="planId" />
+    <result column="plan_code" jdbcType="VARCHAR" property="planCode" />
+    <result column="inbound_trace_code" jdbcType="VARCHAR" property="inboundTraceCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, check_id, check_code, commodity_id, commodity_name, commodity_code, sku_id, SKU_code,
+    SKU_name, container_id, container_name, container_code, unit, predict_num, predict_check_num,
+    checked_num, random_check_num, pass_num, unpass_num, product_time, product_factory,
+    is_pass, product_batch, container_barcode, custom_id, custom_code, custom_name, supplier_id,
+    supplier_code, supplier_name, plan_id, plan_code, inbound_trace_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from quality_check_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from quality_check_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.QualityCheckDetail">
+    insert into quality_check_detail (id, check_id, check_code,
+      commodity_id, commodity_name, commodity_code,
+      sku_id, SKU_code, SKU_name,
+      container_id, container_name, container_code,
+      unit, predict_num, predict_check_num,
+      checked_num, random_check_num, pass_num,
+      unpass_num, product_time, product_factory,
+      is_pass, product_batch, container_barcode,
+      custom_id, custom_code, custom_name,
+      supplier_id, supplier_code, supplier_name,
+      plan_id, plan_code, inbound_trace_code
+      )
+    values (#{id,jdbcType=INTEGER}, #{checkId,jdbcType=INTEGER}, #{checkCode,jdbcType=VARCHAR},
+      #{commodityId,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, #{commodityCode,jdbcType=VARCHAR},
+      #{skuId,jdbcType=INTEGER}, #{skuCode,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR},
+      #{containerId,jdbcType=INTEGER}, #{containerName,jdbcType=VARCHAR}, #{containerCode,jdbcType=VARCHAR},
+      #{unit,jdbcType=VARCHAR}, #{predictNum,jdbcType=DOUBLE}, #{predictCheckNum,jdbcType=DOUBLE},
+      #{checkedNum,jdbcType=DOUBLE}, #{randomCheckNum,jdbcType=DOUBLE}, #{passNum,jdbcType=DOUBLE},
+      #{unpassNum,jdbcType=DOUBLE}, #{productTime,jdbcType=TIMESTAMP}, #{productFactory,jdbcType=VARCHAR},
+      #{isPass,jdbcType=TINYINT}, #{productBatch,jdbcType=VARCHAR}, #{containerBarcode,jdbcType=VARCHAR},
+      #{customId,jdbcType=INTEGER}, #{customCode,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR},
+      #{supplierId,jdbcType=INTEGER}, #{supplierCode,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR},
+      #{planId,jdbcType=INTEGER}, #{planCode,jdbcType=VARCHAR}, #{inboundTraceCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.QualityCheckDetail">
+    insert into quality_check_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="checkId != null">
+        check_id,
+      </if>
+      <if test="checkCode != null">
+        check_code,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="commodityName != null">
+        commodity_name,
+      </if>
+      <if test="commodityCode != null">
+        commodity_code,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="skuCode != null">
+        SKU_code,
+      </if>
+      <if test="skuName != null">
+        SKU_name,
+      </if>
+      <if test="containerId != null">
+        container_id,
+      </if>
+      <if test="containerName != null">
+        container_name,
+      </if>
+      <if test="containerCode != null">
+        container_code,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="predictNum != null">
+        predict_num,
+      </if>
+      <if test="predictCheckNum != null">
+        predict_check_num,
+      </if>
+      <if test="checkedNum != null">
+        checked_num,
+      </if>
+      <if test="randomCheckNum != null">
+        random_check_num,
+      </if>
+      <if test="passNum != null">
+        pass_num,
+      </if>
+      <if test="unpassNum != null">
+        unpass_num,
+      </if>
+      <if test="productTime != null">
+        product_time,
+      </if>
+      <if test="productFactory != null">
+        product_factory,
+      </if>
+      <if test="isPass != null">
+        is_pass,
+      </if>
+      <if test="productBatch != null">
+        product_batch,
+      </if>
+      <if test="containerBarcode != null">
+        container_barcode,
+      </if>
+      <if test="customId != null">
+        custom_id,
+      </if>
+      <if test="customCode != null">
+        custom_code,
+      </if>
+      <if test="customName != null">
+        custom_name,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="supplierCode != null">
+        supplier_code,
+      </if>
+      <if test="supplierName != null">
+        supplier_name,
+      </if>
+      <if test="planId != null">
+        plan_id,
+      </if>
+      <if test="planCode != null">
+        plan_code,
+      </if>
+      <if test="inboundTraceCode != null">
+        inbound_trace_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="checkId != null">
+        #{checkId,jdbcType=INTEGER},
+      </if>
+      <if test="checkCode != null">
+        #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCode != null">
+        #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerName != null">
+        #{containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null">
+        #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="predictNum != null">
+        #{predictNum,jdbcType=DOUBLE},
+      </if>
+      <if test="predictCheckNum != null">
+        #{predictCheckNum,jdbcType=DOUBLE},
+      </if>
+      <if test="checkedNum != null">
+        #{checkedNum,jdbcType=DOUBLE},
+      </if>
+      <if test="randomCheckNum != null">
+        #{randomCheckNum,jdbcType=DOUBLE},
+      </if>
+      <if test="passNum != null">
+        #{passNum,jdbcType=DOUBLE},
+      </if>
+      <if test="unpassNum != null">
+        #{unpassNum,jdbcType=DOUBLE},
+      </if>
+      <if test="productTime != null">
+        #{productTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productFactory != null">
+        #{productFactory,jdbcType=VARCHAR},
+      </if>
+      <if test="isPass != null">
+        #{isPass,jdbcType=TINYINT},
+      </if>
+      <if test="productBatch != null">
+        #{productBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="containerBarcode != null">
+        #{containerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="customCode != null">
+        #{customCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierCode != null">
+        #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="planId != null">
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="planCode != null">
+        #{planCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inboundTraceCode != null">
+        #{inboundTraceCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.QualityCheckDetail">
+    update quality_check_detail
+    <set>
+      <if test="checkId != null">
+        check_id = #{checkId,jdbcType=INTEGER},
+      </if>
+      <if test="checkCode != null">
+        check_code = #{checkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null">
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCode != null">
+        commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        SKU_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        SKU_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        container_id = #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerName != null">
+        container_name = #{containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null">
+        container_code = #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="predictNum != null">
+        predict_num = #{predictNum,jdbcType=DOUBLE},
+      </if>
+      <if test="predictCheckNum != null">
+        predict_check_num = #{predictCheckNum,jdbcType=DOUBLE},
+      </if>
+      <if test="checkedNum != null">
+        checked_num = #{checkedNum,jdbcType=DOUBLE},
+      </if>
+      <if test="randomCheckNum != null">
+        random_check_num = #{randomCheckNum,jdbcType=DOUBLE},
+      </if>
+      <if test="passNum != null">
+        pass_num = #{passNum,jdbcType=DOUBLE},
+      </if>
+      <if test="unpassNum != null">
+        unpass_num = #{unpassNum,jdbcType=DOUBLE},
+      </if>
+      <if test="productTime != null">
+        product_time = #{productTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productFactory != null">
+        product_factory = #{productFactory,jdbcType=VARCHAR},
+      </if>
+      <if test="isPass != null">
+        is_pass = #{isPass,jdbcType=TINYINT},
+      </if>
+      <if test="productBatch != null">
+        product_batch = #{productBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="containerBarcode != null">
+        container_barcode = #{containerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        custom_id = #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="customCode != null">
+        custom_code = #{customCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        custom_name = #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierCode != null">
+        supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        supplier_name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="planId != null">
+        plan_id = #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="planCode != null">
+        plan_code = #{planCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inboundTraceCode != null">
+        inbound_trace_code = #{inboundTraceCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.QualityCheckDetail">
+    update quality_check_detail
+    set check_id = #{checkId,jdbcType=INTEGER},
+      check_code = #{checkCode,jdbcType=VARCHAR},
+      commodity_id = #{commodityId,jdbcType=INTEGER},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      sku_id = #{skuId,jdbcType=INTEGER},
+      SKU_code = #{skuCode,jdbcType=VARCHAR},
+      SKU_name = #{skuName,jdbcType=VARCHAR},
+      container_id = #{containerId,jdbcType=INTEGER},
+      container_name = #{containerName,jdbcType=VARCHAR},
+      container_code = #{containerCode,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      predict_num = #{predictNum,jdbcType=DOUBLE},
+      predict_check_num = #{predictCheckNum,jdbcType=DOUBLE},
+      checked_num = #{checkedNum,jdbcType=DOUBLE},
+      random_check_num = #{randomCheckNum,jdbcType=DOUBLE},
+      pass_num = #{passNum,jdbcType=DOUBLE},
+      unpass_num = #{unpassNum,jdbcType=DOUBLE},
+      product_time = #{productTime,jdbcType=TIMESTAMP},
+      product_factory = #{productFactory,jdbcType=VARCHAR},
+      is_pass = #{isPass,jdbcType=TINYINT},
+      product_batch = #{productBatch,jdbcType=VARCHAR},
+      container_barcode = #{containerBarcode,jdbcType=VARCHAR},
+      custom_id = #{customId,jdbcType=INTEGER},
+      custom_code = #{customCode,jdbcType=VARCHAR},
+      custom_name = #{customName,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      supplier_name = #{supplierName,jdbcType=VARCHAR},
+      plan_id = #{planId,jdbcType=INTEGER},
+      plan_code = #{planCode,jdbcType=VARCHAR},
+      inbound_trace_code = #{inboundTraceCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from quality_check_detail
+    where 1=1
+    <if test="pojo.checkId != null">
+      and check_id = #{pojo.checkId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkCode != null">
+      and check_code = #{pojo.checkCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityName != null">
+      and commodity_name like concat('%',#{pojo.commodityName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat('%',#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuCode != null">
+      and SKU_code like concat('%',#{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuName != null">
+      and SKU_name like concat('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.unit != null">
+      and unit = #{pojo.unit,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.predictNum != null">
+      and predict_num = #{pojo.predictNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.predictCheckNum != null">
+      and predict_check_num = #{pojo.predictCheckNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.checkedNum != null">
+      and checked_num = #{pojo.checkedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.randomCheckNum != null">
+      and random_check_num = #{pojo.randomCheckNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.passNum != null">
+      and pass_num = #{pojo.passNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.unpassNum != null">
+      and unpass_num = #{pojo.unpassNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.productTime != null">
+      and product_time = #{pojo.productTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.productFactory != null">
+      and product_factory like concat('%',#{pojo.productFactory,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isPass != null">
+      and is_pass = #{pojo.isPass,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.productBatch != null">
+      and product_batch = #{pojo.productBatch,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat('%',#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat(#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat(#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierId != null">
+      and supplier_id = #{pojo.supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.supplierCode != null">
+      and supplier_code like concat(#{pojo.supplierCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierName != null">
+      and supplier_name like concat(#{pojo.supplierName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.planCode != null">
+      and plan_code like concat(#{pojo.planCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inboundTraceCode != null">
+      and inbound_trace_code like concat(#{pojo.inboundTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    order by id desc
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from quality_check_detail
+    where 1=1
+    <if test="pojo.checkId != null">
+      and check_id = #{pojo.checkId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.checkCode != null">
+      and check_code = #{pojo.checkCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityName != null">
+      and commodity_name like concat('%',#{pojo.commodityName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat('%',#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuCode != null">
+      and SKU_code like concat('%',#{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuName != null">
+      and SKU_name like concat('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.unit != null">
+      and unit = #{pojo.unit,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.predictNum != null">
+      and predict_num = #{pojo.predictNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.predictCheckNum != null">
+      and predict_check_num = #{pojo.predictCheckNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.checkedNum != null">
+      and checked_num = #{pojo.checkedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.randomCheckNum != null">
+      and random_check_num = #{pojo.randomCheckNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.passNum != null">
+      and pass_num = #{pojo.passNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.unpassNum != null">
+      and unpass_num = #{pojo.unpassNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.productTime != null">
+      and product_time = #{pojo.productTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.productFactory != null">
+      and product_factory like concat('%',#{pojo.productFactory,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isPass != null">
+      and is_pass = #{pojo.isPass,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.productBatch != null">
+      and product_batch = #{pojo.productBatch,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat('%',#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat(#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat(#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierId != null">
+      and supplier_id = #{pojo.supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.supplierCode != null">
+      and supplier_code like concat(#{pojo.supplierCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierName != null">
+      and supplier_name like concat(#{pojo.supplierName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.planCode != null">
+      and plan_code like concat(#{pojo.planCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inboundTraceCode != null">
+      and inbound_trace_code like concat(#{pojo.inboundTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+  <select id="selectByCheckId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from quality_check_detail
+    where check_id=#{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectPassNum" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+      pass_num,unpass_num
+    from quality_check_detail
+    where check_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByCheckId" parameterType="java.lang.Integer">
+    delete from
+      quality_check_detail
+    where check_id = #{id,jdbcType=INTEGER}
+  </delete>
+</mapper>

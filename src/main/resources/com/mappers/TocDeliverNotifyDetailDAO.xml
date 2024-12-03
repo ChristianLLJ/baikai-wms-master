@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.TocDeliverNotifyDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.TocDeliverNotifyDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="deliver_notify_id" jdbcType="INTEGER" property="deliverNotifyId" />
+    <result column="detail_id" jdbcType="VARCHAR" property="detailId" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="sku_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="sku_barcode" jdbcType="VARCHAR" property="skuBarcode" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_price" jdbcType="DOUBLE" property="skuPrice" />
+    <result column="order_cnt" jdbcType="INTEGER" property="orderCnt" />
+    <result column="sku_size" jdbcType="VARCHAR" property="skuSize" />
+    <result column="sku_color" jdbcType="VARCHAR" property="skuColor" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="row_id" jdbcType="INTEGER" property="rowId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, deliver_notify_id, detail_id, sku_id, sku_code, sku_barcode, sku_name, sku_price, 
+    order_cnt, sku_size, sku_color, remarks, row_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from toC_deliver_notify_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from toC_deliver_notify_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.TocDeliverNotifyDetail">
+    insert into toC_deliver_notify_detail (id, deliver_notify_id, detail_id, 
+      sku_id, sku_code, sku_barcode, 
+      sku_name, sku_price, order_cnt, 
+      sku_size, sku_color, remarks, 
+      row_id)
+    values (#{id,jdbcType=INTEGER}, #{deliverNotifyId,jdbcType=INTEGER}, #{detailId,jdbcType=VARCHAR}, 
+      #{skuId,jdbcType=INTEGER}, #{skuCode,jdbcType=VARCHAR}, #{skuBarcode,jdbcType=VARCHAR}, 
+      #{skuName,jdbcType=VARCHAR}, #{skuPrice,jdbcType=DOUBLE}, #{orderCnt,jdbcType=INTEGER}, 
+       #{skuSize,jdbcType=VARCHAR}, #{skuColor,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{rowId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.TocDeliverNotifyDetail">
+    insert into toC_deliver_notify_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="deliverNotifyId != null">
+        deliver_notify_id,
+      </if>
+      <if test="detailId != null">
+        detail_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="skuCode != null">
+        sku_code,
+      </if>
+      <if test="skuBarcode != null">
+        sku_barcode,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="skuPrice != null">
+        sku_price,
+      </if>
+      <if test="orderCnt != null">
+        order_cnt,
+      </if>
+      <if test="skuSize != null">
+        sku_size,
+      </if>
+      <if test="skuColor != null">
+        sku_color,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+      <if test="rowId != null">
+        row_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deliverNotifyId != null">
+        #{deliverNotifyId,jdbcType=INTEGER},
+      </if>
+      <if test="detailId != null">
+        #{detailId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBarcode != null">
+        #{skuBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuPrice != null">
+        #{skuPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="orderCnt != null">
+        #{orderCnt,jdbcType=INTEGER},
+      </if>
+      <if test="skuSize != null">
+         #{skuSize,jdbcType=VARCHAR},
+      </if>
+      <if test="skuColor != null">
+        #{skuColor,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.TocDeliverNotifyDetail">
+    update toC_deliver_notify_detail
+    <set>
+      <if test="deliverNotifyId != null">
+        deliver_notify_id = #{deliverNotifyId,jdbcType=INTEGER},
+      </if>
+      <if test="detailId != null">
+        detail_id = #{detailId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBarcode != null">
+        sku_barcode = #{skuBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuPrice != null">
+        sku_price = #{skuPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="orderCnt != null">
+        order_cnt = #{orderCnt,jdbcType=INTEGER},
+      </if>
+      <if test="skuSize != null">
+        sku_size = #{skuSize,jdbcType=VARCHAR},
+      </if>
+      <if test="skuColor != null">
+        sku_color = #{skuColor,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="rowId != null">
+        row_id = #{rowId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.TocDeliverNotifyDetail">
+    update toC_deliver_notify_detail
+    set deliver_notify_id = #{deliverNotifyId,jdbcType=INTEGER},
+      detail_id = #{detailId,jdbcType=VARCHAR},
+      sku_id = #{skuId,jdbcType=INTEGER},
+      sku_code = #{skuCode,jdbcType=VARCHAR},
+      sku_barcode = #{skuBarcode,jdbcType=VARCHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      sku_price = #{skuPrice,jdbcType=DOUBLE},
+      order_cnt = #{orderCnt,jdbcType=INTEGER},
+      sku_size = #{skuSize,jdbcType=VARCHAR},
+      sku_color = #{skuColor,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      row_id = #{rowId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--新增-->
+  <select id="numScreen" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(id)
+    from toC_deliver_notify_detail
+    <where>
+      1=1
+      <if test="pojo.deliverNotifyId != null">
+        and deliver_notify_id = #{pojo.deliverNotifyId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.detailId != null">
+        and detail_id = #{pojo.detailId,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuId != null">
+        and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuCode != null">
+        and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuBarcode != null">
+        and sku_barcode = #{pojo.skuBarcode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuName != null">
+        and sku_name like CONCAT('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.skuColor != null">
+        and sku_color = #{pojo.skuColor,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuPrice != null">
+        and sku_price = #{pojo.skuPrice,jdbcType=DOUBLE}
+      </if>
+    </where>
+  </select>
+  <!--新增-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select id
+    from toC_deliver_notify_detail
+    <where>
+      1=1
+      <if test="pojo.deliverNotifyId != null">
+        and deliver_notify_id = #{pojo.deliverNotifyId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.detailId != null">
+        and detail_id = #{pojo.detailId,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuId != null">
+        and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuCode != null">
+        and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuBarcode != null">
+        and sku_barcode = #{pojo.skuBarcode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuName != null">
+        and sku_name like CONCAT('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.skuColor != null">
+        and sku_color = #{pojo.skuColor,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuPrice != null">
+        and sku_price = #{pojo.skuPrice,jdbcType=DOUBLE}
+      </if>
+    </where>
+    order by id asc
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+  </select>
+  <!--新增-->
+  <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from toC_deliver_notify_detail
+    where deliver_notify_id = #{deliverNotifyId,jdbcType=INTEGER}
+    order by id asc
+  </select>
+</mapper>

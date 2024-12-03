@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.WarehouseAreaTypeDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.WarehouseAreaType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+    <result column="is_changeable" jdbcType="TINYINT" property="isChangeable" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, type_name, is_changeable, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from warehouse_area_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+<!--  分页查询所有库区种类-->
+  <select id="selectAreaType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from warehouse_area_type
+    limit #{page,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from warehouse_area_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.WarehouseAreaType">
+    insert into warehouse_area_type (id, type_name, is_changeable,
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{isChangeable,jdbcType=TINYINT},
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.WarehouseAreaType">
+    insert into warehouse_area_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeName != null">
+        type_name,
+      </if>
+      <if test="isChangeable != null">
+        is_changeable,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="typeName != null">
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="isChangeable != null">
+        #{isChangeable,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.WarehouseAreaType">
+    update warehouse_area_type
+    <set>
+      <if test="typeName != null">
+        type_name = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="isChangeable != null">
+        is_changeable = #{isChangeable,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.WarehouseAreaType">
+    update warehouse_area_type
+    set type_name = #{typeName,jdbcType=VARCHAR},
+      is_changeable = #{isChangeable,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  返回总数-->
+  <select id="selectNum" resultType="java.lang.Integer">
+    select
+      count(id)
+    from warehouse_area_type
+  </select>
+</mapper>

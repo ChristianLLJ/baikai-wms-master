@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.CompanyDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.Company">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="com_id" jdbcType="INTEGER" property="comId" />
+    <result column="id_usable" jdbcType="TINYINT" property="idUsable" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_address" jdbcType="VARCHAR" property="companyAddress" />
+    <result column="post" jdbcType="INTEGER" property="post" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="e_mail" jdbcType="VARCHAR" property="eMail" />
+    <result column="website" jdbcType="VARCHAR" property="website" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, com_id, id_usable, company_name, company_address, post, phone, e_mail, website
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.Company">
+    insert into company (id, com_id, id_usable,
+      company_name, company_address, post,
+      phone, e_mail, website
+      )
+    values (#{id,jdbcType=INTEGER}, #{comId,jdbcType=INTEGER}, #{idUsable,jdbcType=TINYINT},
+      #{companyName,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR}, #{post,jdbcType=INTEGER},
+      #{phone,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.Company">
+    insert into company
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="comId != null">
+        com_id,
+      </if>
+      <if test="idUsable != null">
+        id_usable,
+      </if>
+      <if test="companyName != null">
+        company_name,
+      </if>
+      <if test="companyAddress != null">
+        company_address,
+      </if>
+      <if test="post != null">
+        post,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="eMail != null">
+        e_mail,
+      </if>
+      <if test="website != null">
+        website,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="comId != null">
+        #{comId,jdbcType=INTEGER},
+      </if>
+      <if test="idUsable != null">
+        #{idUsable,jdbcType=TINYINT},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        #{post,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null">
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        #{website,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Company">
+    update company
+    <set>
+      <if test="comId != null">
+        com_id = #{comId,jdbcType=INTEGER},
+      </if>
+      <if test="idUsable != null">
+        id_usable = #{idUsable,jdbcType=TINYINT},
+      </if>
+      <if test="companyName != null">
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null">
+        company_address = #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        post = #{post,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null">
+        e_mail = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Company">
+    update company
+    set com_id = #{comId,jdbcType=INTEGER},
+      id_usable = #{idUsable,jdbcType=TINYINT},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_address = #{companyAddress,jdbcType=VARCHAR},
+      post = #{post,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      e_mail = #{eMail,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  分页查询-->
+  <select id="selectCompany" parameterType="com.bupt.DTO.SearchDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company
+    order by id desc
+    limit #{page,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
+  </select>
+<!--  返回总数-->
+  <select id="selectNum" resultType="java.lang.Integer">
+    select
+    count(id)
+    from company
+  </select>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from company
+    where 1=1
+    <if test="pojo.comId != null">
+      and com_id = #{pojo.comId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.idUsable != null">
+      and id_usable = #{pojo.idUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.companyName != null">
+      and company_name like concat('%',#{pojo.companyName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.companyAddress != null">
+      and company_address like concat('%',#{pojo.companyAddress,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.post != null">
+      and post = #{pojo.post,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.phone != null">
+      and phone = #{pojo.phone,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.eMail != null">
+      and e_mail = #{pojo.eMail,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.website != null">
+      and website = #{pojo.website,jdbcType=VARCHAR}
+    </if>
+    order by id desc
+    <if test="searchDTO !=null">
+    limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from company
+    where 1=1
+    <if test="pojo.comId != null">
+      and com_id = #{pojo.comId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.idUsable != null">
+      and id_usable = #{pojo.idUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.companyName != null">
+      and company_name like concat('%',#{pojo.companyName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.companyAddress != null">
+      and company_address like concat('%',#{pojo.companyAddress,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.post != null">
+      and post = #{pojo.post,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.phone != null">
+      and phone = #{pojo.phone,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.eMail != null">
+      and e_mail = #{pojo.eMail,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.website != null">
+      and website = #{pojo.website,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

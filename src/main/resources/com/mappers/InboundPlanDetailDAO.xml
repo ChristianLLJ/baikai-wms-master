@@ -1,0 +1,1600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.InboundPlanDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.InboundPlanDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="plan_id" jdbcType="INTEGER" property="planId" />
+    <result column="purchase_id" jdbcType="INTEGER" property="purchaseId" />
+    <result column="purchase_code" jdbcType="VARCHAR" property="purchaseCode" />
+    <result column="purchase_row" jdbcType="INTEGER" property="purchaseRow" />
+    <result column="commodity_id" jdbcType="INTEGER" property="commodityId" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="commodity_code" jdbcType="VARCHAR" property="commodityCode" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="SKU_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="SKU_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="predict_receive_location" jdbcType="INTEGER" property="predictReceiveLocation" />
+    <result column="predict_receive_location_code" jdbcType="VARCHAR" property="predictReceiveLocationCode" />
+    <result column="total_weight" jdbcType="DOUBLE" property="totalWeight" />
+    <result column="total_net_weight" jdbcType="DOUBLE" property="totalNetWeight" />
+    <result column="total_volumn" jdbcType="DOUBLE" property="totalVolumn" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="is_checked" jdbcType="BIT" property="isChecked" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="is_plate" jdbcType="BIT" property="isPlate" />
+    <result column="is_received" jdbcType="BIT" property="isReceived" />
+    <result column="is_packaged" jdbcType="BIT" property="isPackaged" />
+    <result column="product_company" jdbcType="VARCHAR" property="productCompany" />
+    <result column="product_time" jdbcType="TIMESTAMP" property="productTime" />
+    <result column="product_batch" jdbcType="VARCHAR" property="productBatch" />
+    <result column="container_id" jdbcType="INTEGER" property="containerId" />
+    <result column="container_code" jdbcType="VARCHAR" property="containerCode" />
+    <result column="container_name" jdbcType="VARCHAR" property="containerName" />
+    <result column="container_barcode" jdbcType="VARCHAR" property="containerBarcode" />
+    <result column="num" jdbcType="DOUBLE" property="num" />
+    <result column="received_num" jdbcType="DOUBLE" property="receivedNum" />
+    <result column="inbound_trace_code" jdbcType="VARCHAR" property="inboundTraceCode" />
+    <result column="inventory_id" jdbcType="INTEGER" property="inventoryId" />
+    <result column="stack_id" jdbcType="INTEGER" property="stackId" />
+    <result column="stack_code" jdbcType="VARCHAR" property="stackCode" />
+    <result column="stack_name" jdbcType="VARCHAR" property="stackName" />
+    <result column="stack_barcode" jdbcType="VARCHAR" property="stackBarcode" />
+    <result column="custom_id" jdbcType="INTEGER" property="customId" />
+    <result column="custom_code" jdbcType="VARCHAR" property="customCode" />
+    <result column="custom_name" jdbcType="VARCHAR" property="customName" />
+    <result column="supplier_name" jdbcType="VARCHAR" property="supplierName" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="supplier_code" jdbcType="VARCHAR" property="supplierCode" />
+    <result column="sku_split_container_num" jdbcType="INTEGER" property="skuSplitContainerNum" />
+    <result column="is_onshelf" jdbcType="BIT" property="isOnshelf" />
+    <result column="is_audit" jdbcType="BIT" property="isAudit" />
+    <result column="is_single" jdbcType="BIT" property="isSingle" />
+    <result column="source_type" jdbcType="INTEGER" property="sourceType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, plan_id, purchase_id, purchase_code, purchase_row, commodity_id, commodity_name,
+    commodity_code, sku_id, SKU_code, SKU_name, predict_receive_location, predict_receive_location_code,
+    total_weight, total_net_weight, total_volumn, unit, is_checked, receive_time, remark,
+    is_plate, is_received, is_packaged, product_company, product_time, product_batch,
+    container_id, container_code, container_name, container_barcode, num, received_num,
+    inbound_trace_code, inventory_id, stack_id, stack_code, stack_name, stack_barcode,
+    custom_id, custom_code, custom_name, supplier_name, supplier_id, supplier_code, sku_split_container_num,
+    is_onshelf, is_audit, is_single, source_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from inbound_plan_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from inbound_plan_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.InboundPlanDetail">
+    insert into inbound_plan_detail (id, plan_id, purchase_id,
+      purchase_code, purchase_row, commodity_id,
+      commodity_name, commodity_code, sku_id,
+      SKU_code, SKU_name, predict_receive_location,
+      predict_receive_location_code, total_weight,
+      total_net_weight, total_volumn, unit,
+      is_checked, receive_time, remark,
+      is_plate, is_received, is_packaged,
+      product_company, product_time, product_batch,
+      container_id, container_code, container_name,
+      container_barcode, num, received_num,
+      inbound_trace_code, inventory_id, stack_id,
+      stack_code, stack_name, stack_barcode,
+      custom_id, custom_code, custom_name,
+      supplier_name, supplier_id, supplier_code,
+      sku_split_container_num, is_onshelf, is_audit,
+      is_single, source_type)
+    values (#{id,jdbcType=INTEGER}, #{planId,jdbcType=INTEGER}, #{purchaseId,jdbcType=INTEGER},
+      #{purchaseCode,jdbcType=VARCHAR}, #{purchaseRow,jdbcType=INTEGER}, #{commodityId,jdbcType=INTEGER},
+      #{commodityName,jdbcType=VARCHAR}, #{commodityCode,jdbcType=VARCHAR}, #{skuId,jdbcType=INTEGER},
+      #{skuCode,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR}, #{predictReceiveLocation,jdbcType=INTEGER},
+      #{predictReceiveLocationCode,jdbcType=VARCHAR}, #{totalWeight,jdbcType=DOUBLE},
+      #{totalNetWeight,jdbcType=DOUBLE}, #{totalVolumn,jdbcType=DOUBLE}, #{unit,jdbcType=VARCHAR},
+      #{isChecked,jdbcType=BIT}, #{receiveTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},
+      #{isPlate,jdbcType=BIT}, #{isReceived,jdbcType=BIT}, #{isPackaged,jdbcType=BIT},
+      #{productCompany,jdbcType=VARCHAR}, #{productTime,jdbcType=TIMESTAMP}, #{productBatch,jdbcType=VARCHAR},
+      #{containerId,jdbcType=INTEGER}, #{containerCode,jdbcType=VARCHAR}, #{containerName,jdbcType=VARCHAR},
+      #{containerBarcode,jdbcType=VARCHAR}, #{num,jdbcType=DOUBLE}, #{receivedNum,jdbcType=DOUBLE},
+      #{inboundTraceCode,jdbcType=VARCHAR}, #{inventoryId,jdbcType=INTEGER}, #{stackId,jdbcType=INTEGER},
+      #{stackCode,jdbcType=VARCHAR}, #{stackName,jdbcType=VARCHAR}, #{stackBarcode,jdbcType=VARCHAR},
+      #{customId,jdbcType=INTEGER}, #{customCode,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR},
+      #{supplierName,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER}, #{supplierCode,jdbcType=VARCHAR},
+      #{skuSplitContainerNum,jdbcType=INTEGER}, #{isOnshelf,jdbcType=BIT}, #{isAudit,jdbcType=BIT},
+      #{isSingle,jdbcType=BIT}, #{sourceType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.InboundPlanDetail">
+    insert into inbound_plan_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="planId != null">
+        plan_id,
+      </if>
+      <if test="purchaseId != null">
+        purchase_id,
+      </if>
+      <if test="purchaseCode != null">
+        purchase_code,
+      </if>
+      <if test="purchaseRow != null">
+        purchase_row,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="commodityName != null">
+        commodity_name,
+      </if>
+      <if test="commodityCode != null">
+        commodity_code,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="skuCode != null">
+        SKU_code,
+      </if>
+      <if test="skuName != null">
+        SKU_name,
+      </if>
+      <if test="predictReceiveLocation != null">
+        predict_receive_location,
+      </if>
+      <if test="predictReceiveLocationCode != null">
+        predict_receive_location_code,
+      </if>
+      <if test="totalWeight != null">
+        total_weight,
+      </if>
+      <if test="totalNetWeight != null">
+        total_net_weight,
+      </if>
+      <if test="totalVolumn != null">
+        total_volumn,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="isChecked != null">
+        is_checked,
+      </if>
+      <if test="receiveTime != null">
+        receive_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="isPlate != null">
+        is_plate,
+      </if>
+      <if test="isReceived != null">
+        is_received,
+      </if>
+      <if test="isPackaged != null">
+        is_packaged,
+      </if>
+      <if test="productCompany != null">
+        product_company,
+      </if>
+      <if test="productTime != null">
+        product_time,
+      </if>
+      <if test="productBatch != null">
+        product_batch,
+      </if>
+      <if test="containerId != null">
+        container_id,
+      </if>
+      <if test="containerCode != null">
+        container_code,
+      </if>
+      <if test="containerName != null">
+        container_name,
+      </if>
+      <if test="containerBarcode != null">
+        container_barcode,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="receivedNum != null">
+        received_num,
+      </if>
+      <if test="inboundTraceCode != null">
+        inbound_trace_code,
+      </if>
+      <if test="inventoryId != null">
+        inventory_id,
+      </if>
+      <if test="stackId != null">
+        stack_id,
+      </if>
+      <if test="stackCode != null">
+        stack_code,
+      </if>
+      <if test="stackName != null">
+        stack_name,
+      </if>
+      <if test="stackBarcode != null">
+        stack_barcode,
+      </if>
+      <if test="customId != null">
+        custom_id,
+      </if>
+      <if test="customCode != null">
+        custom_code,
+      </if>
+      <if test="customName != null">
+        custom_name,
+      </if>
+      <if test="supplierName != null">
+        supplier_name,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="supplierCode != null">
+        supplier_code,
+      </if>
+      <if test="skuSplitContainerNum != null">
+        sku_split_container_num,
+      </if>
+      <if test="isOnshelf != null">
+        is_onshelf,
+      </if>
+      <if test="isAudit != null">
+        is_audit,
+      </if>
+      <if test="isSingle != null">
+        is_single,
+      </if>
+      <if test="sourceType != null">
+        source_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="planId != null">
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseId != null">
+        #{purchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseCode != null">
+        #{purchaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseRow != null">
+        #{purchaseRow,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCode != null">
+        #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="predictReceiveLocation != null">
+        #{predictReceiveLocation,jdbcType=INTEGER},
+      </if>
+      <if test="predictReceiveLocationCode != null">
+        #{predictReceiveLocationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="totalWeight != null">
+        #{totalWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="totalNetWeight != null">
+        #{totalNetWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="totalVolumn != null">
+        #{totalVolumn,jdbcType=DOUBLE},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="isChecked != null">
+        #{isChecked,jdbcType=BIT},
+      </if>
+      <if test="receiveTime != null">
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isPlate != null">
+        #{isPlate,jdbcType=BIT},
+      </if>
+      <if test="isReceived != null">
+        #{isReceived,jdbcType=BIT},
+      </if>
+      <if test="isPackaged != null">
+        #{isPackaged,jdbcType=BIT},
+      </if>
+      <if test="productCompany != null">
+        #{productCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="productTime != null">
+        #{productTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productBatch != null">
+        #{productBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerCode != null">
+        #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerName != null">
+        #{containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerBarcode != null">
+        #{containerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="receivedNum != null">
+        #{receivedNum,jdbcType=DOUBLE},
+      </if>
+      <if test="inboundTraceCode != null">
+        #{inboundTraceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryId != null">
+        #{inventoryId,jdbcType=INTEGER},
+      </if>
+      <if test="stackId != null">
+        #{stackId,jdbcType=INTEGER},
+      </if>
+      <if test="stackCode != null">
+        #{stackCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stackName != null">
+        #{stackName,jdbcType=VARCHAR},
+      </if>
+      <if test="stackBarcode != null">
+        #{stackBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="customCode != null">
+        #{customCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierCode != null">
+        #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSplitContainerNum != null">
+        #{skuSplitContainerNum,jdbcType=INTEGER},
+      </if>
+      <if test="isOnshelf != null">
+        #{isOnshelf,jdbcType=BIT},
+      </if>
+      <if test="isAudit != null">
+        #{isAudit,jdbcType=BIT},
+      </if>
+      <if test="isSingle != null">
+        #{isSingle,jdbcType=BIT},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.InboundPlanDetail">
+    update inbound_plan_detail
+    <set>
+      <if test="planId != null">
+        plan_id = #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseId != null">
+        purchase_id = #{purchaseId,jdbcType=INTEGER},
+      </if>
+      <if test="purchaseCode != null">
+        purchase_code = #{purchaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseRow != null">
+        purchase_row = #{purchaseRow,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null">
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCode != null">
+        commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        SKU_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        SKU_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="predictReceiveLocation != null">
+        predict_receive_location = #{predictReceiveLocation,jdbcType=INTEGER},
+      </if>
+      <if test="predictReceiveLocationCode != null">
+        predict_receive_location_code = #{predictReceiveLocationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="totalWeight != null">
+        total_weight = #{totalWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="totalNetWeight != null">
+        total_net_weight = #{totalNetWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="totalVolumn != null">
+        total_volumn = #{totalVolumn,jdbcType=DOUBLE},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="isChecked != null">
+        is_checked = #{isChecked,jdbcType=BIT},
+      </if>
+      <if test="receiveTime != null">
+        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isPlate != null">
+        is_plate = #{isPlate,jdbcType=BIT},
+      </if>
+      <if test="isReceived != null">
+        is_received = #{isReceived,jdbcType=BIT},
+      </if>
+      <if test="isPackaged != null">
+        is_packaged = #{isPackaged,jdbcType=BIT},
+      </if>
+      <if test="productCompany != null">
+        product_company = #{productCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="productTime != null">
+        product_time = #{productTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productBatch != null">
+        product_batch = #{productBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        container_id = #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerCode != null">
+        container_code = #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerName != null">
+        container_name = #{containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerBarcode != null">
+        container_barcode = #{containerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="receivedNum != null">
+        received_num = #{receivedNum,jdbcType=DOUBLE},
+      </if>
+      <if test="inboundTraceCode != null">
+        inbound_trace_code = #{inboundTraceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryId != null">
+        inventory_id = #{inventoryId,jdbcType=INTEGER},
+      </if>
+      <if test="stackId != null">
+        stack_id = #{stackId,jdbcType=INTEGER},
+      </if>
+      <if test="stackCode != null">
+        stack_code = #{stackCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stackName != null">
+        stack_name = #{stackName,jdbcType=VARCHAR},
+      </if>
+      <if test="stackBarcode != null">
+        stack_barcode = #{stackBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        custom_id = #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="customCode != null">
+        custom_code = #{customCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        custom_name = #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        supplier_name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierCode != null">
+        supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSplitContainerNum != null">
+        sku_split_container_num = #{skuSplitContainerNum,jdbcType=INTEGER},
+      </if>
+      <if test="isOnshelf != null">
+        is_onshelf = #{isOnshelf,jdbcType=BIT},
+      </if>
+      <if test="isAudit != null">
+        is_audit = #{isAudit,jdbcType=BIT},
+      </if>
+      <if test="isSingle != null">
+        is_single = #{isSingle,jdbcType=BIT},
+      </if>
+      <if test="sourceType != null">
+        source_type = #{sourceType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.InboundPlanDetail">
+    update inbound_plan_detail
+    set plan_id = #{planId,jdbcType=INTEGER},
+      purchase_id = #{purchaseId,jdbcType=INTEGER},
+      purchase_code = #{purchaseCode,jdbcType=VARCHAR},
+      purchase_row = #{purchaseRow,jdbcType=INTEGER},
+      commodity_id = #{commodityId,jdbcType=INTEGER},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      sku_id = #{skuId,jdbcType=INTEGER},
+      SKU_code = #{skuCode,jdbcType=VARCHAR},
+      SKU_name = #{skuName,jdbcType=VARCHAR},
+      predict_receive_location = #{predictReceiveLocation,jdbcType=INTEGER},
+      predict_receive_location_code = #{predictReceiveLocationCode,jdbcType=VARCHAR},
+      total_weight = #{totalWeight,jdbcType=DOUBLE},
+      total_net_weight = #{totalNetWeight,jdbcType=DOUBLE},
+      total_volumn = #{totalVolumn,jdbcType=DOUBLE},
+      unit = #{unit,jdbcType=VARCHAR},
+      is_checked = #{isChecked,jdbcType=BIT},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_plate = #{isPlate,jdbcType=BIT},
+      is_received = #{isReceived,jdbcType=BIT},
+      is_packaged = #{isPackaged,jdbcType=BIT},
+      product_company = #{productCompany,jdbcType=VARCHAR},
+      product_time = #{productTime,jdbcType=TIMESTAMP},
+      product_batch = #{productBatch,jdbcType=VARCHAR},
+      container_id = #{containerId,jdbcType=INTEGER},
+      container_code = #{containerCode,jdbcType=VARCHAR},
+      container_name = #{containerName,jdbcType=VARCHAR},
+      container_barcode = #{containerBarcode,jdbcType=VARCHAR},
+      num = #{num,jdbcType=DOUBLE},
+      received_num = #{receivedNum,jdbcType=DOUBLE},
+      inbound_trace_code = #{inboundTraceCode,jdbcType=VARCHAR},
+      inventory_id = #{inventoryId,jdbcType=INTEGER},
+      stack_id = #{stackId,jdbcType=INTEGER},
+      stack_code = #{stackCode,jdbcType=VARCHAR},
+      stack_name = #{stackName,jdbcType=VARCHAR},
+      stack_barcode = #{stackBarcode,jdbcType=VARCHAR},
+      custom_id = #{customId,jdbcType=INTEGER},
+      custom_code = #{customCode,jdbcType=VARCHAR},
+      custom_name = #{customName,jdbcType=VARCHAR},
+      supplier_name = #{supplierName,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      sku_split_container_num = #{skuSplitContainerNum,jdbcType=INTEGER},
+      is_onshelf = #{isOnshelf,jdbcType=BIT},
+      is_audit = #{isAudit,jdbcType=BIT},
+      is_single = #{isSingle,jdbcType=BIT},
+      source_type = #{sourceType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from inbound_plan_detail
+    where 1=1
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseId != null">
+      and purchase_id = #{pojo.purchaseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseCode != null">
+      and purchase_code like concat('%',#{pojo.purchaseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.purchaseRow != null">
+      and purchase_row = #{pojo.purchaseRow,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityName != null">
+      and commodity_name like concat('%',#{pojo.commodityName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat('%',#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuCode != null">
+      and SKU_code like concat('%',#{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuName != null">
+      and SKU_name like concat('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.predictReceiveLocation != null">
+      and predict_receive_location = #{pojo.predictReceiveLocation,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictReceiveLocationCode != null">
+      and predict_receive_location_code = #{pojo.predictReceiveLocationCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.totalWeight != null">
+      and total_weight = #{pojo.totalWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalNetWeight != null">
+      and total_net_weight = #{pojo.totalNetWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalVolumn != null">
+      and total_volumn = #{pojo.totalVolumn,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.unit != null">
+      and unit = #{pojo.unit,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isChecked != null">
+      and is_checked = #{pojo.isChecked,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.receiveTime != null">
+      and receive_time = #{pojo.receiveTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isPlate != null">
+      and is_plate = #{pojo.isPlate,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isReceived != null">
+      and is_received = #{pojo.isReceived,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isPackaged != null">
+      and is_packaged = #{pojo.isPackaged,jdbcType=BIT}
+    </if>
+    <if test="pojo.productCompany != null">
+      and product_company like concat('%',#{pojo.productCompany,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.productTime != null">
+      and product_time = #{pojo.productTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="pojo.productBatch != null">
+      and product_batch like concat('%',#{pojo.productBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat('%',#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.num != null">
+      and num = #{pojo.num,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedNum != null">
+      and received_num = #{pojo.receivedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.inboundTraceCode != null">
+      and inbound_trace_code like concat(#{pojo.inboundTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inventoryId != null">
+      and inventory_id = #{pojo.inventoryId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackId != null">
+      and stack_id = #{pojo.stackId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackCode != null">
+      and stack_code like concat(#{pojo.stackCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackName != null">
+      and stack_name like concat(#{pojo.stackName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackBarcode != null">
+      and stack_barcode like concat(#{pojo.stackBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat(#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat(#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierName != null">
+      and supplier_name like concat(#{pojo.supplierName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierId != null">
+      and supplier_id = #{pojo.supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.supplierCode != null">
+      and supplier_code like concat(#{pojo.supplierCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuSplitContainerNum != null">
+      sku_split_container_num = #{pojo.skuSplitContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isOnshelf != null">
+      and is_onshelf = #{pojo.isOnshelf,jdbcType=BIT}
+    </if>
+    <if test="pojo.isAudit != null">
+      and is_audit = #{pojo.isAudit,jdbcType=BIT}
+    </if>
+    <if test="pojo.isSingle != null">
+      and is_single = #{pojo.isSingle,jdbcType=BIT}
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="selectByIsPackagedOrIsPlate" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from inbound_plan_detail
+    where  (is_plate = #{pojo.isPlate,jdbcType=TINYINT}
+    or is_packaged = #{pojo.isPackaged,jdbcType=BIT})
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseId != null">
+      and purchase_id = #{pojo.purchaseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseCode != null">
+      and purchase_code like concat('%',#{pojo.purchaseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.purchaseRow != null">
+      and purchase_row = #{pojo.purchaseRow,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityName != null">
+      and commodity_name like concat('%',#{pojo.commodityName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat('%',#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuCode != null">
+      and SKU_code like concat('%',#{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuName != null">
+      and SKU_name like concat('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.predictReceiveLocation != null">
+      and predict_receive_location = #{pojo.predictReceiveLocation,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictReceiveLocationCode != null">
+      and predict_receive_location_code = #{pojo.predictReceiveLocationCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.totalWeight != null">
+      and total_weight = #{pojo.totalWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalNetWeight != null">
+      and total_net_weight = #{pojo.totalNetWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalVolumn != null">
+      and total_volumn = #{pojo.totalVolumn,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.unit != null">
+      and unit = #{pojo.unit,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isChecked != null">
+      and is_checked = #{pojo.isChecked,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.receiveTime != null">
+      and receive_time = #{pojo.receiveTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isReceived != null">
+      and is_received = #{pojo.isReceived,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.productCompany != null">
+      and product_company like concat('%',#{pojo.productCompany,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.productTime != null">
+      and product_time = #{pojo.productTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="pojo.productBatch != null">
+      and product_batch like concat('%',#{pojo.productBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat('%',#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.num != null">
+      and num = #{pojo.num,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedNum != null">
+      and received_num = #{pojo.receivedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.inboundTraceCode != null">
+      and inbound_trace_code like concat(#{pojo.inboundTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inventoryId != null">
+      and inventory_id = #{pojo.inventoryId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackId != null">
+      and stack_id = #{pojo.stackId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackCode != null">
+      and stack_code like concat(#{pojo.stackCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackName != null">
+      and stack_name like concat(#{pojo.stackName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackBarcode != null">
+      and stack_barcode like concat(#{pojo.stackBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat(#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat(#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierName != null">
+      and supplier_name like concat(#{pojo.supplierName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierId != null">
+      and supplier_id = #{pojo.supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.supplierCode != null">
+      and supplier_code like concat(#{pojo.supplierCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuSplitContainerNum != null">
+      sku_split_container_num = #{pojo.skuSplitContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isOnshelf != null">
+      and is_onshelf = #{pojo.isOnshelf,jdbcType=BIT}
+    </if>
+    <if test="pojo.isAudit != null">
+      and is_audit = #{pojo.isAudit,jdbcType=BIT}
+    </if>
+    <if test="pojo.isSingle != null">
+      and is_single = #{pojo.isSingle,jdbcType=BIT}
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectByIsPackagedOrIsPlateNum" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from inbound_plan_detail
+    where  (is_plate = #{pojo.isPlate,jdbcType=TINYINT}
+    or is_packaged = #{pojo.isPackaged,jdbcType=BIT})
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseId != null">
+      and purchase_id = #{pojo.purchaseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseCode != null">
+      and purchase_code like concat('%',#{pojo.purchaseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.purchaseRow != null">
+      and purchase_row = #{pojo.purchaseRow,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityName != null">
+      and commodity_name like concat('%',#{pojo.commodityName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat('%',#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuCode != null">
+      and SKU_code like concat('%',#{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuName != null">
+      and SKU_name like concat('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.predictReceiveLocation != null">
+      and predict_receive_location = #{pojo.predictReceiveLocation,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictReceiveLocationCode != null">
+      and predict_receive_location_code = #{pojo.predictReceiveLocationCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.totalWeight != null">
+      and total_weight = #{pojo.totalWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalNetWeight != null">
+      and total_net_weight = #{pojo.totalNetWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalVolumn != null">
+      and total_volumn = #{pojo.totalVolumn,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.unit != null">
+      and unit = #{pojo.unit,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isChecked != null">
+      and is_checked = #{pojo.isChecked,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.receiveTime != null">
+      and receive_time = #{pojo.receiveTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isReceived != null">
+      and is_received = #{pojo.isReceived,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.productCompany != null">
+      and product_company like concat('%',#{pojo.productCompany,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.productTime != null">
+      and product_time = #{pojo.productTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="pojo.productBatch != null">
+      and product_batch like concat('%',#{pojo.productBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat('%',#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.num != null">
+      and num = #{pojo.num,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedNum != null">
+      and received_num = #{pojo.receivedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.inboundTraceCode != null">
+      and inbound_trace_code like concat(#{pojo.inboundTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inventoryId != null">
+      and inventory_id = #{pojo.inventoryId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackId != null">
+      and stack_id = #{pojo.stackId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackCode != null">
+      and stack_code like concat(#{pojo.stackCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackName != null">
+      and stack_name like concat(#{pojo.stackName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackBarcode != null">
+      and stack_barcode like concat(#{pojo.stackBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat(#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat(#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierName != null">
+      and supplier_name like concat(#{pojo.supplierName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierId != null">
+      and supplier_id = #{pojo.supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.supplierCode != null">
+      and supplier_code like concat(#{pojo.supplierCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuSplitContainerNum != null">
+      sku_split_container_num = #{pojo.skuSplitContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isOnshelf != null">
+      and is_onshelf = #{pojo.isOnshelf,jdbcType=BIT}
+    </if>
+    <if test="pojo.isAudit != null">
+      and is_audit = #{pojo.isAudit,jdbcType=BIT}
+    </if>
+    <if test="pojo.isSingle != null">
+      and is_single = #{pojo.isSingle,jdbcType=BIT}
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from inbound_plan_detail
+    where 1=1
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseId != null">
+      and purchase_id = #{pojo.purchaseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseCode != null">
+      and purchase_code like concat('%',#{pojo.purchaseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.purchaseRow != null">
+      and purchase_row = #{pojo.purchaseRow,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityName != null">
+      and commodity_name like concat('%',#{pojo.commodityName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat('%',#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuCode != null">
+      and SKU_code like concat('%',#{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuName != null">
+      and SKU_name like concat('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.predictReceiveLocation != null">
+      and predict_receive_location = #{pojo.predictReceiveLocation,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictReceiveLocationCode != null">
+      and predict_receive_location_code = #{pojo.predictReceiveLocationCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.totalWeight != null">
+      and total_weight = #{pojo.totalWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalNetWeight != null">
+      and total_net_weight = #{pojo.totalNetWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalVolumn != null">
+      and total_volumn = #{pojo.totalVolumn,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.unit != null">
+      and unit = #{pojo.unit,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isChecked != null">
+      and is_checked = #{pojo.isChecked,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.receiveTime != null">
+      and receive_time = #{pojo.receiveTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isPlate != null">
+      and is_plate = #{pojo.isPlate,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isReceived != null">
+      and is_received = #{pojo.isReceived,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isPackaged != null">
+      and is_packaged = #{pojo.isPackaged,jdbcType=BIT}
+    </if>
+    <if test="pojo.productCompany != null">
+      and product_company like concat('%',#{pojo.productCompany,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.productTime != null">
+      and product_time = #{pojo.productTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="pojo.productBatch != null">
+      and product_batch like concat('%',#{pojo.productBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat('%',#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.num != null">
+      and num = #{pojo.num,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedNum != null">
+      and received_num = #{pojo.receivedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.inboundTraceCode != null">
+      and inbound_trace_code like concat(#{pojo.inboundTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inventoryId != null">
+      and inventory_id = #{pojo.inventoryId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackId != null">
+      and stack_id = #{pojo.stackId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackCode != null">
+      and stack_code like concat(#{pojo.stackCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackName != null">
+      and stack_name like concat(#{pojo.stackName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackBarcode != null">
+      and stack_barcode like concat(#{pojo.stackBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat(#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat(#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierName != null">
+      and supplier_name like concat(#{pojo.supplierName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierId != null">
+      and supplier_id = #{pojo.supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.supplierCode != null">
+      and supplier_code like concat(#{pojo.supplierCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuSplitContainerNum != null">
+      sku_split_container_num = #{pojo.skuSplitContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isOnshelf != null">
+      and is_onshelf = #{pojo.isOnshelf,jdbcType=BIT}
+    </if>
+    <if test="pojo.isAudit != null">
+      and is_audit = #{pojo.isAudit,jdbcType=BIT}
+    </if>
+    <if test="pojo.isSingle != null">
+      and is_single = #{pojo.isSingle,jdbcType=BIT}
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+  </select>
+  <delete id="deleteByPlanId" parameterType="java.lang.Integer">
+    delete from inbound_plan_detail
+    where plan_id=#{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPlanId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from inbound_plan_detail
+    where plan_id=#{id,jdbcType=INTEGER}
+  </select>
+  <update id="updateByPlanId" parameterType="com.bupt.pojo.InboundPlanDetail">
+    update inbound_plan_detail
+    set is_received = 1,received_num = num
+    where container_barcode = #{containerBarcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPlanIdSku" parameterType="com.bupt.pojo.InboundPlanDetail">
+    update inbound_plan_detail
+    set is_received = 1,received_num = #{receivedNum,jdbcType=DOUBLE}
+    where sku_code = #{skuCode,jdbcType=VARCHAR} and plan_id = #{planId,jdbcType=INTEGER}
+  </update>
+  <update id="updateIsReceived" parameterType="com.bupt.pojo.InboundPlan">
+    update inbound_plan_detail
+    set received_num = num,
+        receive_time = #{createTime,jdbcType=TIMESTAMP},
+        is_received=1
+    where plan_id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="checkReceived" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from inbound_plan_detail
+    where plan_id = #{id,jdbcType=INTEGER} and is_received = 0
+  </select>
+  <select id="selectByInboundTraceCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from inbound_plan_detail
+    where inbound_trace_code = #{traceCode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByContainerBarcode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from inbound_plan_detail
+    where container_barcode = #{code,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteBySplitupOne" parameterType="java.lang.Integer">
+    delete from
+      inbound_plan_detail
+    where plan_id = #{id,jdbcType=INTEGER} and sku_split_container_num > 1
+  </delete>
+  <select id="selectByPlanIdSku" parameterType="inboundPlanDetail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from inbound_plan_detail
+    where plan_id = #{planId,jdbcType=INTEGER} and sku_code = #{skuCode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectSkuSum" parameterType="inboundPlanDetail" resultMap="BaseResultMap">
+    SELECT
+      sku_id,sku_name,sku_code,sum(total_volumn),sum(total_weight),SUM(total_net_weight),SUM(num)
+    from inbound_plan_detail GROUP BY sku_id;
+  </select>
+  <select id="SumInboundNum" parameterType="com.bupt.DTO.ScreenDTO" resultType="com.bupt.DTO.reportForm.ReportSum">
+    select
+    sum(num) as inboundSum,sum(received_num) as receiveSum
+    from (select id from inbound_plan where 1=1
+    <if test="startTime!= null">
+      and create_time >= #{startTime}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime}>=create_time
+    </if>
+        ) b left join inbound_plan_detail temp
+    on b.id = plan_id
+    where 1=1
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseId != null">
+      and purchase_id = #{pojo.purchaseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseCode != null">
+      and purchase_code like concat('%',#{pojo.purchaseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.purchaseRow != null">
+      and purchase_row = #{pojo.purchaseRow,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityName != null">
+      and commodity_name like concat('%',#{pojo.commodityName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat('%',#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuCode != null">
+      and SKU_code like concat('%',#{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuName != null">
+      and SKU_name like concat('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.predictReceiveLocation != null">
+      and predict_receive_location = #{pojo.predictReceiveLocation,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictReceiveLocationCode != null">
+      and predict_receive_location_code = #{pojo.predictReceiveLocationCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.totalWeight != null">
+      and total_weight = #{pojo.totalWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalNetWeight != null">
+      and total_net_weight = #{pojo.totalNetWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalVolumn != null">
+      and total_volumn = #{pojo.totalVolumn,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.unit != null">
+      and unit = #{pojo.unit,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isChecked != null">
+      and is_checked = #{pojo.isChecked,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.receiveTime != null">
+      and receive_time = #{pojo.receiveTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isPlate != null">
+      and is_plate = #{pojo.isPlate,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isReceived != null">
+      and is_received = #{pojo.isReceived,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isPackaged != null">
+      and is_packaged = #{pojo.isPackaged,jdbcType=BIT}
+    </if>
+    <if test="pojo.productCompany != null">
+      and product_company like concat('%',#{pojo.productCompany,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.productTime != null">
+      and product_time = #{pojo.productTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="pojo.productBatch != null">
+      and product_batch like concat('%',#{pojo.productBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat('%',#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.num != null">
+      and num = #{pojo.num,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedNum != null">
+      and received_num = #{pojo.receivedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.inboundTraceCode != null">
+      and inbound_trace_code like concat(#{pojo.inboundTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inventoryId != null">
+      and inventory_id = #{pojo.inventoryId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackId != null">
+      and stack_id = #{pojo.stackId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackCode != null">
+      and stack_code like concat(#{pojo.stackCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackName != null">
+      and stack_name like concat(#{pojo.stackName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackBarcode != null">
+      and stack_barcode like concat(#{pojo.stackBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat(#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat(#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierName != null">
+      and supplier_name like concat(#{pojo.supplierName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierId != null">
+      and supplier_id = #{pojo.supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.supplierCode != null">
+      and supplier_code like concat(#{pojo.supplierCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuSplitContainerNum != null">
+      sku_split_container_num = #{pojo.skuSplitContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isOnshelf != null">
+      and is_onshelf = #{pojo.isOnshelf,jdbcType=BIT}
+    </if>
+    <if test="pojo.isAudit != null">
+      and is_audit = #{pojo.isAudit,jdbcType=BIT}
+    </if>
+    <if test="pojo.isSingle != null">
+      and is_single = #{pojo.isSingle,jdbcType=BIT}
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="screenInbound" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from inbound_plan_detail
+    where 1=1 and exists (select * from inbound_plan where 1=1
+    <if test="startTime!= null">
+      and create_time >= #{startTime}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime}>=create_time
+    </if> and inbound_plan.id=inbound_plan_detail.plan_id)
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseId != null">
+      and purchase_id = #{pojo.purchaseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.purchaseCode != null">
+      and purchase_code like concat('%',#{pojo.purchaseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.purchaseRow != null">
+      and purchase_row = #{pojo.purchaseRow,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityName != null">
+      and commodity_name like concat('%',#{pojo.commodityName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat('%',#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuCode != null">
+      and SKU_code like concat('%',#{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuName != null">
+      and SKU_name like concat('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.predictReceiveLocation != null">
+      and predict_receive_location = #{pojo.predictReceiveLocation,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictReceiveLocationCode != null">
+      and predict_receive_location_code = #{pojo.predictReceiveLocationCode,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.totalWeight != null">
+      and total_weight = #{pojo.totalWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalNetWeight != null">
+      and total_net_weight = #{pojo.totalNetWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalVolumn != null">
+      and total_volumn = #{pojo.totalVolumn,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.unit != null">
+      and unit = #{pojo.unit,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isChecked != null">
+      and is_checked = #{pojo.isChecked,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.receiveTime != null">
+      and receive_time = #{pojo.receiveTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isPlate != null">
+      and is_plate = #{pojo.isPlate,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isReceived != null">
+      and is_received = #{pojo.isReceived,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isPackaged != null">
+      and is_packaged = #{pojo.isPackaged,jdbcType=BIT}
+    </if>
+    <if test="pojo.productCompany != null">
+      and product_company like concat('%',#{pojo.productCompany,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.productTime != null">
+      and product_time = #{pojo.productTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="pojo.productBatch != null">
+      and product_batch like concat('%',#{pojo.productBatch,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat('%',#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.num != null">
+      and num = #{pojo.num,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.receivedNum != null">
+      and received_num = #{pojo.receivedNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.inboundTraceCode != null">
+      and inbound_trace_code like concat(#{pojo.inboundTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inventoryId != null">
+      and inventory_id = #{pojo.inventoryId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackId != null">
+      and stack_id = #{pojo.stackId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.stackCode != null">
+      and stack_code like concat(#{pojo.stackCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackName != null">
+      and stack_name like concat(#{pojo.stackName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.stackBarcode != null">
+      and stack_barcode like concat(#{pojo.stackBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat(#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat(#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierName != null">
+      and supplier_name like concat(#{pojo.supplierName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.supplierId != null">
+      and supplier_id = #{pojo.supplierId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.supplierCode != null">
+      and supplier_code like concat(#{pojo.supplierCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuSplitContainerNum != null">
+      sku_split_container_num = #{pojo.skuSplitContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isOnshelf != null">
+      and is_onshelf = #{pojo.isOnshelf,jdbcType=BIT}
+    </if>
+    <if test="pojo.isAudit != null">
+      and is_audit = #{pojo.isAudit,jdbcType=BIT}
+    </if>
+    <if test="pojo.isSingle != null">
+      and is_single = #{pojo.isSingle,jdbcType=BIT}
+    </if>
+    <if test="pojo.sourceType != null">
+      and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+  </select>
+
+</mapper>

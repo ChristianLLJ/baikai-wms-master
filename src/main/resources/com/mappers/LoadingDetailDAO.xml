@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.LoadingDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.LoadingDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="route" jdbcType="VARCHAR" property="route" />
+    <result column="station" jdbcType="VARCHAR" property="station" />
+    <result column="custom_name" jdbcType="VARCHAR" property="customName" />
+    <result column="custom_id" jdbcType="INTEGER" property="customId" />
+    <result column="receiver_id" jdbcType="INTEGER" property="receiverId" />
+    <result column="recerver_name" jdbcType="VARCHAR" property="recerverName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="despatch_id" jdbcType="INTEGER" property="despatchId" />
+    <result column="despatch_code" jdbcType="VARCHAR" property="despatchCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, route, station, custom_name, custom_id, receiver_id, recerver_name, 
+    create_time, despatch_id, despatch_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from loading_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from loading_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.LoadingDetail">
+    insert into loading_detail (id, pid, route, 
+      station, custom_name, custom_id, 
+      receiver_id, recerver_name, create_time, 
+      despatch_id, despatch_code)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{route,jdbcType=VARCHAR}, 
+      #{station,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR}, #{customId,jdbcType=INTEGER}, 
+      #{receiverId,jdbcType=INTEGER}, #{recerverName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{despatchId,jdbcType=INTEGER}, #{despatchCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.LoadingDetail">
+    insert into loading_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="route != null">
+        route,
+      </if>
+      <if test="station != null">
+        station,
+      </if>
+      <if test="customName != null">
+        custom_name,
+      </if>
+      <if test="customId != null">
+        custom_id,
+      </if>
+      <if test="receiverId != null">
+        receiver_id,
+      </if>
+      <if test="recerverName != null">
+        recerver_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="despatchId != null">
+        despatch_id,
+      </if>
+      <if test="despatchCode != null">
+        despatch_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="route != null">
+        #{route,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null">
+        #{station,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverId != null">
+        #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="recerverName != null">
+        #{recerverName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="despatchId != null">
+        #{despatchId,jdbcType=INTEGER},
+      </if>
+      <if test="despatchCode != null">
+        #{despatchCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.LoadingDetail">
+    update loading_detail
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="route != null">
+        route = #{route,jdbcType=VARCHAR},
+      </if>
+      <if test="station != null">
+        station = #{station,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        custom_name = #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        custom_id = #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverId != null">
+        receiver_id = #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="recerverName != null">
+        recerver_name = #{recerverName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="despatchId != null">
+        despatch_id = #{despatchId,jdbcType=INTEGER},
+      </if>
+      <if test="despatchCode != null">
+        despatch_code = #{despatchCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from loading_detail
+        <where>
+            1=1
+            <if test="pojo.pid != null">
+                and pid = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.route != null">
+                and route = #{pojo.route,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.station != null">
+                and station = #{pojo.station,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customName != null">
+                and custom_name like CONCAT('%', #{pojo.customName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.customId != null">
+                and custom_id = #{pojo.customId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.receiverId != null">
+                and receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.recerverName != null">
+                and recerver_name like CONCAT('%', #{pojo.recerverName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime != null">
+                and create_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=create_time
+            </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from loading_detail
+        <where>
+            1=1
+            <if test="pojo.pid != null">
+                and pid = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.route != null">
+                and route = #{pojo.route,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.station != null">
+                and station = #{pojo.station,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.customName != null">
+                and custom_name like CONCAT('%', #{pojo.customName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.customId != null">
+                and custom_id = #{pojo.customId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.receiverId != null">
+                and receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.recerverName != null">
+                and recerver_name like CONCAT('%', #{pojo.recerverName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime != null">
+                and create_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=create_time
+            </if>
+        </where>
+        order by id desc
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+    <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from loading_detail
+        where pid = #{pid,jdbcType=INTEGER}
+    </select>
+</mapper>

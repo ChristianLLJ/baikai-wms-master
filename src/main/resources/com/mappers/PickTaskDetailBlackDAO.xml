@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.PickTaskDetailBlackDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.PickTaskDetailBlack">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="despatch_id" jdbcType="INTEGER" property="despatchId" />
+    <result column="row_no" jdbcType="INTEGER" property="rowNo" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="sku_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="receiver_id" jdbcType="INTEGER" property="receiverId" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="volume" jdbcType="DOUBLE" property="volume" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="area_name" jdbcType="VARCHAR" property="areaName" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="container_id" jdbcType="INTEGER" property="containerId" />
+    <result column="container_code" jdbcType="VARCHAR" property="containerCode" />
+    <result column="full_tag" jdbcType="BIT" property="fullTag" />
+    <result column="boxes_cnt" jdbcType="INTEGER" property="boxesCnt" />
+    <result column="inbox_cnt" jdbcType="INTEGER" property="inboxCnt" />
+    <result column="piece_cnt" jdbcType="INTEGER" property="pieceCnt" />
+    <result column="total_cnt" jdbcType="INTEGER" property="totalCnt" />
+    <result column="full_box_device_id" jdbcType="INTEGER" property="fullBoxDeviceId" />
+    <result column="fullbox_device" jdbcType="VARCHAR" property="fullboxDevice" />
+    <result column="piece_device_id" jdbcType="INTEGER" property="pieceDeviceId" />
+    <result column="piece_device" jdbcType="VARCHAR" property="pieceDevice" />
+    <result column="packing_device_id" jdbcType="INTEGER" property="packingDeviceId" />
+    <result column="packing_device" jdbcType="VARCHAR" property="packingDevice" />
+    <result column="pick_task_rule" jdbcType="VARCHAR" property="pickTaskRule" />
+    <result column="user_defined1" jdbcType="VARCHAR" property="userDefined1" />
+    <result column="user_defined2" jdbcType="VARCHAR" property="userDefined2" />
+    <result column="user_defined3" jdbcType="VARCHAR" property="userDefined3" />
+    <result column="is_picked" jdbcType="BIT" property="isPicked" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, pid, despatch_id, row_no, sku_id, sku_code, customer_id, customer_name, receiver_id, 
+    receiver_name, unit, volume, weight, warehouse_id, warehouse_code, warehouse_name, 
+    area_name, area_id, area_code, container_id, container_code, full_tag, boxes_cnt, 
+    inbox_cnt, piece_cnt, total_cnt, full_box_device_id, fullbox_device, piece_device_id, 
+    piece_device, packing_device_id, packing_device, pick_task_rule, user_defined1, user_defined2, 
+    user_defined3, is_picked, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pick_task_detail_black
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pick_task_detail_black
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.PickTaskDetailBlack">
+    insert into pick_task_detail_black (id, pid, despatch_id, 
+      row_no, sku_id, sku_code, 
+      customer_id, customer_name, receiver_id, 
+      receiver_name, unit, volume, 
+      weight, warehouse_id, warehouse_code, 
+      warehouse_name, area_name, area_id, 
+      area_code, container_id, container_code, 
+      full_tag, boxes_cnt, inbox_cnt, 
+      piece_cnt, total_cnt, full_box_device_id, 
+      fullbox_device, piece_device_id, piece_device, 
+      packing_device_id, packing_device, pick_task_rule, 
+      user_defined1, user_defined2, user_defined3, 
+      is_picked, create_time)
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{despatchId,jdbcType=INTEGER}, 
+      #{rowNo,jdbcType=INTEGER}, #{skuId,jdbcType=INTEGER}, #{skuCode,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=INTEGER}, #{customerName,jdbcType=VARCHAR}, #{receiverId,jdbcType=INTEGER}, 
+      #{receiverName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{volume,jdbcType=DOUBLE}, 
+      #{weight,jdbcType=DOUBLE}, #{warehouseId,jdbcType=INTEGER}, #{warehouseCode,jdbcType=VARCHAR}, 
+      #{warehouseName,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, #{areaId,jdbcType=INTEGER}, 
+      #{areaCode,jdbcType=VARCHAR}, #{containerId,jdbcType=INTEGER}, #{containerCode,jdbcType=VARCHAR}, 
+      #{fullTag,jdbcType=BIT}, #{boxesCnt,jdbcType=INTEGER}, #{inboxCnt,jdbcType=INTEGER}, 
+      #{pieceCnt,jdbcType=INTEGER}, #{totalCnt,jdbcType=INTEGER}, #{fullBoxDeviceId,jdbcType=INTEGER}, 
+      #{fullboxDevice,jdbcType=VARCHAR}, #{pieceDeviceId,jdbcType=INTEGER}, #{pieceDevice,jdbcType=VARCHAR}, 
+      #{packingDeviceId,jdbcType=INTEGER}, #{packingDevice,jdbcType=VARCHAR}, #{pickTaskRule,jdbcType=VARCHAR}, 
+      #{userDefined1,jdbcType=VARCHAR}, #{userDefined2,jdbcType=VARCHAR}, #{userDefined3,jdbcType=VARCHAR}, 
+      #{isPicked,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.PickTaskDetailBlack">
+    insert into pick_task_detail_black
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="despatchId != null">
+        despatch_id,
+      </if>
+      <if test="rowNo != null">
+        row_no,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="skuCode != null">
+        sku_code,
+      </if>
+      <if test="customerId != null">
+        customer_id,
+      </if>
+      <if test="customerName != null">
+        customer_name,
+      </if>
+      <if test="receiverId != null">
+        receiver_id,
+      </if>
+      <if test="receiverName != null">
+        receiver_name,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="areaName != null">
+        area_name,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="containerId != null">
+        container_id,
+      </if>
+      <if test="containerCode != null">
+        container_code,
+      </if>
+      <if test="fullTag != null">
+        full_tag,
+      </if>
+      <if test="boxesCnt != null">
+        boxes_cnt,
+      </if>
+      <if test="inboxCnt != null">
+        inbox_cnt,
+      </if>
+      <if test="pieceCnt != null">
+        piece_cnt,
+      </if>
+      <if test="totalCnt != null">
+        total_cnt,
+      </if>
+      <if test="fullBoxDeviceId != null">
+        full_box_device_id,
+      </if>
+      <if test="fullboxDevice != null">
+        fullbox_device,
+      </if>
+      <if test="pieceDeviceId != null">
+        piece_device_id,
+      </if>
+      <if test="pieceDevice != null">
+        piece_device,
+      </if>
+      <if test="packingDeviceId != null">
+        packing_device_id,
+      </if>
+      <if test="packingDevice != null">
+        packing_device,
+      </if>
+      <if test="pickTaskRule != null">
+        pick_task_rule,
+      </if>
+      <if test="userDefined1 != null">
+        user_defined1,
+      </if>
+      <if test="userDefined2 != null">
+        user_defined2,
+      </if>
+      <if test="userDefined3 != null">
+        user_defined3,
+      </if>
+      <if test="isPicked != null">
+        is_picked,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="despatchId != null">
+        #{despatchId,jdbcType=INTEGER},
+      </if>
+      <if test="rowNo != null">
+        #{rowNo,jdbcType=INTEGER},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverId != null">
+        #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerCode != null">
+        #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fullTag != null">
+        #{fullTag,jdbcType=BIT},
+      </if>
+      <if test="boxesCnt != null">
+        #{boxesCnt,jdbcType=INTEGER},
+      </if>
+      <if test="inboxCnt != null">
+        #{inboxCnt,jdbcType=INTEGER},
+      </if>
+      <if test="pieceCnt != null">
+        #{pieceCnt,jdbcType=INTEGER},
+      </if>
+      <if test="totalCnt != null">
+        #{totalCnt,jdbcType=INTEGER},
+      </if>
+      <if test="fullBoxDeviceId != null">
+        #{fullBoxDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="fullboxDevice != null">
+        #{fullboxDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="pieceDeviceId != null">
+        #{pieceDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="pieceDevice != null">
+        #{pieceDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="packingDeviceId != null">
+        #{packingDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="packingDevice != null">
+        #{packingDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="pickTaskRule != null">
+        #{pickTaskRule,jdbcType=VARCHAR},
+      </if>
+      <if test="userDefined1 != null">
+        #{userDefined1,jdbcType=VARCHAR},
+      </if>
+      <if test="userDefined2 != null">
+        #{userDefined2,jdbcType=VARCHAR},
+      </if>
+      <if test="userDefined3 != null">
+        #{userDefined3,jdbcType=VARCHAR},
+      </if>
+      <if test="isPicked != null">
+        #{isPicked,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.PickTaskDetailBlack">
+    update pick_task_detail_black
+    <set>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="despatchId != null">
+        despatch_id = #{despatchId,jdbcType=INTEGER},
+      </if>
+      <if test="rowNo != null">
+        row_no = #{rowNo,jdbcType=INTEGER},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null">
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="customerName != null">
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverId != null">
+        receiver_id = #{receiverId,jdbcType=INTEGER},
+      </if>
+      <if test="receiverName != null">
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        container_id = #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerCode != null">
+        container_code = #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fullTag != null">
+        full_tag = #{fullTag,jdbcType=BIT},
+      </if>
+      <if test="boxesCnt != null">
+        boxes_cnt = #{boxesCnt,jdbcType=INTEGER},
+      </if>
+      <if test="inboxCnt != null">
+        inbox_cnt = #{inboxCnt,jdbcType=INTEGER},
+      </if>
+      <if test="pieceCnt != null">
+        piece_cnt = #{pieceCnt,jdbcType=INTEGER},
+      </if>
+      <if test="totalCnt != null">
+        total_cnt = #{totalCnt,jdbcType=INTEGER},
+      </if>
+      <if test="fullBoxDeviceId != null">
+        full_box_device_id = #{fullBoxDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="fullboxDevice != null">
+        fullbox_device = #{fullboxDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="pieceDeviceId != null">
+        piece_device_id = #{pieceDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="pieceDevice != null">
+        piece_device = #{pieceDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="packingDeviceId != null">
+        packing_device_id = #{packingDeviceId,jdbcType=INTEGER},
+      </if>
+      <if test="packingDevice != null">
+        packing_device = #{packingDevice,jdbcType=VARCHAR},
+      </if>
+      <if test="pickTaskRule != null">
+        pick_task_rule = #{pickTaskRule,jdbcType=VARCHAR},
+      </if>
+      <if test="userDefined1 != null">
+        user_defined1 = #{userDefined1,jdbcType=VARCHAR},
+      </if>
+      <if test="userDefined2 != null">
+        user_defined2 = #{userDefined2,jdbcType=VARCHAR},
+      </if>
+      <if test="userDefined3 != null">
+        user_defined3 = #{userDefined3,jdbcType=VARCHAR},
+      </if>
+      <if test="isPicked != null">
+        is_picked = #{isPicked,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.PickTaskDetailBlack">
+    update pick_task_detail_black
+    set pid = #{pid,jdbcType=INTEGER},
+      despatch_id = #{despatchId,jdbcType=INTEGER},
+      row_no = #{rowNo,jdbcType=INTEGER},
+      sku_id = #{skuId,jdbcType=INTEGER},
+      sku_code = #{skuCode,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      receiver_id = #{receiverId,jdbcType=INTEGER},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      volume = #{volume,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=INTEGER},
+      area_code = #{areaCode,jdbcType=VARCHAR},
+      container_id = #{containerId,jdbcType=INTEGER},
+      container_code = #{containerCode,jdbcType=VARCHAR},
+      full_tag = #{fullTag,jdbcType=BIT},
+      boxes_cnt = #{boxesCnt,jdbcType=INTEGER},
+      inbox_cnt = #{inboxCnt,jdbcType=INTEGER},
+      piece_cnt = #{pieceCnt,jdbcType=INTEGER},
+      total_cnt = #{totalCnt,jdbcType=INTEGER},
+      full_box_device_id = #{fullBoxDeviceId,jdbcType=INTEGER},
+      fullbox_device = #{fullboxDevice,jdbcType=VARCHAR},
+      piece_device_id = #{pieceDeviceId,jdbcType=INTEGER},
+      piece_device = #{pieceDevice,jdbcType=VARCHAR},
+      packing_device_id = #{packingDeviceId,jdbcType=INTEGER},
+      packing_device = #{packingDevice,jdbcType=VARCHAR},
+      pick_task_rule = #{pickTaskRule,jdbcType=VARCHAR},
+      user_defined1 = #{userDefined1,jdbcType=VARCHAR},
+      user_defined2 = #{userDefined2,jdbcType=VARCHAR},
+      user_defined3 = #{userDefined3,jdbcType=VARCHAR},
+      is_picked = #{isPicked,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--新增  筛选 -->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pick_task_detail_black
+    <where>
+      1=1
+      <if test="pojo.pid != null">
+        and pid = #{pojo.pid,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.despatchId != null">
+        and despatch_id = #{pojo.despatchId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.rowNo != null">
+        and row_no = #{pojo.rowNo,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuId != null">
+        and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuCode != null">
+        and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.customerId != null">
+        and customer_id = #{pojo.customerId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.customerName != null">
+        and customer_name = #{pojo.customerName,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.receiverId != null">
+        and receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.receiverName != null">
+        and receiver_name like CONCAT('%',#{receiverName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.unit != null">
+        and unit = #{pojo.unit,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.warehouseCode != null">
+        and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.areaCode != null">
+        and area_code = #{pojo.areaCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.containerId != null">
+        and container_id = #{pojo.containerId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.fullTag != null">
+        and full_tag = #{pojo.fullTag,jdbcType=BIT}
+      </if>
+      <if test="pojo.pieceCnt != null">
+        and piece_cnt = #{pojo.pieceCnt,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.fullBoxDeviceId != null">
+        and full_box_device_id = #{pojo.fullBoxDeviceId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.fullboxDevice != null">
+        and fullbox_device = #{pojo.fullboxDevice,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.pieceDeviceId != null">
+        and piece_device_id = #{pojo.pieceDeviceId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.pieceDevice != null">
+        and piece_device = #{pojo.pieceDevice,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.packingDeviceId != null">
+        and packing_device_id = #{pojo.packingDeviceId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.packingDevice != null">
+        and packing_device = #{pojo.packingDevice,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.pickTaskRule != null">
+        and pick_task_rule = #{pojo.pickTaskRule,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.isPicked != null">
+        and is_picked = #{pojo.isPicked,jdbcType=BIT}
+      </if>
+      <if test="startTime != null">
+        and create_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        and #{endTime,jdbcType=TIMESTAMP}&gt;=create_time
+      </if>
+      <if test="pojo.userDefined1 != null">
+        and user_defined1 like CONCAT('%', #{pojo.userDefined1,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.userDefined2 != null">
+        and user_defined2 like CONCAT('%', #{pojo.userDefined2,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.userDefined3 != null">
+        and user_defined3 like CONCAT('%', #{pojo.userDefined3,jdbcType=VARBINARY},'%')
+      </if>
+    </where>
+    order by id desc
+    limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+  </select>
+  <!--新增  筛选 -->
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select count(id)
+    from pick_task_detail_black
+    <where>
+      1=1
+      <if test="pojo.pid != null">
+        and pid = #{pojo.pid,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.despatchId != null">
+        and despatch_id = #{pojo.despatchId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuId != null">
+        and sku_id = #{pojo.skuId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuCode != null">
+        and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.customerId != null">
+        and customer_id = #{pojo.customerId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.customerName != null">
+        and customer_name like CONCAT('%', #{pojo.customerName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.receiverId != null">
+        and receiver_id = #{pojo.receiverId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.unit != null">
+        and unit = #{pojo.unit,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.warehouseCode != null">
+        and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.areaCode != null">
+        and area_code = #{pojo.areaCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.locationGroupCode != null">
+        and location_group_code = #{pojo.locationGroupCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.locationId != null">
+        and location_id = #{pojo.locationId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.locationCode != null">
+        and location_code = #{pojo.locationCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.containerId != null">
+        and container_id = #{pojo.containerId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.fullTag != null">
+        and full_tag = #{pojo.fullTag,jdbcType=TINYINT}
+      </if>
+      <if test="pojo.boxNum != null">
+        and box_num = #{pojo.boxNum,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.pickupTag != null">
+        and pickup_tag = #{pojo.pickupTag,jdbcType=TINYINT}
+      </if>
+      <if test="pojo.userDefined1 != null">
+        and user_defined1 like CONCAT('%', #{pojo.userDefined1,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.userDefined2 != null">
+        and user_defined2 like CONCAT('%', #{pojo.userDefined2,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.userDefined3 != null">
+        and user_defined3 like CONCAT('%', #{pojo.userDefined3,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.isPicked != null">
+        and is_picked = #{pojo.isPicked,jdbcType=SMALLINT}
+      </if>
+    </where>
+  </select>
+  <!--新增-->
+  <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from pick_task_detail_black
+    where pid = #{pid,jdbcType=INTEGER}
+    order by despatch_id asc,sku_id asc
+  </select>
+  <!--新增-->
+  <select id="sumTotalCntBySkuAndPid" resultType="java.lang.Integer">
+    select sum(total_cnt)
+    from pick_task_detail_black
+    where pid = #{pid,jdbcType=INTEGER} and sku_id = #{skuId,jdbcType=INTEGER}
+  </select>
+</mapper>

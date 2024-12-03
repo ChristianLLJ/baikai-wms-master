@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.WaveRuleDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.WaveRule">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="wave_rule_code" jdbcType="VARCHAR" property="waveRuleCode"/>
+        <result column="wave_rule_name" jdbcType="VARCHAR" property="waveRuleName"/>
+        <result column="describe_content" jdbcType="VARCHAR" property="describeContent"/>
+        <result column="activate_type" jdbcType="SMALLINT" property="activateType"/>
+        <result column="is_modified" jdbcType="BIT" property="isModified"/>
+        <result column="priority_type" jdbcType="INTEGER" property="priorityType"/>
+        <result column="display_order" jdbcType="INTEGER" property="displayOrder"/>
+        <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName"/>
+        <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode"/>
+        <result column="client_id" jdbcType="INTEGER" property="clientId"/>
+        <result column="client_name" jdbcType="VARCHAR" property="clientName"/>
+        <result column="carrier_id" jdbcType="INTEGER" property="carrierId"/>
+        <result column="carrier_name" jdbcType="VARCHAR" property="carrierName"/>
+        <result column="distribution_rules" jdbcType="VARCHAR" property="distributionRules"/>
+        <result column="order_type" jdbcType="SMALLINT" property="orderType"/>
+        <result column="order_type_name" jdbcType="VARCHAR" property="orderTypeName"/>
+        <result column="order_status_name" jdbcType="VARCHAR" property="orderStatusName"/>
+        <result column="order_status" jdbcType="SMALLINT" property="orderStatus"/>
+        <result column="transport_mode" jdbcType="SMALLINT" property="transportMode"/>
+        <result column="transport_mode_name" jdbcType="VARCHAR" property="transportModeName"/>
+        <result column="route" jdbcType="VARCHAR" property="route"/>
+        <result column="is_single_item" jdbcType="BIT" property="isSingleItem"/>
+        <result column="is_whole_box_constraint" jdbcType="BIT" property="isWholeBoxConstraint"/>
+        <result column="order_window_time" jdbcType="TIMESTAMP" property="orderWindowTime"/>
+        <result column="order_num_lower_limit" jdbcType="INTEGER" property="orderNumLowerLimit"/>
+        <result column="order_num_upper_limit" jdbcType="INTEGER" property="orderNumUpperLimit"/>
+        <result column="fixed_consignee_num" jdbcType="INTEGER" property="fixedConsigneeNum"/>
+        <result column="fixed_product_num" jdbcType="INTEGER" property="fixedProductNum"/>
+        <result column="minimum_sku_num" jdbcType="INTEGER" property="minimumSkuNum"/>
+        <result column="volume_limit" jdbcType="DOUBLE" property="volumeLimit"/>
+        <result column="weight_limit" jdbcType="DOUBLE" property="weightLimit"/>
+        <result column="total_num" jdbcType="INTEGER" property="totalNum"/>
+        <result column="longest_waitting_time" jdbcType="INTEGER" property="longestWaittingTime"/>
+        <result column="is_picking" jdbcType="BIT" property="isPicking"/>
+        <result column="is_binding_box" jdbcType="BIT" property="isBindingBox"/>
+        <result column="wave_num" jdbcType="INTEGER" property="waveNum"/>
+        <result column="is_sowed" jdbcType="SMALLINT" property="isSowed"/>
+        <result column="optimization_method" jdbcType="VARCHAR" property="optimizationMethod"/>
+        <result column="product_mix" jdbcType="VARCHAR" property="productMix"/>
+        <result column="last_wave_time" jdbcType="TIMESTAMP" property="lastWaveTime"/>
+        <result column="order_sorting" jdbcType="VARCHAR" property="orderSorting"/>
+        <result column="is_cross_region" jdbcType="BIT" property="isCrossRegion"/>
+        <result column="is_order_single_area" jdbcType="BIT" property="isOrderSingleArea"/>
+        <result column="in_bound_time" jdbcType="TIMESTAMP" property="inBoundTime"/>
+        <result column="product_time" jdbcType="TIMESTAMP" property="productTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_running" jdbcType="BIT" property="isRunning"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , wave_rule_code, wave_rule_name, describe_content, activate_type, is_modified,
+    priority_type, display_order, warehouse_name, warehouse_code, client_id, client_name, 
+    carrier_id, carrier_name, distribution_rules, order_type, order_type_name, order_status_name, 
+    order_status, transport_mode, transport_mode_name, route, is_single_item, is_whole_box_constraint, 
+    order_window_time, order_num_lower_limit, order_num_upper_limit, fixed_consignee_num, 
+    fixed_product_num, minimum_sku_num, volume_limit, weight_limit, total_num, longest_waitting_time, 
+    is_picking, is_binding_box, wave_num, is_sowed, optimization_method, product_mix, 
+    last_wave_time, order_sorting, is_cross_region, is_order_single_area, in_bound_time, 
+    product_time, create_time, update_time, is_running
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave_rule
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from wave_rule
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.WaveRule" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into wave_rule (id, wave_rule_code, wave_rule_name,
+                               describe_content, activate_type, is_modified,
+                               priority_type, display_order, warehouse_name,
+                               warehouse_code, client_id, client_name,
+                               carrier_id, carrier_name, distribution_rules,
+                               order_type, order_type_name, order_status_name,
+                               order_status, transport_mode, transport_mode_name,
+                               route, is_single_item, is_whole_box_constraint,
+                               order_window_time, order_num_lower_limit,
+                               order_num_upper_limit, fixed_consignee_num,
+                               fixed_product_num, minimum_sku_num, volume_limit,
+                               weight_limit, total_num, longest_waitting_time,
+                               is_picking, is_binding_box, wave_num,
+                               is_sowed, optimization_method, product_mix,
+                               last_wave_time, order_sorting, is_cross_region,
+                               is_order_single_area, in_bound_time, product_time,
+                               create_time, update_time, is_running)
+        values (#{id,jdbcType=INTEGER}, #{waveRuleCode,jdbcType=VARCHAR}, #{waveRuleName,jdbcType=VARCHAR},
+                #{describeContent,jdbcType=VARCHAR}, #{activateType,jdbcType=SMALLINT}, #{isModified,jdbcType=BIT},
+                #{priorityType,jdbcType=INTEGER}, #{displayOrder,jdbcType=INTEGER}, #{warehouseName,jdbcType=VARCHAR},
+                #{warehouseCode,jdbcType=VARCHAR}, #{clientId,jdbcType=INTEGER}, #{clientName,jdbcType=VARCHAR},
+                #{carrierId,jdbcType=INTEGER}, #{carrierName,jdbcType=VARCHAR}, #{distributionRules,jdbcType=VARCHAR},
+                #{orderType,jdbcType=SMALLINT}, #{orderTypeName,jdbcType=VARCHAR}, #{orderStatusName,jdbcType=VARCHAR},
+                #{orderStatus,jdbcType=SMALLINT}, #{transportMode,jdbcType=SMALLINT},
+                #{transportModeName,jdbcType=VARCHAR},
+                #{route,jdbcType=VARCHAR}, #{isSingleItem,jdbcType=BIT}, #{isWholeBoxConstraint,jdbcType=BIT},
+                #{orderWindowTime,jdbcType=TIMESTAMP}, #{orderNumLowerLimit,jdbcType=INTEGER},
+                #{orderNumUpperLimit,jdbcType=INTEGER}, #{fixedConsigneeNum,jdbcType=INTEGER},
+                #{fixedProductNum,jdbcType=INTEGER}, #{minimumSkuNum,jdbcType=INTEGER}, #{volumeLimit,jdbcType=DOUBLE},
+                #{weightLimit,jdbcType=DOUBLE}, #{totalNum,jdbcType=INTEGER}, #{longestWaittingTime,jdbcType=INTEGER},
+                #{isPicking,jdbcType=BIT}, #{isBindingBox,jdbcType=BIT}, #{waveNum,jdbcType=INTEGER},
+                #{isSowed,jdbcType=SMALLINT}, #{optimizationMethod,jdbcType=VARCHAR}, #{productMix,jdbcType=VARCHAR},
+                #{lastWaveTime,jdbcType=TIMESTAMP}, #{orderSorting,jdbcType=VARCHAR}, #{isCrossRegion,jdbcType=BIT},
+                #{isOrderSingleArea,jdbcType=BIT}, #{inBoundTime,jdbcType=TIMESTAMP}, #{productTime,jdbcType=TIMESTAMP},
+                #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isRunning,jdbcType=BIT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.WaveRule" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        insert into wave_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="waveRuleCode != null">
+                wave_rule_code,
+            </if>
+            <if test="waveRuleName != null">
+                wave_rule_name,
+            </if>
+            <if test="describeContent != null">
+                describe_content,
+            </if>
+            <if test="activateType != null">
+                activate_type,
+            </if>
+            <if test="isModified != null">
+                is_modified,
+            </if>
+            <if test="priorityType != null">
+                priority_type,
+            </if>
+            <if test="displayOrder != null">
+                display_order,
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name,
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code,
+            </if>
+            <if test="clientId != null">
+                client_id,
+            </if>
+            <if test="clientName != null">
+                client_name,
+            </if>
+            <if test="carrierId != null">
+                carrier_id,
+            </if>
+            <if test="carrierName != null">
+                carrier_name,
+            </if>
+            <if test="distributionRules != null">
+                distribution_rules,
+            </if>
+            <if test="orderType != null">
+                order_type,
+            </if>
+            <if test="orderTypeName != null">
+                order_type_name,
+            </if>
+            <if test="orderStatusName != null">
+                order_status_name,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+            <if test="transportMode != null">
+                transport_mode,
+            </if>
+            <if test="transportModeName != null">
+                transport_mode_name,
+            </if>
+            <if test="route != null">
+                route,
+            </if>
+            <if test="isSingleItem != null">
+                is_single_item,
+            </if>
+            <if test="isWholeBoxConstraint != null">
+                is_whole_box_constraint,
+            </if>
+            <if test="orderWindowTime != null">
+                order_window_time,
+            </if>
+            <if test="orderNumLowerLimit != null">
+                order_num_lower_limit,
+            </if>
+            <if test="orderNumUpperLimit != null">
+                order_num_upper_limit,
+            </if>
+            <if test="fixedConsigneeNum != null">
+                fixed_consignee_num,
+            </if>
+            <if test="fixedProductNum != null">
+                fixed_product_num,
+            </if>
+            <if test="minimumSkuNum != null">
+                minimum_sku_num,
+            </if>
+            <if test="volumeLimit != null">
+                volume_limit,
+            </if>
+            <if test="weightLimit != null">
+                weight_limit,
+            </if>
+            <if test="totalNum != null">
+                total_num,
+            </if>
+            <if test="longestWaittingTime != null">
+                longest_waitting_time,
+            </if>
+            <if test="isPicking != null">
+                is_picking,
+            </if>
+            <if test="isBindingBox != null">
+                is_binding_box,
+            </if>
+            <if test="waveNum != null">
+                wave_num,
+            </if>
+            <if test="isSowed != null">
+                is_sowed,
+            </if>
+            <if test="optimizationMethod != null">
+                optimization_method,
+            </if>
+            <if test="productMix != null">
+                product_mix,
+            </if>
+            <if test="lastWaveTime != null">
+                last_wave_time,
+            </if>
+            <if test="orderSorting != null">
+                order_sorting,
+            </if>
+            <if test="isCrossRegion != null">
+                is_cross_region,
+            </if>
+            <if test="isOrderSingleArea != null">
+                is_order_single_area,
+            </if>
+            <if test="inBoundTime != null">
+                in_bound_time,
+            </if>
+            <if test="productTime != null">
+                product_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="isRunning != null">
+                is_running,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="waveRuleCode != null">
+                #{waveRuleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="waveRuleName != null">
+                #{waveRuleName,jdbcType=VARCHAR},
+            </if>
+            <if test="describeContent != null">
+                #{describeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="activateType != null">
+                #{activateType,jdbcType=SMALLINT},
+            </if>
+            <if test="isModified != null">
+                #{isModified,jdbcType=BIT},
+            </if>
+            <if test="priorityType != null">
+                #{priorityType,jdbcType=INTEGER},
+            </if>
+            <if test="displayOrder != null">
+                #{displayOrder,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseName != null">
+                #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="clientId != null">
+                #{clientId,jdbcType=INTEGER},
+            </if>
+            <if test="clientName != null">
+                #{clientName,jdbcType=VARCHAR},
+            </if>
+            <if test="carrierId != null">
+                #{carrierId,jdbcType=INTEGER},
+            </if>
+            <if test="carrierName != null">
+                #{carrierName,jdbcType=VARCHAR},
+            </if>
+            <if test="distributionRules != null">
+                #{distributionRules,jdbcType=VARCHAR},
+            </if>
+            <if test="orderType != null">
+                #{orderType,jdbcType=SMALLINT},
+            </if>
+            <if test="orderTypeName != null">
+                #{orderTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatusName != null">
+                #{orderStatusName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="transportMode != null">
+                #{transportMode,jdbcType=SMALLINT},
+            </if>
+            <if test="transportModeName != null">
+                #{transportModeName,jdbcType=VARCHAR},
+            </if>
+            <if test="route != null">
+                #{route,jdbcType=VARCHAR},
+            </if>
+            <if test="isSingleItem != null">
+                #{isSingleItem,jdbcType=BIT},
+            </if>
+            <if test="isWholeBoxConstraint != null">
+                #{isWholeBoxConstraint,jdbcType=BIT},
+            </if>
+            <if test="orderWindowTime != null">
+                #{orderWindowTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderNumLowerLimit != null">
+                #{orderNumLowerLimit,jdbcType=INTEGER},
+            </if>
+            <if test="orderNumUpperLimit != null">
+                #{orderNumUpperLimit,jdbcType=INTEGER},
+            </if>
+            <if test="fixedConsigneeNum != null">
+                #{fixedConsigneeNum,jdbcType=INTEGER},
+            </if>
+            <if test="fixedProductNum != null">
+                #{fixedProductNum,jdbcType=INTEGER},
+            </if>
+            <if test="minimumSkuNum != null">
+                #{minimumSkuNum,jdbcType=INTEGER},
+            </if>
+            <if test="volumeLimit != null">
+                #{volumeLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="weightLimit != null">
+                #{weightLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="totalNum != null">
+                #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="longestWaittingTime != null">
+                #{longestWaittingTime,jdbcType=INTEGER},
+            </if>
+            <if test="isPicking != null">
+                #{isPicking,jdbcType=BIT},
+            </if>
+            <if test="isBindingBox != null">
+                #{isBindingBox,jdbcType=BIT},
+            </if>
+            <if test="waveNum != null">
+                #{waveNum,jdbcType=INTEGER},
+            </if>
+            <if test="isSowed != null">
+                #{isSowed,jdbcType=SMALLINT},
+            </if>
+            <if test="optimizationMethod != null">
+                #{optimizationMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="productMix != null">
+                #{productMix,jdbcType=VARCHAR},
+            </if>
+            <if test="lastWaveTime != null">
+                #{lastWaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderSorting != null">
+                #{orderSorting,jdbcType=VARCHAR},
+            </if>
+            <if test="isCrossRegion != null">
+                #{isCrossRegion,jdbcType=BIT},
+            </if>
+            <if test="isOrderSingleArea != null">
+                #{isOrderSingleArea,jdbcType=BIT},
+            </if>
+            <if test="inBoundTime != null">
+                #{inBoundTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productTime != null">
+                #{productTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isRunning != null">
+                #{isRunning,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.WaveRule">
+        update wave_rule
+        <set>
+            <if test="waveRuleCode != null">
+                wave_rule_code = #{waveRuleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="waveRuleName != null">
+                wave_rule_name = #{waveRuleName,jdbcType=VARCHAR},
+            </if>
+            <if test="describeContent != null">
+                describe_content = #{describeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="activateType != null">
+                activate_type = #{activateType,jdbcType=SMALLINT},
+            </if>
+            <if test="isModified != null">
+                is_modified = #{isModified,jdbcType=BIT},
+            </if>
+            <if test="priorityType != null">
+                priority_type = #{priorityType,jdbcType=INTEGER},
+            </if>
+            <if test="displayOrder != null">
+                display_order = #{displayOrder,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="clientId != null">
+                client_id = #{clientId,jdbcType=INTEGER},
+            </if>
+            <if test="clientName != null">
+                client_name = #{clientName,jdbcType=VARCHAR},
+            </if>
+            <if test="carrierId != null">
+                carrier_id = #{carrierId,jdbcType=INTEGER},
+            </if>
+            <if test="carrierName != null">
+                carrier_name = #{carrierName,jdbcType=VARCHAR},
+            </if>
+            <if test="distributionRules != null">
+                distribution_rules = #{distributionRules,jdbcType=VARCHAR},
+            </if>
+            <if test="orderType != null">
+                order_type = #{orderType,jdbcType=SMALLINT},
+            </if>
+            <if test="orderTypeName != null">
+                order_type_name = #{orderTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatusName != null">
+                order_status_name = #{orderStatusName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="transportMode != null">
+                transport_mode = #{transportMode,jdbcType=SMALLINT},
+            </if>
+            <if test="transportModeName != null">
+                transport_mode_name = #{transportModeName,jdbcType=VARCHAR},
+            </if>
+            <if test="route != null">
+                route = #{route,jdbcType=VARCHAR},
+            </if>
+            <if test="isSingleItem != null">
+                is_single_item = #{isSingleItem,jdbcType=BIT},
+            </if>
+            <if test="isWholeBoxConstraint != null">
+                is_whole_box_constraint = #{isWholeBoxConstraint,jdbcType=BIT},
+            </if>
+            <if test="orderWindowTime != null">
+                order_window_time = #{orderWindowTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderNumLowerLimit != null">
+                order_num_lower_limit = #{orderNumLowerLimit,jdbcType=INTEGER},
+            </if>
+            <if test="orderNumUpperLimit != null">
+                order_num_upper_limit = #{orderNumUpperLimit,jdbcType=INTEGER},
+            </if>
+            <if test="fixedConsigneeNum != null">
+                fixed_consignee_num = #{fixedConsigneeNum,jdbcType=INTEGER},
+            </if>
+            <if test="fixedProductNum != null">
+                fixed_product_num = #{fixedProductNum,jdbcType=INTEGER},
+            </if>
+            <if test="minimumSkuNum != null">
+                minimum_sku_num = #{minimumSkuNum,jdbcType=INTEGER},
+            </if>
+            <if test="volumeLimit != null">
+                volume_limit = #{volumeLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="weightLimit != null">
+                weight_limit = #{weightLimit,jdbcType=DOUBLE},
+            </if>
+            <if test="totalNum != null">
+                total_num = #{totalNum,jdbcType=INTEGER},
+            </if>
+            <if test="longestWaittingTime != null">
+                longest_waitting_time = #{longestWaittingTime,jdbcType=INTEGER},
+            </if>
+            <if test="isPicking != null">
+                is_picking = #{isPicking,jdbcType=BIT},
+            </if>
+            <if test="isBindingBox != null">
+                is_binding_box = #{isBindingBox,jdbcType=BIT},
+            </if>
+            <if test="waveNum != null">
+                wave_num = #{waveNum,jdbcType=INTEGER},
+            </if>
+            <if test="isSowed != null">
+                is_sowed = #{isSowed,jdbcType=SMALLINT},
+            </if>
+            <if test="optimizationMethod != null">
+                optimization_method = #{optimizationMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="productMix != null">
+                product_mix = #{productMix,jdbcType=VARCHAR},
+            </if>
+            <if test="lastWaveTime != null">
+                last_wave_time = #{lastWaveTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderSorting != null">
+                order_sorting = #{orderSorting,jdbcType=VARCHAR},
+            </if>
+            <if test="isCrossRegion != null">
+                is_cross_region = #{isCrossRegion,jdbcType=BIT},
+            </if>
+            <if test="isOrderSingleArea != null">
+                is_order_single_area = #{isOrderSingleArea,jdbcType=BIT},
+            </if>
+            <if test="inBoundTime != null">
+                in_bound_time = #{inBoundTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productTime != null">
+                product_time = #{productTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isRunning != null">
+                is_running = #{isRunning,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.WaveRule">
+        update wave_rule
+        set wave_rule_code          = #{waveRuleCode,jdbcType=VARCHAR},
+            wave_rule_name          = #{waveRuleName,jdbcType=VARCHAR},
+            describe_content        = #{describeContent,jdbcType=VARCHAR},
+            activate_type           = #{activateType,jdbcType=SMALLINT},
+            is_modified             = #{isModified,jdbcType=BIT},
+            priority_type           = #{priorityType,jdbcType=INTEGER},
+            display_order           = #{displayOrder,jdbcType=INTEGER},
+            warehouse_name          = #{warehouseName,jdbcType=VARCHAR},
+            warehouse_code          = #{warehouseCode,jdbcType=VARCHAR},
+            client_id               = #{clientId,jdbcType=INTEGER},
+            client_name             = #{clientName,jdbcType=VARCHAR},
+            carrier_id              = #{carrierId,jdbcType=INTEGER},
+            carrier_name            = #{carrierName,jdbcType=VARCHAR},
+            distribution_rules      = #{distributionRules,jdbcType=VARCHAR},
+            order_type              = #{orderType,jdbcType=SMALLINT},
+            order_type_name         = #{orderTypeName,jdbcType=VARCHAR},
+            order_status_name       = #{orderStatusName,jdbcType=VARCHAR},
+            order_status            = #{orderStatus,jdbcType=SMALLINT},
+            transport_mode          = #{transportMode,jdbcType=SMALLINT},
+            transport_mode_name     = #{transportModeName,jdbcType=VARCHAR},
+            route                   = #{route,jdbcType=VARCHAR},
+            is_single_item          = #{isSingleItem,jdbcType=BIT},
+            is_whole_box_constraint = #{isWholeBoxConstraint,jdbcType=BIT},
+            order_window_time       = #{orderWindowTime,jdbcType=TIMESTAMP},
+            order_num_lower_limit   = #{orderNumLowerLimit,jdbcType=INTEGER},
+            order_num_upper_limit   = #{orderNumUpperLimit,jdbcType=INTEGER},
+            fixed_consignee_num     = #{fixedConsigneeNum,jdbcType=INTEGER},
+            fixed_product_num       = #{fixedProductNum,jdbcType=INTEGER},
+            minimum_sku_num         = #{minimumSkuNum,jdbcType=INTEGER},
+            volume_limit            = #{volumeLimit,jdbcType=DOUBLE},
+            weight_limit            = #{weightLimit,jdbcType=DOUBLE},
+            total_num               = #{totalNum,jdbcType=INTEGER},
+            longest_waitting_time   = #{longestWaittingTime,jdbcType=INTEGER},
+            is_picking              = #{isPicking,jdbcType=BIT},
+            is_binding_box          = #{isBindingBox,jdbcType=BIT},
+            wave_num                = #{waveNum,jdbcType=INTEGER},
+            is_sowed                = #{isSowed,jdbcType=SMALLINT},
+            optimization_method     = #{optimizationMethod,jdbcType=VARCHAR},
+            product_mix             = #{productMix,jdbcType=VARCHAR},
+            last_wave_time          = #{lastWaveTime,jdbcType=TIMESTAMP},
+            order_sorting           = #{orderSorting,jdbcType=VARCHAR},
+            is_cross_region         = #{isCrossRegion,jdbcType=BIT},
+            is_order_single_area    = #{isOrderSingleArea,jdbcType=BIT},
+            in_bound_time           = #{inBoundTime,jdbcType=TIMESTAMP},
+            product_time            = #{productTime,jdbcType=TIMESTAMP},
+            create_time             = #{createTime,jdbcType=TIMESTAMP},
+            update_time             = #{updateTime,jdbcType=TIMESTAMP},
+            is_running              = #{isRunning,jdbcType=BIT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增 晒选总数-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from wave_rule
+        <where>
+            1=1
+            <if test="pojo.waveRuleCode != null">
+                and wave_rule_code=#{pojo.waveRuleCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.waveRuleName != null">
+                and wave_rule_name = #{pojo.waveRuleName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.activateType != null">
+                and activate_type = #{pojo.activateType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.isModified != null">
+                and is_modified = #{pojo.isModified,jdbcType=BIT}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name = #{pojo.warehouseName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseCode != null">
+                and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.clientId != null">
+                and client_id = #{pojo.clientId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.clientName != null">
+                and client_name like CONCAT('%', #{pojo.clientName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.carrierId != null">
+                and carrier_id = #{pojo.carrierId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.carrierName != null">
+                and carrier_name like CONCAT('%', #{pojo.carrierName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.distributionRules != null">
+                and distribution_rules = #{pojo.distributionRules,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.orderType != null">
+                and order_type = #{pojo.orderType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.orderTypeName != null">
+                and order_type_name like CONCAT('%', #{pojo.orderTypeName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.orderStatusName != null">
+                and order_status_name = #{pojo.orderStatusName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.orderStatus != null">
+                and order_status = #{pojo.orderStatus,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.transportMode != null">
+                and transport_mode = #{pojo.transportMode,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.transportModeName != null">
+                and transport_mode_name = #{pojo.transportModeName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.route != null">
+                and route like CONCAT('%', #{pojo.route,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.isSingleItem != null">
+                and is_single_item = #{pojo.isSingleItem,jdbcType=BIT}
+            </if>
+            <if test="pojo.isWholeBoxConstraint != null">
+                and is_whole_box_constraint = #{pojo.isWholeBoxConstraint,jdbcType=BIT}
+            </if>
+            <if test="pojo.orderNumLowerLimit != null">
+                and order_num_lower_limit = #{pojo.orderNumLowerLimit,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.orderNumUpperLimit != null">
+                and order_num_upper_limit = #{pojo.orderNumUpperLimit,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.fixedConsigneeNum != null">
+                and fixed_consignee_num = #{pojo.fixedConsigneeNum,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.fixedProductNum != null">
+                and fixed_product_num = #{pojo.fixedProductNum,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.isPicking != null">
+                and is_picking = #{pojo.isPicking,jdbcType=BIT}
+            </if>
+            <if test="pojo.isBindingBox != null">
+                and is_binding_box = #{pojo.isBindingBox,jdbcType=BIT}
+            </if>
+            <if test="pojo.isSowed != null">
+                and is_sowed = #{pojo.isSowed,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.optimizationMethod != null">
+                and optimization_method like CONCAT('%', #{pojo.optimizationMethod,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.productMix != null">
+                and product_mix = #{pojo.productMix,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.lastWaveTime != null">
+                and last_wave_time = #{pojo.lastWaveTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pojo.orderSorting != null">
+                and order_sorting = #{pojo.orderSorting,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.isCrossRegion != null">
+                and is_cross_region = #{pojo.isCrossRegion,jdbcType=BIT}
+            </if>
+            <if test="pojo.isOrderSingleArea != null">
+                and is_order_single_area = #{pojo.isOrderSingleArea,jdbcType=BIT}
+            </if>
+            <if test="pojo.isRunning != null">
+                and is_running = #{pojo.isRunning,jdbcType=BIT}
+            </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave_rule
+        <where>
+            1=1
+            <if test="pojo.waveRuleCode != null">
+                and wave_rule_code=#{pojo.waveRuleCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.waveRuleName != null">
+                and wave_rule_name=#{pojo.waveRuleName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.activateType != null">
+                and activate_type = #{pojo.activateType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.isModified != null">
+                and is_modified = #{pojo.isModified,jdbcType=BIT}
+            </if>
+            <if test="pojo.warehouseName != null">
+                and warehouse_name = #{pojo.warehouseName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.warehouseCode != null">
+                and warehouse_code = #{pojo.warehouseCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.clientId != null">
+                and client_id = #{pojo.clientId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.clientName != null">
+                and client_name like CONCAT('%', #{pojo.clientName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.carrierId != null">
+                and carrier_id = #{pojo.carrierId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.carrierName != null">
+                and carrier_name like CONCAT('%', #{pojo.carrierName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.distributionRules != null">
+                and distribution_rules = #{pojo.distributionRules,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.orderType != null">
+                and order_type = #{pojo.orderType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.orderTypeName != null">
+                and order_type_name like CONCAT('%', #{pojo.orderTypeName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.orderStatusName != null">
+                and order_status_name = #{pojo.orderStatusName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.orderStatus != null">
+                and order_status = #{pojo.orderStatus,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.transportMode != null">
+                and transport_mode = #{pojo.transportMode,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.transportModeName != null">
+                and transport_mode_name = #{pojo.transportModeName,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.route != null">
+                and route like CONCAT('%', #{pojo.route,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.isSingleItem != null">
+                and is_single_item = #{pojo.isSingleItem,jdbcType=BIT}
+            </if>
+            <if test="pojo.isWholeBoxConstraint != null">
+                and is_whole_box_constraint = #{pojo.isWholeBoxConstraint,jdbcType=BIT}
+            </if>
+            <if test="pojo.orderNumLowerLimit != null">
+                and order_num_lower_limit = #{pojo.orderNumLowerLimit,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.orderNumUpperLimit != null">
+                and order_num_upper_limit = #{pojo.orderNumUpperLimit,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.fixedConsigneeNum != null">
+                and fixed_consignee_num = #{pojo.fixedConsigneeNum,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.fixedProductNum != null">
+                and fixed_product_num = #{pojo.fixedProductNum,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.isPicking != null">
+                and is_picking = #{pojo.isPicking,jdbcType=BIT}
+            </if>
+            <if test="pojo.isBindingBox != null">
+                and is_binding_box = #{pojo.isBindingBox,jdbcType=BIT}
+            </if>
+            <if test="pojo.isSowed != null">
+                and is_sowed = #{pojo.isSowed,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.optimizationMethod != null">
+                and optimization_method like CONCAT('%', #{pojo.optimizationMethod,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.productMix != null">
+                and product_mix = #{pojo.productMix,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.lastWaveTime != null">
+                and last_wave_time = #{pojo.lastWaveTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pojo.orderSorting != null">
+                and order_sorting = #{pojo.orderSorting,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.isCrossRegion != null">
+                and is_cross_region = #{pojo.isCrossRegion,jdbcType=BIT}
+            </if>
+            <if test="pojo.isOrderSingleArea != null">
+                and is_order_single_area = #{pojo.isOrderSingleArea,jdbcType=BIT}
+            </if>
+            <if test="pojo.isRunning != null">
+                and is_running = #{pojo.isRunning,jdbcType=BIT}
+            </if>
+        </where>
+        order by id desc
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+    <!--新增-->
+    <select id="selectAllToRun" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave_rule
+        where is_running =false and activate_type!=0
+    </select>
+    <!--新增-->
+    <select id="selectAllToStop" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave_rule
+        where is_running =true
+    </select>
+</mapper>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.StockFreezeDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.StockFreeze">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="freeze_code" jdbcType="VARCHAR" property="freezeCode"/>
+        <result column="freeze_type" jdbcType="INTEGER" property="freezeType"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="freeze_reason" jdbcType="VARCHAR" property="freezeReason"/>
+        <result column="freeze_time" jdbcType="TIMESTAMP" property="freezeTime"/>
+        <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime"/>
+        <result column="is_freeze" jdbcType="BIT" property="isFreeze"/>
+        <result column="freeze_person_id" jdbcType="INTEGER" property="freezePersonId"/>
+        <result column="freeze_person_name" jdbcType="VARCHAR" property="freezePersonName"/>
+        <result column="release_person_id" jdbcType="INTEGER" property="releasePersonId"/>
+        <result column="release_person_name" jdbcType="VARCHAR" property="releasePersonName"/>
+        <result column="check_person_id" jdbcType="INTEGER" property="checkPersonId"/>
+        <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName"/>
+        <result column="check_time" jdbcType="TIMESTAMP" property="checkTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, freeze_code, freeze_type, `status`, freeze_reason, freeze_time, release_time,
+        is_freeze, freeze_person_id, freeze_person_name, release_person_id, release_person_name,
+        check_person_id, check_person_name, check_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_freeze
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from stock_freeze
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.StockFreeze" keyProperty="id" useGeneratedKeys="true">
+        insert into stock_freeze (id, freeze_code, freeze_type,
+        `status`, freeze_reason, freeze_time,
+        release_time, is_freeze, freeze_person_id,
+        freeze_person_name, release_person_id, release_person_name,
+        check_person_id, check_person_name, check_time
+        )
+        values (#{id,jdbcType=INTEGER}, #{freezeCode,jdbcType=VARCHAR}, #{freezeType,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER}, #{freezeReason,jdbcType=VARCHAR}, #{freezeTime,jdbcType=TIMESTAMP},
+        #{releaseTime,jdbcType=TIMESTAMP}, #{isFreeze,jdbcType=BIT}, #{freezePersonId,jdbcType=INTEGER},
+        #{freezePersonName,jdbcType=VARCHAR}, #{releasePersonId,jdbcType=INTEGER},
+        #{releasePersonName,jdbcType=VARCHAR},
+        #{checkPersonId,jdbcType=INTEGER}, #{checkPersonName,jdbcType=VARCHAR}, #{checkTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.StockFreeze" keyProperty="id" useGeneratedKeys="true">
+        insert into stock_freeze
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="freezeCode != null">
+                freeze_code,
+            </if>
+            <if test="freezeType != null">
+                freeze_type,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="freezeReason != null">
+                freeze_reason,
+            </if>
+            <if test="freezeTime != null">
+                freeze_time,
+            </if>
+            <if test="releaseTime != null">
+                release_time,
+            </if>
+            <if test="isFreeze != null">
+                is_freeze,
+            </if>
+            <if test="freezePersonId != null">
+                freeze_person_id,
+            </if>
+            <if test="freezePersonName != null">
+                freeze_person_name,
+            </if>
+            <if test="releasePersonId != null">
+                release_person_id,
+            </if>
+            <if test="releasePersonName != null">
+                release_person_name,
+            </if>
+            <if test="checkPersonId != null">
+                check_person_id,
+            </if>
+            <if test="checkPersonName != null">
+                check_person_name,
+            </if>
+            <if test="checkTime != null">
+                check_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="freezeCode != null">
+                #{freezeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="freezeType != null">
+                #{freezeType,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="freezeReason != null">
+                #{freezeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="freezeTime != null">
+                #{freezeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="releaseTime != null">
+                #{releaseTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isFreeze != null">
+                #{isFreeze,jdbcType=BIT},
+            </if>
+            <if test="freezePersonId != null">
+                #{freezePersonId,jdbcType=INTEGER},
+            </if>
+            <if test="freezePersonName != null">
+                #{freezePersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="releasePersonId != null">
+                #{releasePersonId,jdbcType=INTEGER},
+            </if>
+            <if test="releasePersonName != null">
+                #{releasePersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkPersonId != null">
+                #{checkPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="checkPersonName != null">
+                #{checkPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null">
+                #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.StockFreeze">
+        update stock_freeze
+        <set>
+            <if test="freezeCode != null">
+                freeze_code = #{freezeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="freezeType != null">
+                freeze_type = #{freezeType,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="freezeReason != null">
+                freeze_reason = #{freezeReason,jdbcType=VARCHAR},
+            </if>
+            <if test="freezeTime != null">
+                freeze_time = #{freezeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="releaseTime != null">
+                release_time = #{releaseTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isFreeze != null">
+                is_freeze = #{isFreeze,jdbcType=BIT},
+            </if>
+            <if test="freezePersonId != null">
+                freeze_person_id = #{freezePersonId,jdbcType=INTEGER},
+            </if>
+            <if test="freezePersonName != null">
+                freeze_person_name = #{freezePersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="releasePersonId != null">
+                release_person_id = #{releasePersonId,jdbcType=INTEGER},
+            </if>
+            <if test="releasePersonName != null">
+                release_person_name = #{releasePersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkPersonId != null">
+                check_person_id = #{checkPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="checkPersonName != null">
+                check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="checkTime != null">
+                check_time = #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.StockFreeze">
+        update stock_freeze
+        set freeze_code = #{freezeCode,jdbcType=VARCHAR},
+        freeze_type = #{freezeType,jdbcType=INTEGER},
+        `status` = #{status,jdbcType=INTEGER},
+        freeze_reason = #{freezeReason,jdbcType=VARCHAR},
+        freeze_time = #{freezeTime,jdbcType=TIMESTAMP},
+        release_time = #{releaseTime,jdbcType=TIMESTAMP},
+        is_freeze = #{isFreeze,jdbcType=BIT},
+        freeze_person_id = #{freezePersonId,jdbcType=INTEGER},
+        freeze_person_name = #{freezePersonName,jdbcType=VARCHAR},
+        release_person_id = #{releasePersonId,jdbcType=INTEGER},
+        release_person_name = #{releasePersonName,jdbcType=VARCHAR},
+        check_person_id = #{checkPersonId,jdbcType=INTEGER},
+        check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+        check_time = #{checkTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="selectNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id)
+        from stock_freeze
+    </select>
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from stock_freeze
+        <where>
+            1=1
+            <if test="pojo.freezeCode != null">
+                and freeze_code = #{pojo.freezeCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.freezeType != null">
+                and freeze_type = #{pojo.freezeType,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.status != null">
+                and `status` = #{pojo.status,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.freezeReason != null">
+                and freeze_reason = #{pojo.freezeReason,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and freeze_time >= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} >= freeze_time
+            </if>
+            <if test="startTime1 != null">
+                and release_time >= #{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP} >= release_time
+            </if>
+            <if test="pojo.isFreeze != null">
+                and is_freeze = #{pojo.isFreeze,jdbcType=TINYINT}
+            </if>
+            <if test="pojo.freezePersonId != null">
+                and freeze_person_id = #{pojo.freezePersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.freezePersonName != null">
+                and freeze_person_name like CONCAT('%', #{pojo.freezePersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.releasePersonId != null">
+                and release_person_id = #{pojo.releasePersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.releasePersonName != null">
+                and release_person_name like CONCAT('%', #{pojo.releasePersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.checkPersonId != null">
+                and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.checkPersonName != null">
+                and check_person_name like CONCAT('%', #{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.checkTime != null">
+                and check_time = #{pojo.checkTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from stock_freeze
+        <where>
+            1=1
+            <if test="pojo.freezeCode != null">
+                and freeze_code = #{pojo.freezeCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.freezeType != null">
+                and freeze_type = #{pojo.freezeType,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.status != null">
+                and `status` = #{pojo.status,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.freezeReason != null">
+                and freeze_reason = #{pojo.freezeReason,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and freeze_time >= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} >= freeze_time
+            </if>
+            <if test="startTime1 != null">
+                and release_time >= #{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP} >= release_time
+            </if>
+            <if test="pojo.isFreeze != null">
+                and is_freeze = #{pojo.isFreeze,jdbcType=TINYINT}
+            </if>
+            <if test="pojo.freezePersonId != null">
+                and freeze_person_id = #{pojo.freezePersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.freezePersonName != null">
+                and freeze_person_name like CONCAT('%', #{pojo.freezePersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.releasePersonId != null">
+                and release_person_id = #{pojo.releasePersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.releasePersonName != null">
+                and release_person_name like CONCAT('%', #{pojo.releasePersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.checkPersonId != null">
+                and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.checkPersonName != null">
+                and check_person_name like CONCAT('%', #{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.checkTime != null">
+                and check_time = #{pojo.checkTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="screen != null">
+                order by ${screen}
+            </if>
+        </where>
+        <if test="searchDTO !=null">
+            limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

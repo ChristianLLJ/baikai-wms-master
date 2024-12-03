@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.ExpressDeliveryDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.ExpressDelivery">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="express_delivery_id" jdbcType="VARCHAR" property="expressDeliveryId" />
+    <result column="express_trace_id" jdbcType="VARCHAR" property="expressTraceId" />
+    <result column="receiver_name" jdbcType="VARCHAR" property="receiverName" />
+    <result column="receiver_num" jdbcType="VARCHAR" property="receiverNum" />
+    <result column="shipper_name" jdbcType="VARCHAR" property="shipperName" />
+    <result column="shipper_num" jdbcType="VARCHAR" property="shipperNum" />
+    <result column="express_type" jdbcType="SMALLINT" property="expressType" />
+    <result column="express_company" jdbcType="VARCHAR" property="expressCompany" />
+    <result column="weight" jdbcType="REAL" property="weight" />
+    <result column="length" jdbcType="REAL" property="length" />
+    <result column="wide" jdbcType="REAL" property="wide" />
+    <result column="hight" jdbcType="REAL" property="hight" />
+    <result column="cnt" jdbcType="REAL" property="cnt" />
+    <result column="volume" jdbcType="REAL" property="volume" />
+    <result column="receiver_province" jdbcType="VARCHAR" property="receiverProvince" />
+    <result column="receiver_city" jdbcType="VARCHAR" property="receiverCity" />
+    <result column="receiver_site" jdbcType="VARCHAR" property="receiverSite" />
+    <result column="receiver_address" jdbcType="VARCHAR" property="receiverAddress" />
+    <result column="shipper_province" jdbcType="VARCHAR" property="shipperProvince" />
+    <result column="shipper_city" jdbcType="VARCHAR" property="shipperCity" />
+    <result column="shipper_site" jdbcType="VARCHAR" property="shipperSite" />
+    <result column="shipper_address" jdbcType="VARCHAR" property="shipperAddress" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="ex_picking_code" jdbcType="VARCHAR" property="exPickingCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, express_delivery_id, express_trace_id, receiver_name, receiver_num, shipper_name, 
+    shipper_num, express_type, express_company, weight, `length`, wide, hight, cnt, volume, 
+    receiver_province, receiver_city, receiver_site, receiver_address, shipper_province, 
+    shipper_city, shipper_site, shipper_address, create_time, pid, ex_picking_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from express_delivery
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from express_delivery
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.ExpressDelivery">
+    insert into express_delivery (id, express_delivery_id, express_trace_id, 
+      receiver_name, receiver_num, shipper_name, 
+      shipper_num, express_type, express_company, 
+      weight, `length`, wide, hight, 
+      cnt, volume, receiver_province, 
+      receiver_city, receiver_site, receiver_address, 
+      shipper_province, shipper_city, shipper_site, 
+      shipper_address, create_time, pid, 
+      ex_picking_code)
+    values (#{id,jdbcType=INTEGER}, #{expressDeliveryId,jdbcType=VARCHAR}, #{expressTraceId,jdbcType=VARCHAR}, 
+      #{receiverName,jdbcType=VARCHAR}, #{receiverNum,jdbcType=VARCHAR}, #{shipperName,jdbcType=VARCHAR}, 
+      #{shipperNum,jdbcType=VARCHAR}, #{expressType,jdbcType=SMALLINT}, #{expressCompany,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=REAL}, #{length,jdbcType=REAL}, #{wide,jdbcType=REAL}, #{hight,jdbcType=REAL}, 
+      #{cnt,jdbcType=REAL}, #{volume,jdbcType=REAL}, #{receiverProvince,jdbcType=VARCHAR}, 
+      #{receiverCity,jdbcType=VARCHAR}, #{receiverSite,jdbcType=VARCHAR}, #{receiverAddress,jdbcType=VARCHAR}, 
+      #{shipperProvince,jdbcType=VARCHAR}, #{shipperCity,jdbcType=VARCHAR}, #{shipperSite,jdbcType=VARCHAR}, 
+      #{shipperAddress,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{pid,jdbcType=INTEGER}, 
+      #{exPickingCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.ExpressDelivery">
+    insert into express_delivery
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="expressDeliveryId != null">
+        express_delivery_id,
+      </if>
+      <if test="expressTraceId != null">
+        express_trace_id,
+      </if>
+      <if test="receiverName != null">
+        receiver_name,
+      </if>
+      <if test="receiverNum != null">
+        receiver_num,
+      </if>
+      <if test="shipperName != null">
+        shipper_name,
+      </if>
+      <if test="shipperNum != null">
+        shipper_num,
+      </if>
+      <if test="expressType != null">
+        express_type,
+      </if>
+      <if test="expressCompany != null">
+        express_company,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="length != null">
+        `length`,
+      </if>
+      <if test="wide != null">
+        wide,
+      </if>
+      <if test="hight != null">
+        hight,
+      </if>
+      <if test="cnt != null">
+        cnt,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="receiverProvince != null">
+        receiver_province,
+      </if>
+      <if test="receiverCity != null">
+        receiver_city,
+      </if>
+      <if test="receiverSite != null">
+        receiver_site,
+      </if>
+      <if test="receiverAddress != null">
+        receiver_address,
+      </if>
+      <if test="shipperProvince != null">
+        shipper_province,
+      </if>
+      <if test="shipperCity != null">
+        shipper_city,
+      </if>
+      <if test="shipperSite != null">
+        shipper_site,
+      </if>
+      <if test="shipperAddress != null">
+        shipper_address,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="exPickingCode != null">
+        ex_picking_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="expressDeliveryId != null">
+        #{expressDeliveryId,jdbcType=VARCHAR},
+      </if>
+      <if test="expressTraceId != null">
+        #{expressTraceId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverNum != null">
+        #{receiverNum,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperName != null">
+        #{shipperName,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperNum != null">
+        #{shipperNum,jdbcType=VARCHAR},
+      </if>
+      <if test="expressType != null">
+        #{expressType,jdbcType=SMALLINT},
+      </if>
+      <if test="expressCompany != null">
+        #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="length != null">
+        #{length,jdbcType=REAL},
+      </if>
+      <if test="wide != null">
+        #{wide,jdbcType=REAL},
+      </if>
+      <if test="hight != null">
+        #{hight,jdbcType=REAL},
+      </if>
+      <if test="cnt != null">
+        #{cnt,jdbcType=REAL},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=REAL},
+      </if>
+      <if test="receiverProvince != null">
+        #{receiverProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverCity != null">
+        #{receiverCity,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverSite != null">
+        #{receiverSite,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperProvince != null">
+        #{shipperProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperCity != null">
+        #{shipperCity,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperSite != null">
+        #{shipperSite,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperAddress != null">
+        #{shipperAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="exPickingCode != null">
+        #{exPickingCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.ExpressDelivery">
+    update express_delivery
+    <set>
+      <if test="expressDeliveryId != null">
+        express_delivery_id = #{expressDeliveryId,jdbcType=VARCHAR},
+      </if>
+      <if test="expressTraceId != null">
+        express_trace_id = #{expressTraceId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null">
+        receiver_name = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverNum != null">
+        receiver_num = #{receiverNum,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperName != null">
+        shipper_name = #{shipperName,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperNum != null">
+        shipper_num = #{shipperNum,jdbcType=VARCHAR},
+      </if>
+      <if test="expressType != null">
+        express_type = #{expressType,jdbcType=SMALLINT},
+      </if>
+      <if test="expressCompany != null">
+        express_company = #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="length != null">
+        `length` = #{length,jdbcType=REAL},
+      </if>
+      <if test="wide != null">
+        wide = #{wide,jdbcType=REAL},
+      </if>
+      <if test="hight != null">
+        hight = #{hight,jdbcType=REAL},
+      </if>
+      <if test="cnt != null">
+        cnt = #{cnt,jdbcType=REAL},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=REAL},
+      </if>
+      <if test="receiverProvince != null">
+        receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverCity != null">
+        receiver_city = #{receiverCity,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverSite != null">
+        receiver_site = #{receiverSite,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperProvince != null">
+        shipper_province = #{shipperProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperCity != null">
+        shipper_city = #{shipperCity,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperSite != null">
+        shipper_site = #{shipperSite,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperAddress != null">
+        shipper_address = #{shipperAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="exPickingCode != null">
+        ex_picking_code = #{exPickingCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.ExpressDelivery">
+    update express_delivery
+    set express_delivery_id = #{expressDeliveryId,jdbcType=VARCHAR},
+      express_trace_id = #{expressTraceId,jdbcType=VARCHAR},
+      receiver_name = #{receiverName,jdbcType=VARCHAR},
+      receiver_num = #{receiverNum,jdbcType=VARCHAR},
+      shipper_name = #{shipperName,jdbcType=VARCHAR},
+      shipper_num = #{shipperNum,jdbcType=VARCHAR},
+      express_type = #{expressType,jdbcType=SMALLINT},
+      express_company = #{expressCompany,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=REAL},
+      `length` = #{length,jdbcType=REAL},
+      wide = #{wide,jdbcType=REAL},
+      hight = #{hight,jdbcType=REAL},
+      cnt = #{cnt,jdbcType=REAL},
+      volume = #{volume,jdbcType=REAL},
+      receiver_province = #{receiverProvince,jdbcType=VARCHAR},
+      receiver_city = #{receiverCity,jdbcType=VARCHAR},
+      receiver_site = #{receiverSite,jdbcType=VARCHAR},
+      receiver_address = #{receiverAddress,jdbcType=VARCHAR},
+      shipper_province = #{shipperProvince,jdbcType=VARCHAR},
+      shipper_city = #{shipperCity,jdbcType=VARCHAR},
+      shipper_site = #{shipperSite,jdbcType=VARCHAR},
+      shipper_address = #{shipperAddress,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      pid = #{pid,jdbcType=INTEGER},
+      ex_picking_code = #{exPickingCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from express_delivery
+        <where>
+            1=1
+            <if test="pojo.receiverName != null">
+                and receiver_name like CONCAT('%', #{pojo.receiverName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.receiverNum != null">
+                and receiver_num = #{pojo.receiverNum,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverProvince != null">
+                and receiver_provience =#{pojo.receiverProvince,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverCity != null">
+                and receiver_city =#{pojo.receiverCity,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverSite != null">
+                and receiver_site =#{pojo.receiverSite,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverAddress != null">
+                and receiver_address like CONCAT('%', #{pojo.receiverAddress,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.expressCompany != null">
+                and express_company = #{pojo.expressCompany,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.expressDeliveryId != null">
+                and express_delivery_id = #{pojo.expressDeliveryId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.shipperName != null">
+                and shipper_name like CONCAT('%', #{pojo.shipperName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.shipperNum != null">
+                and shipper_num = #{pojo.shipperNum,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.shipperAddress != null">
+                and shipper_address like CONCAT('%', #{pojo.shipperAddress,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.expressType != null">
+                and express_type = #{pojo.expressType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.expressCompany != null">
+                and express_company like CONCAT('%', #{pojo.expressCompany,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.expressTraceId != null">
+                and express_trace_id = #{pojo.expressTraceId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.pid != null">
+                and pid = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.exPickingCode != null">
+                and ex_picking_code = #{pojo.exPickingCode,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and create_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= create_time
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from express_delivery
+        <where>
+            1=1
+            <if test="pojo.receiverName != null">
+                and receiver_name like CONCAT('%', #{pojo.receiverName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.receiverNum != null">
+                and receiver_num = #{pojo.receiverNum,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverProvince != null">
+                and receiver_provience =#{pojo.receiverProvince,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverCity != null">
+                and receiver_city =#{pojo.receiverCity,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverSite != null">
+                and receiver_site =#{pojo.receiverSite,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.receiverAddress != null">
+                and receiver_address like CONCAT('%', #{pojo.receiverAddress,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.expressCompany != null">
+                and express_company = #{pojo.expressCompany,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.expressDeliveryId != null">
+                and express_delivery_id = #{pojo.expressDeliveryId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.shipperName != null">
+                and shipper_name like CONCAT('%', #{pojo.shipperName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.shipperNum != null">
+                and shipper_num = #{pojo.shipperNum,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.shipperAddress != null">
+                and shipper_address like CONCAT('%', #{pojo.shipperAddress,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.expressType != null">
+                and express_type = #{pojo.expressType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.expressCompany != null">
+                and express_company like CONCAT('%', #{pojo.expressCompany,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.expressTraceId != null">
+                and express_trace_id = #{pojo.expressTraceId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.pid != null">
+                and pid = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.exPickingCode != null">
+                and ex_picking_code = #{pojo.exPickingCode,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and create_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= create_time
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+        <if test="searchDTO != null">
+            limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+</mapper>

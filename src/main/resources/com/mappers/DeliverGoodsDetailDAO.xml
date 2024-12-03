@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.DeliverGoodsDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.DeliverGoodsDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="PID" jdbcType="INTEGER" property="pid" />
+    <result column="row_id" jdbcType="INTEGER" property="rowId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="sku_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="chinese_describe" jdbcType="VARCHAR" property="chineseDescribe" />
+    <result column="english_describe" jdbcType="VARCHAR" property="englishDescribe" />
+    <result column="other_name" jdbcType="VARCHAR" property="otherName" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="order_cnt" jdbcType="INTEGER" property="orderCnt" />
+    <result column="deliver_cnt" jdbcType="INTEGER" property="deliverCnt" />
+    <result column="volume" jdbcType="DOUBLE" property="volume" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="net_weight" jdbcType="DOUBLE" property="netWeight" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, PID, row_id, `status`, sku_code, chinese_describe, english_describe, other_name, 
+    unit, order_cnt, deliver_cnt, volume, weight, net_weight, money
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deliver_goods_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from deliver_goods_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.DeliverGoodsDetail">
+    insert into deliver_goods_detail (id, PID, row_id, 
+      `status`, sku_code, chinese_describe, 
+      english_describe, other_name, unit, 
+      order_cnt, deliver_cnt, volume, 
+      weight, net_weight, money
+      )
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{rowId,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{skuCode,jdbcType=VARCHAR}, #{chineseDescribe,jdbcType=VARCHAR}, 
+      #{englishDescribe,jdbcType=VARCHAR}, #{otherName,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{orderCnt,jdbcType=INTEGER}, #{deliverCnt,jdbcType=INTEGER}, #{volume,jdbcType=DOUBLE}, 
+      #{weight,jdbcType=DOUBLE}, #{netWeight,jdbcType=DOUBLE}, #{money,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.DeliverGoodsDetail">
+    insert into deliver_goods_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="pid != null">
+        PID,
+      </if>
+      <if test="rowId != null">
+        row_id,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="skuCode != null">
+        sku_code,
+      </if>
+      <if test="chineseDescribe != null">
+        chinese_describe,
+      </if>
+      <if test="englishDescribe != null">
+        english_describe,
+      </if>
+      <if test="otherName != null">
+        other_name,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="orderCnt != null">
+        order_cnt,
+      </if>
+      <if test="deliverCnt != null">
+        deliver_cnt,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="netWeight != null">
+        net_weight,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="rowId != null">
+        #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="chineseDescribe != null">
+        #{chineseDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="englishDescribe != null">
+        #{englishDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="otherName != null">
+        #{otherName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCnt != null">
+        #{orderCnt,jdbcType=INTEGER},
+      </if>
+      <if test="deliverCnt != null">
+        #{deliverCnt,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="netWeight != null">
+        #{netWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.DeliverGoodsDetail">
+    update deliver_goods_detail
+    <set>
+      <if test="pid != null">
+        PID = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="rowId != null">
+        row_id = #{rowId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="skuCode != null">
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="chineseDescribe != null">
+        chinese_describe = #{chineseDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="englishDescribe != null">
+        english_describe = #{englishDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="otherName != null">
+        other_name = #{otherName,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCnt != null">
+        order_cnt = #{orderCnt,jdbcType=INTEGER},
+      </if>
+      <if test="deliverCnt != null">
+        deliver_cnt = #{deliverCnt,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="netWeight != null">
+        net_weight = #{netWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.DeliverGoodsDetail">
+    update deliver_goods_detail
+    set PID = #{pid,jdbcType=INTEGER},
+      row_id = #{rowId,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=VARCHAR},
+      sku_code = #{skuCode,jdbcType=VARCHAR},
+      chinese_describe = #{chineseDescribe,jdbcType=VARCHAR},
+      english_describe = #{englishDescribe,jdbcType=VARCHAR},
+      other_name = #{otherName,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      order_cnt = #{orderCnt,jdbcType=INTEGER},
+      deliver_cnt = #{deliverCnt,jdbcType=INTEGER},
+      volume = #{volume,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      net_weight = #{netWeight,jdbcType=DOUBLE},
+      money = #{money,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from deliver_goods_detail
+        <where>
+        1=1
+        <if test="pojo.pid != null">
+            and PID = #{pojo.pid,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.rowId != null">
+            and row_id = #{pojo.rowId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.status != null">
+            and `status` like CONCAT('%', #{pojo.status,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.skuCode != null">
+            and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+        </if>
+        <if test="pojo.otherName != null">
+            and other_name like CONCAT('%', #{pojo.otherName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.unit != null">
+            and unit = #{pojo.unit,jdbcType=VARCHAR}
+        </if>
+        <if test="pojo.orderCnt != null">
+            and order_cnt = #{pojo.orderCnt,jdbcType=INTEGER}
+        </if>
+        <if test="min1 != null">
+            and deliver_cnt &gt; #{min1,jdbcType=INTEGER}
+        </if>
+        <if test="max1 != null">
+            and #{max1,jdbcType=INTEGER} &gt; deliver_cnt
+        </if>
+        <if test="pojo.chineseDescribe != null">
+            and chinese_describe like CONCAT('%', #{pojo.chineseDescribe,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.englishDescribe != null">
+            and english_describe like CONCAT('%', #{pojo.englishDescribe,jdbcType=VARCHAR},'%')
+        </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select id
+        from deliver_goods_detail
+        <where>
+            1=1
+            <if test="pojo.pid != null">
+                and PID = #{pojo.pid,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.rowId != null">
+                and row_id = #{pojo.rowId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.status != null">
+                and `status` like CONCAT('%', #{pojo.status,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.otherName != null">
+                and other_name like CONCAT('%', #{pojo.otherName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.unit != null">
+                and unit = #{pojo.unit,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.orderCnt != null">
+                and order_cnt = #{pojo.orderCnt,jdbcType=INTEGER}
+            </if>
+            <if test="min1 != null">
+                and deliver_cnt &gt; #{min1,jdbcType=INTEGER}
+            </if>
+            <if test="max1 != null">
+                and #{max1,jdbcType=INTEGER} &gt; deliver_cnt
+            </if>
+            <if test="pojo.chineseDescribe != null">
+                and chinese_describe like CONCAT('%', #{pojo.chineseDescribe,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.englishDescribe != null">
+                and english_describe like CONCAT('%', #{pojo.englishDescribe,jdbcType=VARCHAR},'%')
+            </if>
+        </where>
+        order by id desc
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+</mapper>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.OnshelfStrategyDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.OnshelfStrategy">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="strategy_code" jdbcType="VARCHAR" property="strategyCode" />
+    <result column="strategy_name" jdbcType="VARCHAR" property="strategyName" />
+    <result column="custom_id" jdbcType="INTEGER" property="customId" />
+    <result column="custom_code" jdbcType="VARCHAR" property="customCode" />
+    <result column="custom_name" jdbcType="VARCHAR" property="customName" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="is_usable" jdbcType="BIT" property="isUsable" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, strategy_code, strategy_name, custom_id, custom_code, custom_name, warehouse_id,
+    warehouse_code, warehouse_name, is_usable
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onshelf_strategy
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from onshelf_strategy
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.OnshelfStrategy">
+    insert into onshelf_strategy (id, strategy_code, strategy_name,
+      custom_id, custom_code, custom_name,
+      warehouse_id, warehouse_code, warehouse_name,
+      is_usable)
+    values (#{id,jdbcType=INTEGER}, #{strategyCode,jdbcType=VARCHAR}, #{strategyName,jdbcType=VARCHAR},
+      #{customId,jdbcType=INTEGER}, #{customCode,jdbcType=VARCHAR}, #{customName,jdbcType=VARCHAR},
+      #{warehouseId,jdbcType=INTEGER}, #{warehouseCode,jdbcType=VARCHAR}, #{warehouseName,jdbcType=VARCHAR},
+      #{isUsable,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.OnshelfStrategy" useGeneratedKeys="true" keyProperty="id">
+    insert into onshelf_strategy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="strategyCode != null">
+        strategy_code,
+      </if>
+      <if test="strategyName != null">
+        strategy_name,
+      </if>
+      <if test="customId != null">
+        custom_id,
+      </if>
+      <if test="customCode != null">
+        custom_code,
+      </if>
+      <if test="customName != null">
+        custom_name,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="isUsable != null">
+        is_usable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="strategyCode != null">
+        #{strategyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="strategyName != null">
+        #{strategyName,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="customCode != null">
+        #{customCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsable != null">
+        #{isUsable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.OnshelfStrategy">
+    update onshelf_strategy
+    <set>
+      <if test="strategyCode != null">
+        strategy_code = #{strategyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="strategyName != null">
+        strategy_name = #{strategyName,jdbcType=VARCHAR},
+      </if>
+      <if test="customId != null">
+        custom_id = #{customId,jdbcType=INTEGER},
+      </if>
+      <if test="customCode != null">
+        custom_code = #{customCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customName != null">
+        custom_name = #{customName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseCode != null">
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsable != null">
+        is_usable = #{isUsable,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.OnshelfStrategy">
+    update onshelf_strategy
+    set strategy_code = #{strategyCode,jdbcType=VARCHAR},
+      strategy_name = #{strategyName,jdbcType=VARCHAR},
+      custom_id = #{customId,jdbcType=INTEGER},
+      custom_code = #{customCode,jdbcType=VARCHAR},
+      custom_name = #{customName,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      is_usable = #{isUsable,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onshelf_strategy
+    where 1=1 and warehouse_id in(
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.strategyCode != null">
+      and strategy_code like concat('%',#{pojo.strategyCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.strategyName != null">
+      and strategy_name like concat('%',#{pojo.strategyName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER},
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat('%',#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat('%',#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%',#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=BIT}
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+
+    <if test="searchDTO !=null">
+    limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from onshelf_strategy
+    where 1=1 and warehouse_id in(
+    select
+    warehouse_id
+    from work_group_warehouse_relation
+    where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+    )
+    <if test="pojo.strategyCode != null">
+      and strategy_code like concat('%',#{pojo.strategyCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.strategyName != null">
+      and strategy_name like concat('%',#{pojo.strategyName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customId != null">
+      and custom_id = #{pojo.customId,jdbcType=INTEGER},
+    </if>
+    <if test="pojo.customCode != null">
+      and custom_code like concat('%',#{pojo.customCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.customName != null">
+      and custom_name like concat('%',#{pojo.customName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseCode != null">
+      and warehouse_code like concat('%',#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like concat('%',#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=BIT}
+    </if>
+  </select>
+</mapper>

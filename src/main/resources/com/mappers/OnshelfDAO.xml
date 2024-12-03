@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.OnshelfDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.Onshelf">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="advice_id" jdbcType="INTEGER" property="adviceId"/>
+        <result column="advice_code" jdbcType="VARCHAR" property="adviceCode"/>
+        <result column="onshelf_code" jdbcType="VARCHAR" property="onshelfCode"/>
+        <result column="onshelf_state" jdbcType="INTEGER" property="onshelfState"/>
+        <result column="print_account" jdbcType="INTEGER" property="printAccount"/>
+        <result column="is_usable" jdbcType="BIT" property="isUsable"/>
+        <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId"/>
+        <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName"/>
+        <result column="warehouse_code" jdbcType="VARCHAR" property="warehouseCode"/>
+        <result column="check_person_id" jdbcType="INTEGER" property="checkPersonId"/>
+        <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="onshelf_person_id" jdbcType="INTEGER" property="onshelfPersonId"/>
+        <result column="onshelf_person_name" jdbcType="VARCHAR" property="onshelfPersonName"/>
+        <result column="onshelf_area_id" jdbcType="INTEGER" property="onshelfAreaId"/>
+        <result column="onshelf_area_code" jdbcType="VARCHAR" property="onshelfAreaCode"/>
+        <result column="onshelf_area_name" jdbcType="VARCHAR" property="onshelfAreaName"/>
+        <result column="source_type" jdbcType="INTEGER" property="sourceType"/>
+        <result column="check_time" jdbcType="TIMESTAMP" property="checkTime"/>
+        <result column="onshelf_batch" jdbcType="VARCHAR" property="onshelfBatch"/>
+        <result column="onshelf_task_execute_device" jdbcType="VARCHAR" property="onshelfTaskExecuteDevice"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , advice_id, advice_code, onshelf_code, onshelf_state, print_account, is_usable,
+    warehouse_id, warehouse_name, warehouse_code, check_person_id, check_person_name,
+    create_time, remark, onshelf_person_id, onshelf_person_name, onshelf_area_id, onshelf_area_code,
+    onshelf_area_name, source_type, check_time, onshelf_batch, onshelf_task_execute_device
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from onshelf
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from onshelf
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.Onshelf" useGeneratedKeys="true" keyProperty="id">
+        insert into onshelf (id, advice_id, advice_code,
+                             onshelf_code, onshelf_state, print_account,
+                             is_usable, warehouse_id, warehouse_name,
+                             warehouse_code, check_person_id, check_person_name,
+                             create_time, remark, onshelf_person_id,
+                             onshelf_person_name, onshelf_area_id, onshelf_area_code,
+                             onshelf_area_name, source_type, check_time,
+                             onshelf_batch, onshelf_task_execute_device)
+        values (#{id,jdbcType=INTEGER}, #{adviceId,jdbcType=INTEGER}, #{adviceCode,jdbcType=VARCHAR},
+                #{onshelfCode,jdbcType=VARCHAR}, #{onshelfState,jdbcType=INTEGER}, #{printAccount,jdbcType=INTEGER},
+                #{isUsable,jdbcType=BIT}, #{warehouseId,jdbcType=INTEGER}, #{warehouseName,jdbcType=VARCHAR},
+                #{warehouseCode,jdbcType=VARCHAR}, #{checkPersonId,jdbcType=INTEGER},
+                #{checkPersonName,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{onshelfPersonId,jdbcType=INTEGER},
+                #{onshelfPersonName,jdbcType=VARCHAR}, #{onshelfAreaId,jdbcType=INTEGER},
+                #{onshelfAreaCode,jdbcType=VARCHAR},
+                #{onshelfAreaName,jdbcType=VARCHAR}, #{sourceType,jdbcType=INTEGER}, #{checkTime,jdbcType=TIMESTAMP},
+                #{onshelfBatch,jdbcType=VARCHAR}, #{onshelfTaskExecuteDevice,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.Onshelf" useGeneratedKeys="true" keyProperty="id">
+        insert into onshelf
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="adviceId != null">
+                advice_id,
+            </if>
+            <if test="adviceCode != null">
+                advice_code,
+            </if>
+            <if test="onshelfCode != null">
+                onshelf_code,
+            </if>
+            <if test="onshelfState != null">
+                onshelf_state,
+            </if>
+            <if test="printAccount != null">
+                print_account,
+            </if>
+            <if test="isUsable != null">
+                is_usable,
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id,
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name,
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code,
+            </if>
+            <if test="checkPersonId != null">
+                check_person_id,
+            </if>
+            <if test="checkPersonName != null">
+                check_person_name,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="onshelfPersonId != null">
+                onshelf_person_id,
+            </if>
+            <if test="onshelfPersonName != null">
+                onshelf_person_name,
+            </if>
+            <if test="onshelfAreaId != null">
+                onshelf_area_id,
+            </if>
+            <if test="onshelfAreaCode != null">
+                onshelf_area_code,
+            </if>
+            <if test="onshelfAreaName != null">
+                onshelf_area_name,
+            </if>
+            <if test="sourceType != null">
+                source_type,
+            </if>
+            <if test="checkTime != null">
+                check_time,
+            </if>
+            <if test="onshelfBatch != null">
+                onshelf_batch,
+            </if>
+            <if test="onshelfTaskExecuteDevice != null">
+                onshelf_task_execute_device,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="adviceId != null">
+                #{adviceId,jdbcType=INTEGER},
+            </if>
+            <if test="adviceCode != null">
+                #{adviceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfCode != null">
+                #{onshelfCode,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfState != null">
+                #{onshelfState,jdbcType=INTEGER},
+            </if>
+            <if test="printAccount != null">
+                #{printAccount,jdbcType=INTEGER},
+            </if>
+            <if test="isUsable != null">
+                #{isUsable,jdbcType=BIT},
+            </if>
+            <if test="warehouseId != null">
+                #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseName != null">
+                #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="checkPersonId != null">
+                #{checkPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="checkPersonName != null">
+                #{checkPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfPersonId != null">
+                #{onshelfPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="onshelfPersonName != null">
+                #{onshelfPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfAreaId != null">
+                #{onshelfAreaId,jdbcType=INTEGER},
+            </if>
+            <if test="onshelfAreaCode != null">
+                #{onshelfAreaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfAreaName != null">
+                #{onshelfAreaName,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceType != null">
+                #{sourceType,jdbcType=INTEGER},
+            </if>
+            <if test="checkTime != null">
+                #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="onshelfBatch != null">
+                #{onshelfBatch,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfTaskExecuteDevice != null">
+                #{onshelfTaskExecuteDevice,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Onshelf">
+        update onshelf
+        <set>
+            <if test="adviceId != null">
+                advice_id = #{adviceId,jdbcType=INTEGER},
+            </if>
+            <if test="adviceCode != null">
+                advice_code = #{adviceCode,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfCode != null">
+                onshelf_code = #{onshelfCode,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfState != null">
+                onshelf_state = #{onshelfState,jdbcType=INTEGER},
+            </if>
+            <if test="printAccount != null">
+                print_account = #{printAccount,jdbcType=INTEGER},
+            </if>
+            <if test="isUsable != null">
+                is_usable = #{isUsable,jdbcType=BIT},
+            </if>
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId,jdbcType=INTEGER},
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseCode != null">
+                warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+            </if>
+            <if test="checkPersonId != null">
+                check_person_id = #{checkPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="checkPersonName != null">
+                check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfPersonId != null">
+                onshelf_person_id = #{onshelfPersonId,jdbcType=INTEGER},
+            </if>
+            <if test="onshelfPersonName != null">
+                onshelf_person_name = #{onshelfPersonName,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfAreaId != null">
+                onshelf_area_id = #{onshelfAreaId,jdbcType=INTEGER},
+            </if>
+            <if test="onshelfAreaCode != null">
+                onshelf_area_code = #{onshelfAreaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfAreaName != null">
+                onshelf_area_name = #{onshelfAreaName,jdbcType=VARCHAR},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType,jdbcType=INTEGER},
+            </if>
+            <if test="checkTime != null">
+                check_time = #{checkTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="onshelfBatch != null">
+                onshelf_batch = #{onshelfBatch,jdbcType=VARCHAR},
+            </if>
+            <if test="onshelfTaskExecuteDevice != null">
+                onshelf_task_execute_device = #{onshelfTaskExecuteDevice,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Onshelf">
+        update onshelf
+        set advice_id                   = #{adviceId,jdbcType=INTEGER},
+            advice_code                 = #{adviceCode,jdbcType=VARCHAR},
+            onshelf_code                = #{onshelfCode,jdbcType=VARCHAR},
+            onshelf_state               = #{onshelfState,jdbcType=INTEGER},
+            print_account               = #{printAccount,jdbcType=INTEGER},
+            is_usable                   = #{isUsable,jdbcType=BIT},
+            warehouse_id                = #{warehouseId,jdbcType=INTEGER},
+            warehouse_name              = #{warehouseName,jdbcType=VARCHAR},
+            warehouse_code              = #{warehouseCode,jdbcType=VARCHAR},
+            check_person_id             = #{checkPersonId,jdbcType=INTEGER},
+            check_person_name           = #{checkPersonName,jdbcType=VARCHAR},
+            create_time                 = #{createTime,jdbcType=TIMESTAMP},
+            remark                      = #{remark,jdbcType=VARCHAR},
+            onshelf_person_id           = #{onshelfPersonId,jdbcType=INTEGER},
+            onshelf_person_name         = #{onshelfPersonName,jdbcType=VARCHAR},
+            onshelf_area_id             = #{onshelfAreaId,jdbcType=INTEGER},
+            onshelf_area_code           = #{onshelfAreaCode,jdbcType=VARCHAR},
+            onshelf_area_name           = #{onshelfAreaName,jdbcType=VARCHAR},
+            source_type                 = #{sourceType,jdbcType=INTEGER},
+            check_time                  = #{checkTime,jdbcType=TIMESTAMP},
+            onshelf_batch               = #{onshelfBatch,jdbcType=VARCHAR},
+            onshelf_task_execute_device = #{onshelfTaskExecuteDevice,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from onshelf
+        where 1=1 and warehouse_id in
+        (
+        select
+        warehouse_id
+        from work_group_warehouse_relation
+        where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+        )
+        <if test="pojo.adviceId != null">
+            and advice_id = #{pojo.adviceId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.adviceCode != null">
+            and advice_code like concat(#{pojo.adviceCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.onshelfCode != null">
+            and onshelf_code like concat(#{pojo.onshelfCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.onshelfState != null">
+            and onshelf_state = #{pojo.onshelfState,jdbcType=INTEGER}
+        </if>
+        <if test="stateMin!=null">
+            and onshelf_state >= #{stateMin,jdbcType=INTEGER}
+        </if>
+        <if test="stateMax!=null">
+            and #{stateMax,jdbcType=INTEGER} >= onshelf_state
+        </if>
+        <if test="pojo.printAccount != null">
+            and print_account = #{pojo.printAccount,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.isUsable != null">
+            and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+        </if>
+        <if test="pojo.warehouseId != null">
+            and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.warehouseName != null">
+            and warehouse_name like concat(#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.warehouseCode != null">
+            and warehouse_code like concat(#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.checkPersonId != null">
+            and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.checkPersonName != null">
+            and check_person_name like concat(#{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="startTime!= null">
+            and create_time >= #{startTime}
+        </if>
+        <if test="endTime!= null">
+            and #{endTime}>=create_time
+        </if>
+        <if test="pojo.remark != null">
+            and remark = #{pojo.remark,jdbcType=VARCHAR}
+        </if>
+        <if test="pojo.onshelfPersonId != null">
+            and onshelf_person_id = #{pojo.onshelfPersonId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.onshelfPersonName != null">
+            and onshelf_person_name like concat(#{pojo.onshelfPersonName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.onshelfAreaId != null">
+            and onshelf_area_id = #{pojo.onshelfAreaId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.onshelfAreaCode != null">
+            and onshelf_area_code like concat('%',#{pojo.onshelfAreaCode,jdbcType=VARCHAR})
+        </if>
+        <if test="pojo.onshelfAreaName != null">
+            and onshelf_area_name like concat('%',#{pojo.onshelfAreaName,jdbcType=VARCHAR})
+        </if>
+        <if test="pojo.sourceType != null">
+            and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.checkTime != null">
+            and check_time = #{pojo.checkTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="pojo.onshelfBatch != null">
+            and onshelf_batch like concat(#{pojo.onshelfBatch,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.onshelfTaskExecuteDevice != null">
+            and onshelf_task_execute_device like concat(#{pojo.onshelfTaskExecuteDevice,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="screen != null">
+            order by ${screen}
+        </if>
+        <if test="searchDTO !=null">
+            limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select
+        count(id)
+        from onshelf
+        where 1=1 and warehouse_id in
+        (
+        select
+        warehouse_id
+        from work_group_warehouse_relation
+        where workgroup_id=#{workGroupId,jdbcType=INTEGER}
+        )
+        <if test="pojo.adviceId != null">
+            and advice_id = #{pojo.adviceId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.adviceCode != null">
+            and advice_code like concat(#{pojo.adviceCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.onshelfCode != null">
+            and onshelf_code like concat(#{pojo.onshelfCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.onshelfState != null">
+            and onshelf_state = #{pojo.onshelfState,jdbcType=INTEGER}
+        </if>
+        <if test="stateMin!=null">
+            and onshelf_state >= #{stateMin,jdbcType=INTEGER}
+        </if>
+        <if test="stateMax!=null">
+            and #{stateMax,jdbcType=INTEGER} >= onshelf_state
+        </if>
+        <if test="pojo.printAccount != null">
+            and print_account = #{pojo.printAccount,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.isUsable != null">
+            and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+        </if>
+        <if test="pojo.warehouseId != null">
+            and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.warehouseName != null">
+            and warehouse_name like concat(#{pojo.warehouseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.warehouseCode != null">
+            and warehouse_code like concat(#{pojo.warehouseCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.checkPersonId != null">
+            and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.checkPersonName != null">
+            and check_person_name like concat(#{pojo.checkPersonName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="startTime!= null">
+            and create_time >= #{startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="endTime!= null">
+            and #{endTime,jdbcType=TIMESTAMP}>=create_time
+        </if>
+        <if test="pojo.remark != null">
+            and remark = #{pojo.remark,jdbcType=VARCHAR}
+        </if>
+        <if test="pojo.onshelfPersonId != null">
+            and onshelf_person_id = #{pojo.onshelfPersonId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.onshelfPersonName != null">
+            and onshelf_person_name like concat(#{pojo.onshelfPersonName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.onshelfAreaId != null">
+            and onshelf_area_id = #{pojo.onshelfAreaId,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.onshelfAreaCode != null">
+            and onshelf_area_code like concat(#{pojo.onshelfAreaCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.onshelfAreaName != null">
+            and onshelf_area_name like concat(#{pojo.onshelfAreaName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.sourceType != null">
+            and source_type = #{pojo.sourceType,jdbcType=INTEGER}
+        </if>
+        <if test="pojo.checkTime != null">
+            and check_time = #{pojo.checkTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="pojo.onshelfBatch != null">
+            and onshelf_batch like concat(#{pojo.onshelfBatch,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="pojo.onshelfTaskExecuteDevice != null">
+            and onshelf_task_execute_device like concat(#{pojo.onshelfTaskExecuteDevice,jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+    <select id="selectByOnshelfCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from onshelf
+        where onshelf_code = #{code,jdbcType=VARCHAR}
+    </select>
+    <select id="selectStateAfterCreated" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from onshelf
+        where onshelf_state > 0 and 4 > onshelf_state
+    </select>
+</mapper>

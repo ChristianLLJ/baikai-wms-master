@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.PurchaseOrderDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.PurchaseOrderDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="row_num" jdbcType="INTEGER" property="rowNum" />
+    <result column="commodity_id" jdbcType="INTEGER" property="commodityId" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="commodity_code" jdbcType="VARCHAR" property="commodityCode" />
+    <result column="SKU_ID" jdbcType="INTEGER" property="skuId" />
+    <result column="SKU_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="SKU_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="container_id" jdbcType="INTEGER" property="containerId" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="container_name" jdbcType="VARCHAR" property="containerName" />
+    <result column="container_code" jdbcType="VARCHAR" property="containerCode" />
+    <result column="predict_container_num" jdbcType="INTEGER" property="predictContainerNum" />
+    <result column="predict_num" jdbcType="DOUBLE" property="predictNum" />
+    <result column="fact_container_num" jdbcType="INTEGER" property="factContainerNum" />
+    <result column="fact_num" jdbcType="DOUBLE" property="factNum" />
+    <result column="total_volumn" jdbcType="DOUBLE" property="totalVolumn" />
+    <result column="total_weight" jdbcType="DOUBLE" property="totalWeight" />
+    <result column="total_net_weight" jdbcType="DOUBLE" property="totalNetWeight" />
+    <result column="total_money" jdbcType="DOUBLE" property="totalMoney" />
+    <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="is_generate" jdbcType="BIT" property="isGenerate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_id, row_num, commodity_id, commodity_name, commodity_code, SKU_ID, SKU_code,
+    SKU_name, container_id, unit, container_name, container_code, predict_container_num,
+    predict_num, fact_container_num, fact_num, total_volumn, total_weight, total_net_weight,
+    total_money, receive_time, remark, is_generate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from purchase_order_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from purchase_order_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.PurchaseOrderDetail">
+    insert into purchase_order_detail (id, order_id, row_num,
+      commodity_id, commodity_name, commodity_code,
+      SKU_ID, SKU_code, SKU_name,
+      container_id, unit, container_name,
+      container_code, predict_container_num, predict_num,
+      fact_container_num, fact_num, total_volumn,
+      total_weight, total_net_weight, total_money,
+      receive_time, remark, is_generate
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{rowNum,jdbcType=INTEGER},
+      #{commodityId,jdbcType=INTEGER}, #{commodityName,jdbcType=VARCHAR}, #{commodityCode,jdbcType=VARCHAR},
+      #{skuId,jdbcType=INTEGER}, #{skuCode,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR},
+      #{containerId,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, #{containerName,jdbcType=VARCHAR},
+      #{containerCode,jdbcType=VARCHAR}, #{predictContainerNum,jdbcType=INTEGER}, #{predictNum,jdbcType=DOUBLE},
+      #{factContainerNum,jdbcType=INTEGER}, #{factNum,jdbcType=DOUBLE}, #{totalVolumn,jdbcType=DOUBLE},
+      #{totalWeight,jdbcType=DOUBLE}, #{totalNetWeight,jdbcType=DOUBLE}, #{totalMoney,jdbcType=DOUBLE},
+      #{receiveTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{isGenerate,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.PurchaseOrderDetail">
+    insert into purchase_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="rowNum != null">
+        row_num,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="commodityName != null">
+        commodity_name,
+      </if>
+      <if test="commodityCode != null">
+        commodity_code,
+      </if>
+      <if test="skuId != null">
+        SKU_ID,
+      </if>
+      <if test="skuCode != null">
+        SKU_code,
+      </if>
+      <if test="skuName != null">
+        SKU_name,
+      </if>
+      <if test="containerId != null">
+        container_id,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="containerName != null">
+        container_name,
+      </if>
+      <if test="containerCode != null">
+        container_code,
+      </if>
+      <if test="predictContainerNum != null">
+        predict_container_num,
+      </if>
+      <if test="predictNum != null">
+        predict_num,
+      </if>
+      <if test="factContainerNum != null">
+        fact_container_num,
+      </if>
+      <if test="factNum != null">
+        fact_num,
+      </if>
+      <if test="totalVolumn != null">
+        total_volumn,
+      </if>
+      <if test="totalWeight != null">
+        total_weight,
+      </if>
+      <if test="totalNetWeight != null">
+        total_net_weight,
+      </if>
+      <if test="totalMoney != null">
+        total_money,
+      </if>
+      <if test="receiveTime != null">
+        receive_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="isGenerate != null">
+        is_generate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="rowNum != null">
+        #{rowNum,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCode != null">
+        #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="containerName != null">
+        #{containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null">
+        #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="predictContainerNum != null">
+        #{predictContainerNum,jdbcType=INTEGER},
+      </if>
+      <if test="predictNum != null">
+        #{predictNum,jdbcType=DOUBLE},
+      </if>
+      <if test="factContainerNum != null">
+        #{factContainerNum,jdbcType=INTEGER},
+      </if>
+      <if test="factNum != null">
+        #{factNum,jdbcType=DOUBLE},
+      </if>
+      <if test="totalVolumn != null">
+        #{totalVolumn,jdbcType=DOUBLE},
+      </if>
+      <if test="totalWeight != null">
+        #{totalWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="totalNetWeight != null">
+        #{totalNetWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="totalMoney != null">
+        #{totalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="receiveTime != null">
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isGenerate != null">
+        #{isGenerate,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.PurchaseOrderDetail">
+    update purchase_order_detail
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="rowNum != null">
+        row_num = #{rowNum,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="commodityName != null">
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityCode != null">
+        commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        SKU_ID = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        SKU_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        SKU_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        container_id = #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="containerName != null">
+        container_name = #{containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null">
+        container_code = #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="predictContainerNum != null">
+        predict_container_num = #{predictContainerNum,jdbcType=INTEGER},
+      </if>
+      <if test="predictNum != null">
+        predict_num = #{predictNum,jdbcType=DOUBLE},
+      </if>
+      <if test="factContainerNum != null">
+        fact_container_num = #{factContainerNum,jdbcType=INTEGER},
+      </if>
+      <if test="factNum != null">
+        fact_num = #{factNum,jdbcType=DOUBLE},
+      </if>
+      <if test="totalVolumn != null">
+        total_volumn = #{totalVolumn,jdbcType=DOUBLE},
+      </if>
+      <if test="totalWeight != null">
+        total_weight = #{totalWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="totalNetWeight != null">
+        total_net_weight = #{totalNetWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="totalMoney != null">
+        total_money = #{totalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="receiveTime != null">
+        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isGenerate != null">
+        is_generate = #{isGenerate,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.PurchaseOrderDetail">
+    update purchase_order_detail
+    set order_id = #{orderId,jdbcType=INTEGER},
+      row_num = #{rowNum,jdbcType=INTEGER},
+      commodity_id = #{commodityId,jdbcType=INTEGER},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      SKU_ID = #{skuId,jdbcType=INTEGER},
+      SKU_code = #{skuCode,jdbcType=VARCHAR},
+      SKU_name = #{skuName,jdbcType=VARCHAR},
+      container_id = #{containerId,jdbcType=INTEGER},
+      unit = #{unit,jdbcType=VARCHAR},
+      container_name = #{containerName,jdbcType=VARCHAR},
+      container_code = #{containerCode,jdbcType=VARCHAR},
+      predict_container_num = #{predictContainerNum,jdbcType=INTEGER},
+      predict_num = #{predictNum,jdbcType=DOUBLE},
+      fact_container_num = #{factContainerNum,jdbcType=INTEGER},
+      fact_num = #{factNum,jdbcType=DOUBLE},
+      total_volumn = #{totalVolumn,jdbcType=DOUBLE},
+      total_weight = #{totalWeight,jdbcType=DOUBLE},
+      total_net_weight = #{totalNetWeight,jdbcType=DOUBLE},
+      total_money = #{totalMoney,jdbcType=DOUBLE},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_generate = #{isGenerate,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from purchase_order_detail
+    where 1=1
+    <if test="searchDTO !=null">
+      and id >= (select id from purchase_order_detail order by id asc
+      limit #{searchDTO.page,jdbcType=INTEGER},1)
+    </if>
+    <if test="pojo.orderId != null">
+      and order_id = #{pojo.orderId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.rowNum != null">
+      and row_num = #{pojo.rowNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityName != null">
+      and commodity_name like concat('%',#{pojo.commodityName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat('%',#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and SKU_ID = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuCode != null">
+      and SKU_code like concat('%', #{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuName != null">
+      and SKU_name like concat('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.unit != null">
+      and unit = #{pojo.unit,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.predictContainerNum != null">
+      and predict_container_num = #{pojo.predictContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictNum != null">
+      and predict_num = #{pojo.predictNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.factContainerNum != null">
+      and fact_container_num = #{pojo.factContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.factNum != null">
+      and fact_num = #{pojo.factNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalVolumn != null">
+      and total_volumn = #{pojo.totalVolumn,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalWeight != null">
+      and total_weight = #{pojo.totalWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalNetWeight != null">
+      and total_net_weight = #{pojo.totalNetWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalMoney != null">
+      and total_money = #{pojo.totalMoney,jdbcType=DOUBLE}
+    </if>
+    <if test="startTime!= null">
+      and receive_time >= #{startTime,jdbcType=DATE}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime,jdbcType=DATE}>=receive_time
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isGenerate != null">
+      and is_generate = #{pojo.isGenerate,jdbcType=BIT}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.num,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from purchase_order_detail
+    where 1=1
+    <if test="searchDTO !=null">
+      and id >= (select id from purchase_order_detail order by id asc
+      limit #{searchDTO.page,jdbcType=INTEGER},1)
+    </if>
+    <if test="pojo.orderId != null">
+      and order_id = #{pojo.orderId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.rowNum != null">
+      and row_num = #{pojo.rowNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityId != null">
+      and commodity_id = #{pojo.commodityId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.commodityName != null">
+      and commodity_name like concat('%',#{pojo.commodityName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.commodityCode != null">
+      and commodity_code like concat('%',#{pojo.commodityCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuId != null">
+      and SKU_ID = #{pojo.skuId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.skuCode != null">
+      and SKU_code like concat('%', #{pojo.skuCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuName != null">
+      and SKU_name like concat('%',#{pojo.skuName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.unit != null">
+      and unit = #{pojo.unit,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.predictContainerNum != null">
+      and predict_container_num = #{pojo.predictContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.predictNum != null">
+      and predict_num = #{pojo.predictNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.factContainerNum != null">
+      and fact_container_num = #{pojo.factContainerNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.factNum != null">
+      and fact_num = #{pojo.factNum,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalVolumn != null">
+      and total_volumn = #{pojo.totalVolumn,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalWeight != null">
+      and total_weight = #{pojo.totalWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalNetWeight != null">
+      and total_net_weight = #{pojo.totalNetWeight,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.totalMoney != null">
+      and total_money = #{pojo.totalMoney,jdbcType=DOUBLE}
+    </if>
+    <if test="startTime!= null">
+      and receive_time >= #{startTime,jdbcType=DATE}
+    </if>
+    <if test="endTime!= null">
+      and  #{endTime,jdbcType=DATE}>=receive_time
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.isGenerate != null">
+      and is_generate = #{pojo.isGenerate,jdbcType=BIT}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.num,jdbcType=INTEGER}
+    </if>
+  </select>
+  <delete id="deleteByOrderId" parameterType="java.lang.Integer">
+    delete from purchase_order_detail
+    where order_id=#{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByOrderId" parameterType="purchaseOrderDetail" resultType="java.lang.Integer">
+    select
+    id
+    from purchase_order_detail
+    where order_id=#{id,jdbcType=INTEGER} and sku_name = #{skuName,jdbcType=VARCHAR}
+  </select>
+</mapper>

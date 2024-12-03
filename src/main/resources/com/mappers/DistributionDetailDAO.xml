@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.DistributionDetailDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.DistributionDetail">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="distribution_id" jdbcType="INTEGER" property="distributionId"/>
+        <result column="distribution_detail_row" jdbcType="INTEGER" property="distributionDetailRow"/>
+        <result column="ex_picking_type" jdbcType="SMALLINT" property="exPickingType"/>
+        <result column="work_type" jdbcType="SMALLINT" property="workType"/>
+        <result column="wave_number" jdbcType="INTEGER" property="waveNumber"/>
+        <result column="sku_code" jdbcType="VARCHAR" property="skuCode"/>
+        <result column="sku_cnt" jdbcType="INTEGER" property="skuCnt"/>
+        <result column="goods_size" jdbcType="VARCHAR" property="goodsSize"/>
+        <result column="goods_color" jdbcType="VARCHAR" property="goodsColor"/>
+        <result column="sku_bar_code" jdbcType="VARCHAR" property="skuBarCode"/>
+        <result column="sku_price" jdbcType="INTEGER" property="skuPrice"/>
+        <result column="supplier_number" jdbcType="VARCHAR" property="supplierNumber"/>
+        <result column="supplier_name" jdbcType="VARCHAR" property="supplierName"/>
+        <result column="product_company" jdbcType="VARCHAR" property="productCompany"/>
+        <result column="product_time" jdbcType="TIMESTAMP" property="productTime"/>
+        <result column="product_batch" jdbcType="VARCHAR" property="productBatch"/>
+        <result column="trace_code" jdbcType="VARCHAR" property="traceCode"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , distribution_id, distribution_detail_row, ex_picking_type, work_type, wave_number,
+    sku_code, sku_cnt, goods_size, goods_color, sku_bar_code, sku_price, supplier_number, 
+    supplier_name, product_company, product_time, product_batch, trace_code
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from distribution_detail
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from distribution_detail
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.DistributionDetail">
+        insert into distribution_detail (id, distribution_id, distribution_detail_row,
+                                         ex_picking_type, work_type, wave_number,
+                                         sku_code, sku_cnt, goods_size,
+                                         goods_color, sku_bar_code, sku_price,
+                                         supplier_number, supplier_name, product_company,
+                                         product_time, product_batch, trace_code)
+        values (#{id,jdbcType=INTEGER}, #{distributionId,jdbcType=INTEGER}, #{distributionDetailRow,jdbcType=INTEGER},
+                #{exPickingType,jdbcType=SMALLINT}, #{workType,jdbcType=SMALLINT}, #{waveNumber,jdbcType=INTEGER},
+                #{skuCode,jdbcType=VARCHAR}, #{skuCnt,jdbcType=INTEGER}, #{goodsSize,jdbcType=VARCHAR},
+                #{goodsColor,jdbcType=VARCHAR}, #{skuBarCode,jdbcType=VARCHAR}, #{skuPrice,jdbcType=INTEGER},
+                #{supplierNumber,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR},
+                #{productCompany,jdbcType=VARCHAR},
+                #{productTime,jdbcType=TIMESTAMP}, #{productBatch,jdbcType=VARCHAR}, #{traceCode,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.DistributionDetail">
+        insert into distribution_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="distributionId != null">
+                distribution_id,
+            </if>
+            <if test="distributionDetailRow != null">
+                distribution_detail_row,
+            </if>
+            <if test="exPickingType != null">
+                ex_picking_type,
+            </if>
+            <if test="workType != null">
+                work_type,
+            </if>
+            <if test="waveNumber != null">
+                wave_number,
+            </if>
+            <if test="skuCode != null">
+                sku_code,
+            </if>
+            <if test="skuCnt != null">
+                sku_cnt,
+            </if>
+            <if test="goodsSize != null">
+                goods_size,
+            </if>
+            <if test="goodsColor != null">
+                goods_color,
+            </if>
+            <if test="skuBarCode != null">
+                sku_bar_code,
+            </if>
+            <if test="skuPrice != null">
+                sku_price,
+            </if>
+            <if test="supplierNumber != null">
+                supplier_number,
+            </if>
+            <if test="supplierName != null">
+                supplier_name,
+            </if>
+            <if test="productCompany != null">
+                product_company,
+            </if>
+            <if test="productTime != null">
+                product_time,
+            </if>
+            <if test="productBatch != null">
+                product_batch,
+            </if>
+            <if test="traceCode != null">
+                trace_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="distributionId != null">
+                #{distributionId,jdbcType=INTEGER},
+            </if>
+            <if test="distributionDetailRow != null">
+                #{distributionDetailRow,jdbcType=INTEGER},
+            </if>
+            <if test="exPickingType != null">
+                #{exPickingType,jdbcType=SMALLINT},
+            </if>
+            <if test="workType != null">
+                #{workType,jdbcType=SMALLINT},
+            </if>
+            <if test="waveNumber != null">
+                #{waveNumber,jdbcType=INTEGER},
+            </if>
+            <if test="skuCode != null">
+                #{skuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuCnt != null">
+                #{skuCnt,jdbcType=INTEGER},
+            </if>
+            <if test="goodsSize != null">
+                #{goodsSize,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsColor != null">
+                #{goodsColor,jdbcType=VARCHAR},
+            </if>
+            <if test="skuBarCode != null">
+                #{skuBarCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuPrice != null">
+                #{skuPrice,jdbcType=INTEGER},
+            </if>
+            <if test="supplierNumber != null">
+                #{supplierNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierName != null">
+                #{supplierName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCompany != null">
+                #{productCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="productTime != null">
+                #{productTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productBatch != null">
+                #{productBatch,jdbcType=VARCHAR},
+            </if>
+            <if test="traceCode != null">
+                #{traceCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.DistributionDetail">
+        update distribution_detail
+        <set>
+            <if test="distributionId != null">
+                distribution_id = #{distributionId,jdbcType=INTEGER},
+            </if>
+            <if test="distributionDetailRow != null">
+                distribution_detail_row = #{distributionDetailRow,jdbcType=INTEGER},
+            </if>
+            <if test="exPickingType != null">
+                ex_picking_type = #{exPickingType,jdbcType=SMALLINT},
+            </if>
+            <if test="workType != null">
+                work_type = #{workType,jdbcType=SMALLINT},
+            </if>
+            <if test="waveNumber != null">
+                wave_number = #{waveNumber,jdbcType=INTEGER},
+            </if>
+            <if test="skuCode != null">
+                sku_code = #{skuCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuCnt != null">
+                sku_cnt = #{skuCnt,jdbcType=INTEGER},
+            </if>
+            <if test="goodsSize != null">
+                goods_size = #{goodsSize,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsColor != null">
+                goods_color = #{goodsColor,jdbcType=VARCHAR},
+            </if>
+            <if test="skuBarCode != null">
+                sku_bar_code = #{skuBarCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuPrice != null">
+                sku_price = #{skuPrice,jdbcType=INTEGER},
+            </if>
+            <if test="supplierNumber != null">
+                supplier_number = #{supplierNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="supplierName != null">
+                supplier_name = #{supplierName,jdbcType=VARCHAR},
+            </if>
+            <if test="productCompany != null">
+                product_company = #{productCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="productTime != null">
+                product_time = #{productTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="productBatch != null">
+                product_batch = #{productBatch,jdbcType=VARCHAR},
+            </if>
+            <if test="traceCode != null">
+                trace_code = #{traceCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.DistributionDetail">
+        update distribution_detail
+        set distribution_id         = #{distributionId,jdbcType=INTEGER},
+            distribution_detail_row = #{distributionDetailRow,jdbcType=INTEGER},
+            ex_picking_type         = #{exPickingType,jdbcType=SMALLINT},
+            work_type               = #{workType,jdbcType=SMALLINT},
+            wave_number             = #{waveNumber,jdbcType=INTEGER},
+            sku_code                = #{skuCode,jdbcType=VARCHAR},
+            sku_cnt                 = #{skuCnt,jdbcType=INTEGER},
+            goods_size              = #{goodsSize,jdbcType=VARCHAR},
+            goods_color             = #{goodsColor,jdbcType=VARCHAR},
+            sku_bar_code            = #{skuBarCode,jdbcType=VARCHAR},
+            sku_price               = #{skuPrice,jdbcType=INTEGER},
+            supplier_number         = #{supplierNumber,jdbcType=VARCHAR},
+            supplier_name           = #{supplierName,jdbcType=VARCHAR},
+            product_company         = #{productCompany,jdbcType=VARCHAR},
+            product_time            = #{productTime,jdbcType=TIMESTAMP},
+            product_batch           = #{productBatch,jdbcType=VARCHAR},
+            trace_code              = #{traceCode,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from distribution_detail
+        <where>
+            1=1
+            <if test="pojo.distributionId != null">
+                and distribution_id = #{pojo.distributionId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.distributionDetailRow != null">
+                and distribution_detail_row = #{pojo.distributionDetailRow,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.exPickingType != null">
+                and ex_picking_type = #{pojo.exPickingType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.workType != null">
+                and work_type = #{pojo.workType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.waveNumber != null">
+                and wave_number = #{pojo.waveNumber,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=CHAR}
+            </if>
+            <if test="pojo.skuCnt != null">
+                and sku_cnt = #{pojo.skuCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuBarCode != null">
+                and sku_bar_code = #{pojo.skuBarCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuPrice != null">
+                and sku_price = #{pojo.skuPrice,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.supplierNumber != null">
+                and supplier_number = #{pojo.supplierNumber,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.supplierName != null">
+                and supplier_name like CONCAT('%', #{pojo.supplierName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.productCompany != null">
+                and product_company like CONCAT('%', #{pojo.productCompany,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime != null">
+                and product_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= product_time
+            </if>
+            <if test="pojo.productBatch != null">
+                and product_batch like CONCAT('%', #{pojo.productBatch,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.traceCode != null">
+                and trace_code = #{pojo.traceCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select id
+        from distribution_detail
+        <where>
+            1=1
+            <if test="pojo.distributionId != null">
+                and distribution_id = #{pojo.distributionId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.distributionDetailRow != null">
+                and distribution_detail_row = #{pojo.distributionDetailRow,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.exPickingType != null">
+                and ex_picking_type = #{pojo.exPickingType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.workType != null">
+                and work_type = #{pojo.workType,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.waveNumber != null">
+                and wave_number = #{pojo.waveNumber,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuCode != null">
+                and sku_code = #{pojo.skuCode,jdbcType=CHAR}
+            </if>
+            <if test="pojo.skuCnt != null">
+                and sku_cnt = #{pojo.skuCnt,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.skuBarCode != null">
+                and sku_bar_code = #{pojo.skuBarCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.skuPrice != null">
+                and sku_price = #{pojo.skuPrice,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.supplierNumber != null">
+                and supplier_number = #{pojo.supplierNumber,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.supplierName != null">
+                and supplier_name like CONCAT('%', #{pojo.supplierName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.productCompany != null">
+                and product_company like CONCAT('%', #{pojo.productCompany,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="startTime != null">
+                and product_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= product_time
+            </if>
+            <if test="pojo.productBatch != null">
+                and product_batch like CONCAT('%', #{pojo.productBatch,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.traceCode != null">
+                and trace_code = #{pojo.traceCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by id desc
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+    <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from distribution_detail
+        where distribution_id = #{distributionId,jdbcType=INTEGER}
+    </select>
+</mapper>

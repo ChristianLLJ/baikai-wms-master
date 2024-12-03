@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.GoodsSkuDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.GoodsSku">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="sku_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="sku_barcode" jdbcType="VARCHAR" property="skuBarcode" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="sku_describe" jdbcType="VARCHAR" property="skuDescribe" />
+    <result column="sku_size_id" jdbcType="INTEGER" property="skuSizeId" />
+    <result column="sku_size" jdbcType="VARCHAR" property="skuSize" />
+    <result column="sku_color_id" jdbcType="INTEGER" property="skuColorId" />
+    <result column="sku_color" jdbcType="VARCHAR" property="skuColor" />
+    <result column="sku_brand_id" jdbcType="INTEGER" property="skuBrandId" />
+    <result column="sku_brand" jdbcType="VARCHAR" property="skuBrand" />
+    <result column="sku_season_id" jdbcType="INTEGER" property="skuSeasonId" />
+    <result column="sku_season" jdbcType="VARCHAR" property="skuSeason" />
+    <result column="country_barcode" jdbcType="VARCHAR" property="countryBarcode" />
+    <result column="saler_barcode" jdbcType="VARCHAR" property="salerBarcode" />
+    <result column="scan_barcode1" jdbcType="VARCHAR" property="scanBarcode1" />
+    <result column="scan_barcode2" jdbcType="VARCHAR" property="scanBarcode2" />
+    <result column="scan_barcode3" jdbcType="VARCHAR" property="scanBarcode3" />
+    <result column="volume" jdbcType="DOUBLE" property="volume" />
+    <result column="weight" jdbcType="DOUBLE" property="weight" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="add_person_id" jdbcType="INTEGER" property="addPersonId" />
+    <result column="add_person_name" jdbcType="VARCHAR" property="addPersonName" />
+    <result column="check_person_id" jdbcType="INTEGER" property="checkPersonId" />
+    <result column="check_person_name" jdbcType="VARCHAR" property="checkPersonName" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="svol" jdbcType="DOUBLE" property="svol" />
+    <result column="bvol" jdbcType="DOUBLE" property="bvol" />
+    <result column="ctn" jdbcType="INTEGER" property="ctn" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, goods_id, sku_code, sku_barcode, sku_name, sku_describe, sku_size_id, sku_size,
+    sku_color_id, sku_color, sku_brand_id, sku_brand, sku_season_id, sku_season, country_barcode,
+    saler_barcode, scan_barcode1, scan_barcode2, scan_barcode3, volume, weight, create_time,
+    remark, add_person_id, add_person_name, check_person_id, check_person_name, money,
+    `year`, svol, bvol, ctn
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from goods_sku
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods_sku
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.GoodsSku">
+    insert into goods_sku (ID, goods_id, sku_code,
+      sku_barcode, sku_name, sku_describe,
+      sku_size_id, sku_size, sku_color_id,
+      sku_color, sku_brand_id, sku_brand,
+      sku_season_id, sku_season, country_barcode,
+      saler_barcode, scan_barcode1, scan_barcode2,
+      scan_barcode3, volume, weight,
+      create_time, remark, add_person_id,
+      add_person_name, check_person_id, check_person_name,
+      money, `year`, svol, bvol,
+      ctn)
+    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{skuCode,jdbcType=VARCHAR},
+      #{skuBarcode,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR}, #{skuDescribe,jdbcType=VARCHAR},
+      #{skuSizeId,jdbcType=INTEGER}, #{skuSize,jdbcType=VARCHAR}, #{skuColorId,jdbcType=INTEGER},
+      #{skuColor,jdbcType=VARCHAR}, #{skuBrandId,jdbcType=INTEGER}, #{skuBrand,jdbcType=VARCHAR},
+      #{skuSeasonId,jdbcType=INTEGER}, #{skuSeason,jdbcType=VARCHAR}, #{countryBarcode,jdbcType=VARCHAR},
+      #{salerBarcode,jdbcType=VARCHAR}, #{scanBarcode1,jdbcType=VARCHAR}, #{scanBarcode2,jdbcType=VARCHAR},
+      #{scanBarcode3,jdbcType=VARCHAR}, #{volume,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE},
+      #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{addPersonId,jdbcType=INTEGER},
+      #{addPersonName,jdbcType=VARCHAR}, #{checkPersonId,jdbcType=INTEGER}, #{checkPersonName,jdbcType=VARCHAR},
+      #{money,jdbcType=DOUBLE}, #{year,jdbcType=VARCHAR}, #{svol,jdbcType=DOUBLE}, #{bvol,jdbcType=DOUBLE},
+      #{ctn,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.GoodsSku">
+    insert into goods_sku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="skuCode != null">
+        sku_code,
+      </if>
+      <if test="skuBarcode != null">
+        sku_barcode,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="skuDescribe != null">
+        sku_describe,
+      </if>
+      <if test="skuSizeId != null">
+        sku_size_id,
+      </if>
+      <if test="skuSize != null">
+        sku_size,
+      </if>
+      <if test="skuColorId != null">
+        sku_color_id,
+      </if>
+      <if test="skuColor != null">
+        sku_color,
+      </if>
+      <if test="skuBrandId != null">
+        sku_brand_id,
+      </if>
+      <if test="skuBrand != null">
+        sku_brand,
+      </if>
+      <if test="skuSeasonId != null">
+        sku_season_id,
+      </if>
+      <if test="skuSeason != null">
+        sku_season,
+      </if>
+      <if test="countryBarcode != null">
+        country_barcode,
+      </if>
+      <if test="salerBarcode != null">
+        saler_barcode,
+      </if>
+      <if test="scanBarcode1 != null">
+        scan_barcode1,
+      </if>
+      <if test="scanBarcode2 != null">
+        scan_barcode2,
+      </if>
+      <if test="scanBarcode3 != null">
+        scan_barcode3,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="addPersonId != null">
+        add_person_id,
+      </if>
+      <if test="addPersonName != null">
+        add_person_name,
+      </if>
+      <if test="checkPersonId != null">
+        check_person_id,
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="year != null">
+        `year`,
+      </if>
+      <if test="svol != null">
+        svol,
+      </if>
+      <if test="bvol != null">
+        bvol,
+      </if>
+      <if test="ctn != null">
+        ctn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBarcode != null">
+        #{skuBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuDescribe != null">
+        #{skuDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSizeId != null">
+        #{skuSizeId,jdbcType=INTEGER},
+      </if>
+      <if test="skuSize != null">
+        #{skuSize,jdbcType=VARCHAR},
+      </if>
+      <if test="skuColorId != null">
+        #{skuColorId,jdbcType=INTEGER},
+      </if>
+      <if test="skuColor != null">
+        #{skuColor,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBrandId != null">
+        #{skuBrandId,jdbcType=INTEGER},
+      </if>
+      <if test="skuBrand != null">
+        #{skuBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSeasonId != null">
+        #{skuSeasonId,jdbcType=INTEGER},
+      </if>
+      <if test="skuSeason != null">
+        #{skuSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="countryBarcode != null">
+        #{countryBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="salerBarcode != null">
+        #{salerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="scanBarcode1 != null">
+        #{scanBarcode1,jdbcType=VARCHAR},
+      </if>
+      <if test="scanBarcode2 != null">
+        #{scanBarcode2,jdbcType=VARCHAR},
+      </if>
+      <if test="scanBarcode3 != null">
+        #{scanBarcode3,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addPersonId != null">
+        #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="addPersonName != null">
+        #{addPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPersonId != null">
+        #{checkPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonName != null">
+        #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="svol != null">
+        #{svol,jdbcType=DOUBLE},
+      </if>
+      <if test="bvol != null">
+        #{bvol,jdbcType=DOUBLE},
+      </if>
+      <if test="ctn != null">
+        #{ctn,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.GoodsSku">
+    update goods_sku
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBarcode != null">
+        sku_barcode = #{skuBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuDescribe != null">
+        sku_describe = #{skuDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSizeId != null">
+        sku_size_id = #{skuSizeId,jdbcType=INTEGER},
+      </if>
+      <if test="skuSize != null">
+        sku_size = #{skuSize,jdbcType=VARCHAR},
+      </if>
+      <if test="skuColorId != null">
+        sku_color_id = #{skuColorId,jdbcType=INTEGER},
+      </if>
+      <if test="skuColor != null">
+        sku_color = #{skuColor,jdbcType=VARCHAR},
+      </if>
+      <if test="skuBrandId != null">
+        sku_brand_id = #{skuBrandId,jdbcType=INTEGER},
+      </if>
+      <if test="skuBrand != null">
+        sku_brand = #{skuBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="skuSeasonId != null">
+        sku_season_id = #{skuSeasonId,jdbcType=INTEGER},
+      </if>
+      <if test="skuSeason != null">
+        sku_season = #{skuSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="countryBarcode != null">
+        country_barcode = #{countryBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="salerBarcode != null">
+        saler_barcode = #{salerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="scanBarcode1 != null">
+        scan_barcode1 = #{scanBarcode1,jdbcType=VARCHAR},
+      </if>
+      <if test="scanBarcode2 != null">
+        scan_barcode2 = #{scanBarcode2,jdbcType=VARCHAR},
+      </if>
+      <if test="scanBarcode3 != null">
+        scan_barcode3 = #{scanBarcode3,jdbcType=VARCHAR},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=DOUBLE},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addPersonId != null">
+        add_person_id = #{addPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="addPersonName != null">
+        add_person_name = #{addPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPersonId != null">
+        check_person_id = #{checkPersonId,jdbcType=INTEGER},
+      </if>
+      <if test="checkPersonName != null">
+        check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="year != null">
+        `year` = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="svol != null">
+        svol = #{svol,jdbcType=DOUBLE},
+      </if>
+      <if test="bvol != null">
+        bvol = #{bvol,jdbcType=DOUBLE},
+      </if>
+      <if test="ctn != null">
+        ctn = #{ctn,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.GoodsSku">
+    update goods_sku
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      sku_code = #{skuCode,jdbcType=VARCHAR},
+      sku_barcode = #{skuBarcode,jdbcType=VARCHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      sku_describe = #{skuDescribe,jdbcType=VARCHAR},
+      sku_size_id = #{skuSizeId,jdbcType=INTEGER},
+      sku_size = #{skuSize,jdbcType=VARCHAR},
+      sku_color_id = #{skuColorId,jdbcType=INTEGER},
+      sku_color = #{skuColor,jdbcType=VARCHAR},
+      sku_brand_id = #{skuBrandId,jdbcType=INTEGER},
+      sku_brand = #{skuBrand,jdbcType=VARCHAR},
+      sku_season_id = #{skuSeasonId,jdbcType=INTEGER},
+      sku_season = #{skuSeason,jdbcType=VARCHAR},
+      country_barcode = #{countryBarcode,jdbcType=VARCHAR},
+      saler_barcode = #{salerBarcode,jdbcType=VARCHAR},
+      scan_barcode1 = #{scanBarcode1,jdbcType=VARCHAR},
+      scan_barcode2 = #{scanBarcode2,jdbcType=VARCHAR},
+      scan_barcode3 = #{scanBarcode3,jdbcType=VARCHAR},
+      volume = #{volume,jdbcType=DOUBLE},
+      weight = #{weight,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      add_person_id = #{addPersonId,jdbcType=INTEGER},
+      add_person_name = #{addPersonName,jdbcType=VARCHAR},
+      check_person_id = #{checkPersonId,jdbcType=INTEGER},
+      check_person_name = #{checkPersonName,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DOUBLE},
+      `year` = #{year,jdbcType=VARCHAR},
+      svol = #{svol,jdbcType=DOUBLE},
+      bvol = #{bvol,jdbcType=DOUBLE},
+      ctn = #{ctn,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--新增-->
+  <select id="selectByGoodsId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from goods_sku
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <!--新增-->
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select count(1)
+    from goods_sku
+    <where>
+      1=1
+      <if test="pojo.goodsId != null">
+        and goods_id = #{pojo.goodsId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuCode != null">
+        and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuBarcode != null">
+        and sku_barcode = #{pojo.skuBarcode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuName != null">
+        and sku_name like CONCAT('%', #{pojo.skuName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.skuDescribe != null">
+        and sku_describe = #{pojo.skuDescribe,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuSizeId != null">
+        and sku_size_id = #{pojo.skuSizeId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuSize != null">
+        and sku_size = #{pojo.skuSize,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuColorId != null">
+        and sku_color_id = #{pojo.skuColorId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuColor != null">
+        and sku_color = #{pojo.skuColor,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuBrandId != null">
+        and sku_brand_id = #{pojo.skuBrandId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuBrand != null">
+        and sku_brand = #{pojo.skuBrand,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuSeasonId != null">
+        and sku_season_id = #{pojo.skuSeasonId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuSeason != null">
+        and sku_season = #{pojo.skuSeason,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.countryBarcode != null">
+        and country_barcode = #{pojo.countryBarcode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.salerBarcode != null">
+        and saler_barcode = #{pojo.salerBarcode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.scanBarcode1 != null">
+        and scan_barcode1 = #{pojo.scanBarcode1,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.scanBarcode2 != null">
+        and scan_barcode2 = #{pojo.scanBarcode2,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.scanBarcode3 != null">
+        and scan_barcode3 = #{pojo.scanBarcode3,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.volume != null">
+        and volume = #{pojo.volume,jdbcType=DOUBLE}
+      </if>
+      <if test="pojo.weight != null">
+        and weight = #{pojo.weight,jdbcType=DOUBLE}
+      </if>
+      <if test="pojo.remark != null">
+        and remark = #{pojo.remark,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.addPersonId != null">
+        and add_person_id = #{pojo.addPersonId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.addPersonName != null">
+        and add_person_name = #{pojo.addPersonName,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.checkPersonId != null">
+        and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.checkPersonName != null">
+        and check_person_name = #{pojo.checkPersonName,jdbcType=VARCHAR}
+      </if>
+      <if test="startTime != null">
+        and create_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        and #{endTime,jdbcType=TIMESTAMP}&gt;=create_time
+      </if>
+    </where>
+  </select>
+  <!--新增  筛选 -->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select ID
+    from goods_sku
+    <where>
+      1=1
+      <if test="pojo.goodsId != null">
+        and goods_id = #{pojo.goodsId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuCode != null">
+        and sku_code = #{pojo.skuCode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuBarcode != null">
+        and sku_barcode = #{pojo.skuBarcode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuName != null">
+        and sku_name like CONCAT('%', #{pojo.skuName,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="pojo.skuDescribe != null">
+        and sku_describe = #{pojo.skuDescribe,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuSizeId != null">
+        and sku_size_id = #{pojo.skuSizeId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuSize != null">
+        and sku_size = #{pojo.skuSize,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuColorId != null">
+        and sku_color_id = #{pojo.skuColorId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuColor != null">
+        and sku_color = #{pojo.skuColor,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuBrandId != null">
+        and sku_brand_id = #{pojo.skuBrandId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuBrand != null">
+        and sku_brand = #{pojo.skuBrand,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.skuSeasonId != null">
+        and sku_season_id = #{pojo.skuSeasonId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.skuSeason != null">
+        and sku_season = #{pojo.skuSeason,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.countryBarcode != null">
+        and country_barcode = #{pojo.countryBarcode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.salerBarcode != null">
+        and saler_barcode = #{pojo.salerBarcode,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.scanBarcode1 != null">
+        and scan_barcode1 = #{pojo.scanBarcode1,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.scanBarcode2 != null">
+        and scan_barcode2 = #{pojo.scanBarcode2,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.scanBarcode3 != null">
+        and scan_barcode3 = #{pojo.scanBarcode3,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.volume != null">
+        and volume = #{pojo.volume,jdbcType=DOUBLE}
+      </if>
+      <if test="pojo.weight != null">
+        and weight = #{pojo.weight,jdbcType=DOUBLE}
+      </if>
+      <if test="pojo.remark != null">
+        and remark = #{pojo.remark,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.addPersonId != null">
+        and add_person_id = #{pojo.addPersonId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.addPersonName != null">
+        and add_person_name = #{pojo.addPersonName,jdbcType=VARCHAR}
+      </if>
+      <if test="pojo.checkPersonId != null">
+        and check_person_id = #{pojo.checkPersonId,jdbcType=INTEGER}
+      </if>
+      <if test="pojo.checkPersonName != null">
+        and check_person_name = #{pojo.checkPersonName,jdbcType=VARCHAR}
+      </if>
+      <if test="startTime != null">
+        and create_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        and #{endTime,jdbcType=TIMESTAMP}&gt;=create_time
+      </if>
+    </where>
+    ORDER BY id DESC
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+  </select>
+  <!--新增-->
+  <select id="selectMaxId" resultType="java.lang.Integer">
+    select max(ID)
+    from goods_sku
+  </select>
+  <!--新增-->
+  <select id="selectByBarcode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from goods_sku
+    where sku_barcode = #{skuBarcode,jdbcType=VARCHAR}
+  </select>
+  <!--新增-->
+  <select id="selectBarcode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from goods_sku
+    where sku_barcode = #{skuBarcode,jdbcType=VARCHAR}
+  </select>
+  <!--新增-->
+  <select id="selectBySkuCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from goods_sku
+    where  sku_code = #{skuCode,jdbcType=VARCHAR}
+  </select>
+  <!--新增-->
+  <select id="selectDetailByPid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from goods_sku
+    where  goods_id = #{pid,jdbcType=INTEGER}
+  </select>
+</mapper>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.OnshelfStrategyDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.OnshelfStrategyDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rule_system_id" jdbcType="INTEGER" property="ruleSystemId" />
+    <result column="rule_detail_id" jdbcType="INTEGER" property="ruleDetailId" />
+    <result column="rule_detail_code" jdbcType="VARCHAR" property="ruleDetailCode" />
+    <result column="location_limit_system_id" jdbcType="INTEGER" property="locationLimitSystemId" />
+    <result column="space_limit_system_id" jdbcType="INTEGER" property="spaceLimitSystemId" />
+    <result column="is_usable" jdbcType="BIT" property="isUsable" />
+    <result column="onshelf_strategy_id" jdbcType="INTEGER" property="onshelfStrategyId" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="rule_detail_name" jdbcType="VARCHAR" property="ruleDetailName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rule_system_id, rule_detail_id, rule_detail_code, location_limit_system_id, space_limit_system_id,
+    is_usable, onshelf_strategy_id, priority, rule_detail_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onshelf_strategy_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from onshelf_strategy_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.OnshelfStrategyDetail">
+    insert into onshelf_strategy_detail (id, rule_system_id, rule_detail_id,
+      rule_detail_code, location_limit_system_id,
+      space_limit_system_id, is_usable, onshelf_strategy_id,
+      priority, rule_detail_name)
+    values (#{id,jdbcType=INTEGER}, #{ruleSystemId,jdbcType=INTEGER}, #{ruleDetailId,jdbcType=INTEGER},
+      #{ruleDetailCode,jdbcType=VARCHAR}, #{locationLimitSystemId,jdbcType=INTEGER},
+      #{spaceLimitSystemId,jdbcType=INTEGER}, #{isUsable,jdbcType=BIT}, #{onshelfStrategyId,jdbcType=INTEGER},
+      #{priority,jdbcType=INTEGER}, #{ruleDetailName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.OnshelfStrategyDetail" useGeneratedKeys="true" keyProperty="id">
+    insert into onshelf_strategy_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ruleSystemId != null">
+        rule_system_id,
+      </if>
+      <if test="ruleDetailId != null">
+        rule_detail_id,
+      </if>
+      <if test="ruleDetailCode != null">
+        rule_detail_code,
+      </if>
+      <if test="locationLimitSystemId != null">
+        location_limit_system_id,
+      </if>
+      <if test="spaceLimitSystemId != null">
+        space_limit_system_id,
+      </if>
+      <if test="isUsable != null">
+        is_usable,
+      </if>
+      <if test="onshelfStrategyId != null">
+        onshelf_strategy_id,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="ruleDetailName != null">
+        rule_detail_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ruleSystemId != null">
+        #{ruleSystemId,jdbcType=INTEGER},
+      </if>
+      <if test="ruleDetailId != null">
+        #{ruleDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="ruleDetailCode != null">
+        #{ruleDetailCode,jdbcType=VARCHAR},
+      </if>
+      <if test="locationLimitSystemId != null">
+        #{locationLimitSystemId,jdbcType=INTEGER},
+      </if>
+      <if test="spaceLimitSystemId != null">
+        #{spaceLimitSystemId,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        #{isUsable,jdbcType=BIT},
+      </if>
+      <if test="onshelfStrategyId != null">
+        #{onshelfStrategyId,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="ruleDetailName != null">
+        #{ruleDetailName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.OnshelfStrategyDetail">
+    update onshelf_strategy_detail
+    <set>
+      <if test="ruleSystemId != null">
+        rule_system_id = #{ruleSystemId,jdbcType=INTEGER},
+      </if>
+      <if test="ruleDetailId != null">
+        rule_detail_id = #{ruleDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="ruleDetailCode != null">
+        rule_detail_code = #{ruleDetailCode,jdbcType=VARCHAR},
+      </if>
+      <if test="locationLimitSystemId != null">
+        location_limit_system_id = #{locationLimitSystemId,jdbcType=INTEGER},
+      </if>
+      <if test="spaceLimitSystemId != null">
+        space_limit_system_id = #{spaceLimitSystemId,jdbcType=INTEGER},
+      </if>
+      <if test="isUsable != null">
+        is_usable = #{isUsable,jdbcType=BIT},
+      </if>
+      <if test="onshelfStrategyId != null">
+        onshelf_strategy_id = #{onshelfStrategyId,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="ruleDetailName != null">
+        rule_detail_name = #{ruleDetailName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.OnshelfStrategyDetail">
+    update onshelf_strategy_detail
+    set rule_system_id = #{ruleSystemId,jdbcType=INTEGER},
+      rule_detail_id = #{ruleDetailId,jdbcType=INTEGER},
+      rule_detail_code = #{ruleDetailCode,jdbcType=VARCHAR},
+      location_limit_system_id = #{locationLimitSystemId,jdbcType=INTEGER},
+      space_limit_system_id = #{spaceLimitSystemId,jdbcType=INTEGER},
+      is_usable = #{isUsable,jdbcType=BIT},
+      onshelf_strategy_id = #{onshelfStrategyId,jdbcType=INTEGER},
+      priority = #{priority,jdbcType=INTEGER},
+      rule_detail_name = #{ruleDetailName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByOnshelfStrategyId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from onshelf_strategy_detail
+    where onshelf_strategy_id = #{id,jdbcType=INTEGER}
+  </select>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from onshelf_strategy_detail
+    where 1=1
+    <if test="pojo.ruleSystemId != null">
+      and rule_system_id = #{pojo.ruleSystemId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.ruleDetailId != null">
+      and rule_detail_id = #{pojo.ruleDetailId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.ruleDetailCode != null">
+      and rule_detail_code like concat('%',#{pojo.ruleDetailCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.ruleDetailName != null">
+      and rule_detail_name like concat('%',#{pojo.ruleDetailName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.locationLimitSystemId != null">
+      and location_limit_system_id = #{pojo.locationLimitSystemId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.spaceLimitSystemId != null">
+      and space_limit_system_id = #{pojo.spaceLimitSystemId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=BIT}
+    </if>
+    <if test="pojo.onshelfStrategyId != null">
+      and onshelf_strategy_id = #{pojo.onshelfStrategyId,jdbcType=INTEGER}
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+    limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from onshelf_strategy_detail
+    where 1=1
+    <if test="pojo.ruleSystemId != null">
+      and rule_system_id = #{pojo.ruleSystemId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.ruleDetailId != null">
+      and rule_detail_id = #{pojo.ruleDetailId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.ruleDetailCode != null">
+      and rule_detail_code like concat('%',#{pojo.ruleDetailCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.ruleDetailName != null">
+      and rule_detail_name like concat('%',#{pojo.ruleDetailName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.locationLimitSystemId != null">
+      and location_limit_system_id = #{pojo.locationLimitSystemId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.spaceLimitSystemId != null">
+      and space_limit_system_id = #{pojo.spaceLimitSystemId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=BIT}
+    </if>
+    <if test="pojo.onshelfStrategyId != null">
+      and onshelf_strategy_id = #{pojo.onshelfStrategyId,jdbcType=INTEGER}
+    </if>
+  </select>
+</mapper>

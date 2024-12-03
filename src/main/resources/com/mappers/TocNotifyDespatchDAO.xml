@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.TocNotifyDespatchDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.TocNotifyDespatch">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="toC_id" jdbcType="INTEGER" property="tocId"/>
+        <result column="despatch_id" jdbcType="INTEGER" property="despatchId"/>
+        <result column="update_date" jdbcType="DATE" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , toC_id, despatch_id, update_date
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from toC_notify_despatch
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from toC_notify_despatch
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.TocNotifyDespatch">
+        insert into toC_notify_despatch (id, toC_id, despatch_id,
+                                         update_date)
+        values (#{id,jdbcType=INTEGER}, #{tocId,jdbcType=INTEGER}, #{despatchId,jdbcType=INTEGER},
+                #{updateDate,jdbcType=DATE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.TocNotifyDespatch">
+        insert into toC_notify_despatch
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tocId != null">
+                toC_id,
+            </if>
+            <if test="despatchId != null">
+                despatch_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="tocId != null">
+                #{tocId,jdbcType=INTEGER},
+            </if>
+            <if test="despatchId != null">
+                #{despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.TocNotifyDespatch">
+        update toC_notify_despatch
+        <set>
+            <if test="tocId != null">
+                toC_id = #{tocId,jdbcType=INTEGER},
+            </if>
+            <if test="despatchId != null">
+                despatch_id = #{despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=DATE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.TocNotifyDespatch">
+        update toC_notify_despatch
+        set toC_id      = #{tocId,jdbcType=INTEGER},
+            despatch_id = #{despatchId,jdbcType=INTEGER},
+            update_date = #{updateDate,jdbcType=DATE}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="findByDesId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from toC_notify_despatch
+        where despatch_id = #{despatchId,jdbcType=INTEGER}
+        order by id asc
+    </select>
+    <!--新增-->
+    <select id="findByTocId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from toC_notify_despatch
+        where toC_id = #{tocId,jdbcType=INTEGER}
+        order by id asc
+    </select>
+</mapper>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.AuditReasonDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.AuditReason">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="table_code" jdbcType="VARCHAR" property="tableCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="audit_reason" jdbcType="VARCHAR" property="auditReason" />
+    <result column="table_id" jdbcType="INTEGER" property="tableId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, table_code, create_time, audit_reason, table_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from audit_reason
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from audit_reason
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.AuditReason">
+    insert into audit_reason (id, table_code, create_time,
+      audit_reason, table_id)
+    values (#{id,jdbcType=INTEGER}, #{tableCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{auditReason,jdbcType=VARCHAR}, #{tableId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.AuditReason">
+    insert into audit_reason
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tableCode != null">
+        table_code,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="auditReason != null">
+        audit_reason,
+      </if>
+      <if test="tableId != null">
+        table_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tableCode != null">
+        #{tableCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditReason != null">
+        #{auditReason,jdbcType=VARCHAR},
+      </if>
+      <if test="tableId != null">
+        #{tableId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.AuditReason">
+    update audit_reason
+    <set>
+      <if test="tableCode != null">
+        table_code = #{tableCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditReason != null">
+        audit_reason = #{auditReason,jdbcType=VARCHAR},
+      </if>
+      <if test="tableId != null">
+        table_id = #{tableId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.AuditReason">
+    update audit_reason
+    set table_code = #{tableCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      audit_reason = #{auditReason,jdbcType=VARCHAR},
+      table_id = #{tableId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectReason" parameterType="com.bupt.pojo.AuditReason" resultType="java.lang.String">
+    select
+      audit_reason
+    from audit_reason
+    where
+      table_code = #{tableCode,jdbcType=VARCHAR}
+  </select>
+</mapper>

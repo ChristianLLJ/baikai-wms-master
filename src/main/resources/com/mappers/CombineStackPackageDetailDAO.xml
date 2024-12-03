@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.CombineStackPackageDetailDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.CombineStackPackageDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="detail_id" jdbcType="INTEGER" property="detailId" />
+    <result column="container_id" jdbcType="INTEGER" property="containerId" />
+    <result column="container_name" jdbcType="VARCHAR" property="containerName" />
+    <result column="container_code" jdbcType="VARCHAR" property="containerCode" />
+    <result column="container_barcode" jdbcType="VARCHAR" property="containerBarcode" />
+    <result column="sku_num" jdbcType="INTEGER" property="skuNum" />
+    <result column="num" jdbcType="DOUBLE" property="num" />
+    <result column="trace_code" jdbcType="VARCHAR" property="traceCode" />
+    <result column="row_num" jdbcType="INTEGER" property="rowNum" />
+    <result column="inbound_trace_code" jdbcType="VARCHAR" property="inboundTraceCode" />
+    <result column="is_stacked" jdbcType="BIT" property="isStacked" />
+    <result column="stack_barcode" jdbcType="VARCHAR" property="stackBarcode" />
+    <result column="plan_id" jdbcType="INTEGER" property="planId" />
+    <result column="plan_code" jdbcType="VARCHAR" property="planCode" />
+    <result column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="sku_code" jdbcType="VARCHAR" property="skuCode" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="total_volumn" jdbcType="DOUBLE" property="totalVolumn" />
+    <result column="total_weight" jdbcType="DOUBLE" property="totalWeight" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, detail_id, container_id, container_name, container_code, container_barcode, sku_num,
+    num, trace_code, row_num, inbound_trace_code, is_stacked, stack_barcode, plan_id,
+    plan_code, sku_id, sku_code, sku_name, total_volumn, total_weight
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from combine_stack_package_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from combine_stack_package_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.CombineStackPackageDetail">
+    insert into combine_stack_package_detail (id, detail_id, container_id,
+      container_name, container_code, container_barcode,
+      sku_num, num, trace_code,
+      row_num, inbound_trace_code, is_stacked,
+      stack_barcode, plan_id, plan_code,
+      sku_id, sku_code, sku_name,
+      total_volumn, total_weight)
+    values (#{id,jdbcType=INTEGER}, #{detailId,jdbcType=INTEGER}, #{containerId,jdbcType=INTEGER},
+      #{containerName,jdbcType=VARCHAR}, #{containerCode,jdbcType=VARCHAR}, #{containerBarcode,jdbcType=VARCHAR},
+      #{skuNum,jdbcType=INTEGER}, #{num,jdbcType=DOUBLE}, #{traceCode,jdbcType=VARCHAR},
+      #{rowNum,jdbcType=INTEGER}, #{inboundTraceCode,jdbcType=VARCHAR}, #{isStacked,jdbcType=BIT},
+      #{stackBarcode,jdbcType=VARCHAR}, #{planId,jdbcType=INTEGER}, #{planCode,jdbcType=VARCHAR},
+      #{skuId,jdbcType=INTEGER}, #{skuCode,jdbcType=VARCHAR}, #{skuName,jdbcType=VARCHAR},
+      #{totalVolumn,jdbcType=DOUBLE}, #{totalWeight,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.CombineStackPackageDetail">
+    insert into combine_stack_package_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="detailId != null">
+        detail_id,
+      </if>
+      <if test="containerId != null">
+        container_id,
+      </if>
+      <if test="containerName != null">
+        container_name,
+      </if>
+      <if test="containerCode != null">
+        container_code,
+      </if>
+      <if test="containerBarcode != null">
+        container_barcode,
+      </if>
+      <if test="skuNum != null">
+        sku_num,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="traceCode != null">
+        trace_code,
+      </if>
+      <if test="rowNum != null">
+        row_num,
+      </if>
+      <if test="inboundTraceCode != null">
+        inbound_trace_code,
+      </if>
+      <if test="isStacked != null">
+        is_stacked,
+      </if>
+      <if test="stackBarcode != null">
+        stack_barcode,
+      </if>
+      <if test="planId != null">
+        plan_id,
+      </if>
+      <if test="planCode != null">
+        plan_code,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="skuCode != null">
+        sku_code,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="totalVolumn != null">
+        total_volumn,
+      </if>
+      <if test="totalWeight != null">
+        total_weight,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="detailId != null">
+        #{detailId,jdbcType=INTEGER},
+      </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerName != null">
+        #{containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null">
+        #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerBarcode != null">
+        #{containerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuNum != null">
+        #{skuNum,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="traceCode != null">
+        #{traceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rowNum != null">
+        #{rowNum,jdbcType=INTEGER},
+      </if>
+      <if test="inboundTraceCode != null">
+        #{inboundTraceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isStacked != null">
+        #{isStacked,jdbcType=BIT},
+      </if>
+      <if test="stackBarcode != null">
+        #{stackBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="planId != null">
+        #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="planCode != null">
+        #{planCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="totalVolumn != null">
+        #{totalVolumn,jdbcType=DOUBLE},
+      </if>
+      <if test="totalWeight != null">
+        #{totalWeight,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.CombineStackPackageDetail">
+    update combine_stack_package_detail
+    <set>
+      <if test="detailId != null">
+        detail_id = #{detailId,jdbcType=INTEGER},
+      </if>
+      <if test="containerId != null">
+        container_id = #{containerId,jdbcType=INTEGER},
+      </if>
+      <if test="containerName != null">
+        container_name = #{containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null">
+        container_code = #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerBarcode != null">
+        container_barcode = #{containerBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuNum != null">
+        sku_num = #{skuNum,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="traceCode != null">
+        trace_code = #{traceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rowNum != null">
+        row_num = #{rowNum,jdbcType=INTEGER},
+      </if>
+      <if test="inboundTraceCode != null">
+        inbound_trace_code = #{inboundTraceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isStacked != null">
+        is_stacked = #{isStacked,jdbcType=BIT},
+      </if>
+      <if test="stackBarcode != null">
+        stack_barcode = #{stackBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="planId != null">
+        plan_id = #{planId,jdbcType=INTEGER},
+      </if>
+      <if test="planCode != null">
+        plan_code = #{planCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="skuCode != null">
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="totalVolumn != null">
+        total_volumn = #{totalVolumn,jdbcType=DOUBLE},
+      </if>
+      <if test="totalWeight != null">
+        total_weight = #{totalWeight,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.CombineStackPackageDetail">
+    update combine_stack_package_detail
+    set detail_id = #{detailId,jdbcType=INTEGER},
+      container_id = #{containerId,jdbcType=INTEGER},
+      container_name = #{containerName,jdbcType=VARCHAR},
+      container_code = #{containerCode,jdbcType=VARCHAR},
+      container_barcode = #{containerBarcode,jdbcType=VARCHAR},
+      sku_num = #{skuNum,jdbcType=INTEGER},
+      num = #{num,jdbcType=DOUBLE},
+      trace_code = #{traceCode,jdbcType=VARCHAR},
+      row_num = #{rowNum,jdbcType=INTEGER},
+      inbound_trace_code = #{inboundTraceCode,jdbcType=VARCHAR},
+      is_stacked = #{isStacked,jdbcType=BIT},
+      stack_barcode = #{stackBarcode,jdbcType=VARCHAR},
+      plan_id = #{planId,jdbcType=INTEGER},
+      plan_code = #{planCode,jdbcType=VARCHAR},
+      sku_id = #{skuId,jdbcType=INTEGER},
+      sku_code = #{skuCode,jdbcType=VARCHAR},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      total_volumn = #{totalVolumn,jdbcType=DOUBLE},
+      total_weight = #{totalWeight,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from combine_stack_package_detail
+    where 1=1
+    <if test="pojo.detailId != null">
+      and detail_id = #{pojo.detailId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat('%',#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuNum != null">
+      and sku_num = #{pojo.skuNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.num != null">
+      and num = #{pojo.num,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.traceCode != null">
+      and trace_code like concat('%',#{pojo.traceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inboundTraceCode != null">
+      and inbound_trace_code like concat(#{pojo.inboundTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isStacked != null">
+      and is_stacked = #{pojo.isStacked,jdbcType=BIT}
+    </if>
+    <if test="pojo.stackBarcode != null">
+      and stack_barcode like concat(#{pojo.stackBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.planCode != null">
+      and plan_code like concat(#{pojo.planCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="screen != null">
+      order by ${screen}
+    </if>
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from combine_stack_package_detail
+    where 1=1
+    <if test="pojo.detailId != null">
+      and detail_id = #{pojo.detailId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerId != null">
+      and container_id = #{pojo.containerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.containerName != null">
+      and container_name like concat('%',#{pojo.containerName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerCode != null">
+      and container_code like concat('%',#{pojo.containerCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.containerBarcode != null">
+      and container_barcode like concat('%',#{pojo.containerBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.skuNum != null">
+      and sku_num = #{pojo.skuNum,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.num != null">
+      and num = #{pojo.num,jdbcType=DOUBLE}
+    </if>
+    <if test="pojo.traceCode != null">
+      and trace_code like concat('%',#{pojo.traceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.inboundTraceCode != null">
+      and inbound_trace_code like concat(#{pojo.inboundTraceCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isStacked != null">
+      and is_stacked = #{pojo.isStacked,jdbcType=BIT}
+    </if>
+    <if test="pojo.stackBarcode != null">
+      and stack_barcode like concat(#{pojo.stackBarcode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.planId != null">
+      and plan_id = #{pojo.planId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.planCode != null">
+      and plan_code like concat(#{pojo.planCode,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+  <delete id="deleteByDetailId" parameterType="java.lang.Integer">
+    delete from
+      combine_stack_package_detail
+    where detail_id = #{detailId,jdbcType=INTEGER}
+  </delete>
+  <select id="checkStacked" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from combine_stack_package_detail
+    where detail_id = #{id,jdbcType=INTEGER} and is_stacked = 0
+  </select>
+  <update id="updateByStackBarcodeAndContainerBarcode" parameterType="com.bupt.pojo.CombineStackPackageDetail">
+    update combine_stack_package_detail
+    set is_stacked = #{isStacked,jdbcType=BIT}
+    where stack_barcode = #{stackBarcode,jdbcType=VARCHAR} and container_barcode = #{containerBarcode,jdbcType=VARCHAR}
+  </update>
+</mapper>

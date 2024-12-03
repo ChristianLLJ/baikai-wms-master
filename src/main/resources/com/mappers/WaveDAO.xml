@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.WaveDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.Wave">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="wave_id" jdbcType="VARCHAR" property="waveId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="discribe" jdbcType="VARCHAR" property="discribe"/>
+        <result column="check_status" jdbcType="SMALLINT" property="checkStatus"/>
+        <result column="weight" jdbcType="DOUBLE" property="weight"/>
+        <result column="volume" jdbcType="DOUBLE" property="volume"/>
+        <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName"/>
+        <result column="warehouse" jdbcType="VARCHAR" property="warehouse"/>
+        <result column="carrier_name" jdbcType="VARCHAR" property="carrierName"/>
+        <result column="wave_rule_id" jdbcType="INTEGER" property="waveRuleId"/>
+        <result column="wave_rule_name" jdbcType="VARCHAR" property="waveRuleName"/>
+        <result column="wave_rule_code" jdbcType="VARCHAR" property="waveRuleCode"/>
+        <result column="reviewer_id" jdbcType="INTEGER" property="reviewerId"/>
+        <result column="reviewer_name" jdbcType="VARCHAR" property="reviewerName"/>
+        <result column="reviewer_time" jdbcType="TIMESTAMP" property="reviewerTime"/>
+        <result column="user_defined1" jdbcType="VARCHAR" property="userDefined1"/>
+        <result column="user_defined2" jdbcType="VARCHAR" property="userDefined2"/>
+        <result column="user_defined3" jdbcType="VARCHAR" property="userDefined3"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , wave_id, `status`, discribe, check_status, weight, volume, warehouse_name, warehouse,
+    carrier_name, wave_rule_id, wave_rule_name, wave_rule_code, reviewer_id, reviewer_name, 
+    reviewer_time, user_defined1, user_defined2, user_defined3, create_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from wave
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.Wave" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into wave (id, wave_id, `status`,
+                          discribe, check_status, weight,
+                          volume, warehouse_name, warehouse,
+                          carrier_name, wave_rule_id, wave_rule_name,
+                          wave_rule_code, reviewer_id, reviewer_name,
+                          reviewer_time, user_defined1, user_defined2,
+                          user_defined3, create_time)
+        values (#{id,jdbcType=INTEGER}, #{waveId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+                #{discribe,jdbcType=VARCHAR}, #{checkStatus,jdbcType=SMALLINT}, #{weight,jdbcType=DOUBLE},
+                #{volume,jdbcType=DOUBLE}, #{warehouseName,jdbcType=VARCHAR}, #{warehouse,jdbcType=VARCHAR},
+                #{carrierName,jdbcType=VARCHAR}, #{waveRuleId,jdbcType=INTEGER}, #{waveRuleName,jdbcType=VARCHAR},
+                #{waveRuleCode,jdbcType=VARCHAR}, #{reviewerId,jdbcType=INTEGER}, #{reviewerName,jdbcType=VARCHAR},
+                #{reviewerTime,jdbcType=TIMESTAMP}, #{userDefined1,jdbcType=VARCHAR}, #{userDefined2,jdbcType=VARCHAR},
+                #{userDefined3,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.Wave" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into wave
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="waveId != null">
+                wave_id,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="discribe != null">
+                discribe,
+            </if>
+            <if test="checkStatus != null">
+                check_status,
+            </if>
+            <if test="weight != null">
+                weight,
+            </if>
+            <if test="volume != null">
+                volume,
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name,
+            </if>
+            <if test="warehouse != null">
+                warehouse,
+            </if>
+            <if test="carrierName != null">
+                carrier_name,
+            </if>
+            <if test="waveRuleId != null">
+                wave_rule_id,
+            </if>
+            <if test="waveRuleName != null">
+                wave_rule_name,
+            </if>
+            <if test="waveRuleCode != null">
+                wave_rule_code,
+            </if>
+            <if test="reviewerId != null">
+                reviewer_id,
+            </if>
+            <if test="reviewerName != null">
+                reviewer_name,
+            </if>
+            <if test="reviewerTime != null">
+                reviewer_time,
+            </if>
+            <if test="userDefined1 != null">
+                user_defined1,
+            </if>
+            <if test="userDefined2 != null">
+                user_defined2,
+            </if>
+            <if test="userDefined3 != null">
+                user_defined3,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="waveId != null">
+                #{waveId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="discribe != null">
+                #{discribe,jdbcType=VARCHAR},
+            </if>
+            <if test="checkStatus != null">
+                #{checkStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="weight != null">
+                #{weight,jdbcType=DOUBLE},
+            </if>
+            <if test="volume != null">
+                #{volume,jdbcType=DOUBLE},
+            </if>
+            <if test="warehouseName != null">
+                #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouse != null">
+                #{warehouse,jdbcType=VARCHAR},
+            </if>
+            <if test="carrierName != null">
+                #{carrierName,jdbcType=VARCHAR},
+            </if>
+            <if test="waveRuleId != null">
+                #{waveRuleId,jdbcType=INTEGER},
+            </if>
+            <if test="waveRuleName != null">
+                #{waveRuleName,jdbcType=VARCHAR},
+            </if>
+            <if test="waveRuleCode != null">
+                #{waveRuleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewerId != null">
+                #{reviewerId,jdbcType=INTEGER},
+            </if>
+            <if test="reviewerName != null">
+                #{reviewerName,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewerTime != null">
+                #{reviewerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userDefined1 != null">
+                #{userDefined1,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined2 != null">
+                #{userDefined2,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined3 != null">
+                #{userDefined3,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.Wave">
+        update wave
+        <set>
+            <if test="waveId != null">
+                wave_id = #{waveId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="discribe != null">
+                discribe = #{discribe,jdbcType=VARCHAR},
+            </if>
+            <if test="checkStatus != null">
+                check_status = #{checkStatus,jdbcType=SMALLINT},
+            </if>
+            <if test="weight != null">
+                weight = #{weight,jdbcType=DOUBLE},
+            </if>
+            <if test="volume != null">
+                volume = #{volume,jdbcType=DOUBLE},
+            </if>
+            <if test="warehouseName != null">
+                warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouse != null">
+                warehouse = #{warehouse,jdbcType=VARCHAR},
+            </if>
+            <if test="carrierName != null">
+                carrier_name = #{carrierName,jdbcType=VARCHAR},
+            </if>
+            <if test="waveRuleId != null">
+                wave_rule_id = #{waveRuleId,jdbcType=INTEGER},
+            </if>
+            <if test="waveRuleName != null">
+                wave_rule_name = #{waveRuleName,jdbcType=VARCHAR},
+            </if>
+            <if test="waveRuleCode != null">
+                wave_rule_code = #{waveRuleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewerId != null">
+                reviewer_id = #{reviewerId,jdbcType=INTEGER},
+            </if>
+            <if test="reviewerName != null">
+                reviewer_name = #{reviewerName,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewerTime != null">
+                reviewer_time = #{reviewerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userDefined1 != null">
+                user_defined1 = #{userDefined1,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined2 != null">
+                user_defined2 = #{userDefined2,jdbcType=VARCHAR},
+            </if>
+            <if test="userDefined3 != null">
+                user_defined3 = #{userDefined3,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.Wave">
+        update wave
+        set wave_id        = #{waveId,jdbcType=VARCHAR},
+            `status`       = #{status,jdbcType=INTEGER},
+            discribe       = #{discribe,jdbcType=VARCHAR},
+            check_status   = #{checkStatus,jdbcType=SMALLINT},
+            weight         = #{weight,jdbcType=DOUBLE},
+            volume         = #{volume,jdbcType=DOUBLE},
+            warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+            warehouse      = #{warehouse,jdbcType=VARCHAR},
+            carrier_name   = #{carrierName,jdbcType=VARCHAR},
+            wave_rule_id   = #{waveRuleId,jdbcType=INTEGER},
+            wave_rule_name = #{waveRuleName,jdbcType=VARCHAR},
+            wave_rule_code = #{waveRuleCode,jdbcType=VARCHAR},
+            reviewer_id    = #{reviewerId,jdbcType=INTEGER},
+            reviewer_name  = #{reviewerName,jdbcType=VARCHAR},
+            reviewer_time  = #{reviewerTime,jdbcType=TIMESTAMP},
+            user_defined1  = #{userDefined1,jdbcType=VARCHAR},
+            user_defined2  = #{userDefined2,jdbcType=VARCHAR},
+            user_defined3  = #{userDefined3,jdbcType=VARCHAR},
+            create_time    = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.WaveScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from wave
+        <where>
+            1=1
+            <if test="!(states == null ||states.size == 0) ">
+                and `status` in
+                <foreach close=")" collection="states" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="!(warehouseCodes == null || warehouseCodes.size == 0) ">
+                and warehouse in
+                <foreach close=")" collection="warehouseCodes" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="!(waveRuleId == null || waveRuleId.size == 0) ">
+                and wave_rule_id in
+                <foreach close=")" collection="waveRuleId" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="pojo.waveId != null">
+                and wave_id=#{pojo.waveId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.checkStatus != null">
+                and check_status = #{pojo.checkStatus,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.carrierName != null">
+                and carrier_name like CONCAT('%', #{pojo.carrierName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.waveRuleCode != null">
+                and wave_rule_code = #{pojo.waveRuleCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.reviewerId != null">
+                and reviewer_id = #{pojo.reviewerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.reviewerName != null">
+                and reviewer_name like CONCAT('%', #{pojo.reviewerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.reviewerTime != null">
+                and reviewer_time = #{pojo.reviewerTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pojo.discribe != null">
+                and discribe = #{pojo.discribe,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined1 != null">
+                and user_defined1 = #{pojo.userDefined1,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined2 != null">
+                and user_defined2 = #{pojo.userDefined2,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined3 != null">
+                and user_defined3 = #{pojo.userDefined3,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and create_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=create_time
+            </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.WaveScreenDTO" resultMap="BaseResultMap">
+        select id
+        from wave
+        <where>
+            1=1
+            <if test="!(states == null ||states.size == 0) ">
+                and `status` in
+                <foreach close=")" collection="states" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="!(warehouseCodes == null || warehouseCodes.size == 0) ">
+                and warehouse in
+                <foreach close=")" collection="warehouseCodes" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="!(waveRuleId == null || waveRuleId.size == 0) ">
+                and wave_rule_id in
+                <foreach close=")" collection="waveRuleId" index="index" item="item" open="(" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="pojo.waveId != null">
+                and wave_id = #{pojo.waveId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.checkStatus != null">
+                and check_status = #{pojo.checkStatus,jdbcType=SMALLINT}
+            </if>
+            <if test="pojo.carrierName != null">
+                and carrier_name like CONCAT('%', #{pojo.carrierName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.waveRuleCode != null">
+                and wave_rule_code = #{pojo.waveRuleCode,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.reviewerId != null">
+                and reviewer_id = #{pojo.reviewerId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.reviewerName != null">
+                and reviewer_name like CONCAT('%', #{pojo.reviewerName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.reviewerTime != null">
+                and reviewer_time = #{pojo.reviewerTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="pojo.discribe != null">
+                and discribe = #{pojo.discribe,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined1 != null">
+                and user_defined1 = #{pojo.userDefined1,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined2 != null">
+                and user_defined2 = #{pojo.userDefined2,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.userDefined3 != null">
+                and user_defined3 = #{pojo.userDefined3,jdbcType=VARCHAR}
+            </if>
+            <if test="startTime != null">
+                and create_time&gt;=#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;=create_time
+            </if>
+        </where>
+        <if test="screen != '' &amp;screen != null">
+            order by ${screen}
+        </if>
+        <if test="screen == ''|| screen == null">
+            order by id desc
+        </if>
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+    <!--新增-->
+    <select id="selectByWaveRuleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave
+        where wave_rule_id = #{waveRuleId,jdbcType=INTEGER}
+        order by create_time desc , check_status asc
+    </select>
+    <!--新增-->
+    <select id="selectByStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave
+        where `status` = #{status,jdbcType=INTEGER}
+        order by create_time desc
+    </select>
+    <!--新增-->
+    <select id="selectByCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wave
+        where wave_id=#{waveId,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.WarehouseAreaDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.WarehouseArea">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="area_type" jdbcType="INTEGER" property="areaType" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
+    <result column="area_name" jdbcType="VARCHAR" property="areaName" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="is_usable" jdbcType="TINYINT" property="isUsable" />
+    <result column="is_sold" jdbcType="TINYINT" property="isSold" />
+    <result column="warehouse_name" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="container_number" jdbcType="INTEGER" property="containerNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, area_type, warehouse_id, area_name, area_code, is_usable, is_sold, warehouse_name,
+    remark, container_number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from warehouse_area
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from warehouse_area
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.WarehouseArea">
+    insert into warehouse_area (id, area_type, warehouse_id,
+      area_name, area_code, is_usable,
+      is_sold, warehouse_name, remark,
+      container_number)
+    values (#{id,jdbcType=INTEGER}, #{areaType,jdbcType=INTEGER}, #{warehouseId,jdbcType=INTEGER},
+      #{areaName,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{isUsable,jdbcType=TINYINT},
+      #{isSold,jdbcType=TINYINT}, #{warehouseName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+      #{containerNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.WarehouseArea">
+    insert into warehouse_area
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="areaType != null">
+        area_type,
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
+      <if test="areaName != null">
+        area_name,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="isUsable != null">
+        is_usable,
+      </if>
+      <if test="isSold != null">
+        is_sold,
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="containerNumber != null">
+        container_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="areaType != null">
+        #{areaType,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsable != null">
+        #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="isSold != null">
+        #{isSold,jdbcType=TINYINT},
+      </if>
+      <if test="warehouseName != null">
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="containerNumber != null">
+        #{containerNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.WarehouseArea">
+    update warehouse_area
+    <set>
+      <if test="areaType != null">
+        area_type = #{areaType,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="areaName != null">
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsable != null">
+        is_usable = #{isUsable,jdbcType=TINYINT},
+      </if>
+      <if test="isSold != null">
+        is_sold = #{isSold,jdbcType=TINYINT},
+      </if>
+      <if test="warehouseName != null">
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="containerNumber != null">
+        container_number = #{containerNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.WarehouseArea">
+    update warehouse_area
+    set area_type = #{areaType,jdbcType=INTEGER},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=VARCHAR},
+      is_usable = #{isUsable,jdbcType=TINYINT},
+      is_sold = #{isSold,jdbcType=TINYINT},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      container_number = #{containerNumber,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectWarehouseArea" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from warehouse_area
+    limit #{page,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
+  </select>
+  <!--  模糊分页查询所有id.name,code-->
+  <select id="selectIdAndNameAndCode" resultType="com.bupt.DTO.IdAndNameAndCode">
+    select
+      id,area_name as name,area_code as code
+    from warehouse_area
+    where area_name like concat('%',#{name},'%')
+      limit 0,10
+  </select>
+  <!--  修改库区库区类型为空-->
+  <update id="updByAreaType" parameterType="com.bupt.DTO.area.AreaTypeIdAndNull">
+    update warehouse_area
+    set area_type = #{cid,jdbcType=INTEGER}
+    where area_type=#{id,jdbcType=INTEGER}
+  </update>
+  <!--  返回总数-->
+  <select id="selectNum" resultType="java.lang.Integer">
+    select
+      count(id)
+    from warehouse_area
+  </select>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from warehouse_area
+    where 1=1
+    <if test="pojo.areaType != null">
+      and area_type = #{pojo.areaType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.areaName != null">
+      and area_name like concat('%',#{pojo.areaName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.areaCode != null">
+      and area_code like concat('%',#{pojo.areaCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isSold != null">
+      and is_sold = #{pojo.isSold,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like #{pojo.warehouseName,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    order by id desc
+    <if test="searchDTO !=null">
+      limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from warehouse_area
+    where 1=1
+    <if test="pojo.areaType != null">
+      and area_type = #{pojo.areaType,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.warehouseId != null">
+      and warehouse_id = #{pojo.warehouseId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.areaName != null">
+      and area_name like concat('%',#{pojo.areaName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.areaCode != null">
+      and area_code like concat('%',#{pojo.areaCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.isUsable != null">
+      and is_usable = #{pojo.isUsable,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.isSold != null">
+      and is_sold = #{pojo.isSold,jdbcType=TINYINT}
+    </if>
+    <if test="pojo.warehouseName != null">
+      and warehouse_name like #{pojo.warehouseName,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

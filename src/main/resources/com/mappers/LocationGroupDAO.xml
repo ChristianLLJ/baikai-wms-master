@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.LocationGroupDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.LocationGroup">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="group_code" jdbcType="VARCHAR" property="groupCode" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="area_name" jdbcType="VARCHAR" property="areaName" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="changer_id" jdbcType="INTEGER" property="changerId" />
+    <result column="change_time" jdbcType="TIMESTAMP" property="changeTime" />
+    <result column="changer_name" jdbcType="VARCHAR" property="changerName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, group_code, group_name, area_name, area_code, remark, changer_id, change_time,
+    changer_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from location_group
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+<!--  分页查询所有库位组-->
+  <select id="selectLocationGroup" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from location_group
+    limit #{page,jdbcType=INTEGER},#{num,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from location_group
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.LocationGroup">
+    insert into location_group (id, group_code, group_name,
+      area_name, area_code, remark,
+      changer_id, change_time, changer_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{groupCode,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR},
+      #{areaName,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+      #{changerId,jdbcType=INTEGER}, #{changeTime,jdbcType=TIMESTAMP}, #{changerName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.LocationGroup">
+    insert into location_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="groupCode != null">
+        group_code,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="areaName != null">
+        area_name,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="changerId != null">
+        changer_id,
+      </if>
+      <if test="changeTime != null">
+        change_time,
+      </if>
+      <if test="changerName != null">
+        changer_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="groupCode != null">
+        #{groupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="changerId != null">
+        #{changerId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null">
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changerName != null">
+        #{changerName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.LocationGroup">
+    update location_group
+    <set>
+      <if test="groupCode != null">
+        group_code = #{groupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="changerId != null">
+        changer_id = #{changerId,jdbcType=INTEGER},
+      </if>
+      <if test="changeTime != null">
+        change_time = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changerName != null">
+        changer_name = #{changerName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.LocationGroup">
+    update location_group
+    set group_code = #{groupCode,jdbcType=VARCHAR},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      changer_id = #{changerId,jdbcType=INTEGER},
+      change_time = #{changeTime,jdbcType=TIMESTAMP},
+      changer_name = #{changerName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  返回总数-->
+  <select id="selectNum" resultType="java.lang.Integer">
+    select
+      count(id)
+    from location_group
+  </select>
+  <!--  筛选-->
+  <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from location_group
+    where 1=1
+    <if test="pojo.groupCode != null">
+      and group_code like concat('%',#{pojo.groupCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.groupName != null">
+      and group_name like concat('%',#{pojo.groupName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.areaName != null">
+      and area_name like concat('%',#{pojo.areaName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.areaCode != null">
+      and area_code like concat('%',#{pojo.areaCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.changerId != null">
+      and changer_id = #{pojo.changerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.changeTime != null">
+      and change_time = #{pojo.changeTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.changerName != null">
+      and changer_name like concat('%',#{pojo.changerName,jdbcType=VARCHAR},'%')
+    </if>
+    order by id desc
+    <if test="searchDTO !=null">
+    limit #{searchDTO.page,jdbcType=INTEGER},#{searchDTO.num,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+    select
+    count(id)
+    from location_group
+    where 1=1
+    <if test="pojo.groupCode != null">
+      and group_code like concat('%',#{pojo.groupCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.groupName != null">
+      and group_name like concat('%',#{pojo.groupName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.areaName != null">
+      and area_name like concat('%',#{pojo.areaName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.areaCode != null">
+      and area_code like concat('%',#{pojo.areaCode,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="pojo.remark != null">
+      and remark = #{pojo.remark,jdbcType=VARCHAR}
+    </if>
+    <if test="pojo.changerId != null">
+      and changer_id = #{pojo.changerId,jdbcType=INTEGER}
+    </if>
+    <if test="pojo.changeTime != null">
+      and change_time = #{pojo.changeTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pojo.changerName != null">
+      and changer_name like concat('%',#{pojo.changerName,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+</mapper>

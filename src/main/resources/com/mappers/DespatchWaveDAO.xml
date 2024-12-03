@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.DespatchWaveDAO">
+    <resultMap id="BaseResultMap" type="com.bupt.pojo.DespatchWave">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="despatch_id" jdbcType="INTEGER" property="despatchId"/>
+        <result column="wave_id" jdbcType="INTEGER" property="waveId"/>
+        <result column="update_date" jdbcType="DATE" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , despatch_id, wave_id, update_date
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from despatch_wave
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from despatch_wave
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.bupt.pojo.DespatchWave">
+        insert into despatch_wave (id, despatch_id, wave_id,
+                                   update_date)
+        values (#{id,jdbcType=INTEGER}, #{despatchId,jdbcType=INTEGER}, #{waveId,jdbcType=INTEGER},
+                #{updateDate,jdbcType=DATE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.bupt.pojo.DespatchWave">
+        insert into despatch_wave
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="despatchId != null">
+                despatch_id,
+            </if>
+            <if test="waveId != null">
+                wave_id,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="despatchId != null">
+                #{despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="waveId != null">
+                #{waveId,jdbcType=INTEGER},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.DespatchWave">
+        update despatch_wave
+        <set>
+            <if test="despatchId != null">
+                despatch_id = #{despatchId,jdbcType=INTEGER},
+            </if>
+            <if test="waveId != null">
+                wave_id = #{waveId,jdbcType=INTEGER},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=DATE},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.DespatchWave">
+        update despatch_wave
+        set despatch_id = #{despatchId,jdbcType=INTEGER},
+            wave_id     = #{waveId,jdbcType=INTEGER},
+            update_date = #{updateDate,jdbcType=DATE}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="com.bupt.DTO.ScreenDTO" resultType="java.lang.Integer">
+        select count(id)
+        from despatch_wave
+        <where>
+            1=1
+            <if test="pojo.despatchId != null">
+                and despatch_id = #{pojo.despatchId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.waveId != null">
+                and wave_id = #{pojo.waveId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select id
+        from despatch_wave
+        <where>
+            1=1
+            <if test="pojo.despatchId != null">
+                and despatch_id = #{pojo.despatchId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.waveId != null">
+                and wave_id = #{pojo.waveId,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by id desc
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+    <!--新增-->
+    <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from despatch_wave
+        where wave_id = #{waveId,jdbcType=INTEGER}
+    </select>
+    <select id="selectDespatchIdByWaveId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from despatch_wave
+        where wave_id = #{waveId,jdbcType=INTEGER}
+    </select>
+    <select id="selectWaveIdByDespatchId" resultType="java.lang.Integer">
+        select wave_id
+        from despatch_wave
+        where despatch_id = #{despatchId,jdbcType=INTEGER}
+        order by id desc limit 1
+    </select>
+    <delete id="deleteByWaveId" parameterType="java.lang.Integer">
+        delete
+        from despatch_wave
+        where wave_id = #{waveId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByDespatchId" parameterType="java.lang.Integer">
+        delete
+        from despatch_wave
+        where despatch_id = #{despatchId,jdbcType=INTEGER}
+    </delete>
+</mapper>

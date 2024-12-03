@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bupt.mapper.PrePlatformDAO">
+  <resultMap id="BaseResultMap" type="com.bupt.pojo.PrePlatform">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="distribution_id" jdbcType="INTEGER" property="distributionId" />
+    <result column="pre_id" jdbcType="VARCHAR" property="preId" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+    <result column="driver" jdbcType="VARCHAR" property="driver" />
+    <result column="platform_number" jdbcType="INTEGER" property="platformNumber" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="statrt_take_time" jdbcType="TIMESTAMP" property="statrtTakeTime" />
+    <result column="take_time" jdbcType="TIMESTAMP" property="takeTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, distribution_id, pre_id, car_number, driver, platform_number, `number`, statrt_take_time, 
+    take_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pre_platform
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from pre_platform
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bupt.pojo.PrePlatform">
+    insert into pre_platform (id, distribution_id, pre_id, 
+      car_number, driver, platform_number, 
+      `number`, statrt_take_time, take_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{distributionId,jdbcType=INTEGER}, #{preId,jdbcType=VARCHAR}, 
+      #{carNumber,jdbcType=VARCHAR}, #{driver,jdbcType=VARCHAR}, #{platformNumber,jdbcType=INTEGER}, 
+      #{number,jdbcType=INTEGER}, #{statrtTakeTime,jdbcType=TIMESTAMP}, #{takeTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bupt.pojo.PrePlatform">
+    insert into pre_platform
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="distributionId != null">
+        distribution_id,
+      </if>
+      <if test="preId != null">
+        pre_id,
+      </if>
+      <if test="carNumber != null">
+        car_number,
+      </if>
+      <if test="driver != null">
+        driver,
+      </if>
+      <if test="platformNumber != null">
+        platform_number,
+      </if>
+      <if test="number != null">
+        `number`,
+      </if>
+      <if test="statrtTakeTime != null">
+        statrt_take_time,
+      </if>
+      <if test="takeTime != null">
+        take_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="distributionId != null">
+        #{distributionId,jdbcType=INTEGER},
+      </if>
+      <if test="preId != null">
+        #{preId,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null">
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="platformNumber != null">
+        #{platformNumber,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="statrtTakeTime != null">
+        #{statrtTakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="takeTime != null">
+        #{takeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bupt.pojo.PrePlatform">
+    update pre_platform
+    <set>
+      <if test="distributionId != null">
+        distribution_id = #{distributionId,jdbcType=INTEGER},
+      </if>
+      <if test="preId != null">
+        pre_id = #{preId,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null">
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        driver = #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="platformNumber != null">
+        platform_number = #{platformNumber,jdbcType=INTEGER},
+      </if>
+      <if test="number != null">
+        `number` = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="statrtTakeTime != null">
+        statrt_take_time = #{statrtTakeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="takeTime != null">
+        take_time = #{takeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bupt.pojo.PrePlatform">
+    update pre_platform
+    set distribution_id = #{distributionId,jdbcType=INTEGER},
+      pre_id = #{preId,jdbcType=VARCHAR},
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      driver = #{driver,jdbcType=VARCHAR},
+      platform_number = #{platformNumber,jdbcType=INTEGER},
+      `number` = #{number,jdbcType=INTEGER},
+      statrt_take_time = #{statrtTakeTime,jdbcType=TIMESTAMP},
+      take_time = #{takeTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <!--新增-->
+    <select id="numScreen" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id)
+        from pre_platform
+        <where>
+            1=1
+            <if test="pojo.distributionId != null">
+                and distribution_id = #{pojo.distributionId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.preId != null">
+                and pre_id = #{pojo.preId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.carNumber != null">
+                and car_number like CONCAT('%' #{pojo.carNumber,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.driver != null">
+                and driver like CONCAT('%' #{pojo.driver,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.platformNumber != null">
+                and platform_number = #{pojo.platformNumber,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.number != null">
+                and `number` = #{pojo.number,jdbcType=INTEGER}
+            </if>
+            <if test="startTime != null">
+                and take_time&gt;#{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP}&gt;take_time
+            </if>
+            <if test="startTime1 != null">
+                and statrt_take_time&gt;#{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP}&gt;statrt_take_time
+            </if>
+        </where>
+    </select>
+    <!--新增  筛选 -->
+    <select id="screen" parameterType="com.bupt.DTO.ScreenDTO" resultMap="BaseResultMap">
+        select id
+        from pre_platform
+        <where>
+            1=1
+            <if test="pojo.distributionId != null">
+                and distribution_id = #{pojo.distributionId,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.preId != null">
+                and pre_id = #{pojo.preId,jdbcType=VARCHAR}
+            </if>
+            <if test="pojo.carNumber != null">
+                and car_number like CONCAT('%' #{pojo.carNumber,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.driver != null">
+                and driver like CONCAT('%' #{pojo.driver,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="pojo.platformNumber != null">
+                and platform_number = #{pojo.platformNumber,jdbcType=INTEGER}
+            </if>
+            <if test="pojo.number != null">
+                and `number` = #{pojo.number,jdbcType=INTEGER}
+            </if>
+            <if test="startTime != null">
+                and take_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime != null">
+                and #{endTime,jdbcType=TIMESTAMP} &gt;= take_time
+            </if>
+            <if test="startTime1 != null">
+                and statrt_take_time &gt; = #{startTime1,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endTime1 != null">
+                and #{endTime1,jdbcType=TIMESTAMP} &gt;= statrt_take_time
+            </if>
+        </where>
+        order by id desc
+        limit #{searchDTO.page,jdbcType=INTEGER}, #{searchDTO.num,jdbcType=INTEGER}
+    </select>
+    <select id="selectDetailByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pre_platform
+        where wave_id = #{waveId,jdbcType=INTEGER}
+    </select>
+    <select id="selectMaxNumberByPreNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select
+        max(`number`)
+        from pre_platform
+        where platform_number = #{platformNumber,jdbcType=INTEGER}
+    </select>
+    <!--新增-->
+    <select id="selectByDistributionid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from pre_platform
+        where distribution_id = #{distributionId,jdbcType=INTEGER}
+    </select>
+</mapper>
